@@ -320,4 +320,117 @@ public final class Exp {
         }
         throw new IllegalArgumentException("Cannot convert " + value);
     }
+
+    // ------------------------------------------------------------------------------------------
+    // sqlglot builder helpers (expressions/builders.py, core.py). Stubs marked TODO(port) are filled
+    // in by the expression-helpers port; their signatures are the contract other code relies on.
+
+    static RuntimeException notPorted(String what) {
+        return new UnsupportedOperationException("not yet ported from sqlglot: " + what);
+    }
+
+    /** {@code exp.cast(expression, to)}: CAST(expression AS to); {@code to} is a DType, type string or DATA_TYPE node. */
+    public static Expression cast(Expression expression, Object to) {
+        return cast(expression, to, true, null);
+    }
+
+    /** {@code exp.cast(expression, to, copy=..., dialect=...)}. */
+    public static Expression cast(Expression expression, Object to, boolean copy, io.github.offbyjuan.jglot.dialects.Dialect dialect) {
+        throw notPorted("exp.cast"); // TODO(port)
+    }
+
+    /** {@code exp.to_interval("1 day")} or an existing expression. */
+    public static Expression toInterval(Object interval) {
+        throw notPorted("exp.to_interval"); // TODO(port)
+    }
+
+    /** {@code exp.to_table("db.tbl")}: parses a (possibly dotted) table name. */
+    public static Expression toTable(Object sqlPath, io.github.offbyjuan.jglot.dialects.Dialect dialect) {
+        throw notPorted("exp.to_table"); // TODO(port)
+    }
+
+    /** {@code exp.to_column("tbl.col")}. */
+    public static Expression toColumn(Object sqlPath, io.github.offbyjuan.jglot.dialects.Dialect dialect) {
+        throw notPorted("exp.to_column"); // TODO(port)
+    }
+
+    /** {@code exp.subquery(expression, alias)}: {@code SELECT * FROM (expression) AS alias}. */
+    public static Expression subquery(Expression expression, String alias) {
+        throw notPorted("exp.subquery"); // TODO(port)
+    }
+
+    /** {@code exp.values(rows, alias, columns)}. */
+    public static Expression values(List<List<Object>> rows, String alias, List<String> columns) {
+        throw notPorted("exp.values"); // TODO(port)
+    }
+
+    /**
+     * {@code exp.func(name, *args, dialect=...)}: a known function node if {@code dialect}'s parser
+     * knows {@code name}, otherwise an Anonymous function.
+     */
+    public static Expression func(String name, io.github.offbyjuan.jglot.dialects.Dialect dialect, Object... args) {
+        throw notPorted("exp.func"); // TODO(port)
+    }
+
+    /** {@code exp.case(expression)}: an empty CASE; add branches with {@link Expression#when}. */
+    public static Expression caseExpr(Expression expression) {
+        throw notPorted("exp.case"); // TODO(port)
+    }
+
+    /** {@code exp.select(*expressions)}: a new SELECT. Strings are parsed with the base dialect. */
+    public static Expression select(Object... expressions) {
+        throw notPorted("exp.select"); // TODO(port)
+    }
+
+    /** {@code exp.union(left, right, distinct=...)}. */
+    public static Expression union(Expression left, Expression right, boolean distinct) {
+        throw notPorted("exp.union"); // TODO(port)
+    }
+
+    /** {@code exp.intersect(left, right, distinct=...)}. */
+    public static Expression intersect(Expression left, Expression right, boolean distinct) {
+        throw notPorted("exp.intersect"); // TODO(port)
+    }
+
+    /** {@code exp.except_(left, right, distinct=...)}. */
+    public static Expression except(Expression left, Expression right, boolean distinct) {
+        throw notPorted("exp.except_"); // TODO(port)
+    }
+
+    /** {@code exp.maybe_parse(sql_or_expression, dialect=...)}: parses strings, passes nodes through. */
+    public static Expression maybeParse(Object sqlOrExpression, io.github.offbyjuan.jglot.dialects.Dialect dialect) {
+        throw notPorted("exp.maybe_parse"); // TODO(port)
+    }
+
+    /** {@code exp.condition(...)}: parses a condition string or passes a node through. */
+    public static Expression condition(Object expression, io.github.offbyjuan.jglot.dialects.Dialect dialect) {
+        throw notPorted("exp.condition"); // TODO(port)
+    }
+
+    /** {@code exp.xor(*conditions)}. */
+    public static Expression xor(Expression... conditions) {
+        return combine(XOR, List.of(conditions), true);
+    }
+
+    /** {@code exp.apply_index_offset(this, expressions, offset, dialect)}. */
+    public static List<Expression> applyIndexOffset(Expression thisExpr, List<Expression> expressions, int offset,
+            io.github.offbyjuan.jglot.dialects.Dialect dialect) {
+        throw notPorted("exp.apply_index_offset"); // TODO(port)
+    }
+
+    /** {@code exp.table_name(table, dialect, identify)}: the dotted name of a table. */
+    public static String tableName(Object table, io.github.offbyjuan.jglot.dialects.Dialect dialect, boolean identify) {
+        throw notPorted("exp.table_name"); // TODO(port)
+    }
+
+    /** {@code exp.replace_children(expression, fun)}: replaces each child with {@code fun(child)}. */
+    public static void replaceChildren(Expression expression, java.util.function.Function<Expression, Object> fun) {
+        throw notPorted("exp.replace_children"); // TODO(port)
+    }
+
+    /** {@code exp.replace_tree(expression, fun, prune)}. */
+    public static Expression replaceTree(Expression expression, java.util.function.Function<Expression, Expression> fun,
+            java.util.function.Predicate<Expression> prune) {
+        throw notPorted("exp.replace_tree"); // TODO(port)
+    }
 }

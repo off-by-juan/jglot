@@ -1,0 +1,375 @@
+sqlglot/parser.py:1485-1512	_parse_partitioned_by_bucket_or_truncate	Expression parsePartitionedByBucketOrTruncate()
+sqlglot/parser.py:2310-2316	_parse_command	Expression parseCommand()
+sqlglot/parser.py:2318-2348	_parse_comment	Expression parseComment(boolean allowExists)	defaults: allowExists=true
+sqlglot/parser.py:2350-2354	_parse_to_table	Expression parseToTable()
+sqlglot/parser.py:2357-2390	_parse_ttl	Expression parseTtl()
+sqlglot/parser.py:2392-2393	_parse_condition	Expression parseCondition()
+sqlglot/parser.py:2395-2402	_parse_block	Expression parseBlock()
+sqlglot/parser.py:2404-2407	_parse_whileblock	Expression parseWhileblock()
+sqlglot/parser.py:2409-2431	_parse_statement	Expression parseStatement()
+sqlglot/parser.py:2433-2505	_parse_drop	Expression parseDrop(boolean exists, String kind)	defaults: exists=false, kind=null
+sqlglot/parser.py:2507-2510	_parse_exists	Boolean parseExists(boolean not)	defaults: not=false
+sqlglot/parser.py:2512-2796	_parse_create	Expression parseCreate()
+sqlglot/parser.py:2798-2832	_parse_sequence_properties	Expression parseSequenceProperties()
+sqlglot/parser.py:2834-2854	_parse_trigger_events	List<Expression> parseTriggerEvents()
+sqlglot/parser.py:2856-2870	_parse_trigger_deferrable	Object[] parseTriggerDeferrable()
+sqlglot/parser.py:2872-2878	_parse_trigger_referencing_clause	Expression parseTriggerReferencingClause(String keyword)
+sqlglot/parser.py:2880-2902	_parse_trigger_referencing	Expression parseTriggerReferencing()
+sqlglot/parser.py:2904-2908	_parse_trigger_for_each	String parseTriggerForEach()
+sqlglot/parser.py:2910-2918	_parse_trigger_execute	Expression parseTriggerExecute()
+sqlglot/parser.py:2920-2946	_parse_property_before	Object parsePropertyBefore()
+sqlglot/parser.py:2948-2949	_parse_wrapped_properties	List<Object> parseWrappedProperties()
+sqlglot/parser.py:2951-2981	_parse_property	Object parseProperty()
+sqlglot/parser.py:2983-3007	_parse_key_value_property	Expression parseKeyValueProperty(ParseFn parseValue)	defaults: parseValue=null
+sqlglot/parser.py:3009-3030	_parse_stored	Expression parseStored()
+sqlglot/parser.py:3032-3037	_parse_unquoted_field	Expression parseUnquotedField()
+sqlglot/parser.py:3039-3043	_parse_property_assignment	Expression parsePropertyAssignment(ExprType expClass, Map<Arg, Object> kwargs)	defaults: kwargs=null
+sqlglot/parser.py:3045-3062	_parse_properties	Expression parseProperties(Boolean before)	defaults: before=null
+sqlglot/parser.py:3064-3067	_parse_fallback	Expression parseFallback(boolean no)	defaults: no=false
+sqlglot/parser.py:3069-3074	_parse_sql_security	Expression parseSqlSecurity()
+sqlglot/parser.py:3076-3079	_parse_settings_property	Expression parseSettingsProperty()
+sqlglot/parser.py:3081-3086	_parse_called_on_null_input_property	Expression parseCalledOnNullInputProperty()
+sqlglot/parser.py:3088-3097	_parse_volatile_property	Expression parseVolatileProperty()
+sqlglot/parser.py:3099-3104	_parse_retention_period	Expression parseRetentionPeriod()
+sqlglot/parser.py:3106-3128	_parse_system_versioning_property	Expression parseSystemVersioningProperty(boolean with)	defaults: with=false
+sqlglot/parser.py:3130-3144	_parse_data_deletion_property	Expression parseDataDeletionProperty()
+sqlglot/parser.py:3146-3163	_parse_distributed_property	Expression parseDistributedProperty()
+sqlglot/parser.py:3165-3168	_parse_composite_key_property	Expression parseCompositeKeyProperty(ExprType exprType)
+sqlglot/parser.py:3170-3211	_parse_with_property	Object parseWithProperty()
+sqlglot/parser.py:3213-3224	_parse_procedure_option	Expression parseProcedureOption()
+sqlglot/parser.py:3227-3237	_parse_definer	Expression parseDefiner()
+sqlglot/parser.py:3239-3242	_parse_withjournaltable	Expression parseWithjournaltable()
+sqlglot/parser.py:3244-3245	_parse_log	Expression parseLog(boolean no)	defaults: no=false
+sqlglot/parser.py:3247-3248	_parse_journal	Expression parseJournal(Map<Arg, Object> kwargs)	defaults: kwargs=null
+sqlglot/parser.py:3250-3259	_parse_checksum	Expression parseChecksum()
+sqlglot/parser.py:3261-3267	_parse_cluster	Expression parseCluster()
+sqlglot/parser.py:3269-3274	_parse_cluster_property	Expression parseClusterProperty()
+sqlglot/parser.py:3276-3296	_parse_clustered_by	Expression parseClusteredBy()
+sqlglot/parser.py:3298-3303	_parse_copy_property	Expression parseCopyProperty()
+sqlglot/parser.py:3305-3309	_parse_freespace	Expression parseFreespace()
+sqlglot/parser.py:3311-3321	_parse_mergeblockratio	Expression parseMergeblockratio(boolean no, boolean default_)	defaults: no=false, default_=false
+sqlglot/parser.py:3323-3340	_parse_datablocksize	Expression parseDatablocksize(Boolean default_, Boolean minimum, Boolean maximum)	defaults: default_=null, minimum=null, maximum=null
+sqlglot/parser.py:3342-3357	_parse_blockcompression	Expression parseBlockcompression()
+sqlglot/parser.py:3359-3371	_parse_withisolatedloading	Expression parseWithisolatedloading()
+sqlglot/parser.py:3373-3418	_parse_locking	Expression parseLocking()
+sqlglot/parser.py:3420-3423	_parse_partition_by	List<Expression> parsePartitionBy()
+sqlglot/parser.py:3425-3459	_parse_partition_bound_spec	Expression parsePartitionBoundSpec()
+sqlglot/parser.py:3462-3476	_parse_partitioned_of	Expression parsePartitionedOf()
+sqlglot/parser.py:3478-3484	_parse_partitioned_by	Expression parsePartitionedBy()
+sqlglot/parser.py:3486-3494	_parse_withdata	Expression parseWithdata(boolean no)	defaults: no=false
+sqlglot/parser.py:3496-3499	_parse_contains_property	Expression parseContainsProperty()
+sqlglot/parser.py:3501-3504	_parse_modifies_property	Expression parseModifiesProperty()
+sqlglot/parser.py:3506-3511	_parse_no_property	Expression parseNoProperty()
+sqlglot/parser.py:3513-3518	_parse_on_property	Expression parseOnProperty()
+sqlglot/parser.py:3520-3523	_parse_reads_property	Expression parseReadsProperty()
+sqlglot/parser.py:3525-3526	_parse_distkey	Expression parseDistkey()
+sqlglot/parser.py:3528-3543	_parse_create_like	Expression parseCreateLike()
+sqlglot/parser.py:3545-3548	_parse_sortkey	Expression parseSortkey(boolean compound)	defaults: compound=false
+sqlglot/parser.py:3550-3554	_parse_character_set	Expression parseCharacterSet(boolean default_)	defaults: default_=false
+sqlglot/parser.py:3556-3560	_parse_remote_with_connection	Expression parseRemoteWithConnection()
+sqlglot/parser.py:3562-3582	_parse_returns	Expression parseReturns()
+sqlglot/parser.py:3584-3613	_parse_describe	Expression parseDescribe()
+sqlglot/parser.py:3615-3654	_parse_multitable_inserts	Expression parseMultitableInserts(Collection<String> comments, String kind)	defaults: kind=null
+sqlglot/parser.py:3656-3762	_parse_insert	Expression parseInsert()
+sqlglot/parser.py:3764-3768	_parse_insert_table	Expression parseInsertTable()
+sqlglot/parser.py:3770-3773	_parse_kill	Expression parseKill()
+sqlglot/parser.py:3775-3811	_parse_on_conflict	Expression parseOnConflict()
+sqlglot/parser.py:3813-3821	_parse_returning	Expression parseReturning()
+sqlglot/parser.py:3823-3826	_parse_row	Expression parseRow()
+sqlglot/parser.py:3828-3837	_parse_serde_properties	Expression parseSerdeProperties(boolean with)	defaults: with=false
+sqlglot/parser.py:3839-3871	_parse_row_format	Expression parseRowFormat(boolean matchRow)	defaults: matchRow=false
+sqlglot/parser.py:3873-3898	_parse_load	Expression parseLoad()
+sqlglot/parser.py:3900-3924	_parse_delete	Expression parseDelete()
+sqlglot/parser.py:3926-3933	_parse_update_assignment	Expression parseUpdateAssignment()
+sqlglot/parser.py:3935-3962	_parse_update	Expression parseUpdate()
+sqlglot/parser.py:3964-3970	_parse_use	Expression parseUse()
+sqlglot/parser.py:3972-3978	_parse_uncache	Expression parseUncache()
+sqlglot/parser.py:3980-3999	_parse_cache	Expression parseCache()
+sqlglot/parser.py:4001-4010	_parse_partition	Expression parsePartition()
+sqlglot/parser.py:4012-4027	_parse_value	Expression parseValue(boolean values)	defaults: values=true
+sqlglot/parser.py:4029-4032	_parse_projections	Object[] parseProjections()
+sqlglot/parser.py:4034-4055	_parse_wrapped_select	Expression parseWrappedSelect(boolean table)	defaults: table=false
+sqlglot/parser.py:4057-4077	_parse_select	Expression parseSelect(boolean nested, boolean table, boolean parseSubqueryAlias, boolean parseSetOperation, boolean consumePipe)	defaults: nested=false, table=false, parseSubqueryAlias=true, parseSetOperation=true, consumePipe=true
+sqlglot/parser.py:4079-4237	_parse_select_query	Expression parseSelectQuery(boolean nested, boolean table, boolean parseSubqueryAlias, boolean parseSetOperation)	defaults: nested=false, table=false, parseSubqueryAlias=true, parseSetOperation=true
+sqlglot/parser.py:4239-4258	_parse_recursive_with_search	Expression parseRecursiveWithSearch()
+sqlglot/parser.py:4260-4309	_parse_with	Expression parseWith(boolean skipWithToken)	defaults: skipWithToken=false
+sqlglot/parser.py:4311-4349	_parse_cte	Expression parseCte()
+sqlglot/parser.py:4351-4354	_values_to_select	Expression valuesToSelect(Expression values)
+sqlglot/parser.py:4356-4392	_parse_table_alias	Expression parseTableAlias(Set<TokenType> aliasTokens)	defaults: aliasTokens=null
+sqlglot/parser.py:4394-4407	_parse_subquery	Expression parseSubquery(Expression this_, boolean parseAlias)	defaults: parseAlias=true
+sqlglot/parser.py:4409-4434	_implicit_unnests_to_explicit	Expression implicitUnnestsToExplicit(Expression this_)
+sqlglot/parser.py:4442-4507	_parse_query_modifiers	Object parseQueryModifiers(Expression this_)
+sqlglot/parser.py:4509-4515	_parse_hint_fallback_to_string	Expression parseHintFallbackToString()
+sqlglot/parser.py:4517-4518	_parse_hint_function_call	Expression parseHintFunctionCall()
+sqlglot/parser.py:4520-4540	_parse_hint_body	Expression parseHintBody()
+sqlglot/parser.py:4542-4546	_parse_hint	Expression parseHint()
+sqlglot/parser.py:4548-4558	_parse_into	Expression parseIntoImpl()
+sqlglot/parser.py:4560-4573	_parse_from	Expression parseFrom(boolean joins, boolean skipFromToken, boolean consumePipe)	defaults: joins=false, skipFromToken=false, consumePipe=false
+sqlglot/parser.py:4575-4581	_parse_match_recognize_measure	Expression parseMatchRecognizeMeasure()
+sqlglot/parser.py:4583-4674	_parse_match_recognize	Expression parseMatchRecognize()
+sqlglot/parser.py:4676-4731	_parse_lateral	Expression parseLateral()
+sqlglot/parser.py:4733-4739	_parse_stream	Expression parseStream()
+sqlglot/parser.py:4741-4748	_parse_join_parts	Object[] parseJoinParts()
+sqlglot/parser.py:4750-4757	_parse_using_identifiers	List<Expression> parseUsingIdentifiers()
+sqlglot/parser.py:4759-4853	_parse_join	Expression parseJoin(boolean skipJoinToken, boolean parseBracket, Set<TokenType> aliasTokens)	defaults: skipJoinToken=false, parseBracket=false, aliasTokens=null
+sqlglot/parser.py:4855-4864	_parse_opclass	Expression parseOpclass()
+sqlglot/parser.py:4866-4897	_parse_index_params	Expression parseIndexParams()
+sqlglot/parser.py:4899-4927	_parse_index	Expression parseIndex(Expression index, boolean anonymous)	defaults: index=null, anonymous=false
+sqlglot/parser.py:4929-4955	_parse_table_hints	List<Expression> parseTableHints()
+sqlglot/parser.py:4957-4963	_parse_table_part	Expression parseTablePart(boolean schema)	defaults: schema=false
+sqlglot/parser.py:4965-5026	_parse_table_parts_fast	Expression parseTablePartsFast()
+sqlglot/parser.py:5028-5097	_parse_table_parts	Expression parseTableParts(boolean schema, boolean isDbReference, boolean wildcard, boolean fast)	defaults: schema=false, isDbReference=false, wildcard=false, fast=false
+sqlglot/parser.py:5099-5253	_parse_table	Expression parseTable(boolean schema, boolean joins, Set<TokenType> aliasTokens, boolean parseBracket, boolean isDbReference, boolean parsePartition, boolean consumePipe)	defaults: schema=false, joins=false, aliasTokens=null, parseBracket=false, isDbReference=false, parsePartition=false, consumePipe=false
+sqlglot/parser.py:5255-5281	_parse_version	Expression parseVersion()
+sqlglot/parser.py:5283-5304	_parse_historical_data	Expression parseHistoricalData()
+sqlglot/parser.py:5306-5319	_parse_changes	Expression parseChanges()
+sqlglot/parser.py:5321-5350	_parse_unnest	Expression parseUnnest(boolean withAlias)	defaults: withAlias=true
+sqlglot/parser.py:5352-5371	_parse_derived_table_values	Expression parseDerivedTableValues(boolean allowValueSynonym)	defaults: allowValueSynonym=false
+sqlglot/parser.py:5373-5437	_parse_table_sample	Expression parseTableSample(boolean asModifier)	defaults: asModifier=false
+sqlglot/parser.py:5439-5442	_parse_pivots	List<Expression> parsePivots()
+sqlglot/parser.py:5444-5447	_parse_joins	Object parseJoins(Set<TokenType> aliasTokens)	defaults: aliasTokens=null
+sqlglot/parser.py:5449-5458	_parse_unpivot_columns	Expression parseUnpivotColumns()
+sqlglot/parser.py:5461-5491	_parse_simplified_pivot	Expression parseSimplifiedPivot(Boolean isUnpivot)	defaults: isUnpivot=null
+sqlglot/parser.py:5493-5519	_parse_pivot_in	Expression parsePivotIn()
+sqlglot/parser.py:5521-5528	_parse_pivot_aggregation	Expression parsePivotAggregation()
+sqlglot/parser.py:5530-5645	_parse_pivot	Expression parsePivot()
+sqlglot/parser.py:5647-5648	_pivot_column_names	Collection<String> pivotColumnNames(List<Expression> aggregations)
+sqlglot/parser.py:5650-5658	_parse_prewhere	Expression parsePrewhere(boolean skipWhereToken)	defaults: skipWhereToken=false
+sqlglot/parser.py:5660-5668	_parse_where	Expression parseWhere(boolean skipWhereToken)	defaults: skipWhereToken=false
+sqlglot/parser.py:5670-5716	_parse_group	Expression parseGroup(boolean skipGroupByToken)	defaults: skipGroupByToken=false
+sqlglot/parser.py:5718-5728	_parse_cube_or_rollup	Expression parseCubeOrRollup(boolean withPrefix)	defaults: withPrefix=false
+sqlglot/parser.py:5730-5735	_parse_grouping_sets	Expression parseGroupingSets()
+sqlglot/parser.py:5737-5738	_parse_grouping_set	Expression parseGroupingSet()
+sqlglot/parser.py:5740-5747	_parse_having	Expression parseHaving(boolean skipHavingToken)	defaults: skipHavingToken=false
+sqlglot/parser.py:5749-5752	_parse_qualify	Expression parseQualify()
+sqlglot/parser.py:5754-5760	_parse_connect_with_prior	Expression parseConnectWithPrior()
+sqlglot/parser.py:5762-5777	_parse_connect	Expression parseConnect(boolean skipStartToken)	defaults: skipStartToken=false
+sqlglot/parser.py:5779-5783	_parse_name_as_expression	Expression parseNameAsExpression()
+sqlglot/parser.py:5785-5788	_parse_interpolate	List<Expression> parseInterpolate()
+sqlglot/parser.py:5790-5808	_parse_order	Expression parseOrder(Expression this_, boolean skipOrderToken)	defaults: this_=null, skipOrderToken=false
+sqlglot/parser.py:5810-5813	_parse_sort	Expression parseSort(ExprType expClass, TokenType token)
+sqlglot/parser.py:5815-5858	_parse_ordered	Expression parseOrdered(ParseFn parseMethod)	defaults: parseMethod=null
+sqlglot/parser.py:5860-5869	_parse_limit_options	Expression parseLimitOptions()
+sqlglot/parser.py:5871-5938	_parse_limit	Expression parseLimit(Expression this_, boolean top, boolean skipLimitToken)	defaults: this_=null, top=false, skipLimitToken=false
+sqlglot/parser.py:5940-5949	_parse_offset	Expression parseOffset(Expression this_)	defaults: this_=null
+sqlglot/parser.py:5951-5966	_can_parse_limit_or_offset	boolean canParseLimitOrOffset()
+sqlglot/parser.py:5968-5983	_can_parse_named_window	boolean canParseNamedWindow()
+sqlglot/parser.py:5985-5986	_parse_limit_by	List<Expression> parseLimitBy()
+sqlglot/parser.py:5988-6023	_parse_locks	List<Expression> parseLocks()
+sqlglot/parser.py:6025-6100	parse_set_operation	Expression parseSetOperation(Expression this_, boolean consumePipe)	defaults: consumePipe=false
+sqlglot/parser.py:6102-6123	_parse_set_operations	Expression parseSetOperations(Expression this_)
+sqlglot/parser.py:6125-6126	_parse_expression	Expression parseExpression()
+sqlglot/parser.py:6128-6148	_parse_assignment	Expression parseAssignment()
+sqlglot/parser.py:6150-6160	_parse_disjunction	Expression parseDisjunction()
+sqlglot/parser.py:6162-6172	_parse_conjunction	Expression parseConjunction()
+sqlglot/parser.py:6174-6184	_parse_equality	Expression parseEquality()
+sqlglot/parser.py:6186-6194	_parse_comparison	Expression parseComparison()
+sqlglot/parser.py:6196-6230	_parse_range	Expression parseRange(Expression this_)	defaults: this_=null
+sqlglot/parser.py:6232-6241	_negate_range	Expression negateRange(Expression this_)	defaults: this_=null
+sqlglot/parser.py:6243-6278	_parse_is	Expression parseIs(Expression this_)
+sqlglot/parser.py:6280-6302	_parse_in	Expression parseIn(Expression this_, boolean alias)	defaults: alias=false
+sqlglot/parser.py:6304-6315	_parse_between	Expression parseBetween(Expression this_)
+sqlglot/parser.py:6317-6322	_parse_escape	Expression parseEscape(Expression this_)
+sqlglot/parser.py:6324-6389	_parse_interval_span	Expression parseIntervalSpan(Expression this_, boolean parseFunctionUnit)	defaults: parseFunctionUnit=true
+sqlglot/parser.py:6391-6429	_parse_interval	Expression parseInterval(boolean requireInterval, boolean parseFunctionUnit)	defaults: requireInterval=true, parseFunctionUnit=true
+sqlglot/parser.py:6431-6464	_parse_bitwise	Expression parseBitwise()
+sqlglot/parser.py:6466-6479	_parse_term	Expression parseTerm(boolean parseMod)	defaults: parseMod=true
+sqlglot/parser.py:6481-6489	_normalize_collate	void normalizeCollate(Expression collate)
+sqlglot/parser.py:6491-6514	_parse_factor	Expression parseFactor(boolean parseMod)	defaults: parseMod=true
+sqlglot/parser.py:6516-6517	_parse_factor_operand	Expression parseFactorOperand()
+sqlglot/parser.py:6519-6527	_parse_exponent	Expression parseExponent()
+sqlglot/parser.py:6529-6532	_parse_unary	Expression parseUnary()
+sqlglot/parser.py:6534-6595	_parse_type	Expression parseType(boolean parseInterval, boolean fallbackToIdentifier)	defaults: parseInterval=true, fallbackToIdentifier=false
+sqlglot/parser.py:6597-6607	_parse_type_size	Expression parseTypeSize()
+sqlglot/parser.py:6609-6615	_parse_user_defined_type	Expression parseUserDefinedType(Expression identifier)
+sqlglot/parser.py:6617-6873	_parse_types	Expression parseTypes(boolean checkFunc, boolean schema, boolean allowIdentifiers, boolean withCollation)	defaults: checkFunc=false, schema=false, allowIdentifiers=true, withCollation=false
+sqlglot/parser.py:6875-6899	_parse_json_type_arg	Expression parseJsonTypeArg()
+sqlglot/parser.py:6901-6902	_parse_vector_expressions	List<Expression> parseVectorExpressions(List<Expression> expressions)
+sqlglot/parser.py:6904-6932	_parse_struct_types	Expression parseStructTypes(boolean typeRequired)	defaults: typeRequired=false
+sqlglot/parser.py:6934-6939	_parse_at_time_zone	Expression parseAtTimeZone(Expression this_)
+sqlglot/parser.py:6941-6964	_parse_atom	Expression parseAtom()
+sqlglot/parser.py:6966-6980	_parse_column	Expression parseColumn()
+sqlglot/parser.py:6982-7053	_parse_column_parts_fast	Expression parseColumnPartsFast()
+sqlglot/parser.py:7055-7069	_parse_column_reference	Expression parseColumnReference()
+sqlglot/parser.py:7071-7087	_build_json_extract	Object[] buildJsonExtract(Expression this_, List<Expression> pathParts)
+sqlglot/parser.py:7089-7144	_parse_colon_as_variant_extract	Expression parseColonAsVariantExtract(Expression this_)
+sqlglot/parser.py:7146-7147	_parse_dcolon	Expression parseDcolon()
+sqlglot/parser.py:7149-7215	_parse_column_ops	Expression parseColumnOps(Expression this_)
+sqlglot/parser.py:7217-7253	_parse_paren	Expression parseParen()
+sqlglot/parser.py:7255-7281	_parse_primary	Expression parsePrimary()
+sqlglot/parser.py:7283-7312	_parse_field	Expression parseField(boolean anyToken, Set<TokenType> tokens, boolean anonymousFunc)	defaults: anyToken=false, tokens=null, anonymousFunc=false
+sqlglot/parser.py:7314-7342	_parse_function	Expression parseFunction(Map<String, Object> functions, boolean anonymous, boolean optionalParens, boolean anyToken)	defaults: functions=null, anonymous=false, optionalParens=true, anyToken=false
+sqlglot/parser.py:7344-7345	_parse_function_args	List<Expression> parseFunctionArgs(boolean alias)	defaults: alias=false
+sqlglot/parser.py:7347-7353	_parse_connector_function	Expression parseConnectorFunction(ParseFn connector)
+sqlglot/parser.py:7355-7470	_parse_function_call	Expression parseFunctionCall(Map<String, Object> functions, boolean anonymous, boolean optionalParens, boolean anyToken)	defaults: functions=null, anonymous=false, optionalParens=true, anyToken=false
+sqlglot/parser.py:7472-7473	_to_prop_eq	Expression toPropEq(Expression expression, int index)
+sqlglot/parser.py:7475-7500	_kv_to_prop_eq	List<Expression> kvToPropEq(List<Expression> expressions, boolean parseMap)	defaults: parseMap=false
+sqlglot/parser.py:7502-7522	_parse_function_properties	Expression parseFunctionProperties()
+sqlglot/parser.py:7524-7525	_parse_user_defined_function_expression	Expression parseUserDefinedFunctionExpression()
+sqlglot/parser.py:7527-7528	_parse_function_parameter	Expression parseFunctionParameter()
+sqlglot/parser.py:7530-7540	_parse_user_defined_function	Expression parseUserDefinedFunction(TokenType kind)	defaults: kind=null
+sqlglot/parser.py:7542-7575	_parse_macro_overloads	Expression parseMacroOverloads(Expression this_, Expression firstBody, boolean firstIsTable)	defaults: firstIsTable=false
+sqlglot/parser.py:7577-7582	_parse_introducer	Expression parseIntroducer(Token token)
+sqlglot/parser.py:7584-7592	_parse_session_parameter	Expression parseSessionParameter()
+sqlglot/parser.py:7594-7595	_parse_lambda_arg	Expression parseLambdaArg()
+sqlglot/parser.py:7597-7642	_parse_lambda	Expression parseLambda(boolean alias)	defaults: alias=false
+sqlglot/parser.py:7644-7656	_parse_schema	Expression parseSchema(Expression this_)	defaults: this_=null
+sqlglot/parser.py:7658-7659	_parse_field_def	Expression parseFieldDef()
+sqlglot/parser.py:7661-7744	_parse_column_def	Expression parseColumnDef(Expression this_, boolean computedColumn)	defaults: computedColumn=true
+sqlglot/parser.py:7746-7777	_parse_auto_increment	Expression parseAutoIncrement()
+sqlglot/parser.py:7779-7788	_parse_check_constraint	Expression parseCheckConstraint()
+sqlglot/parser.py:7790-7794	_parse_auto_property	Expression parseAutoProperty()
+sqlglot/parser.py:7796-7802	_parse_compress	Expression parseCompress()
+sqlglot/parser.py:7804-7855	_parse_generated_as_identity	Expression parseGeneratedAsIdentity()
+sqlglot/parser.py:7857-7859	_parse_inline	Expression parseInline()
+sqlglot/parser.py:7861-7871	_parse_not_constraint	Expression parseNotConstraint()
+sqlglot/parser.py:7873-7906	_parse_column_constraint	Expression parseColumnConstraint()
+sqlglot/parser.py:7908-7916	_parse_constraint	Expression parseConstraint()
+sqlglot/parser.py:7918-7926	_parse_unnamed_constraints	List<Expression> parseUnnamedConstraints()
+sqlglot/parser.py:7928-7944	_parse_unnamed_constraint	Expression parseUnnamedConstraint(Collection<String> constraints)	defaults: constraints=null
+sqlglot/parser.py:7946-7953	_parse_unique_key	Expression parseUniqueKey()
+sqlglot/parser.py:7955-7965	_parse_unique	Expression parseUnique()
+sqlglot/parser.py:7967-7999	_parse_key_constraint_options	Collection<String> parseKeyConstraintOptions()
+sqlglot/parser.py:8001-8008	_parse_references	Expression parseReferences(boolean match)	defaults: match=true
+sqlglot/parser.py:8010-8043	_parse_foreign_key	Expression parseForeignKey()
+sqlglot/parser.py:8045-8046	_parse_primary_key_part	Expression parsePrimaryKeyPart()
+sqlglot/parser.py:8048-8058	_parse_period_for_system_time	Expression parsePeriodForSystemTime()
+sqlglot/parser.py:8060-8099	_parse_primary_key	Expression parsePrimaryKey(boolean wrappedOptional, boolean inProps, boolean namedPrimaryKey)	defaults: wrappedOptional=false, inProps=false, namedPrimaryKey=false
+sqlglot/parser.py:8101-8102	_parse_bracket_key_value	Expression parseBracketKeyValue(boolean isMap)	defaults: isMap=false
+sqlglot/parser.py:8104-8118	_parse_odbc_datetime_literal	Expression parseOdbcDatetimeLiteral()
+sqlglot/parser.py:8120-8177	_parse_bracket	Expression parseBracket(Expression this_)	defaults: this_=null
+sqlglot/parser.py:8179-8189	_parse_slice	Expression parseSlice(Expression this_)
+sqlglot/parser.py:8191-8220	_parse_case	Expression parseCase()
+sqlglot/parser.py:8222-8246	_parse_if	Expression parseIf()
+sqlglot/parser.py:8248-8258	_parse_next_value_for	Expression parseNextValueFor()
+sqlglot/parser.py:8260-8269	_parse_extract	Expression parseExtract()
+sqlglot/parser.py:8271-8279	_parse_gap_fill	Expression parseGapFill()
+sqlglot/parser.py:8281-8287	_parse_char	Expression parseChar()
+sqlglot/parser.py:8289-8296	_parse_charset_name	Expression parseCharsetName()
+sqlglot/parser.py:8298-8308	_parse_weight_string	Expression parseWeightString()
+sqlglot/parser.py:8310-8366	_parse_cast	Expression parseCast(boolean strict, Boolean safe)	defaults: safe=null
+sqlglot/parser.py:8368-8420	_parse_string_agg	Expression parseStringAgg()
+sqlglot/parser.py:8422-8432	_parse_convert	Expression parseConvert(boolean strict, Boolean safe)	defaults: safe=null
+sqlglot/parser.py:8434-8443	_parse_char_charset	Expression parseCharCharset(Expression to)
+sqlglot/parser.py:8445-8460	_parse_xml_element	Expression parseXmlElement()
+sqlglot/parser.py:8462-8487	_parse_xml_table	Expression parseXmlTable()
+sqlglot/parser.py:8489-8501	_parse_xml_namespace	List<Expression> parseXmlNamespace()
+sqlglot/parser.py:8503-8509	_parse_decode	Expression parseDecode()
+sqlglot/parser.py:8511-8520	_parse_json_key_value	Expression parseJsonKeyValue()
+sqlglot/parser.py:8522-8526	_parse_format_json	Expression parseFormatJson(Expression this_)
+sqlglot/parser.py:8528-8542	_parse_on_condition	Expression parseOnCondition()
+sqlglot/parser.py:8544-8558	_parse_on_handling	Object parseOnHandling(String on, String... values)
+sqlglot/parser.py:8566-8596	_parse_json_object	Object parseJsonObject(Object agg)	defaults: agg=false
+sqlglot/parser.py:8599-8624	_parse_json_column_def	Expression parseJsonColumnDef()
+sqlglot/parser.py:8626-8632	_parse_json_schema	Expression parseJsonSchema()
+sqlglot/parser.py:8634-8647	_parse_json_table	Expression parseJsonTable()
+sqlglot/parser.py:8649-8677	_parse_match_against	Expression parseMatchAgainst()
+sqlglot/parser.py:8680-8699	_parse_open_json	Expression parseOpenJson()
+sqlglot/parser.py:8701-8718	_parse_position	Expression parsePosition(boolean haystackFirst)	defaults: haystackFirst=false
+sqlglot/parser.py:8720-8722	_parse_join_hint	Expression parseJoinHint(String funcName)
+sqlglot/parser.py:8724-8748	_parse_substring	Expression parseSubstring()
+sqlglot/parser.py:8750-8774	_parse_trim	Expression parseTrim()
+sqlglot/parser.py:8776-8777	_parse_window_clause	List<Expression> parseWindowClause()
+sqlglot/parser.py:8779-8780	_parse_named_window	Expression parseNamedWindow()
+sqlglot/parser.py:8782-8788	_parse_respect_or_ignore_nulls	Expression parseRespectOrIgnoreNulls(Expression this_)
+sqlglot/parser.py:8790-8798	_parse_having_max	Expression parseHavingMax(Expression this_)
+sqlglot/parser.py:8800-8918	_parse_window	Expression parseWindow(Expression this_, boolean alias)	defaults: alias=false
+sqlglot/parser.py:8920-8923	_parse_partition_and_order	Object[] parsePartitionAndOrder()
+sqlglot/parser.py:8925-8935	_parse_window_spec	Map<String, Object> parseWindowSpec()
+sqlglot/parser.py:8937-8978	_parse_alias	Expression parseAlias(Expression this_, boolean explicit)	defaults: explicit=false
+sqlglot/parser.py:8980-8992	_parse_id_var	Expression parseIdVar(boolean anyToken, Set<TokenType> tokens)	defaults: anyToken=true, tokens=null
+sqlglot/parser.py:8994-8997	_parse_string	Expression parseString()
+sqlglot/parser.py:8999-9004	_parse_string_as_identifier	Expression parseStringAsIdentifier()
+sqlglot/parser.py:9006-9009	_parse_number	Expression parseNumber()
+sqlglot/parser.py:9011-9014	_parse_identifier	Expression parseIdentifier()
+sqlglot/parser.py:9016-9030	_parse_var	Expression parseVar(boolean anyToken, Set<TokenType> tokens, boolean upper)	defaults: anyToken=false, tokens=null, upper=false
+sqlglot/parser.py:9032-9036	_advance_any	Token advanceAny(boolean ignoreReserved)	defaults: ignoreReserved=false
+sqlglot/parser.py:9038-9039	_parse_var_or_string	Expression parseVarOrString(boolean upper)	defaults: upper=false
+sqlglot/parser.py:9041-9042	_parse_primary_or_var	Expression parsePrimaryOrVar()
+sqlglot/parser.py:9044-9047	_parse_null	Expression parseNull()
+sqlglot/parser.py:9049-9054	_parse_boolean	Expression parseBoolean()
+sqlglot/parser.py:9056-9059	_parse_star	Expression parseStar()
+sqlglot/parser.py:9061-9063	_parse_parameter	Expression parseParameter()
+sqlglot/parser.py:9065-9071	_parse_placeholder	Expression parsePlaceholder()
+sqlglot/parser.py:9073-9080	_parse_star_op	List<Expression> parseStarOp(String... keywords)
+sqlglot/parser.py:9097-9098	_parse_wrapped_id_vars	List<Expression> parseWrappedIdVars(boolean optional)	defaults: optional=false
+sqlglot/parser.py:9119-9120	_parse_expressions	List<Expression> parseExpressions()
+sqlglot/parser.py:9122-9130	_parse_select_or_expression	Expression parseSelectOrExpression(boolean alias)	defaults: alias=false
+sqlglot/parser.py:9132-9135	_parse_ddl_select	Expression parseDdlSelect()
+sqlglot/parser.py:9137-9155	_parse_transaction	Expression parseTransaction()
+sqlglot/parser.py:9157-9175	_parse_commit_or_rollback	Expression parseCommitOrRollback()
+sqlglot/parser.py:9177-9193	_parse_refresh	Expression parseRefresh()
+sqlglot/parser.py:9195-9208	_parse_column_def_with_exists	Object parseColumnDefWithExists()
+sqlglot/parser.py:9210-9214	_parse_add_column	Expression parseAddColumn()
+sqlglot/parser.py:9216-9237	_parse_drop_column	Expression parseDropColumn()
+sqlglot/parser.py:9239-9250	_parse_alter_drop_action	Expression parseAlterDropAction()
+sqlglot/parser.py:9253-9256	_parse_drop_partition	Expression parseDropPartition(Boolean exists)	defaults: exists=null
+sqlglot/parser.py:9258-9297	_parse_alter_table_add	List<Expression> parseAlterTableAdd()
+sqlglot/parser.py:9299-9356	_parse_alter_table_alter	Expression parseAlterTableAlter()
+sqlglot/parser.py:9358-9363	_parse_alter_diststyle	Expression parseAlterDiststyle()
+sqlglot/parser.py:9365-9377	_parse_alter_sortkey	Expression parseAlterSortkey(Boolean compound)	defaults: compound=null
+sqlglot/parser.py:9379-9387	_parse_alter_table_drop	List<Expression> parseAlterTableDrop()
+sqlglot/parser.py:9389-9404	_parse_alter_table_rename	Expression parseAlterTableRename()
+sqlglot/parser.py:9406-9440	_parse_alter_table_set	Expression parseAlterTableSet()
+sqlglot/parser.py:9442-9452	_parse_alter_session	Expression parseAlterSession()
+sqlglot/parser.py:9454-9538	_parse_alter	Expression parseAlter()
+sqlglot/parser.py:9540-9605	_parse_analyze	Expression parseAnalyze()
+sqlglot/parser.py:9608-9638	_parse_analyze_statistics	Expression parseAnalyzeStatistics()
+sqlglot/parser.py:9641-9660	_parse_analyze_validate	Expression parseAnalyzeValidate()
+sqlglot/parser.py:9662-9666	_parse_analyze_columns	Expression parseAnalyzeColumns()
+sqlglot/parser.py:9668-9672	_parse_analyze_delete	Expression parseAnalyzeDelete()
+sqlglot/parser.py:9674-9677	_parse_analyze_list	Expression parseAnalyzeList()
+sqlglot/parser.py:9680-9717	_parse_analyze_histogram	Expression parseAnalyzeHistogram()
+sqlglot/parser.py:9719-9738	_parse_merge	Expression parseMerge()
+sqlglot/parser.py:9740-9791	_parse_when_matched	Expression parseWhenMatched()
+sqlglot/parser.py:9793-9797	_parse_show	Expression parseShow()
+sqlglot/parser.py:9799-9817	_parse_set_item_assignment	Expression parseSetItemAssignment(String kind)	defaults: kind=null
+sqlglot/parser.py:9819-9826	_parse_set_transaction	Expression parseSetTransaction(boolean global)	defaults: global=false
+sqlglot/parser.py:9828-9830	_parse_set_item	Expression parseSetItem()
+sqlglot/parser.py:9832-9842	_parse_set	Expression parseSet(boolean unset, boolean tag)	defaults: unset=false, tag=false
+sqlglot/parser.py:9844-9873	_parse_var_from_options	Expression parseVarFromOptions(Map<String, List<List<String>>> options, boolean raiseUnmatched)	defaults: raiseUnmatched=true
+sqlglot/parser.py:9875-9881	_parse_as_command	Expression parseAsCommand(Token start)
+sqlglot/parser.py:9883-9902	_parse_dict_property	Expression parseDictProperty(String this_)
+sqlglot/parser.py:9904-9915	_parse_dict_range	Expression parseDictRange(String this_)
+sqlglot/parser.py:9917-9935	_parse_comprehension	Expression parseComprehension(Expression this_)
+sqlglot/parser.py:9937-9971	_parse_heredoc	Expression parseHeredoc()
+sqlglot/parser.py:10005-10033	_replace_lambda	Expression replaceLambda(Expression node, List<Expression> expressions)
+sqlglot/parser.py:10035-10084	_parse_truncate_table	Expression parseTruncateTable()
+sqlglot/parser.py:10086-10087	_parse_indexed_column	Expression parseIndexedColumn()
+sqlglot/parser.py:10089-10097	_parse_with_operator	Expression parseWithOperator()
+sqlglot/parser.py:10099-10118	_parse_wrapped_options	List<Expression> parseWrappedOptions()
+sqlglot/parser.py:10120-10157	_parse_copy_parameters	List<Expression> parseCopyParameters()
+sqlglot/parser.py:10159-10180	_parse_credentials	Expression parseCredentials()
+sqlglot/parser.py:10182-10183	_parse_file_location	Expression parseFileLocation()
+sqlglot/parser.py:10185-10218	_parse_copy	Expression parseCopy()
+sqlglot/parser.py:10220-10225	_parse_normalize	Expression parseNormalize()
+sqlglot/parser.py:10227-10237	_parse_ceil_floor	Expression parseCeilFloor(ExprType exprType)
+sqlglot/parser.py:10239-10261	_parse_star_ops	Expression parseStarOps()
+sqlglot/parser.py:10263-10283	_parse_grant_privilege	Expression parseGrantPrivilege()
+sqlglot/parser.py:10285-10292	_parse_grant_principal	Expression parseGrantPrincipal()
+sqlglot/parser.py:10294-10306	_parse_grant_revoke_common	Object[] parseGrantRevokeCommon()
+sqlglot/parser.py:10308-10331	_parse_grant	Expression parseGrant()
+sqlglot/parser.py:10333-10361	_parse_revoke	Expression parseRevoke()
+sqlglot/parser.py:10363-10378	_parse_overlay	Expression parseOverlay()
+sqlglot/parser.py:10380-10387	_parse_format_name	Expression parseFormatName()
+sqlglot/parser.py:10389-10402	_parse_distinct_arg_function	Expression parseDistinctArgFunction(ExprType func, int distinctIndex)	defaults: distinctIndex=0
+sqlglot/parser.py:10404-10408	_identifier_expression	Expression identifierExpression(Token token, Boolean quoted)	defaults: token=null, quoted=null
+sqlglot/parser.py:10410-10430	_build_pipe_cte	Expression buildPipeCte(Expression query, List<Expression> expressions, Expression aliasCte)	defaults: aliasCte=null
+sqlglot/parser.py:10432-10439	_parse_pipe_syntax_select	Expression parsePipeSyntaxSelect(Expression query)
+sqlglot/parser.py:10441-10463	_parse_pipe_syntax_limit	Expression parsePipeSyntaxLimit(Expression query)
+sqlglot/parser.py:10465-10475	_parse_pipe_syntax_aggregate_fields	Expression parsePipeSyntaxAggregateFields()
+sqlglot/parser.py:10477-10505	_parse_pipe_syntax_aggregate_group_order_by	Expression parsePipeSyntaxAggregateGroupOrderBy(Expression query, boolean groupByExists)	defaults: groupByExists=true
+sqlglot/parser.py:10507-10516	_parse_pipe_syntax_aggregate	Expression parsePipeSyntaxAggregate(Expression query)
+sqlglot/parser.py:10518-10547	_parse_pipe_syntax_set_operator	Expression parsePipeSyntaxSetOperator(Expression query)
+sqlglot/parser.py:10549-10557	_parse_pipe_syntax_join	Expression parsePipeSyntaxJoin(Expression query)
+sqlglot/parser.py:10559-10568	_parse_pipe_syntax_pivot	Expression parsePipeSyntaxPivot(Expression query)
+sqlglot/parser.py:10570-10573	_parse_pipe_syntax_extend	Expression parsePipeSyntaxExtend(Expression query)
+sqlglot/parser.py:10575-10584	_parse_pipe_syntax_tablesample	Expression parsePipeSyntaxTablesample(Expression query)
+sqlglot/parser.py:10586-10612	_parse_pipe_syntax_query	Expression parsePipeSyntaxQuery(Expression query)
+sqlglot/parser.py:10614-10627	_parse_declareitem	Expression parseDeclareitem()
+sqlglot/parser.py:10629-10637	_parse_declare	Expression parseDeclare()
+sqlglot/parser.py:10639-10645	build_cast	Expression buildCast(boolean strict, Map<Arg, Object> kwargs)	defaults: kwargs=null
+sqlglot/parser.py:10647-10661	_parse_json_value	Expression parseJsonValue(boolean jsonPath)	defaults: jsonPath=true
+sqlglot/parser.py:10663-10700	_parse_group_concat	Expression parseGroupConcat()
+sqlglot/parser.py:10702-10709	_parse_initcap	Expression parseInitcap()
+sqlglot/parser.py:10711-10725	_parse_operator	Expression parseOperator(Expression this_)

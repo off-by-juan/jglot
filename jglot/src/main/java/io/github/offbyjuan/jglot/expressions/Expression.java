@@ -1293,6 +1293,163 @@ public final class Expression {
     }
 
     // ------------------------------------------------------------------------------------------
+    // Builder methods (sqlglot's Expression/Query/Select builder API). Stubs marked TODO(port) are
+    // filled in by the expression-helpers port; their signatures are the contract other code uses.
+    // Unless noted, these follow sqlglot's copy=True default and return a modified copy.
+
+    private static RuntimeException notPorted(String what) {
+        return new UnsupportedOperationException("not yet ported from sqlglot: " + what);
+    }
+
+    /** {@code query.select(*expressions, append=..., copy=...)}. */
+    public Expression select(boolean append, boolean copy, Object... expressions) {
+        throw notPorted("Select.select"); // TODO(port)
+    }
+
+    /** {@code select.from_(expression, copy=...)}. */
+    public Expression from(Object expression, boolean copy) {
+        throw notPorted("Select.from_"); // TODO(port)
+    }
+
+    /** {@code query.where(*expressions, append=..., copy=...)}: AND-combines with any existing WHERE. */
+    public Expression where(boolean append, boolean copy, Object... expressions) {
+        throw notPorted("Select.where"); // TODO(port)
+    }
+
+    /** {@code select.join(expression, on=..., using=..., join_type=..., join_alias=..., copy=...)}. */
+    public Expression join(Object expression, Object on, List<Object> using, String joinType, String joinAlias, boolean copy) {
+        throw notPorted("Select.join"); // TODO(port)
+    }
+
+    /** {@code select.group_by(*expressions, append=..., copy=...)}. */
+    public Expression groupBy(boolean append, boolean copy, Object... expressions) {
+        throw notPorted("Select.group_by"); // TODO(port)
+    }
+
+    /** {@code query.order_by(*expressions, append=..., copy=...)}. */
+    public Expression orderBy(boolean append, boolean copy, Object... expressions) {
+        throw notPorted("Query.order_by"); // TODO(port)
+    }
+
+    /** {@code query.limit(expression, copy=...)}. */
+    public Expression limit(Object expression, boolean copy) {
+        throw notPorted("Query.limit"); // TODO(port)
+    }
+
+    /** {@code query.offset(expression, copy=...)}. */
+    public Expression offset(Object expression, boolean copy) {
+        throw notPorted("Query.offset"); // TODO(port)
+    }
+
+    /** {@code select.distinct(*ons, distinct=..., copy=...)}. */
+    public Expression distinct(boolean distinct, boolean copy, Object... ons) {
+        throw notPorted("Select.distinct"); // TODO(port)
+    }
+
+    /** {@code query.with_(alias, as_, recursive=..., append=..., copy=...)}. */
+    public Expression with(Object alias, Object as, boolean recursive, boolean append, boolean copy) {
+        throw notPorted("Query.with_"); // TODO(port)
+    }
+
+    /** {@code query.subquery(alias=..., copy=...)}: wraps the query in a SUBQUERY node. */
+    public Expression subquery(Object alias, boolean copy) {
+        throw notPorted("Query.subquery"); // TODO(port)
+    }
+
+    /** {@code expression.as_(alias, quoted=..., copy=..., table=...)}. */
+    public Expression as(Object alias, Boolean quoted, boolean copy) {
+        throw notPorted("Expression.as_"); // TODO(port)
+    }
+
+    /** {@code query.union(*expressions, distinct=..., copy=...)}. */
+    public Expression union(boolean distinct, boolean copy, Object... expressions) {
+        throw notPorted("Query.union"); // TODO(port)
+    }
+
+    /** {@code query.intersect(*expressions, distinct=..., copy=...)}. */
+    public Expression intersect(boolean distinct, boolean copy, Object... expressions) {
+        throw notPorted("Query.intersect"); // TODO(port)
+    }
+
+    /** {@code query.except_(*expressions, distinct=..., copy=...)}. */
+    public Expression except(boolean distinct, boolean copy, Object... expressions) {
+        throw notPorted("Query.except_"); // TODO(port)
+    }
+
+    /** {@code expression.and_(*expressions, copy=...)}. */
+    public Expression and(boolean copy, Object... expressions) {
+        throw notPorted("Expression.and_"); // TODO(port)
+    }
+
+    /** {@code expression.or_(*expressions, copy=...)}. */
+    public Expression or(boolean copy, Object... expressions) {
+        throw notPorted("Expression.or_"); // TODO(port)
+    }
+
+    /** {@code expression.not_(copy=...)}. */
+    public Expression not(boolean copy) {
+        throw notPorted("Expression.not_"); // TODO(port)
+    }
+
+    /** {@code expression.eq(other)}: a copy of this = other. */
+    public Expression eq(Object other) {
+        throw notPorted("Expression.eq"); // TODO(port)
+    }
+
+    /** {@code expression.neq(other)}. */
+    public Expression neq(Object other) {
+        throw notPorted("Expression.neq"); // TODO(port)
+    }
+
+    /** {@code expression.isin(*expressions, query=..., unnest=..., copy=...)}. */
+    public Expression isin(Object query, Object unnest, boolean copy, Object... expressions) {
+        throw notPorted("Expression.isin"); // TODO(port)
+    }
+
+    /** {@code expression.between(low, high, copy=...)}. */
+    public Expression between(Object low, Object high, boolean copy) {
+        throw notPorted("Expression.between"); // TODO(port)
+    }
+
+    /**
+     * {@code expression.is_type(*dtypes)}: for DATA_TYPE nodes (and casts/annotated nodes, via their
+     * type) whether the type matches any of {@code dtypes} (DType values, type strings or DATA_TYPE
+     * nodes). See {@link DataTypes#isType}.
+     */
+    public boolean isType(Object... dtypes) {
+        Expression dt = type.isDataTypeType() ? this : dataType();
+        return dt != null && DataTypes.isType(dt, false, dtypes);
+    }
+
+    /** {@code expression.assert_is(type)}. */
+    public Expression assertIs(ExprType t) {
+        if (!is(t)) {
+            throw new AssertionError(this + " is not " + t.className() + ".");
+        }
+        return this;
+    }
+
+    /** {@code column.to_dot(include_dots=...)}: converts a column into a Dot chain. */
+    public Expression toDot(boolean includeDots) {
+        throw notPorted("Column.to_dot"); // TODO(port)
+    }
+
+    /** {@code case.when(condition, then, copy=...)}. */
+    public Expression when(Object condition, Object then, boolean copy) {
+        throw notPorted("Case.when"); // TODO(port)
+    }
+
+    /** {@code case.else_(condition, copy=...)}. */
+    public Expression elseCase(Object condition, boolean copy) {
+        throw notPorted("Case.else_"); // TODO(port)
+    }
+
+    /** {@code expression.sql(dialect)}: renders this node in {@code dialect}. */
+    public String sql(io.github.offbyjuan.jglot.dialects.Dialect dialect) {
+        return dialect.generate(this);
+    }
+
+    // ------------------------------------------------------------------------------------------
     // Debug output
 
     /** sqlglot-style tree dump, e.g. {@code Select(expressions=[Column(this=Identifier(...))])}. */

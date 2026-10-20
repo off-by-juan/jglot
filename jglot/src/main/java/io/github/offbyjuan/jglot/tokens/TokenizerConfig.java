@@ -24,6 +24,7 @@ public final class TokenizerConfig {
     final Map<Character, String> identifiers;
     final Map<String, String> comments;
     final Set<Character> stringEscapes;
+    final java.util.List<String> stringEscapesOrdered;
     final Set<Character> byteStringEscapes;
     final Set<Character> identifierEscapes;
     final Set<TokenType> commands;
@@ -66,6 +67,7 @@ public final class TokenizerConfig {
         this.identifiers = Collections.unmodifiableMap(new LinkedHashMap<>(b.identifiers));
         this.comments = Collections.unmodifiableMap(new LinkedHashMap<>(b.comments));
         this.stringEscapes = Set.copyOf(b.stringEscapes);
+        this.stringEscapesOrdered = java.util.List.copyOf(b.stringEscapesOrdered);
         this.byteStringEscapes = Set.copyOf(b.byteStringEscapes);
         this.identifierEscapes = Set.copyOf(b.identifierEscapes);
         this.commands = Collections.unmodifiableSet(enumSet(b.commands));
@@ -122,6 +124,11 @@ public final class TokenizerConfig {
         return stringEscapes;
     }
 
+    /** sqlglot's {@code STRING_ESCAPES} list, in declaration order. */
+    public java.util.List<String> stringEscapesOrdered() {
+        return stringEscapesOrdered;
+    }
+
     public Set<Character> byteStringEscapes() {
         return byteStringEscapes;
     }
@@ -160,6 +167,7 @@ public final class TokenizerConfig {
         public final Map<String, String> comments = new LinkedHashMap<>();
         public final java.util.HashSet<Character> stringEscapes = new java.util.HashSet<>();
         public final java.util.HashSet<Character> byteStringEscapes = new java.util.HashSet<>();
+        public final java.util.ArrayList<String> stringEscapesOrdered = new java.util.ArrayList<>();
         public final java.util.HashSet<Character> identifierEscapes = new java.util.HashSet<>();
         public final java.util.HashSet<TokenType> commands = new java.util.HashSet<>();
         public final java.util.HashSet<TokenType> commandPrefixTokens = new java.util.HashSet<>();

@@ -382,6 +382,7 @@ public final class TokenizerData {
         b.comments.put("/*+", "*/");
         b.stringEscapes.add('\'');
         b.byteStringEscapes.add('\'');
+        b.stringEscapesOrdered.add("'");
         b.commands.add(TokenType.COMMAND);
         b.commands.add(TokenType.EXECUTE);
         b.commands.add(TokenType.FETCH);
@@ -882,6 +883,7 @@ public final class TokenizerData {
         b.stringEscapes.add('\'');
         b.byteStringEscapes.add('\'');
         b.byteStringEscapes.add('\\');
+        b.stringEscapesOrdered.add("'");
         b.commands.add(TokenType.COMMAND);
         b.commands.add(TokenType.EXECUTE);
         b.commands.add(TokenType.FETCH);
@@ -1372,6 +1374,7 @@ public final class TokenizerData {
         b.comments.put("{#", "#}");
         b.stringEscapes.add('\'');
         b.byteStringEscapes.add('\'');
+        b.stringEscapesOrdered.add("'");
         b.commands.add(TokenType.COMMAND);
         b.commands.add(TokenType.EXECUTE);
         b.commands.add(TokenType.FETCH);
@@ -1839,6 +1842,7 @@ public final class TokenizerData {
         b.comments.put("{#", "#}");
         b.stringEscapes.add('\'');
         b.byteStringEscapes.add('\'');
+        b.stringEscapesOrdered.add("'");
         b.commands.add(TokenType.COMMAND);
         b.commands.add(TokenType.EXECUTE);
         b.commands.add(TokenType.FETCH);
@@ -2332,6 +2336,7 @@ public final class TokenizerData {
         b.comments.put("{#", "#}");
         b.stringEscapes.add('\\');
         b.byteStringEscapes.add('\\');
+        b.stringEscapesOrdered.add("\\");
         b.commands.add(TokenType.COMMAND);
         b.commands.add(TokenType.EXECUTE);
         b.commands.add(TokenType.FETCH);
@@ -2858,6 +2863,8 @@ public final class TokenizerData {
         b.byteStringEscapes.add('\'');
         b.byteStringEscapes.add('\\');
         b.identifierEscapes.add('\\');
+        b.stringEscapesOrdered.add("'");
+        b.stringEscapesOrdered.add("\\");
         b.commands.add(TokenType.COMMAND);
         b.commands.add(TokenType.EXECUTE);
         b.commands.add(TokenType.FETCH);
@@ -3373,6 +3380,7 @@ public final class TokenizerData {
         b.comments.put("/*+", "*/");
         b.stringEscapes.add('\\');
         b.byteStringEscapes.add('\\');
+        b.stringEscapesOrdered.add("\\");
         b.commands.add(TokenType.COMMAND);
         b.commands.add(TokenType.EXECUTE);
         b.commands.add(TokenType.FETCH);
