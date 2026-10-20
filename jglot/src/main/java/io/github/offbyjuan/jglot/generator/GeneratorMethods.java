@@ -16,7 +16,7 @@ public abstract class GeneratorMethods extends GeneratorCore {
 
     /** Dispatches to the {@code <key>_sql} method for the node's exact type, or returns null. */
     @Override
-    protected String sqlFor(Expression e) {
+    public String sqlFor(Expression e) {
         return switch (e.type()) {
             case ADD -> addSql(e);
             case ADD_CONSTRAINT -> addconstraintSql(e);
@@ -443,2509 +443,2509 @@ public abstract class GeneratorMethods extends GeneratorCore {
     }
 
     /** sqlglot/generator.py:1017 preprocess */
-    protected Expression preprocess(Expression expression) {
+    public Expression preprocess(Expression expression) {
         throw notPorted("preprocess");
     }
 
     /** sqlglot/generator.py:1028 _move_ctes_to_top_level */
-    protected Expression moveCtesToTopLevel(Expression expression) {
+    public Expression moveCtesToTopLevel(Expression expression) {
         throw notPorted("_move_ctes_to_top_level");
     }
 
     /** sqlglot/generator.py:1176 uncache_sql */
-    protected String uncacheSql(Expression expression) {
+    public String uncacheSql(Expression expression) {
         throw notPorted("uncache_sql");
     }
 
     /** sqlglot/generator.py:1181 cache_sql */
-    protected String cacheSql(Expression expression) {
+    public String cacheSql(Expression expression) {
         throw notPorted("cache_sql");
     }
 
     /** sqlglot/generator.py:1191 characterset_sql */
-    protected String charactersetSql(Expression expression) {
+    public String charactersetSql(Expression expression) {
         throw notPorted("characterset_sql");
     }
 
     /** sqlglot/generator.py:1195 column_parts */
-    protected String columnParts(Expression expression) {
+    public String columnParts(Expression expression) {
         throw notPorted("column_parts");
     }
 
     /** sqlglot/generator.py:1211 column_sql */
-    protected String columnSql(Expression expression) {
+    public String columnSql(Expression expression) {
         throw notPorted("column_sql");
     }
 
     /** sqlglot/generator.py:1220 pseudocolumn_sql */
-    protected String pseudocolumnSql(Expression expression) {
+    public String pseudocolumnSql(Expression expression) {
         throw notPorted("pseudocolumn_sql");
     }
 
     /** sqlglot/generator.py:1223 columnposition_sql */
-    protected String columnpositionSql(Expression expression) {
+    public String columnpositionSql(Expression expression) {
         throw notPorted("columnposition_sql");
     }
 
     /** sqlglot/generator.py:1229 columndef_sql */
-    protected String columndefSql(Expression expression, String sep) {
+    public String columndefSql(Expression expression, String sep) {
         throw notPorted("columndef_sql");
     }
 
-    protected final String columndefSql(Expression expression) {
+    public final String columndefSql(Expression expression) {
         return columndefSql(expression, " ");
     }
 
     /** sqlglot/generator.py:1244 columnconstraint_sql */
-    protected String columnconstraintSql(Expression expression) {
+    public String columnconstraintSql(Expression expression) {
         throw notPorted("columnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1249 computedcolumnconstraint_sql */
-    protected String computedcolumnconstraintSql(Expression expression) {
+    public String computedcolumnconstraintSql(Expression expression) {
         throw notPorted("computedcolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1260 autoincrementcolumnconstraint_sql */
-    protected String autoincrementcolumnconstraintSql(Expression unused) {
+    public String autoincrementcolumnconstraintSql(Expression unused) {
         throw notPorted("autoincrementcolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1263 compresscolumnconstraint_sql */
-    protected String compresscolumnconstraintSql(Expression expression) {
+    public String compresscolumnconstraintSql(Expression expression) {
         throw notPorted("compresscolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1271 generatedasidentitycolumnconstraint_sql */
-    protected String generatedasidentitycolumnconstraintSql(Expression expression) {
+    public String generatedasidentitycolumnconstraintSql(Expression expression) {
         throw notPorted("generatedasidentitycolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1304 generatedasrowcolumnconstraint_sql */
-    protected String generatedasrowcolumnconstraintSql(Expression expression) {
+    public String generatedasrowcolumnconstraintSql(Expression expression) {
         throw notPorted("generatedasrowcolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1311 periodforsystemtimeconstraint_sql */
-    protected String periodforsystemtimeconstraintSql(Expression expression) {
+    public String periodforsystemtimeconstraintSql(Expression expression) {
         throw notPorted("periodforsystemtimeconstraint_sql");
     }
 
     /** sqlglot/generator.py:1316 notnullcolumnconstraint_sql */
-    protected String notnullcolumnconstraintSql(Expression expression) {
+    public String notnullcolumnconstraintSql(Expression expression) {
         throw notPorted("notnullcolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1319 primarykeycolumnconstraint_sql */
-    protected String primarykeycolumnconstraintSql(Expression expression) {
+    public String primarykeycolumnconstraintSql(Expression expression) {
         throw notPorted("primarykeycolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1327 uniquecolumnconstraint_sql */
-    protected String uniquecolumnconstraintSql(Expression expression) {
+    public String uniquecolumnconstraintSql(Expression expression) {
         throw notPorted("uniquecolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1339 inoutcolumnconstraint_sql */
-    protected String inoutcolumnconstraintSql(Expression expression) {
+    public String inoutcolumnconstraintSql(Expression expression) {
         throw notPorted("inoutcolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:1357 createable_sql */
-    protected String createableSql(Expression expression, Object locations) {
+    public String createableSql(Expression expression, Object locations) {
         throw notPorted("createable_sql");
     }
 
     /** sqlglot/generator.py:1360 create_sql */
-    protected String createSql(Expression expression) {
+    public String createSql(Expression expression) {
         throw notPorted("create_sql");
     }
 
     /** sqlglot/generator.py:1481 sequenceproperties_sql */
-    protected String sequencepropertiesSql(Expression expression) {
+    public String sequencepropertiesSql(Expression expression) {
         throw notPorted("sequenceproperties_sql");
     }
 
     /** sqlglot/generator.py:1506 triggerproperties_sql */
-    protected String triggerpropertiesSql(Expression expression) {
+    public String triggerpropertiesSql(Expression expression) {
         throw notPorted("triggerproperties_sql");
     }
 
     /** sqlglot/generator.py:1535 triggerreferencing_sql */
-    protected String triggerreferencingSql(Expression expression) {
+    public String triggerreferencingSql(Expression expression) {
         throw notPorted("triggerreferencing_sql");
     }
 
     /** sqlglot/generator.py:1546 triggerevent_sql */
-    protected String triggereventSql(Expression expression) {
+    public String triggereventSql(Expression expression) {
         throw notPorted("triggerevent_sql");
     }
 
     /** sqlglot/generator.py:1553 clone_sql */
-    protected String cloneSql(Expression expression) {
+    public String cloneSql(Expression expression) {
         throw notPorted("clone_sql");
     }
 
     /** sqlglot/generator.py:1559 describe_sql */
-    protected String describeSql(Expression expression) {
+    public String describeSql(Expression expression) {
         throw notPorted("describe_sql");
     }
 
     /** sqlglot/generator.py:1570 heredoc_sql */
-    protected String heredocSql(Expression expression) {
+    public String heredocSql(Expression expression) {
         throw notPorted("heredoc_sql");
     }
 
     /** sqlglot/generator.py:1574 prepend_ctes */
-    protected String prependCtes(Expression expression, String sql) {
+    public String prependCtes(Expression expression, String sql) {
         throw notPorted("prepend_ctes");
     }
 
     /** sqlglot/generator.py:1580 with_sql */
-    protected String withSql(Expression expression) {
+    public String withSql(Expression expression) {
         throw notPorted("with_sql");
     }
 
     /** sqlglot/generator.py:1599 cte_sql */
-    protected String cteSql(Expression expression) {
+    public String cteSql(Expression expression) {
         throw notPorted("cte_sql");
     }
 
     /** sqlglot/generator.py:1617 tablealias_sql */
-    protected String tablealiasSql(Expression expression) {
+    public String tablealiasSql(Expression expression) {
         throw notPorted("tablealias_sql");
     }
 
     /** sqlglot/generator.py:1635 bitstring_sql */
-    protected String bitstringSql(Expression expression) {
+    public String bitstringSql(Expression expression) {
         throw notPorted("bitstring_sql");
     }
 
     /** sqlglot/generator.py:1641 hexstring_sql */
-    protected String hexstringSql(Expression expression, String binaryFunctionRepr) {
+    public String hexstringSql(Expression expression, String binaryFunctionRepr) {
         throw notPorted("hexstring_sql");
     }
 
-    protected final String hexstringSql(Expression expression) {
+    public final String hexstringSql(Expression expression) {
         return hexstringSql(expression, (String) null);
     }
 
     /** sqlglot/generator.py:1666 bytestring_sql */
-    protected String bytestringSql(Expression expression) {
+    public String bytestringSql(Expression expression) {
         throw notPorted("bytestring_sql");
     }
 
     /** sqlglot/generator.py:1705 unicodestring_sql */
-    protected String unicodestringSql(Expression expression) {
+    public String unicodestringSql(Expression expression) {
         throw notPorted("unicodestring_sql");
     }
 
     /** sqlglot/generator.py:1736 rawstring_sql */
-    protected String rawstringSql(Expression expression) {
+    public String rawstringSql(Expression expression) {
         throw notPorted("rawstring_sql");
     }
 
     /** sqlglot/generator.py:1744 datatypeparam_sql */
-    protected String datatypeparamSql(Expression expression) {
+    public String datatypeparamSql(Expression expression) {
         throw notPorted("datatypeparam_sql");
     }
 
     /** sqlglot/generator.py:1750 datatype_param_bound_limiter */
-    protected Expression datatypeParamBoundLimiter(Expression expression, Expression typeValue, Object[] defaults, Object[] bounds) {
+    public Expression datatypeParamBoundLimiter(Expression expression, Expression typeValue, Object[] defaults, Object[] bounds) {
         throw notPorted("datatype_param_bound_limiter");
     }
 
     /** sqlglot/generator.py:1790 datatype_sql */
-    protected String datatypeSql(Expression expression) {
+    public String datatypeSql(Expression expression) {
         throw notPorted("datatype_sql");
     }
 
     /** sqlglot/generator.py:1855 directory_sql */
-    protected String directorySql(Expression expression) {
+    public String directorySql(Expression expression) {
         throw notPorted("directory_sql");
     }
 
     /** sqlglot/generator.py:1861 delete_sql */
-    protected String deleteSql(Expression expression) {
+    public String deleteSql(Expression expression) {
         throw notPorted("delete_sql");
     }
 
     /** sqlglot/generator.py:1881 drop_sql */
-    protected String dropSql(Expression expression) {
+    public String dropSql(Expression expression) {
         throw notPorted("drop_sql");
     }
 
     /** sqlglot/generator.py:1906 set_operation */
-    protected String setOperation(Expression expression) {
+    public String setOperation(Expression expression) {
         throw notPorted("set_operation");
     }
 
     /** sqlglot/generator.py:1939 set_operations */
-    protected String setOperations(Expression expression) {
+    public String setOperations(Expression expression) {
         throw notPorted("set_operations");
     }
 
     /** sqlglot/generator.py:1984 fetch_sql */
-    protected String fetchSql(Expression expression) {
+    public String fetchSql(Expression expression) {
         throw notPorted("fetch_sql");
     }
 
     /** sqlglot/generator.py:1993 limitoptions_sql */
-    protected String limitoptionsSql(Expression expression) {
+    public String limitoptionsSql(Expression expression) {
         throw notPorted("limitoptions_sql");
     }
 
     /** sqlglot/generator.py:2001 filter_sql */
-    protected String filterSql(Expression expression) {
+    public String filterSql(Expression expression) {
         throw notPorted("filter_sql");
     }
 
     /** sqlglot/generator.py:2006 hint_sql */
-    protected String hintSql(Expression expression) {
+    public String hintSql(Expression expression) {
         throw notPorted("hint_sql");
     }
 
     /** sqlglot/generator.py:2013 indexparameters_sql */
-    protected String indexparametersSql(Expression expression) {
+    public String indexparametersSql(Expression expression) {
         throw notPorted("indexparameters_sql");
     }
 
     /** sqlglot/generator.py:2033 index_sql */
-    protected String indexSql(Expression expression) {
+    public String indexSql(Expression expression) {
         throw notPorted("index_sql");
     }
 
     /** sqlglot/generator.py:2047 dynamicidentifier_sql */
-    protected String dynamicidentifierSql(Expression expression) {
+    public String dynamicidentifierSql(Expression expression) {
         throw notPorted("dynamicidentifier_sql");
     }
 
     /** sqlglot/generator.py:2061 identifier_sql */
-    protected String identifierSql(Expression expression) {
+    public String identifierSql(Expression expression) {
         throw notPorted("identifier_sql");
     }
 
     /** sqlglot/generator.py:2081 hex_sql */
-    protected String hexSql(Expression expression) {
+    public String hexSql(Expression expression) {
         throw notPorted("hex_sql");
     }
 
     /** sqlglot/generator.py:2088 lowerhex_sql */
-    protected String lowerhexSql(Expression expression) {
+    public String lowerhexSql(Expression expression) {
         throw notPorted("lowerhex_sql");
     }
 
     /** sqlglot/generator.py:2094 inputoutputformat_sql */
-    protected String inputoutputformatSql(Expression expression) {
+    public String inputoutputformatSql(Expression expression) {
         throw notPorted("inputoutputformat_sql");
     }
 
     /** sqlglot/generator.py:2101 national_sql */
-    protected String nationalSql(Expression expression, String prefix) {
+    public String nationalSql(Expression expression, String prefix) {
         throw notPorted("national_sql");
     }
 
-    protected final String nationalSql(Expression expression) {
+    public final String nationalSql(Expression expression) {
         return nationalSql(expression, "N");
     }
 
     /** sqlglot/generator.py:2105 partition_sql */
-    protected String partitionSql(Expression expression) {
+    public String partitionSql(Expression expression) {
         throw notPorted("partition_sql");
     }
 
     /** sqlglot/generator.py:2109 properties_sql */
-    protected String propertiesSql(Expression expression) {
+    public String propertiesSql(Expression expression) {
         throw notPorted("properties_sql");
     }
 
     /** sqlglot/generator.py:2134 root_properties */
-    protected String rootProperties(Expression properties) {
+    public String rootProperties(Expression properties) {
         throw notPorted("root_properties");
     }
 
     /** sqlglot/generator.py:2139 properties */
-    protected String properties(Expression properties, String prefix, String sep, String suffix, boolean wrapped) {
+    public String properties(Expression properties, String prefix, String sep, String suffix, boolean wrapped) {
         throw notPorted("properties");
     }
 
-    protected final String properties(Expression properties) {
+    public final String properties(Expression properties) {
         return properties(properties, "", ", ", "", true);
     }
 
-    protected final String properties(Expression properties, String prefix) {
+    public final String properties(Expression properties, String prefix) {
         return properties(properties, prefix, ", ", "", true);
     }
 
-    protected final String properties(Expression properties, String prefix, String sep) {
+    public final String properties(Expression properties, String prefix, String sep) {
         return properties(properties, prefix, sep, "", true);
     }
 
-    protected final String properties(Expression properties, String prefix, String sep, String suffix) {
+    public final String properties(Expression properties, String prefix, String sep, String suffix) {
         return properties(properties, prefix, sep, suffix, true);
     }
 
     /** sqlglot/generator.py:2154 with_properties */
-    protected String withProperties(Expression properties) {
+    public String withProperties(Expression properties) {
         throw notPorted("with_properties");
     }
 
     /** sqlglot/generator.py:2157 locate_properties */
-    protected Object locateProperties(Expression properties) {
+    public Object locateProperties(Expression properties) {
         throw notPorted("locate_properties");
     }
 
     /** sqlglot/generator.py:2168 property_name */
-    protected String propertyName(Expression expression, boolean stringKey) {
+    public String propertyName(Expression expression, boolean stringKey) {
         throw notPorted("property_name");
     }
 
-    protected final String propertyName(Expression expression) {
+    public final String propertyName(Expression expression) {
         return propertyName(expression, false);
     }
 
     /** sqlglot/generator.py:2173 property_sql */
-    protected String propertySql(Expression expression) {
+    public String propertySql(Expression expression) {
         throw notPorted("property_sql");
     }
 
     /** sqlglot/generator.py:2184 uuidproperty_sql */
-    protected String uuidpropertySql(Expression expression) {
+    public String uuidpropertySql(Expression expression) {
         throw notPorted("uuidproperty_sql");
     }
 
     /** sqlglot/generator.py:2187 likeproperty_sql */
-    protected String likepropertySql(Expression expression) {
+    public String likepropertySql(Expression expression) {
         throw notPorted("likeproperty_sql");
     }
 
     /** sqlglot/generator.py:2204 fallbackproperty_sql */
-    protected String fallbackpropertySql(Expression expression) {
+    public String fallbackpropertySql(Expression expression) {
         throw notPorted("fallbackproperty_sql");
     }
 
     /** sqlglot/generator.py:2209 journalproperty_sql */
-    protected String journalpropertySql(Expression expression) {
+    public String journalpropertySql(Expression expression) {
         throw notPorted("journalproperty_sql");
     }
 
     /** sqlglot/generator.py:2218 freespaceproperty_sql */
-    protected String freespacepropertySql(Expression expression) {
+    public String freespacepropertySql(Expression expression) {
         throw notPorted("freespaceproperty_sql");
     }
 
     /** sqlglot/generator.py:2223 checksumproperty_sql */
-    protected String checksumpropertySql(Expression expression) {
+    public String checksumpropertySql(Expression expression) {
         throw notPorted("checksumproperty_sql");
     }
 
     /** sqlglot/generator.py:2232 mergeblockratioproperty_sql */
-    protected String mergeblockratiopropertySql(Expression expression) {
+    public String mergeblockratiopropertySql(Expression expression) {
         throw notPorted("mergeblockratioproperty_sql");
     }
 
     /** sqlglot/generator.py:2241 moduleproperty_sql */
-    protected String modulepropertySql(Expression expression) {
+    public String modulepropertySql(Expression expression) {
         throw notPorted("moduleproperty_sql");
     }
 
     /** sqlglot/generator.py:2246 datablocksizeproperty_sql */
-    protected String datablocksizepropertySql(Expression expression) {
+    public String datablocksizepropertySql(Expression expression) {
         throw notPorted("datablocksizeproperty_sql");
     }
 
     /** sqlglot/generator.py:2262 blockcompressionproperty_sql */
-    protected String blockcompressionpropertySql(Expression expression) {
+    public String blockcompressionpropertySql(Expression expression) {
         throw notPorted("blockcompressionproperty_sql");
     }
 
     /** sqlglot/generator.py:2281 isolatedloadingproperty_sql */
-    protected String isolatedloadingpropertySql(Expression expression) {
+    public String isolatedloadingpropertySql(Expression expression) {
         throw notPorted("isolatedloadingproperty_sql");
     }
 
     /** sqlglot/generator.py:2290 partitionboundspec_sql */
-    protected String partitionboundspecSql(Expression expression) {
+    public String partitionboundspecSql(Expression expression) {
         throw notPorted("partitionboundspec_sql");
     }
 
     /** sqlglot/generator.py:2302 partitionedofproperty_sql */
-    protected String partitionedofpropertySql(Expression expression) {
+    public String partitionedofpropertySql(Expression expression) {
         throw notPorted("partitionedofproperty_sql");
     }
 
     /** sqlglot/generator.py:2313 lockingproperty_sql */
-    protected String lockingpropertySql(Expression expression) {
+    public String lockingpropertySql(Expression expression) {
         throw notPorted("lockingproperty_sql");
     }
 
     /** sqlglot/generator.py:2322 withdataproperty_sql */
-    protected String withdatapropertySql(Expression expression) {
+    public String withdatapropertySql(Expression expression) {
         throw notPorted("withdataproperty_sql");
     }
 
     /** sqlglot/generator.py:2330 withsystemversioningproperty_sql */
-    protected String withsystemversioningpropertySql(Expression expression) {
+    public String withsystemversioningpropertySql(Expression expression) {
         throw notPorted("withsystemversioningproperty_sql");
     }
 
     /** sqlglot/generator.py:2351 insert_sql */
-    protected String insertSql(Expression expression) {
+    public String insertSql(Expression expression) {
         throw notPorted("insert_sql");
     }
 
     /** sqlglot/generator.py:2398 introducer_sql */
-    protected String introducerSql(Expression expression) {
+    public String introducerSql(Expression expression) {
         throw notPorted("introducer_sql");
     }
 
     /** sqlglot/generator.py:2401 kill_sql */
-    protected String killSql(Expression expression) {
+    public String killSql(Expression expression) {
         throw notPorted("kill_sql");
     }
 
     /** sqlglot/generator.py:2408 pseudotype_sql */
-    protected String pseudotypeSql(Expression expression) {
+    public String pseudotypeSql(Expression expression) {
         throw notPorted("pseudotype_sql");
     }
 
     /** sqlglot/generator.py:2411 objectidentifier_sql */
-    protected String objectidentifierSql(Expression expression) {
+    public String objectidentifierSql(Expression expression) {
         throw notPorted("objectidentifier_sql");
     }
 
     /** sqlglot/generator.py:2414 onconflict_sql */
-    protected String onconflictSql(Expression expression) {
+    public String onconflictSql(Expression expression) {
         throw notPorted("onconflict_sql");
     }
 
     /** sqlglot/generator.py:2437 returning_sql */
-    protected String returningSql(Expression expression) {
+    public String returningSql(Expression expression) {
         throw notPorted("returning_sql");
     }
 
     /** sqlglot/generator.py:2440 rowformatdelimitedproperty_sql */
-    protected String rowformatdelimitedpropertySql(Expression expression) {
+    public String rowformatdelimitedpropertySql(Expression expression) {
         throw notPorted("rowformatdelimitedproperty_sql");
     }
 
     /** sqlglot/generator.py:2455 withtablehint_sql */
-    protected String withtablehintSql(Expression expression) {
+    public String withtablehintSql(Expression expression) {
         throw notPorted("withtablehint_sql");
     }
 
     /** sqlglot/generator.py:2458 indextablehint_sql */
-    protected String indextablehintSql(Expression expression) {
+    public String indextablehintSql(Expression expression) {
         throw notPorted("indextablehint_sql");
     }
 
     /** sqlglot/generator.py:2464 historicaldata_sql */
-    protected String historicaldataSql(Expression expression) {
+    public String historicaldataSql(Expression expression) {
         throw notPorted("historicaldata_sql");
     }
 
     /** sqlglot/generator.py:2470 table_parts */
-    protected String tableParts(Expression expression) {
+    public String tableParts(Expression expression) {
         throw notPorted("table_parts");
     }
 
     /** sqlglot/generator.py:2481 table_sql */
-    protected String tableSql(Expression expression, String sep) {
+    public String tableSql(Expression expression, String sep) {
         throw notPorted("table_sql");
     }
 
-    protected final String tableSql(Expression expression) {
+    public final String tableSql(Expression expression) {
         return tableSql(expression, " AS ");
     }
 
     /** sqlglot/generator.py:2548 tablefromrows_sql */
-    protected String tablefromrowsSql(Expression expression) {
+    public String tablefromrowsSql(Expression expression) {
         throw notPorted("tablefromrows_sql");
     }
 
     /** sqlglot/generator.py:2559 tablesample_sql */
-    protected String tablesampleSql(Expression expression, String tablesampleKeyword) {
+    public String tablesampleSql(Expression expression, String tablesampleKeyword) {
         throw notPorted("tablesample_sql");
     }
 
-    protected final String tablesampleSql(Expression expression) {
+    public final String tablesampleSql(Expression expression) {
         return tablesampleSql(expression, (String) null);
     }
 
     /** sqlglot/generator.py:2588 _pivot_in_value_aliases */
-    protected List<Expression> pivotInValueAliases(Expression expression) {
+    public List<Expression> pivotInValueAliases(Expression expression) {
         throw notPorted("_pivot_in_value_aliases");
     }
 
     /** sqlglot/generator.py:2663 pivot_sql */
-    protected String pivotSql(Expression expression) {
+    public String pivotSql(Expression expression) {
         throw notPorted("pivot_sql");
     }
 
     /** sqlglot/generator.py:2713 version_sql */
-    protected String versionSql(Expression expression) {
+    public String versionSql(Expression expression) {
         throw notPorted("version_sql");
     }
 
     /** sqlglot/generator.py:2719 tuple_sql */
-    protected String tupleSql(Expression expression) {
+    public String tupleSql(Expression expression) {
         throw notPorted("tuple_sql");
     }
 
     /** sqlglot/generator.py:2722 _update_from_joins_sql */
-    protected Object[] updateFromJoinsSql(Expression expression) {
+    public Object[] updateFromJoinsSql(Expression expression) {
         throw notPorted("_update_from_joins_sql");
     }
 
     /** sqlglot/generator.py:2754 update_sql */
-    protected String updateSql(Expression expression) {
+    public String updateSql(Expression expression) {
         throw notPorted("update_sql");
     }
 
     /** sqlglot/generator.py:2772 values_sql */
-    protected String valuesSql(Expression expression, boolean valuesAsTable) {
+    public String valuesSql(Expression expression, boolean valuesAsTable) {
         throw notPorted("values_sql");
     }
 
-    protected final String valuesSql(Expression expression) {
+    public final String valuesSql(Expression expression) {
         return valuesSql(expression, true);
     }
 
     /** sqlglot/generator.py:2816 var_sql */
-    protected String varSql(Expression expression) {
+    public String varSql(Expression expression) {
         throw notPorted("var_sql");
     }
 
     /** sqlglot/generator.py:2820 into_sql */
-    protected String intoSql(Expression expression) {
+    public String intoSql(Expression expression) {
         throw notPorted("into_sql");
     }
 
     /** sqlglot/generator.py:2825 from_sql */
-    protected String fromSql(Expression expression) {
+    public String fromSql(Expression expression) {
         throw notPorted("from_sql");
     }
 
     /** sqlglot/generator.py:2828 groupingsets_sql */
-    protected String groupingsetsSql(Expression expression) {
+    public String groupingsetsSql(Expression expression) {
         throw notPorted("groupingsets_sql");
     }
 
     /** sqlglot/generator.py:2832 rollup_sql */
-    protected String rollupSql(Expression expression) {
+    public String rollupSql(Expression expression) {
         throw notPorted("rollup_sql");
     }
 
     /** sqlglot/generator.py:2836 rollupindex_sql */
-    protected String rollupindexSql(Expression expression) {
+    public String rollupindexSql(Expression expression) {
         throw notPorted("rollupindex_sql");
     }
 
     /** sqlglot/generator.py:2851 rollupproperty_sql */
-    protected String rolluppropertySql(Expression expression) {
+    public String rolluppropertySql(Expression expression) {
         throw notPorted("rollupproperty_sql");
     }
 
     /** sqlglot/generator.py:2854 cube_sql */
-    protected String cubeSql(Expression expression) {
+    public String cubeSql(Expression expression) {
         throw notPorted("cube_sql");
     }
 
     /** sqlglot/generator.py:2858 group_sql */
-    protected String groupSql(Expression expression) {
+    public String groupSql(Expression expression) {
         throw notPorted("group_sql");
     }
 
     /** sqlglot/generator.py:2901 having_sql */
-    protected String havingSql(Expression expression) {
+    public String havingSql(Expression expression) {
         throw notPorted("having_sql");
     }
 
     /** sqlglot/generator.py:2905 connect_sql */
-    protected String connectSql(Expression expression) {
+    public String connectSql(Expression expression) {
         throw notPorted("connect_sql");
     }
 
     /** sqlglot/generator.py:2913 prior_sql */
-    protected String priorSql(Expression expression) {
+    public String priorSql(Expression expression) {
         throw notPorted("prior_sql");
     }
 
     /** sqlglot/generator.py:2916 join_sql */
-    protected String joinSql(Expression expression) {
+    public String joinSql(Expression expression) {
         throw notPorted("join_sql");
     }
 
     /** sqlglot/generator.py:2968 lambda_sql */
-    protected String lambdaSql(Expression expression, String arrowSep, boolean wrap) {
+    public String lambdaSql(Expression expression, String arrowSep, boolean wrap) {
         throw notPorted("lambda_sql");
     }
 
-    protected final String lambdaSql(Expression expression) {
+    public final String lambdaSql(Expression expression) {
         return lambdaSql(expression, "->", true);
     }
 
-    protected final String lambdaSql(Expression expression, String arrowSep) {
+    public final String lambdaSql(Expression expression, String arrowSep) {
         return lambdaSql(expression, arrowSep, true);
     }
 
     /** sqlglot/generator.py:2973 lateral_op */
-    protected String lateralOp(Expression expression) {
+    public String lateralOp(Expression expression) {
         throw notPorted("lateral_op");
     }
 
     /** sqlglot/generator.py:2986 lateral_sql */
-    protected String lateralSql(Expression expression) {
+    public String lateralSql(Expression expression) {
         throw notPorted("lateral_sql");
     }
 
     /** sqlglot/generator.py:3020 limit_sql */
-    protected String limitSql(Expression expression, boolean top) {
+    public String limitSql(Expression expression, boolean top) {
         throw notPorted("limit_sql");
     }
 
-    protected final String limitSql(Expression expression) {
+    public final String limitSql(Expression expression) {
         return limitSql(expression, false);
     }
 
     /** sqlglot/generator.py:3040 offset_sql */
-    protected String offsetSql(Expression expression) {
+    public String offsetSql(Expression expression) {
         throw notPorted("offset_sql");
     }
 
     /** sqlglot/generator.py:3048 setitem_sql */
-    protected String setitemSql(Expression expression) {
+    public String setitemSql(Expression expression) {
         throw notPorted("setitem_sql");
     }
 
     /** sqlglot/generator.py:3061 set_sql */
-    protected String setSql(Expression expression) {
+    public String setSql(Expression expression) {
         throw notPorted("set_sql");
     }
 
     /** sqlglot/generator.py:3066 queryband_sql */
-    protected String querybandSql(Expression expression) {
+    public String querybandSql(Expression expression) {
         throw notPorted("queryband_sql");
     }
 
     /** sqlglot/generator.py:3074 pragma_sql */
-    protected String pragmaSql(Expression expression) {
+    public String pragmaSql(Expression expression) {
         throw notPorted("pragma_sql");
     }
 
     /** sqlglot/generator.py:3077 lock_sql */
-    protected String lockSql(Expression expression) {
+    public String lockSql(Expression expression) {
         throw notPorted("lock_sql");
     }
 
     /** sqlglot/generator.py:3100 literal_sql */
-    protected String literalSql(Expression expression) {
+    public String literalSql(Expression expression) {
         throw notPorted("literal_sql");
     }
 
     /** sqlglot/generator.py:3106 escape_str */
-    protected String escapeStr(String text, boolean escapeBackslash, String delimiter, String escapedDelimiter, boolean isByteString, boolean isBytes) {
+    public String escapeStr(String text, boolean escapeBackslash, String delimiter, String escapedDelimiter, boolean isByteString, boolean isBytes) {
         throw notPorted("escape_str");
     }
 
-    protected final String escapeStr(String text) {
+    public final String escapeStr(String text) {
         return escapeStr(text, true, (String) null, (String) null, false, false);
     }
 
-    protected final String escapeStr(String text, boolean escapeBackslash) {
+    public final String escapeStr(String text, boolean escapeBackslash) {
         return escapeStr(text, escapeBackslash, (String) null, (String) null, false, false);
     }
 
-    protected final String escapeStr(String text, boolean escapeBackslash, String delimiter) {
+    public final String escapeStr(String text, boolean escapeBackslash, String delimiter) {
         return escapeStr(text, escapeBackslash, delimiter, (String) null, false, false);
     }
 
-    protected final String escapeStr(String text, boolean escapeBackslash, String delimiter, String escapedDelimiter) {
+    public final String escapeStr(String text, boolean escapeBackslash, String delimiter, String escapedDelimiter) {
         return escapeStr(text, escapeBackslash, delimiter, escapedDelimiter, false, false);
     }
 
-    protected final String escapeStr(String text, boolean escapeBackslash, String delimiter, String escapedDelimiter, boolean isByteString) {
+    public final String escapeStr(String text, boolean escapeBackslash, String delimiter, String escapedDelimiter, boolean isByteString) {
         return escapeStr(text, escapeBackslash, delimiter, escapedDelimiter, isByteString, false);
     }
 
     /** sqlglot/generator.py:3135 loaddata_sql */
-    protected String loaddataSql(Expression expression) {
+    public String loaddataSql(Expression expression) {
         throw notPorted("loaddata_sql");
     }
 
     /** sqlglot/generator.py:3163 null_sql */
-    protected String nullSql(Object... unused) {
+    public String nullSql(Object... unused) {
         throw notPorted("null_sql");
     }
 
     /** sqlglot/generator.py:3166 boolean_sql */
-    protected String booleanSql(Expression expression) {
+    public String booleanSql(Expression expression) {
         throw notPorted("boolean_sql");
     }
 
     /** sqlglot/generator.py:3169 booland_sql */
-    protected String boolandSql(Expression expression) {
+    public String boolandSql(Expression expression) {
         throw notPorted("booland_sql");
     }
 
     /** sqlglot/generator.py:3172 boolor_sql */
-    protected String boolorSql(Expression expression) {
+    public String boolorSql(Expression expression) {
         throw notPorted("boolor_sql");
     }
 
     /** sqlglot/generator.py:3175 order_sql */
-    protected String orderSql(Expression expression, boolean flat) {
+    public String orderSql(Expression expression, boolean flat) {
         throw notPorted("order_sql");
     }
 
-    protected final String orderSql(Expression expression) {
+    public final String orderSql(Expression expression) {
         return orderSql(expression, false);
     }
 
     /** sqlglot/generator.py:3181 withfill_sql */
-    protected String withfillSql(Expression expression) {
+    public String withfillSql(Expression expression) {
         throw notPorted("withfill_sql");
     }
 
     /** sqlglot/generator.py:3199 cluster_sql */
-    protected String clusterSql(Expression expression) {
+    public String clusterSql(Expression expression) {
         throw notPorted("cluster_sql");
     }
 
     /** sqlglot/generator.py:3202 clusterproperty_sql */
-    protected String clusterpropertySql(Expression expression) {
+    public String clusterpropertySql(Expression expression) {
         throw notPorted("clusterproperty_sql");
     }
 
     /** sqlglot/generator.py:3209 distribute_sql */
-    protected String distributeSql(Expression expression) {
+    public String distributeSql(Expression expression) {
         throw notPorted("distribute_sql");
     }
 
     /** sqlglot/generator.py:3212 sort_sql */
-    protected String sortSql(Expression expression) {
+    public String sortSql(Expression expression) {
         throw notPorted("sort_sql");
     }
 
     /** sqlglot/generator.py:3215 _resolve_ordered_for_null_ordering_simulation */
-    protected Expression resolveOrderedForNullOrderingSimulation(Expression expression) {
+    public Expression resolveOrderedForNullOrderingSimulation(Expression expression) {
         throw notPorted("_resolve_ordered_for_null_ordering_simulation");
     }
 
     /** sqlglot/generator.py:3251 ordered_sql */
-    protected String orderedSql(Expression expression) {
+    public String orderedSql(Expression expression) {
         throw notPorted("ordered_sql");
     }
 
     /** sqlglot/generator.py:3332 matchrecognizemeasure_sql */
-    protected String matchrecognizemeasureSql(Expression expression) {
+    public String matchrecognizemeasureSql(Expression expression) {
         throw notPorted("matchrecognizemeasure_sql");
     }
 
     /** sqlglot/generator.py:3340 matchrecognize_sql */
-    protected String matchrecognizeSql(Expression expression) {
+    public String matchrecognizeSql(Expression expression) {
         throw notPorted("matchrecognize_sql");
     }
 
     /** sqlglot/generator.py:3372 query_modifiers */
-    protected String queryModifiers(Expression expression, String... sqls) {
+    public String queryModifiers(Expression expression, String... sqls) {
         throw notPorted("query_modifiers");
     }
 
     /** sqlglot/generator.py:3406 options_modifier */
-    protected String optionsModifier(Expression expression) {
+    public String optionsModifier(Expression expression) {
         throw notPorted("options_modifier");
     }
 
     /** sqlglot/generator.py:3410 forclause_sql */
-    protected String forclauseSql(Expression expression) {
+    public String forclauseSql(Expression expression) {
         throw notPorted("forclause_sql");
     }
 
     /** sqlglot/generator.py:3421 queryoption_sql */
-    protected String queryoptionSql(Expression expression) {
+    public String queryoptionSql(Expression expression) {
         throw notPorted("queryoption_sql");
     }
 
     /** sqlglot/generator.py:3425 offset_limit_modifiers */
-    protected Collection<String> offsetLimitModifiers(Expression expression, boolean fetch, Expression limit) {
+    public Collection<String> offsetLimitModifiers(Expression expression, boolean fetch, Expression limit) {
         throw notPorted("offset_limit_modifiers");
     }
 
     /** sqlglot/generator.py:3433 after_limit_modifiers */
-    protected Collection<String> afterLimitModifiers(Expression expression) {
+    public Collection<String> afterLimitModifiers(Expression expression) {
         throw notPorted("after_limit_modifiers");
     }
 
     /** sqlglot/generator.py:3438 select_sql */
-    protected String selectSql(Expression expression) {
+    public String selectSql(Expression expression) {
         throw notPorted("select_sql");
     }
 
     /** sqlglot/generator.py:3522 schema_sql */
-    protected String schemaSql(Expression expression) {
+    public String schemaSql(Expression expression) {
         throw notPorted("schema_sql");
     }
 
     /** sqlglot/generator.py:3527 schema_columns_sql */
-    protected String schemaColumnsSql(Expression expression) {
+    public String schemaColumnsSql(Expression expression) {
         throw notPorted("schema_columns_sql");
     }
 
     /** sqlglot/generator.py:3532 star_sql */
-    protected String starSql(Expression expression) {
+    public String starSql(Expression expression) {
         throw notPorted("star_sql");
     }
 
     /** sqlglot/generator.py:3543 parameter_sql */
-    protected String parameterSql(Expression expression) {
+    public String parameterSql(Expression expression) {
         throw notPorted("parameter_sql");
     }
 
     /** sqlglot/generator.py:3547 sessionparameter_sql */
-    protected String sessionparameterSql(Expression expression) {
+    public String sessionparameterSql(Expression expression) {
         throw notPorted("sessionparameter_sql");
     }
 
     /** sqlglot/generator.py:3554 placeholder_sql */
-    protected String placeholderSql(Expression expression) {
+    public String placeholderSql(Expression expression) {
         throw notPorted("placeholder_sql");
     }
 
     /** sqlglot/generator.py:3557 subquery_sql */
-    protected String subquerySql(Expression expression, String sep) {
+    public String subquerySql(Expression expression, String sep) {
         throw notPorted("subquery_sql");
     }
 
-    protected final String subquerySql(Expression expression) {
+    public final String subquerySql(Expression expression) {
         return subquerySql(expression, " AS ");
     }
 
     /** sqlglot/generator.py:3571 qualify_sql */
-    protected String qualifySql(Expression expression) {
+    public String qualifySql(Expression expression) {
         throw notPorted("qualify_sql");
     }
 
     /** sqlglot/generator.py:3575 unnest_sql */
-    protected String unnestSql(Expression expression) {
+    public String unnestSql(Expression expression) {
         throw notPorted("unnest_sql");
     }
 
     /** sqlglot/generator.py:3605 prewhere_sql */
-    protected String prewhereSql(Expression expression) {
+    public String prewhereSql(Expression expression) {
         throw notPorted("prewhere_sql");
     }
 
     /** sqlglot/generator.py:3608 where_sql */
-    protected String whereSql(Expression expression) {
+    public String whereSql(Expression expression) {
         throw notPorted("where_sql");
     }
 
     /** sqlglot/generator.py:3612 window_sql */
-    protected String windowSql(Expression expression) {
+    public String windowSql(Expression expression) {
         throw notPorted("window_sql");
     }
 
     /** sqlglot/generator.py:3637 partition_by_sql */
-    protected String partitionBySql(Expression expression) {
+    public String partitionBySql(Expression expression) {
         throw notPorted("partition_by_sql");
     }
 
     /** sqlglot/generator.py:3641 windowspec_sql */
-    protected String windowspecSql(Expression expression) {
+    public String windowspecSql(Expression expression) {
         throw notPorted("windowspec_sql");
     }
 
     /** sqlglot/generator.py:3660 withingroup_sql */
-    protected String withingroupSql(Expression expression) {
+    public String withingroupSql(Expression expression) {
         throw notPorted("withingroup_sql");
     }
 
     /** sqlglot/generator.py:3665 between_sql */
-    protected String betweenSql(Expression expression) {
+    public String betweenSql(Expression expression) {
         throw notPorted("between_sql");
     }
 
     /** sqlglot/generator.py:3683 bracket_offset_expressions */
-    protected List<Expression> bracketOffsetExpressions(Expression expression, Integer indexOffset) {
+    public List<Expression> bracketOffsetExpressions(Expression expression, Integer indexOffset) {
         throw notPorted("bracket_offset_expressions");
     }
 
-    protected final List<Expression> bracketOffsetExpressions(Expression expression) {
+    public final List<Expression> bracketOffsetExpressions(Expression expression) {
         return bracketOffsetExpressions(expression, (Integer) null);
     }
 
     /** sqlglot/generator.py:3696 bracket_sql */
-    protected String bracketSql(Expression expression) {
+    public String bracketSql(Expression expression) {
         throw notPorted("bracket_sql");
     }
 
     /** sqlglot/generator.py:3701 all_sql */
-    protected String allSql(Expression expression) {
+    public String allSql(Expression expression) {
         throw notPorted("all_sql");
     }
 
     /** sqlglot/generator.py:3707 any_sql */
-    protected String anySql(Expression expression) {
+    public String anySql(Expression expression) {
         throw notPorted("any_sql");
     }
 
     /** sqlglot/generator.py:3715 exists_sql */
-    protected String existsSql(Expression expression) {
+    public String existsSql(Expression expression) {
         throw notPorted("exists_sql");
     }
 
     /** sqlglot/generator.py:3718 case_sql */
-    protected String caseSql(Expression expression) {
+    public String caseSql(Expression expression) {
         throw notPorted("case_sql");
     }
 
     /** sqlglot/generator.py:3738 constraint_sql */
-    protected String constraintSql(Expression expression) {
+    public String constraintSql(Expression expression) {
         throw notPorted("constraint_sql");
     }
 
     /** sqlglot/generator.py:3743 nextvaluefor_sql */
-    protected String nextvalueforSql(Expression expression) {
+    public String nextvalueforSql(Expression expression) {
         throw notPorted("nextvaluefor_sql");
     }
 
     /** sqlglot/generator.py:3748 extract_sql */
-    protected String extractSql(Expression expression) {
+    public String extractSql(Expression expression) {
         throw notPorted("extract_sql");
     }
 
     /** sqlglot/generator.py:3766 trim_sql */
-    protected String trimSql(Expression expression) {
+    public String trimSql(Expression expression) {
         throw notPorted("trim_sql");
     }
 
     /** sqlglot/generator.py:3778 convert_concat_args */
-    protected List<Expression> convertConcatArgs(Expression expression) {
+    public List<Expression> convertConcatArgs(Expression expression) {
         throw notPorted("convert_concat_args");
     }
 
     /** sqlglot/generator.py:3809 concat_sql */
-    protected String concatSql(Expression expression) {
+    public String concatSql(Expression expression) {
         throw notPorted("concat_sql");
     }
 
     /** sqlglot/generator.py:3826 concatws_sql */
-    protected String concatwsSql(Expression expression) {
+    public String concatwsSql(Expression expression) {
         throw notPorted("concatws_sql");
     }
 
     /** sqlglot/generator.py:3842 check_sql */
-    protected String checkSql(Expression expression) {
+    public String checkSql(Expression expression) {
         throw notPorted("check_sql");
     }
 
     /** sqlglot/generator.py:3846 foreignkey_sql */
-    protected String foreignkeySql(Expression expression) {
+    public String foreignkeySql(Expression expression) {
         throw notPorted("foreignkey_sql");
     }
 
     /** sqlglot/generator.py:3861 primarykey_sql */
-    protected String primarykeySql(Expression expression) {
+    public String primarykeySql(Expression expression) {
         throw notPorted("primarykey_sql");
     }
 
     /** sqlglot/generator.py:3870 timeserieskey_sql */
-    protected String timeserieskeySql(Expression expression) {
+    public String timeserieskeySql(Expression expression) {
         throw notPorted("timeserieskey_sql");
     }
 
     /** sqlglot/generator.py:3874 if_sql */
-    protected String ifSql(Expression expression) {
+    public String ifSql(Expression expression) {
         throw notPorted("if_sql");
     }
 
     /** sqlglot/generator.py:3877 matchagainst_sql */
-    protected String matchagainstSql(Expression expression) {
+    public String matchagainstSql(Expression expression) {
         throw notPorted("matchagainst_sql");
     }
 
     /** sqlglot/generator.py:3894 jsonkeyvalue_sql */
-    protected String jsonkeyvalueSql(Expression expression) {
+    public String jsonkeyvalueSql(Expression expression) {
         throw notPorted("jsonkeyvalue_sql");
     }
 
     /** sqlglot/generator.py:3897 jsonpath_sql */
-    protected String jsonpathSql(Expression expression) {
+    public String jsonpathSql(Expression expression) {
         throw notPorted("jsonpath_sql");
     }
 
     /** sqlglot/generator.py:3906 json_path_part */
-    protected String jsonPathPart(Object expression) {
+    public String jsonPathPart(Object expression) {
         throw notPorted("json_path_part");
     }
 
     /** sqlglot/generator.py:3927 formatjson_sql */
-    protected String formatjsonSql(Expression expression) {
+    public String formatjsonSql(Expression expression) {
         throw notPorted("formatjson_sql");
     }
 
     /** sqlglot/generator.py:3930 formatphrase_sql */
-    protected String formatphraseSql(Expression expression) {
+    public String formatphraseSql(Expression expression) {
         throw notPorted("formatphrase_sql");
     }
 
     /** sqlglot/generator.py:3937 _jsonobject_sql */
-    protected String jsonobjectSql(Expression expression, String name) {
+    public String jsonobjectSql(Expression expression, String name) {
         throw notPorted("_jsonobject_sql");
     }
 
-    protected final String jsonobjectSql(Expression expression) {
+    public final String jsonobjectSql(Expression expression) {
         return jsonobjectSql(expression, "");
     }
 
     /** sqlglot/generator.py:3963 jsonarray_sql */
-    protected String jsonarraySql(Expression expression) {
+    public String jsonarraySql(Expression expression) {
         throw notPorted("jsonarray_sql");
     }
 
     /** sqlglot/generator.py:3973 jsonarrayagg_sql */
-    protected String jsonarrayaggSql(Expression expression) {
+    public String jsonarrayaggSql(Expression expression) {
         throw notPorted("jsonarrayagg_sql");
     }
 
     /** sqlglot/generator.py:3987 jsoncolumndef_sql */
-    protected String jsoncolumndefSql(Expression expression) {
+    public String jsoncolumndefSql(Expression expression) {
         throw notPorted("jsoncolumndef_sql");
     }
 
     /** sqlglot/generator.py:4003 jsonschema_sql */
-    protected String jsonschemaSql(Expression expression) {
+    public String jsonschemaSql(Expression expression) {
         throw notPorted("jsonschema_sql");
     }
 
     /** sqlglot/generator.py:4006 jsontable_sql */
-    protected String jsontableSql(Expression expression) {
+    public String jsontableSql(Expression expression) {
         throw notPorted("jsontable_sql");
     }
 
     /** sqlglot/generator.py:4019 openjsoncolumndef_sql */
-    protected String openjsoncolumndefSql(Expression expression) {
+    public String openjsoncolumndefSql(Expression expression) {
         throw notPorted("openjsoncolumndef_sql");
     }
 
     /** sqlglot/generator.py:4027 openjson_sql */
-    protected String openjsonSql(Expression expression) {
+    public String openjsonSql(Expression expression) {
         throw notPorted("openjson_sql");
     }
 
     /** sqlglot/generator.py:4039 in_sql */
-    protected String inSql(Expression expression) {
+    public String inSql(Expression expression) {
         throw notPorted("in_sql");
     }
 
     /** sqlglot/generator.py:4056 in_unnest_op */
-    protected String inUnnestOp(Expression unnest) {
+    public String inUnnestOp(Expression unnest) {
         throw notPorted("in_unnest_op");
     }
 
     /** sqlglot/generator.py:4059 interval_sql */
-    protected String intervalSql(Expression expression) {
+    public String intervalSql(Expression expression) {
         throw notPorted("interval_sql");
     }
 
     /** sqlglot/generator.py:4091 return_sql */
-    protected String returnSql(Expression expression) {
+    public String returnSql(Expression expression) {
         throw notPorted("return_sql");
     }
 
     /** sqlglot/generator.py:4094 reference_sql */
-    protected String referenceSql(Expression expression) {
+    public String referenceSql(Expression expression) {
         throw notPorted("reference_sql");
     }
 
     /** sqlglot/generator.py:4102 anonymous_sql */
-    protected String anonymousSql(Expression expression) {
+    public String anonymousSql(Expression expression) {
         throw notPorted("anonymous_sql");
     }
 
     /** sqlglot/generator.py:4111 paren_sql */
-    protected String parenSql(Expression expression) {
+    public String parenSql(Expression expression) {
         throw notPorted("paren_sql");
     }
 
     /** sqlglot/generator.py:4115 neg_sql */
-    protected String negSql(Expression expression) {
+    public String negSql(Expression expression) {
         throw notPorted("neg_sql");
     }
 
     /** sqlglot/generator.py:4121 not_sql */
-    protected String notSql(Expression expression) {
+    public String notSql(Expression expression) {
         throw notPorted("not_sql");
     }
 
     /** sqlglot/generator.py:4124 alias_sql */
-    protected String aliasSql(Expression expression) {
+    public String aliasSql(Expression expression) {
         throw notPorted("alias_sql");
     }
 
     /** sqlglot/generator.py:4129 pivotalias_sql */
-    protected String pivotaliasSql(Expression expression) {
+    public String pivotaliasSql(Expression expression) {
         throw notPorted("pivotalias_sql");
     }
 
     /** sqlglot/generator.py:4146 aliases_sql */
-    protected String aliasesSql(Expression expression) {
+    public String aliasesSql(Expression expression) {
         throw notPorted("aliases_sql");
     }
 
     /** sqlglot/generator.py:4149 atindex_sql */
-    protected String atindexSql(Expression expression) {
+    public String atindexSql(Expression expression) {
         throw notPorted("atindex_sql");
     }
 
     /** sqlglot/generator.py:4154 attimezone_sql */
-    protected String attimezoneSql(Expression expression) {
+    public String attimezoneSql(Expression expression) {
         throw notPorted("attimezone_sql");
     }
 
     /** sqlglot/generator.py:4159 fromtimezone_sql */
-    protected String fromtimezoneSql(Expression expression) {
+    public String fromtimezoneSql(Expression expression) {
         throw notPorted("fromtimezone_sql");
     }
 
     /** sqlglot/generator.py:4164 fromiso8601date_sql */
-    protected String fromiso8601dateSql(Expression expression) {
+    public String fromiso8601dateSql(Expression expression) {
         throw notPorted("fromiso8601date_sql");
     }
 
     /** sqlglot/generator.py:4167 fromiso8601timestamp_sql */
-    protected String fromiso8601timestampSql(Expression expression) {
+    public String fromiso8601timestampSql(Expression expression) {
         throw notPorted("fromiso8601timestamp_sql");
     }
 
     /** sqlglot/generator.py:4170 fromiso8601timestampnanos_sql */
-    protected String fromiso8601timestampnanosSql(Expression expression) {
+    public String fromiso8601timestampnanosSql(Expression expression) {
         throw notPorted("fromiso8601timestampnanos_sql");
     }
 
     /** sqlglot/generator.py:4173 add_sql */
-    protected String addSql(Expression expression) {
+    public String addSql(Expression expression) {
         throw notPorted("add_sql");
     }
 
     /** sqlglot/generator.py:4176 and_sql */
-    protected String andSql(Expression expression, List<Object> stack) {
+    public String andSql(Expression expression, List<Object> stack) {
         throw notPorted("and_sql");
     }
 
-    protected final String andSql(Expression expression) {
+    public final String andSql(Expression expression) {
         return andSql(expression, (List<Object>) null);
     }
 
     /** sqlglot/generator.py:4179 or_sql */
-    protected String orSql(Expression expression, List<Object> stack) {
+    public String orSql(Expression expression, List<Object> stack) {
         throw notPorted("or_sql");
     }
 
-    protected final String orSql(Expression expression) {
+    public final String orSql(Expression expression) {
         return orSql(expression, (List<Object>) null);
     }
 
     /** sqlglot/generator.py:4182 xor_sql */
-    protected String xorSql(Expression expression, List<Object> stack) {
+    public String xorSql(Expression expression, List<Object> stack) {
         throw notPorted("xor_sql");
     }
 
-    protected final String xorSql(Expression expression) {
+    public final String xorSql(Expression expression) {
         return xorSql(expression, (List<Object>) null);
     }
 
     /** sqlglot/generator.py:4185 connector_sql */
-    protected String connectorSql(Expression expression, String op, List<Object> stack) {
+    public String connectorSql(Expression expression, String op, List<Object> stack) {
         throw notPorted("connector_sql");
     }
 
-    protected final String connectorSql(Expression expression, String op) {
+    public final String connectorSql(Expression expression, String op) {
         return connectorSql(expression, op, (List<Object>) null);
     }
 
     /** sqlglot/generator.py:4217 bitwiseand_sql */
-    protected String bitwiseandSql(Expression expression) {
+    public String bitwiseandSql(Expression expression) {
         throw notPorted("bitwiseand_sql");
     }
 
     /** sqlglot/generator.py:4220 bitwiseleftshift_sql */
-    protected String bitwiseleftshiftSql(Expression expression) {
+    public String bitwiseleftshiftSql(Expression expression) {
         throw notPorted("bitwiseleftshift_sql");
     }
 
     /** sqlglot/generator.py:4223 bitwisenot_sql */
-    protected String bitwisenotSql(Expression expression) {
+    public String bitwisenotSql(Expression expression) {
         throw notPorted("bitwisenot_sql");
     }
 
     /** sqlglot/generator.py:4226 bitwiseor_sql */
-    protected String bitwiseorSql(Expression expression) {
+    public String bitwiseorSql(Expression expression) {
         throw notPorted("bitwiseor_sql");
     }
 
     /** sqlglot/generator.py:4229 bitwiserightshift_sql */
-    protected String bitwiserightshiftSql(Expression expression) {
+    public String bitwiserightshiftSql(Expression expression) {
         throw notPorted("bitwiserightshift_sql");
     }
 
     /** sqlglot/generator.py:4232 bitwisexor_sql */
-    protected String bitwisexorSql(Expression expression) {
+    public String bitwisexorSql(Expression expression) {
         throw notPorted("bitwisexor_sql");
     }
 
     /** sqlglot/generator.py:4235 cast_sql */
-    protected String castSql(Expression expression, String safePrefix) {
+    public String castSql(Expression expression, String safePrefix) {
         throw notPorted("cast_sql");
     }
 
-    protected final String castSql(Expression expression) {
+    public final String castSql(Expression expression) {
         return castSql(expression, (String) null);
     }
 
     /** sqlglot/generator.py:4247 strtotime_sql */
-    protected String strtotimeSql(Expression expression) {
+    public String strtotimeSql(Expression expression) {
         throw notPorted("strtotime_sql");
     }
 
     /** sqlglot/generator.py:4251 strtodate_sql */
-    protected String strtodateSql(Expression expression) {
+    public String strtodateSql(Expression expression) {
         throw notPorted("strtodate_sql");
     }
 
     /** sqlglot/generator.py:4254 parsedatetime_sql */
-    protected String parsedatetimeSql(Expression expression) {
+    public String parsedatetimeSql(Expression expression) {
         throw notPorted("parsedatetime_sql");
     }
 
     /** sqlglot/generator.py:4262 currentdate_sql */
-    protected String currentdateSql(Expression expression) {
+    public String currentdateSql(Expression expression) {
         throw notPorted("currentdate_sql");
     }
 
     /** sqlglot/generator.py:4266 collate_sql */
-    protected String collateSql(Expression expression) {
+    public String collateSql(Expression expression) {
         throw notPorted("collate_sql");
     }
 
     /** sqlglot/generator.py:4271 command_sql */
-    protected String commandSql(Expression expression) {
+    public String commandSql(Expression expression) {
         throw notPorted("command_sql");
     }
 
     /** sqlglot/generator.py:4274 comment_sql */
-    protected String commentSql(Expression expression) {
+    public String commentSql(Expression expression) {
         throw notPorted("comment_sql");
     }
 
     /** sqlglot/generator.py:4282 mergetreettlaction_sql */
-    protected String mergetreettlactionSql(Expression expression) {
+    public String mergetreettlactionSql(Expression expression) {
         throw notPorted("mergetreettlaction_sql");
     }
 
     /** sqlglot/generator.py:4293 mergetreettl_sql */
-    protected String mergetreettlSql(Expression expression) {
+    public String mergetreettlSql(Expression expression) {
         throw notPorted("mergetreettl_sql");
     }
 
     /** sqlglot/generator.py:4304 transaction_sql */
-    protected String transactionSql(Expression expression) {
+    public String transactionSql(Expression expression) {
         throw notPorted("transaction_sql");
     }
 
     /** sqlglot/generator.py:4309 commit_sql */
-    protected String commitSql(Expression expression) {
+    public String commitSql(Expression expression) {
         throw notPorted("commit_sql");
     }
 
     /** sqlglot/generator.py:4316 rollback_sql */
-    protected String rollbackSql(Expression expression) {
+    public String rollbackSql(Expression expression) {
         throw notPorted("rollback_sql");
     }
 
     /** sqlglot/generator.py:4321 altercolumn_sql */
-    protected String altercolumnSql(Expression expression) {
+    public String altercolumnSql(Expression expression) {
         throw notPorted("altercolumn_sql");
     }
 
     /** sqlglot/generator.py:4369 _alter_column_null_constraint_sql */
-    protected String alterColumnNullConstraintSql(Expression expression) {
+    public String alterColumnNullConstraintSql(Expression expression) {
         throw notPorted("_alter_column_null_constraint_sql");
     }
 
     /** sqlglot/generator.py:4380 modifycolumn_sql */
-    protected String modifycolumnSql(Expression expression) {
+    public String modifycolumnSql(Expression expression) {
         throw notPorted("modifycolumn_sql");
     }
 
     /** sqlglot/generator.py:4391 alterindex_sql */
-    protected String alterindexSql(Expression expression) {
+    public String alterindexSql(Expression expression) {
         throw notPorted("alterindex_sql");
     }
 
     /** sqlglot/generator.py:4399 alterdiststyle_sql */
-    protected String alterdiststyleSql(Expression expression) {
+    public String alterdiststyleSql(Expression expression) {
         throw notPorted("alterdiststyle_sql");
     }
 
     /** sqlglot/generator.py:4405 altersortkey_sql */
-    protected String altersortkeySql(Expression expression) {
+    public String altersortkeySql(Expression expression) {
         throw notPorted("altersortkey_sql");
     }
 
     /** sqlglot/generator.py:4412 alterrename_sql */
-    protected String alterrenameSql(Expression expression, boolean includeTo) {
+    public String alterrenameSql(Expression expression, boolean includeTo) {
         throw notPorted("alterrename_sql");
     }
 
-    protected final String alterrenameSql(Expression expression) {
+    public final String alterrenameSql(Expression expression) {
         return alterrenameSql(expression, true);
     }
 
     /** sqlglot/generator.py:4422 renamecolumn_sql */
-    protected String renamecolumnSql(Expression expression) {
+    public String renamecolumnSql(Expression expression) {
         throw notPorted("renamecolumn_sql");
     }
 
     /** sqlglot/generator.py:4428 alterset_sql */
-    protected String altersetSql(Expression expression) {
+    public String altersetSql(Expression expression) {
         throw notPorted("alterset_sql");
     }
 
     /** sqlglot/generator.py:4435 alter_sql */
-    protected String alterSql(Expression expression) {
+    public String alterSql(Expression expression) {
         throw notPorted("alter_sql");
     }
 
     /** sqlglot/generator.py:4493 altersession_sql */
-    protected String altersessionSql(Expression expression) {
+    public String altersessionSql(Expression expression) {
         throw notPorted("altersession_sql");
     }
 
     /** sqlglot/generator.py:4498 add_column_sql */
-    protected String addColumnSql(Expression expression) {
+    public String addColumnSql(Expression expression) {
         throw notPorted("add_column_sql");
     }
 
     /** sqlglot/generator.py:4509 droppartition_sql */
-    protected String droppartitionSql(Expression expression) {
+    public String droppartitionSql(Expression expression) {
         throw notPorted("droppartition_sql");
     }
 
     /** sqlglot/generator.py:4514 dropprimarykey_sql */
-    protected String dropprimarykeySql(Expression expression) {
+    public String dropprimarykeySql(Expression expression) {
         throw notPorted("dropprimarykey_sql");
     }
 
     /** sqlglot/generator.py:4517 addconstraint_sql */
-    protected String addconstraintSql(Expression expression) {
+    public String addconstraintSql(Expression expression) {
         throw notPorted("addconstraint_sql");
     }
 
     /** sqlglot/generator.py:4520 addpartition_sql */
-    protected String addpartitionSql(Expression expression) {
+    public String addpartitionSql(Expression expression) {
         throw notPorted("addpartition_sql");
     }
 
     /** sqlglot/generator.py:4526 distinct_sql */
-    protected String distinctSql(Expression expression) {
+    public String distinctSql(Expression expression) {
         throw notPorted("distinct_sql");
     }
 
     /** sqlglot/generator.py:4541 ignorenulls_sql */
-    protected String ignorenullsSql(Expression expression) {
+    public String ignorenullsSql(Expression expression) {
         throw notPorted("ignorenulls_sql");
     }
 
     /** sqlglot/generator.py:4544 respectnulls_sql */
-    protected String respectnullsSql(Expression expression) {
+    public String respectnullsSql(Expression expression) {
         throw notPorted("respectnulls_sql");
     }
 
     /** sqlglot/generator.py:4547 havingmax_sql */
-    protected String havingmaxSql(Expression expression) {
+    public String havingmaxSql(Expression expression) {
         throw notPorted("havingmax_sql");
     }
 
     /** sqlglot/generator.py:4553 intdiv_sql */
-    protected String intdivSql(Expression expression) {
+    public String intdivSql(Expression expression) {
         throw notPorted("intdiv_sql");
     }
 
     /** sqlglot/generator.py:4556 _truncated_div_sql */
-    protected String truncatedDivSql(Expression this_, Expression divisor) {
+    public String truncatedDivSql(Expression this_, Expression divisor) {
         throw notPorted("_truncated_div_sql");
     }
 
     /** sqlglot/generator.py:4563 dpipe_sql */
-    protected String dpipeSql(Expression expression) {
+    public String dpipeSql(Expression expression) {
         throw notPorted("dpipe_sql");
     }
 
     /** sqlglot/generator.py:4568 div_sql */
-    protected String divSql(Expression expression) {
+    public String divSql(Expression expression) {
         throw notPorted("div_sql");
     }
 
     /** sqlglot/generator.py:4591 safedivide_sql */
-    protected String safedivideSql(Expression expression) {
+    public String safedivideSql(Expression expression) {
         throw notPorted("safedivide_sql");
     }
 
     /** sqlglot/generator.py:4596 overlaps_sql */
-    protected String overlapsSql(Expression expression) {
+    public String overlapsSql(Expression expression) {
         throw notPorted("overlaps_sql");
     }
 
     /** sqlglot/generator.py:4599 distance_sql */
-    protected String distanceSql(Expression expression) {
+    public String distanceSql(Expression expression) {
         throw notPorted("distance_sql");
     }
 
     /** sqlglot/generator.py:4602 distancend_sql */
-    protected String distancendSql(Expression expression) {
+    public String distancendSql(Expression expression) {
         throw notPorted("distancend_sql");
     }
 
     /** sqlglot/generator.py:4605 dot_sql */
-    protected String dotSql(Expression expression) {
+    public String dotSql(Expression expression) {
         throw notPorted("dot_sql");
     }
 
     /** sqlglot/generator.py:4608 eq_sql */
-    protected String eqSql(Expression expression) {
+    public String eqSql(Expression expression) {
         throw notPorted("eq_sql");
     }
 
     /** sqlglot/generator.py:4611 propertyeq_sql */
-    protected String propertyeqSql(Expression expression) {
+    public String propertyeqSql(Expression expression) {
         throw notPorted("propertyeq_sql");
     }
 
     /** sqlglot/generator.py:4614 escape_sql */
-    protected String escapeSql(Expression expression) {
+    public String escapeSql(Expression expression) {
         throw notPorted("escape_sql");
     }
 
     /** sqlglot/generator.py:4624 glob_sql */
-    protected String globSql(Expression expression) {
+    public String globSql(Expression expression) {
         throw notPorted("glob_sql");
     }
 
     /** sqlglot/generator.py:4627 gt_sql */
-    protected String gtSql(Expression expression) {
+    public String gtSql(Expression expression) {
         throw notPorted("gt_sql");
     }
 
     /** sqlglot/generator.py:4630 gte_sql */
-    protected String gteSql(Expression expression) {
+    public String gteSql(Expression expression) {
         throw notPorted("gte_sql");
     }
 
     /** sqlglot/generator.py:4633 is_sql */
-    protected String isSql(Expression expression) {
+    public String isSql(Expression expression) {
         throw notPorted("is_sql");
     }
 
     /** sqlglot/generator.py:4640 _like_sql */
-    protected String likeSql(Expression expression, Expression escape) {
+    public String likeSql(Expression expression, Expression escape) {
         throw notPorted("_like_sql");
     }
 
-    protected final String likeSql(Expression expression) {
+    public final String likeSql(Expression expression) {
         return likeSql(expression, (Expression) null);
     }
 
     /** sqlglot/generator.py:4690 like_sql */
-    protected String likeSqlImpl(Expression expression) {
+    public String likeSqlImpl(Expression expression) {
         throw notPorted("like_sql");
     }
 
     /** sqlglot/generator.py:4693 ilike_sql */
-    protected String ilikeSql(Expression expression) {
+    public String ilikeSql(Expression expression) {
         throw notPorted("ilike_sql");
     }
 
     /** sqlglot/generator.py:4696 match_sql */
-    protected String matchSql(Expression expression) {
+    public String matchSql(Expression expression) {
         throw notPorted("match_sql");
     }
 
     /** sqlglot/generator.py:4701 similarto_sql */
-    protected String similartoSql(Expression expression) {
+    public String similartoSql(Expression expression) {
         throw notPorted("similarto_sql");
     }
 
     /** sqlglot/generator.py:4704 lt_sql */
-    protected String ltSql(Expression expression) {
+    public String ltSql(Expression expression) {
         throw notPorted("lt_sql");
     }
 
     /** sqlglot/generator.py:4707 lte_sql */
-    protected String lteSql(Expression expression) {
+    public String lteSql(Expression expression) {
         throw notPorted("lte_sql");
     }
 
     /** sqlglot/generator.py:4710 mod_sql */
-    protected String modSql(Expression expression) {
+    public String modSql(Expression expression) {
         throw notPorted("mod_sql");
     }
 
     /** sqlglot/generator.py:4721 mul_sql */
-    protected String mulSql(Expression expression) {
+    public String mulSql(Expression expression) {
         throw notPorted("mul_sql");
     }
 
     /** sqlglot/generator.py:4724 neq_sql */
-    protected String neqSql(Expression expression) {
+    public String neqSql(Expression expression) {
         throw notPorted("neq_sql");
     }
 
     /** sqlglot/generator.py:4727 nullsafeeq_sql */
-    protected String nullsafeeqSql(Expression expression) {
+    public String nullsafeeqSql(Expression expression) {
         throw notPorted("nullsafeeq_sql");
     }
 
     /** sqlglot/generator.py:4730 nullsafeneq_sql */
-    protected String nullsafeneqSql(Expression expression) {
+    public String nullsafeneqSql(Expression expression) {
         throw notPorted("nullsafeneq_sql");
     }
 
     /** sqlglot/generator.py:4733 sub_sql */
-    protected String subSql(Expression expression) {
+    public String subSql(Expression expression) {
         throw notPorted("sub_sql");
     }
 
     /** sqlglot/generator.py:4736 trycast_sql */
-    protected String trycastSql(Expression expression) {
+    public String trycastSql(Expression expression) {
         throw notPorted("trycast_sql");
     }
 
     /** sqlglot/generator.py:4739 jsoncast_sql */
-    protected String jsoncastSql(Expression expression) {
+    public String jsoncastSql(Expression expression) {
         throw notPorted("jsoncast_sql");
     }
 
     /** sqlglot/generator.py:4742 try_sql */
-    protected String trySql(Expression expression) {
+    public String trySql(Expression expression) {
         throw notPorted("try_sql");
     }
 
     /** sqlglot/generator.py:4749 log_sql */
-    protected String logSql(Expression expression) {
+    public String logSql(Expression expression) {
         throw notPorted("log_sql");
     }
 
     /** sqlglot/generator.py:4763 use_sql */
-    protected String useSql(Expression expression) {
+    public String useSql(Expression expression) {
         throw notPorted("use_sql");
     }
 
     /** sqlglot/generator.py:4791 ceil_floor */
-    protected String ceilFloor(Expression expression) {
+    public String ceilFloor(Expression expression) {
         throw notPorted("ceil_floor");
     }
 
     /** sqlglot/generator.py:4840 format_time */
-    protected String formatTime(Expression expression, Map<String, Object> inverseTimeMapping, Object inverseTimeTrie) {
+    public String formatTime(Expression expression, Map<String, Object> inverseTimeMapping, Object inverseTimeTrie) {
         throw notPorted("format_time");
     }
 
-    protected final String formatTime(Expression expression) {
+    public final String formatTime(Expression expression) {
         return formatTime(expression, (Map<String, Object>) null, (Object) null);
     }
 
-    protected final String formatTime(Expression expression, Map<String, Object> inverseTimeMapping) {
+    public final String formatTime(Expression expression, Map<String, Object> inverseTimeMapping) {
         return formatTime(expression, inverseTimeMapping, (Object) null);
     }
 
     /** sqlglot/generator.py:4908 op_expressions */
-    protected String opExpressions(String op, Expression expression, boolean flat) {
+    public String opExpressions(String op, Expression expression, boolean flat) {
         throw notPorted("op_expressions");
     }
 
-    protected final String opExpressions(String op, Expression expression) {
+    public final String opExpressions(String op, Expression expression) {
         return opExpressions(op, expression, false);
     }
 
     /** sqlglot/generator.py:4915 naked_property */
-    protected String nakedProperty(Expression expression) {
+    public String nakedProperty(Expression expression) {
         throw notPorted("naked_property");
     }
 
     /** sqlglot/generator.py:4921 tag_sql */
-    protected String tagSql(Expression expression) {
+    public String tagSql(Expression expression) {
         throw notPorted("tag_sql");
     }
 
     /** sqlglot/generator.py:4924 token_sql */
-    protected String tokenSql(TokenType tokenType) {
+    public String tokenSql(TokenType tokenType) {
         throw notPorted("token_sql");
     }
 
     /** sqlglot/generator.py:4927 userdefinedfunction_sql */
-    protected String userdefinedfunctionSql(Expression expression) {
+    public String userdefinedfunctionSql(Expression expression) {
         throw notPorted("userdefinedfunction_sql");
     }
 
     /** sqlglot/generator.py:4935 macrooverloads_sql */
-    protected String macrooverloadsSql(Expression expression) {
+    public String macrooverloadsSql(Expression expression) {
         throw notPorted("macrooverloads_sql");
     }
 
     /** sqlglot/generator.py:4938 macrooverload_sql */
-    protected String macrooverloadSql(Expression expression) {
+    public String macrooverloadSql(Expression expression) {
         throw notPorted("macrooverload_sql");
     }
 
     /** sqlglot/generator.py:4944 joinhint_sql */
-    protected String joinhintSql(Expression expression) {
+    public String joinhintSql(Expression expression) {
         throw notPorted("joinhint_sql");
     }
 
     /** sqlglot/generator.py:4949 kwarg_sql */
-    protected String kwargSql(Expression expression) {
+    public String kwargSql(Expression expression) {
         throw notPorted("kwarg_sql");
     }
 
     /** sqlglot/generator.py:4952 when_sql */
-    protected String whenSql(Expression expression) {
+    public String whenSql(Expression expression) {
         throw notPorted("when_sql");
     }
 
     /** sqlglot/generator.py:4982 whens_sql */
-    protected String whensSql(Expression expression) {
+    public String whensSql(Expression expression) {
         throw notPorted("whens_sql");
     }
 
     /** sqlglot/generator.py:4985 merge_sql */
-    protected String mergeSql(Expression expression) {
+    public String mergeSql(Expression expression) {
         throw notPorted("merge_sql");
     }
 
     /** sqlglot/generator.py:5017 tochar_sql */
-    protected String tocharSql(Expression expression) {
+    public String tocharSql(Expression expression) {
         throw notPorted("tochar_sql");
     }
 
     /** sqlglot/generator.py:5021 tonumber_sql */
-    protected String tonumberSql(Expression expression) {
+    public String tonumberSql(Expression expression) {
         throw notPorted("tonumber_sql");
     }
 
     /** sqlglot/generator.py:5033 _tonumber_cast_sql */
-    protected String tonumberCastSql(Expression expression) {
+    public String tonumberCastSql(Expression expression) {
         throw notPorted("_tonumber_cast_sql");
     }
 
     /** sqlglot/generator.py:5038 dictproperty_sql */
-    protected String dictpropertySql(Expression expression) {
+    public String dictpropertySql(Expression expression) {
         throw notPorted("dictproperty_sql");
     }
 
     /** sqlglot/generator.py:5045 dictrange_sql */
-    protected String dictrangeSql(Expression expression) {
+    public String dictrangeSql(Expression expression) {
         throw notPorted("dictrange_sql");
     }
 
     /** sqlglot/generator.py:5051 dictsubproperty_sql */
-    protected String dictsubpropertySql(Expression expression) {
+    public String dictsubpropertySql(Expression expression) {
         throw notPorted("dictsubproperty_sql");
     }
 
     /** sqlglot/generator.py:5054 aggregatekeyproperty_sql */
-    protected String aggregatekeypropertySql(Expression expression) {
+    public String aggregatekeypropertySql(Expression expression) {
         throw notPorted("aggregatekeyproperty_sql");
     }
 
     /** sqlglot/generator.py:5057 duplicatekeyproperty_sql */
-    protected String duplicatekeypropertySql(Expression expression) {
+    public String duplicatekeypropertySql(Expression expression) {
         throw notPorted("duplicatekeyproperty_sql");
     }
 
     /** sqlglot/generator.py:5061 uniquekeyproperty_sql */
-    protected String uniquekeypropertySql(Expression expression, String prefix) {
+    public String uniquekeypropertySql(Expression expression, String prefix) {
         throw notPorted("uniquekeyproperty_sql");
     }
 
-    protected final String uniquekeypropertySql(Expression expression) {
+    public final String uniquekeypropertySql(Expression expression) {
         return uniquekeypropertySql(expression, "UNIQUE KEY");
     }
 
     /** sqlglot/generator.py:5067 distributedbyproperty_sql */
-    protected String distributedbypropertySql(Expression expression) {
+    public String distributedbypropertySql(Expression expression) {
         throw notPorted("distributedbyproperty_sql");
     }
 
     /** sqlglot/generator.py:5076 oncluster_sql */
-    protected String onclusterSql(Expression expression) {
+    public String onclusterSql(Expression expression) {
         throw notPorted("oncluster_sql");
     }
 
     /** sqlglot/generator.py:5079 clusteredbyproperty_sql */
-    protected String clusteredbypropertySql(Expression expression) {
+    public String clusteredbypropertySql(Expression expression) {
         throw notPorted("clusteredbyproperty_sql");
     }
 
     /** sqlglot/generator.py:5086 anyvalue_sql */
-    protected String anyvalueSql(Expression expression) {
+    public String anyvalueSql(Expression expression) {
         throw notPorted("anyvalue_sql");
     }
 
     /** sqlglot/generator.py:5095 querytransform_sql */
-    protected String querytransformSql(Expression expression) {
+    public String querytransformSql(Expression expression) {
         throw notPorted("querytransform_sql");
     }
 
     /** sqlglot/generator.py:5110 indexconstraintoption_sql */
-    protected String indexconstraintoptionSql(Expression expression) {
+    public String indexconstraintoptionSql(Expression expression) {
         throw notPorted("indexconstraintoption_sql");
     }
 
     /** sqlglot/generator.py:5142 checkcolumnconstraint_sql */
-    protected String checkcolumnconstraintSql(Expression expression) {
+    public String checkcolumnconstraintSql(Expression expression) {
         throw notPorted("checkcolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:5146 indexcolumnconstraint_sql */
-    protected String indexcolumnconstraintSql(Expression expression) {
+    public String indexcolumnconstraintSql(Expression expression) {
         throw notPorted("indexcolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:5159 nvl2_sql */
-    protected String nvl2Sql(Expression expression) {
+    public String nvl2Sql(Expression expression) {
         throw notPorted("nvl2_sql");
     }
 
     /** sqlglot/generator.py:5174 nthvalue_sql */
-    protected String nthvalueSql(Expression expression) {
+    public String nthvalueSql(Expression expression) {
         throw notPorted("nthvalue_sql");
     }
 
     /** sqlglot/generator.py:5180 comprehension_sql */
-    protected String comprehensionSql(Expression expression) {
+    public String comprehensionSql(Expression expression) {
         throw notPorted("comprehension_sql");
     }
 
     /** sqlglot/generator.py:5190 columnprefix_sql */
-    protected String columnprefixSql(Expression expression) {
+    public String columnprefixSql(Expression expression) {
         throw notPorted("columnprefix_sql");
     }
 
     /** sqlglot/generator.py:5193 opclass_sql */
-    protected String opclassSql(Expression expression) {
+    public String opclassSql(Expression expression) {
         throw notPorted("opclass_sql");
     }
 
     /** sqlglot/generator.py:5196 _ml_sql */
-    protected String mlSql(Expression expression, String name) {
+    public String mlSql(Expression expression, String name) {
         throw notPorted("_ml_sql");
     }
 
     /** sqlglot/generator.py:5210 predict_sql */
-    protected String predictSql(Expression expression) {
+    public String predictSql(Expression expression) {
         throw notPorted("predict_sql");
     }
 
     /** sqlglot/generator.py:5213 generateembedding_sql */
-    protected String generateembeddingSql(Expression expression) {
+    public String generateembeddingSql(Expression expression) {
         throw notPorted("generateembedding_sql");
     }
 
     /** sqlglot/generator.py:5217 generatetext_sql */
-    protected String generatetextSql(Expression expression) {
+    public String generatetextSql(Expression expression) {
         throw notPorted("generatetext_sql");
     }
 
     /** sqlglot/generator.py:5220 generatetable_sql */
-    protected String generatetableSql(Expression expression) {
+    public String generatetableSql(Expression expression) {
         throw notPorted("generatetable_sql");
     }
 
     /** sqlglot/generator.py:5223 generatebool_sql */
-    protected String generateboolSql(Expression expression) {
+    public String generateboolSql(Expression expression) {
         throw notPorted("generatebool_sql");
     }
 
     /** sqlglot/generator.py:5226 generateint_sql */
-    protected String generateintSql(Expression expression) {
+    public String generateintSql(Expression expression) {
         throw notPorted("generateint_sql");
     }
 
     /** sqlglot/generator.py:5229 generatedouble_sql */
-    protected String generatedoubleSql(Expression expression) {
+    public String generatedoubleSql(Expression expression) {
         throw notPorted("generatedouble_sql");
     }
 
     /** sqlglot/generator.py:5232 mltranslate_sql */
-    protected String mltranslateSql(Expression expression) {
+    public String mltranslateSql(Expression expression) {
         throw notPorted("mltranslate_sql");
     }
 
     /** sqlglot/generator.py:5235 mlforecast_sql */
-    protected String mlforecastSql(Expression expression) {
+    public String mlforecastSql(Expression expression) {
         throw notPorted("mlforecast_sql");
     }
 
     /** sqlglot/generator.py:5238 aiforecast_sql */
-    protected String aiforecastSql(Expression expression) {
+    public String aiforecastSql(Expression expression) {
         throw notPorted("aiforecast_sql");
     }
 
     /** sqlglot/generator.py:5257 featuresattime_sql */
-    protected String featuresattimeSql(Expression expression) {
+    public String featuresattimeSql(Expression expression) {
         throw notPorted("featuresattime_sql");
     }
 
     /** sqlglot/generator.py:5270 vectorsearch_sql */
-    protected String vectorsearchSql(Expression expression) {
+    public String vectorsearchSql(Expression expression) {
         throw notPorted("vectorsearch_sql");
     }
 
     /** sqlglot/generator.py:5290 forin_sql */
-    protected String forinSql(Expression expression) {
+    public String forinSql(Expression expression) {
         throw notPorted("forin_sql");
     }
 
     /** sqlglot/generator.py:5296 refresh_sql */
-    protected String refreshSql(Expression expression) {
+    public String refreshSql(Expression expression) {
         throw notPorted("refresh_sql");
     }
 
     /** sqlglot/generator.py:5301 toarray_sql */
-    protected String toarraySql(Expression expression) {
+    public String toarraySql(Expression expression) {
         throw notPorted("toarray_sql");
     }
 
     /** sqlglot/generator.py:5314 tsordstotime_sql */
-    protected String tsordstotimeSql(Expression expression) {
+    public String tsordstotimeSql(Expression expression) {
         throw notPorted("tsordstotime_sql");
     }
 
     /** sqlglot/generator.py:5331 tsordstotimestamp_sql */
-    protected String tsordstotimestampSql(Expression expression) {
+    public String tsordstotimestampSql(Expression expression) {
         throw notPorted("tsordstotimestamp_sql");
     }
 
     /** sqlglot/generator.py:5338 tsordstodatetime_sql */
-    protected String tsordstodatetimeSql(Expression expression) {
+    public String tsordstodatetimeSql(Expression expression) {
         throw notPorted("tsordstodatetime_sql");
     }
 
     /** sqlglot/generator.py:5345 tsordstodate_sql */
-    protected String tsordstodateSql(Expression expression) {
+    public String tsordstodateSql(Expression expression) {
         throw notPorted("tsordstodate_sql");
     }
 
     /** sqlglot/generator.py:5365 unixdate_sql */
-    protected String unixdateSql(Expression expression) {
+    public String unixdateSql(Expression expression) {
         throw notPorted("unixdate_sql");
     }
 
     /** sqlglot/generator.py:5375 lastday_sql */
-    protected String lastdaySql(Expression expression) {
+    public String lastdaySql(Expression expression) {
         throw notPorted("lastday_sql");
     }
 
     /** sqlglot/generator.py:5385 dateadd_sql */
-    protected String dateaddSql(Expression expression) {
+    public String dateaddSql(Expression expression) {
         throw notPorted("dateadd_sql");
     }
 
     /** sqlglot/generator.py:5395 arrayinsert_sql */
-    protected String arrayinsertSql(Expression expression, int indexOffset) {
+    public String arrayinsertSql(Expression expression, int indexOffset) {
         throw notPorted("arrayinsert_sql");
     }
 
-    protected final String arrayinsertSql(Expression expression) {
+    public final String arrayinsertSql(Expression expression) {
         return arrayinsertSql(expression, 0);
     }
 
     /** sqlglot/generator.py:5417 arrayany_sql */
-    protected String arrayanySql(Expression expression) {
+    public String arrayanySql(Expression expression) {
         throw notPorted("arrayany_sql");
     }
 
     /** sqlglot/generator.py:5432 struct_sql */
-    protected String structSql(Expression expression) {
+    public String structSql(Expression expression) {
         throw notPorted("struct_sql");
     }
 
     /** sqlglot/generator.py:5445 partitionrange_sql */
-    protected String partitionrangeSql(Expression expression) {
+    public String partitionrangeSql(Expression expression) {
         throw notPorted("partitionrange_sql");
     }
 
     /** sqlglot/generator.py:5451 truncatetable_sql */
-    protected String truncatetableSql(Expression expression) {
+    public String truncatetableSql(Expression expression) {
         throw notPorted("truncatetable_sql");
     }
 
     /** sqlglot/generator.py:5473 convert_sql */
-    protected String convertSql(Expression expression) {
+    public String convertSql(Expression expression) {
         throw notPorted("convert_sql");
     }
 
     /** sqlglot/generator.py:5515 _jsonpathkey_sql */
-    protected String jsonpathkeySql(Expression expression) {
+    public String jsonpathkeySql(Expression expression) {
         throw notPorted("_jsonpathkey_sql");
     }
 
     /** sqlglot/generator.py:5535 _jsonpathsubscript_sql */
-    protected String jsonpathsubscriptSql(Expression expression) {
+    public String jsonpathsubscriptSql(Expression expression) {
         throw notPorted("_jsonpathsubscript_sql");
     }
 
     /** sqlglot/generator.py:5539 _simplify_unless_literal */
-    protected Expression simplifyUnlessLiteral(Expression expression) {
+    public Expression simplifyUnlessLiteral(Expression expression) {
         throw notPorted("_simplify_unless_literal");
     }
 
     /** sqlglot/generator.py:5547 _embed_ignore_nulls */
-    protected String embedIgnoreNulls(Expression expression, String text) {
+    public String embedIgnoreNulls(Expression expression, String text) {
         throw notPorted("_embed_ignore_nulls");
     }
 
     /** sqlglot/generator.py:5590 copyparameter_sql */
-    protected String copyparameterSql(Expression expression) {
+    public String copyparameterSql(Expression expression) {
         throw notPorted("copyparameter_sql");
     }
 
     /** sqlglot/generator.py:5613 credentials_sql */
-    protected String credentialsSql(Expression expression) {
+    public String credentialsSql(Expression expression) {
         throw notPorted("credentials_sql");
     }
 
     /** sqlglot/generator.py:5638 copy_sql */
-    protected String copySql(Expression expression) {
+    public String copySql(Expression expression) {
         throw notPorted("copy_sql");
     }
 
     /** sqlglot/generator.py:5666 semicolon_sql */
-    protected String semicolonSql(Expression expression) {
+    public String semicolonSql(Expression expression) {
         throw notPorted("semicolon_sql");
     }
 
     /** sqlglot/generator.py:5669 datadeletionproperty_sql */
-    protected String datadeletionpropertySql(Expression expression) {
+    public String datadeletionpropertySql(Expression expression) {
         throw notPorted("datadeletionproperty_sql");
     }
 
     /** sqlglot/generator.py:5681 maskingpolicycolumnconstraint_sql */
-    protected String maskingpolicycolumnconstraintSql(Expression expression) {
+    public String maskingpolicycolumnconstraintSql(Expression expression) {
         throw notPorted("maskingpolicycolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:5689 gapfill_sql */
-    protected String gapfillSql(Expression expression) {
+    public String gapfillSql(Expression expression) {
         throw notPorted("gapfill_sql");
     }
 
     /** sqlglot/generator.py:5694 scope_resolution */
-    protected String scopeResolution(String rhs, String scopeName) {
+    public String scopeResolution(String rhs, String scopeName) {
         throw notPorted("scope_resolution");
     }
 
     /** sqlglot/generator.py:5697 scoperesolution_sql */
-    protected String scoperesolutionSql(Expression expression) {
+    public String scoperesolutionSql(Expression expression) {
         throw notPorted("scoperesolution_sql");
     }
 
     /** sqlglot/generator.py:5709 parsejson_sql */
-    protected String parsejsonSql(Expression expression) {
+    public String parsejsonSql(Expression expression) {
         throw notPorted("parsejson_sql");
     }
 
     /** sqlglot/generator.py:5715 rand_sql */
-    protected String randSql(Expression expression) {
+    public String randSql(Expression expression) {
         throw notPorted("rand_sql");
     }
 
     /** sqlglot/generator.py:5723 changes_sql */
-    protected String changesSql(Expression expression) {
+    public String changesSql(Expression expression) {
         throw notPorted("changes_sql");
     }
 
     /** sqlglot/generator.py:5733 pad_sql */
-    protected String padSql(Expression expression) {
+    public String padSql(Expression expression) {
         throw notPorted("pad_sql");
     }
 
     /** sqlglot/generator.py:5742 summarize_sql */
-    protected String summarizeSql(Expression expression) {
+    public String summarizeSql(Expression expression) {
         throw notPorted("summarize_sql");
     }
 
     /** sqlglot/generator.py:5746 explodinggenerateseries_sql */
-    protected String explodinggenerateseriesSql(Expression expression) {
+    public String explodinggenerateseriesSql(Expression expression) {
         throw notPorted("explodinggenerateseries_sql");
     }
 
     /** sqlglot/generator.py:5761 converttimezone_sql */
-    protected String converttimezoneSql(Expression expression) {
+    public String converttimezoneSql(Expression expression) {
         throw notPorted("converttimezone_sql");
     }
 
     /** sqlglot/generator.py:5778 json_sql */
-    protected String jsonSql(Expression expression) {
+    public String jsonSql(Expression expression) {
         throw notPorted("json_sql");
     }
 
     /** sqlglot/generator.py:5795 jsonvalue_sql */
-    protected String jsonvalueSql(Expression expression) {
+    public String jsonvalueSql(Expression expression) {
         throw notPorted("jsonvalue_sql");
     }
 
     /** sqlglot/generator.py:5805 skipjsoncolumn_sql */
-    protected String skipjsoncolumnSql(Expression expression) {
+    public String skipjsoncolumnSql(Expression expression) {
         throw notPorted("skipjsoncolumn_sql");
     }
 
     /** sqlglot/generator.py:5809 conditionalinsert_sql */
-    protected String conditionalinsertSql(Expression expression) {
+    public String conditionalinsertSql(Expression expression) {
         throw notPorted("conditionalinsert_sql");
     }
 
     /** sqlglot/generator.py:5816 multitableinserts_sql */
-    protected String multitableinsertsSql(Expression expression) {
+    public String multitableinsertsSql(Expression expression) {
         throw notPorted("multitableinserts_sql");
     }
 
     /** sqlglot/generator.py:5831 oncondition_sql */
-    protected String onconditionSql(Expression expression) {
+    public String onconditionSql(Expression expression) {
         throw notPorted("oncondition_sql");
     }
 
     /** sqlglot/generator.py:5859 jsonextractquote_sql */
-    protected String jsonextractquoteSql(Expression expression) {
+    public String jsonextractquoteSql(Expression expression) {
         throw notPorted("jsonextractquote_sql");
     }
 
     /** sqlglot/generator.py:5863 jsonexists_sql */
-    protected String jsonexistsSql(Expression expression) {
+    public String jsonexistsSql(Expression expression) {
         throw notPorted("jsonexists_sql");
     }
 
     /** sqlglot/generator.py:5877 _add_arrayagg_null_filter */
-    protected String addArrayaggNullFilter(String arrayAggSql, Expression arrayAggExpr, Expression columnExpr) {
+    public String addArrayaggNullFilter(String arrayAggSql, Expression arrayAggExpr, Expression columnExpr) {
         throw notPorted("_add_arrayagg_null_filter");
     }
 
     /** sqlglot/generator.py:5917 arrayagg_sql */
-    protected String arrayaggSql(Expression expression) {
+    public String arrayaggSql(Expression expression) {
         throw notPorted("arrayagg_sql");
     }
 
     /** sqlglot/generator.py:5925 slice_sql */
-    protected String sliceSql(Expression expression) {
+    public String sliceSql(Expression expression) {
         throw notPorted("slice_sql");
     }
 
     /** sqlglot/generator.py:5933 apply_sql */
-    protected String applySql(Expression expression) {
+    public String applySql(Expression expression) {
         throw notPorted("apply_sql");
     }
 
     /** sqlglot/generator.py:5939 _grant_or_revoke_sql */
-    protected String grantOrRevokeSql(Expression expression, String keyword, String preposition, String grantOptionPrefix, String grantOptionSuffix) {
+    public String grantOrRevokeSql(Expression expression, String keyword, String preposition, String grantOptionPrefix, String grantOptionSuffix) {
         throw notPorted("_grant_or_revoke_sql");
     }
 
-    protected final String grantOrRevokeSql(Expression expression, String keyword, String preposition) {
+    public final String grantOrRevokeSql(Expression expression, String keyword, String preposition) {
         return grantOrRevokeSql(expression, keyword, preposition, "", "");
     }
 
-    protected final String grantOrRevokeSql(Expression expression, String keyword, String preposition, String grantOptionPrefix) {
+    public final String grantOrRevokeSql(Expression expression, String keyword, String preposition, String grantOptionPrefix) {
         return grantOrRevokeSql(expression, keyword, preposition, grantOptionPrefix, "");
     }
 
     /** sqlglot/generator.py:5966 grant_sql */
-    protected String grantSql(Expression expression) {
+    public String grantSql(Expression expression) {
         throw notPorted("grant_sql");
     }
 
     /** sqlglot/generator.py:5974 revoke_sql */
-    protected String revokeSql(Expression expression) {
+    public String revokeSql(Expression expression) {
         throw notPorted("revoke_sql");
     }
 
     /** sqlglot/generator.py:5982 grantprivilege_sql */
-    protected String grantprivilegeSql(Expression expression) {
+    public String grantprivilegeSql(Expression expression) {
         throw notPorted("grantprivilege_sql");
     }
 
     /** sqlglot/generator.py:5989 grantprincipal_sql */
-    protected String grantprincipalSql(Expression expression) {
+    public String grantprincipalSql(Expression expression) {
         throw notPorted("grantprincipal_sql");
     }
 
     /** sqlglot/generator.py:5997 columns_sql */
-    protected String columnsSql(Expression expression) {
+    public String columnsSql(Expression expression) {
         throw notPorted("columns_sql");
     }
 
     /** sqlglot/generator.py:6004 overlay_sql */
-    protected String overlaySql(Expression expression) {
+    public String overlaySql(Expression expression) {
         throw notPorted("overlay_sql");
     }
 
     /** sqlglot/generator.py:6014 todouble_sql */
-    protected String todoubleSql(Expression expression) {
+    public String todoubleSql(Expression expression) {
         throw notPorted("todouble_sql");
     }
 
     /** sqlglot/generator.py:6018 string_sql */
-    protected String stringSql(Expression expression) {
+    public String stringSql(Expression expression) {
         throw notPorted("string_sql");
     }
 
     /** sqlglot/generator.py:6032 median_sql */
-    protected String medianSql(Expression expression) {
+    public String medianSql(Expression expression) {
         throw notPorted("median_sql");
     }
 
     /** sqlglot/generator.py:6040 overflowtruncatebehavior_sql */
-    protected String overflowtruncatebehaviorSql(Expression expression) {
+    public String overflowtruncatebehaviorSql(Expression expression) {
         throw notPorted("overflowtruncatebehavior_sql");
     }
 
     /** sqlglot/generator.py:6046 unixseconds_sql */
-    protected String unixsecondsSql(Expression expression) {
+    public String unixsecondsSql(Expression expression) {
         throw notPorted("unixseconds_sql");
     }
 
     /** sqlglot/generator.py:6056 arraysize_sql */
-    protected String arraysizeSql(Expression expression) {
+    public String arraysizeSql(Expression expression) {
         throw notPorted("arraysize_sql");
     }
 
     /** sqlglot/generator.py:6071 attach_sql */
-    protected String attachSql(Expression expression) {
+    public String attachSql(Expression expression) {
         throw notPorted("attach_sql");
     }
 
     /** sqlglot/generator.py:6079 detach_sql */
-    protected String detachSql(Expression expression) {
+    public String detachSql(Expression expression) {
         throw notPorted("detach_sql");
     }
 
     /** sqlglot/generator.py:6096 attachoption_sql */
-    protected String attachoptionSql(Expression expression) {
+    public String attachoptionSql(Expression expression) {
         throw notPorted("attachoption_sql");
     }
 
     /** sqlglot/generator.py:6102 watermarkcolumnconstraint_sql */
-    protected String watermarkcolumnconstraintSql(Expression expression) {
+    public String watermarkcolumnconstraintSql(Expression expression) {
         throw notPorted("watermarkcolumnconstraint_sql");
     }
 
     /** sqlglot/generator.py:6107 encodeproperty_sql */
-    protected String encodepropertySql(Expression expression) {
+    public String encodepropertySql(Expression expression) {
         throw notPorted("encodeproperty_sql");
     }
 
     /** sqlglot/generator.py:6117 includeproperty_sql */
-    protected String includepropertySql(Expression expression) {
+    public String includepropertySql(Expression expression) {
         throw notPorted("includeproperty_sql");
     }
 
     /** sqlglot/generator.py:6131 xmlelement_sql */
-    protected String xmlelementSql(Expression expression) {
+    public String xmlelementSql(Expression expression) {
         throw notPorted("xmlelement_sql");
     }
 
     /** sqlglot/generator.py:6136 xmlkeyvalueoption_sql */
-    protected String xmlkeyvalueoptionSql(Expression expression) {
+    public String xmlkeyvalueoptionSql(Expression expression) {
         throw notPorted("xmlkeyvalueoption_sql");
     }
 
     /** sqlglot/generator.py:6142 partitionbyrangeproperty_sql */
-    protected String partitionbyrangepropertySql(Expression expression) {
+    public String partitionbyrangepropertySql(Expression expression) {
         throw notPorted("partitionbyrangeproperty_sql");
     }
 
     /** sqlglot/generator.py:6147 partitionbyrangepropertydynamic_sql */
-    protected String partitionbyrangepropertydynamicSql(Expression expression) {
+    public String partitionbyrangepropertydynamicSql(Expression expression) {
         throw notPorted("partitionbyrangepropertydynamic_sql");
     }
 
     /** sqlglot/generator.py:6159 unpivotcolumns_sql */
-    protected String unpivotcolumnsSql(Expression expression) {
+    public String unpivotcolumnsSql(Expression expression) {
         throw notPorted("unpivotcolumns_sql");
     }
 
     /** sqlglot/generator.py:6165 analyzesample_sql */
-    protected String analyzesampleSql(Expression expression) {
+    public String analyzesampleSql(Expression expression) {
         throw notPorted("analyzesample_sql");
     }
 
     /** sqlglot/generator.py:6170 analyzestatistics_sql */
-    protected String analyzestatisticsSql(Expression expression) {
+    public String analyzestatisticsSql(Expression expression) {
         throw notPorted("analyzestatistics_sql");
     }
 
     /** sqlglot/generator.py:6180 analyzehistogram_sql */
-    protected String analyzehistogramSql(Expression expression) {
+    public String analyzehistogramSql(Expression expression) {
         throw notPorted("analyzehistogram_sql");
     }
 
     /** sqlglot/generator.py:6189 analyzedelete_sql */
-    protected String analyzedeleteSql(Expression expression) {
+    public String analyzedeleteSql(Expression expression) {
         throw notPorted("analyzedelete_sql");
     }
 
     /** sqlglot/generator.py:6194 analyzelistchainedrows_sql */
-    protected String analyzelistchainedrowsSql(Expression expression) {
+    public String analyzelistchainedrowsSql(Expression expression) {
         throw notPorted("analyzelistchainedrows_sql");
     }
 
     /** sqlglot/generator.py:6198 analyzevalidate_sql */
-    protected String analyzevalidateSql(Expression expression) {
+    public String analyzevalidateSql(Expression expression) {
         throw notPorted("analyzevalidate_sql");
     }
 
     /** sqlglot/generator.py:6205 analyze_sql */
-    protected String analyzeSql(Expression expression) {
+    public String analyzeSql(Expression expression) {
         throw notPorted("analyze_sql");
     }
 
     /** sqlglot/generator.py:6222 xmltable_sql */
-    protected String xmltableSql(Expression expression) {
+    public String xmltableSql(Expression expression) {
         throw notPorted("xmltable_sql");
     }
 
     /** sqlglot/generator.py:6233 xmlnamespace_sql */
-    protected String xmlnamespaceSql(Expression expression) {
+    public String xmlnamespaceSql(Expression expression) {
         throw notPorted("xmlnamespace_sql");
     }
 
     /** sqlglot/generator.py:6237 export_sql */
-    protected String exportSql(Expression expression) {
+    public String exportSql(Expression expression) {
         throw notPorted("export_sql");
     }
 
     /** sqlglot/generator.py:6244 declare_sql */
-    protected String declareSql(Expression expression) {
+    public String declareSql(Expression expression) {
         throw notPorted("declare_sql");
     }
 
     /** sqlglot/generator.py:6248 declareitem_sql */
-    protected String declareitemSql(Expression expression) {
+    public String declareitemSql(Expression expression) {
         throw notPorted("declareitem_sql");
     }
 
     /** sqlglot/generator.py:6261 recursivewithsearch_sql */
-    protected String recursivewithsearchSql(Expression expression) {
+    public String recursivewithsearchSql(Expression expression) {
         throw notPorted("recursivewithsearch_sql");
     }
 
     /** sqlglot/generator.py:6276 parameterizedagg_sql */
-    protected String parameterizedaggSql(Expression expression) {
+    public String parameterizedaggSql(Expression expression) {
         throw notPorted("parameterizedagg_sql");
     }
 
     /** sqlglot/generator.py:6280 anonymousaggfunc_sql */
-    protected String anonymousaggfuncSql(Expression expression) {
+    public String anonymousaggfuncSql(Expression expression) {
         throw notPorted("anonymousaggfunc_sql");
     }
 
     /** sqlglot/generator.py:6283 combinedaggfunc_sql */
-    protected String combinedaggfuncSql(Expression expression) {
+    public String combinedaggfuncSql(Expression expression) {
         throw notPorted("combinedaggfunc_sql");
     }
 
     /** sqlglot/generator.py:6286 combinedparameterizedagg_sql */
-    protected String combinedparameterizedaggSql(Expression expression) {
+    public String combinedparameterizedaggSql(Expression expression) {
         throw notPorted("combinedparameterizedagg_sql");
     }
 
     /** sqlglot/generator.py:6289 show_sql */
-    protected String showSql(Expression expression) {
+    public String showSql(Expression expression) {
         throw notPorted("show_sql");
     }
 
     /** sqlglot/generator.py:6293 install_sql */
-    protected String installSql(Expression expression) {
+    public String installSql(Expression expression) {
         throw notPorted("install_sql");
     }
 
     /** sqlglot/generator.py:6297 liststage_sql */
-    protected String liststageSql(Expression expression) {
+    public String liststageSql(Expression expression) {
         throw notPorted("liststage_sql");
     }
 
     /** sqlglot/generator.py:6302 get_put_sql */
-    protected String getPutSql(Expression expression) {
+    public String getPutSql(Expression expression) {
         throw notPorted("get_put_sql");
     }
 
     /** sqlglot/generator.py:6316 translatecharacters_sql */
-    protected String translatecharactersSql(Expression expression) {
+    public String translatecharactersSql(Expression expression) {
         throw notPorted("translatecharacters_sql");
     }
 
     /** sqlglot/generator.py:6322 decodecase_sql */
-    protected String decodecaseSql(Expression expression) {
+    public String decodecaseSql(Expression expression) {
         throw notPorted("decodecase_sql");
     }
 
     /** sqlglot/generator.py:6348 semanticview_sql */
-    protected String semanticviewSql(Expression expression) {
+    public String semanticviewSql(Expression expression) {
         throw notPorted("semanticview_sql");
     }
 
     /** sqlglot/generator.py:6366 getextract_sql */
-    protected String getextractSql(Expression expression) {
+    public String getextractSql(Expression expression) {
         throw notPorted("getextract_sql");
     }
 
     /** sqlglot/generator.py:6380 datefromunixdate_sql */
-    protected String datefromunixdateSql(Expression expression) {
+    public String datefromunixdateSql(Expression expression) {
         throw notPorted("datefromunixdate_sql");
     }
 
     /** sqlglot/generator.py:6389 space_sql */
-    protected String spaceSql(Expression expression) {
+    public String spaceSql(Expression expression) {
         throw notPorted("space_sql");
     }
 
     /** sqlglot/generator.py:6392 buildproperty_sql */
-    protected String buildpropertySql(Expression expression) {
+    public String buildpropertySql(Expression expression) {
         throw notPorted("buildproperty_sql");
     }
 
     /** sqlglot/generator.py:6395 refreshtriggerproperty_sql */
-    protected String refreshtriggerpropertySql(Expression expression) {
+    public String refreshtriggerpropertySql(Expression expression) {
         throw notPorted("refreshtriggerproperty_sql");
     }
 
     /** sqlglot/generator.py:6409 modelattribute_sql */
-    protected String modelattributeSql(Expression expression) {
+    public String modelattributeSql(Expression expression) {
         throw notPorted("modelattribute_sql");
     }
 
     /** sqlglot/generator.py:6413 directorystage_sql */
-    protected String directorystageSql(Expression expression) {
+    public String directorystageSql(Expression expression) {
         throw notPorted("directorystage_sql");
     }
 
     /** sqlglot/generator.py:6416 uuid_sql */
-    protected String uuidSql(Expression expression) {
+    public String uuidSql(Expression expression) {
         throw notPorted("uuid_sql");
     }
 
     /** sqlglot/generator.py:6425 initcap_sql */
-    protected String initcapSql(Expression expression) {
+    public String initcapSql(Expression expression) {
         throw notPorted("initcap_sql");
     }
 
     /** sqlglot/generator.py:6441 localtime_sql */
-    protected String localtimeSql(Expression expression) {
+    public String localtimeSql(Expression expression) {
         throw notPorted("localtime_sql");
     }
 
     /** sqlglot/generator.py:6445 localtimestamp_sql */
-    protected String localtimestampSql(Expression expression) {
+    public String localtimestampSql(Expression expression) {
         throw notPorted("localtimestamp_sql");
     }
 
     /** sqlglot/generator.py:6449 weekstart_name */
-    protected String weekstartName(Expression expression) {
+    public String weekstartName(Expression expression) {
         throw notPorted("weekstart_name");
     }
 
     /** sqlglot/generator.py:6465 weekstart_sql */
-    protected String weekstartSql(Expression expression) {
+    public String weekstartSql(Expression expression) {
         throw notPorted("weekstart_sql");
     }
 
     /** sqlglot/generator.py:6474 chr_sql */
-    protected String chrSql(Expression expression, String name) {
+    public String chrSql(Expression expression, String name) {
         throw notPorted("chr_sql");
     }
 
-    protected final String chrSql(Expression expression) {
+    public final String chrSql(Expression expression) {
         return chrSql(expression, "CHR");
     }
 
     /** sqlglot/generator.py:6480 weightstring_sql */
-    protected String weightstringSql(Expression expression) {
+    public String weightstringSql(Expression expression) {
         throw notPorted("weightstring_sql");
     }
 
     /** sqlglot/generator.py:6485 block_sql */
-    protected String blockSql(Expression expression) {
+    public String blockSql(Expression expression) {
         throw notPorted("block_sql");
     }
 
     /** sqlglot/generator.py:6490 functionspecification_sql */
-    protected String functionspecificationSql(Expression expression) {
+    public String functionspecificationSql(Expression expression) {
         throw notPorted("functionspecification_sql");
     }
 
     /** sqlglot/generator.py:6494 storedprocedure_sql */
-    protected String storedprocedureSql(Expression expression) {
+    public String storedprocedureSql(Expression expression) {
         throw notPorted("storedprocedure_sql");
     }
 
     /** sqlglot/generator.py:6498 ifblock_sql */
-    protected String ifblockSql(Expression expression) {
+    public String ifblockSql(Expression expression) {
         throw notPorted("ifblock_sql");
     }
 
     /** sqlglot/generator.py:6502 casestatement_sql */
-    protected String casestatementSql(Expression expression) {
+    public String casestatementSql(Expression expression) {
         throw notPorted("casestatement_sql");
     }
 
     /** sqlglot/generator.py:6506 whileblock_sql */
-    protected String whileblockSql(Expression expression) {
+    public String whileblockSql(Expression expression) {
         throw notPorted("whileblock_sql");
     }
 
     /** sqlglot/generator.py:6510 loopblock_sql */
-    protected String loopblockSql(Expression expression) {
+    public String loopblockSql(Expression expression) {
         throw notPorted("loopblock_sql");
     }
 
     /** sqlglot/generator.py:6514 repeatblock_sql */
-    protected String repeatblockSql(Expression expression) {
+    public String repeatblockSql(Expression expression) {
         throw notPorted("repeatblock_sql");
     }
 
     /** sqlglot/generator.py:6518 leave_sql */
-    protected String leaveSql(Expression expression) {
+    public String leaveSql(Expression expression) {
         throw notPorted("leave_sql");
     }
 
     /** sqlglot/generator.py:6522 iterate_sql */
-    protected String iterateSql(Expression expression) {
+    public String iterateSql(Expression expression) {
         throw notPorted("iterate_sql");
     }
 
     /** sqlglot/generator.py:6526 execute_sql */
-    protected String executeSql(Expression expression) {
+    public String executeSql(Expression expression) {
         throw notPorted("execute_sql");
     }
 
     /** sqlglot/generator.py:6530 executesql_sql */
-    protected String executesqlSql(Expression expression) {
+    public String executesqlSql(Expression expression) {
         throw notPorted("executesql_sql");
     }
 
     /** sqlglot/generator.py:6534 altermodifysqlsecurity_sql */
-    protected String altermodifysqlsecuritySql(Expression expression) {
+    public String altermodifysqlsecuritySql(Expression expression) {
         throw notPorted("altermodifysqlsecurity_sql");
     }
 
     /** sqlglot/generator.py:6538 usingproperty_sql */
-    protected String usingpropertySql(Expression expression) {
+    public String usingpropertySql(Expression expression) {
         throw notPorted("usingproperty_sql");
     }
 
     /** sqlglot/generator.py:6542 renameindex_sql */
-    protected String renameindexSql(Expression expression) {
+    public String renameindexSql(Expression expression) {
         throw notPorted("renameindex_sql");
     }
 

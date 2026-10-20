@@ -283,6 +283,7 @@ def main() -> int:
     ap.add_argument("--imports", default="")
     ap.add_argument("--ctor", default="", help="constructor params passed through to super, e.g. 'Dialect dialect, ParserOptions options'")
     ap.add_argument("--sql-dispatch", action="store_true", help="emit sqlFor(): <key>_sql dispatch for generator classes")
+    ap.add_argument("--visibility", default="protected", help="visibility of generated methods")
     args = ap.parse_args()
 
     methods = collect(Path(args.sqlglot) / args.module, args.cls)
@@ -309,7 +310,7 @@ def main() -> int:
         by_name = {m.py_name: m for m in methods}
         L.append("    /** Dispatches to the {@code <key>_sql} method for the node's exact type, or returns null. */")
         L.append("    @Override")
-        L.append("    protected String sqlFor(Expression e) {")
+        L.append("    public String sqlFor(Expression e) {")
         L.append("        return switch (e.type()) {")
         for key, cls in sorted(exp.EXPR_CLASSES.items()):
             m = by_name.get(f"{key}_sql")
@@ -320,7 +321,7 @@ def main() -> int:
         L.append("    }\n")
     for m in methods:
         L.append(f"    /** {args.module}:{m.lineno} {m.py_name} */")
-        L.append(f"    protected {m.java_sig()} {{")
+        L.append(f"    {args.visibility} {m.java_sig()} {{")
         L.append(f"        throw notPorted(\"{m.py_name}\");")
         L.append("    }\n")
         # Convenience overloads for trailing default arguments, mirroring Python positional calls.
@@ -335,7 +336,7 @@ def main() -> int:
             sig = ", ".join(f"{t} {n}" for t, n, _ in head)
             call = ", ".join([n for _, n, _ in head] + [cast_default(t, dflt) for t, _, dflt in params[k:]])
             ret = "" if m.ret == "void" else "return "
-            L.append(f"    protected final {m.ret} {m.java_name}({sig}) {{")
+            L.append(f"    {args.visibility} final {m.ret} {m.java_name}({sig}) {{")
             L.append(f"        {ret}{m.java_name}({call});")
             L.append("    }\n")
     L.append("}")

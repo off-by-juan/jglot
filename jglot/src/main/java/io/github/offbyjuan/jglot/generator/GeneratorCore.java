@@ -89,7 +89,7 @@ public abstract class GeneratorCore {
     }
 
     /** sqlglot's {@code name_sequence("_t")}. */
-    protected String nextName() {
+    public String nextName() {
         return "_t" + (nextNameCounter++);
     }
 
@@ -140,7 +140,7 @@ public abstract class GeneratorCore {
     }
 
     /** Generic preprocessing applied before generation; ported in the Generator fragments. */
-    protected abstract Expression preprocess(Expression expression);
+    public abstract Expression preprocess(Expression expression);
 
     /** Records that the target dialect cannot express something. */
     public void unsupported(String message) {
@@ -151,7 +151,7 @@ public abstract class GeneratorCore {
     }
 
     /** sqlglot's {@code @unsupported_args}: flags args that the target cannot express. */
-    protected void unsupportedArgs(Expression expression, Object... argsAndDiagnostics) {
+    public void unsupportedArgs(Expression expression, Object... argsAndDiagnostics) {
         String exprName = expression.type().className();
         String dialectName = dialect.getClass().getSimpleName();
         for (int i = 0; i < argsAndDiagnostics.length; i++) {
@@ -176,23 +176,23 @@ public abstract class GeneratorCore {
     // ------------------------------------------------------------------------------------------
     // Layout
 
-    protected String sep(String sep) {
+    public String sep(String sep) {
         return pretty ? sep.strip() + "\n" : sep;
     }
 
-    protected String sep() {
+    public String sep() {
         return sep(" ");
     }
 
-    protected String seg(String sqlText, String sep) {
+    public String seg(String sqlText, String sep) {
         return sep(sep) + sqlText;
     }
 
-    protected String seg(String sqlText) {
+    public String seg(String sqlText) {
         return seg(sqlText, " ");
     }
 
-    protected String sanitizeComment(String comment) {
+    public String sanitizeComment(String comment) {
         if (!comment.isEmpty() && !comment.substring(0, 1).isBlank()) {
             comment = " " + comment;
         }
@@ -202,12 +202,12 @@ public abstract class GeneratorCore {
         return comment.replace("*/", "* /").replace("/*", "/ *");
     }
 
-    protected String replaceLineBreaks(String s) {
+    public String replaceLineBreaks(String s) {
         return pretty ? s.replace("\n", SENTINEL_LINE_BREAK) : s;
     }
 
     /** sqlglot's {@code maybe_comment}: appends (or prepends) an expression's comments. */
-    protected String maybeComment(String sqlText, Expression expression, List<String> comments, boolean separated) {
+    public String maybeComment(String sqlText, Expression expression, List<String> comments, boolean separated) {
         List<String> cs = this.preserveComments ? (comments == null ? (expression == null ? null : expression.comments()) : comments) : null;
 
         if (cs == null || cs.isEmpty() || (expression != null && isAny(expression, g.EXCLUDE_COMMENTS))) {
@@ -233,16 +233,16 @@ public abstract class GeneratorCore {
         return sqlText + " " + String.join(" ", commentsList);
     }
 
-    protected String maybeComment(String sqlText, Expression expression) {
+    public String maybeComment(String sqlText, Expression expression) {
         return maybeComment(sqlText, expression, null, false);
     }
 
-    protected String maybeComment(String sqlText, List<String> comments) {
+    public String maybeComment(String sqlText, List<String> comments) {
         return maybeComment(sqlText, null, comments, false);
     }
 
     /** {@code isinstance(e, (A, B, ...))} for a list of types (sqlglot tuple class attributes). */
-    protected static boolean isAny(Expression e, java.util.Collection<ExprType> types) {
+    public static boolean isAny(Expression e, java.util.Collection<ExprType> types) {
         for (ExprType t : types) {
             if (e.is(t)) {
                 return true;
@@ -252,7 +252,7 @@ public abstract class GeneratorCore {
     }
 
     /** sqlglot's {@code wrap}: parenthesizes a query or the {@code this} of a wrapper. */
-    protected String wrap(Object expression) {
+    public String wrap(Object expression) {
         String thisSql;
         if (expression instanceof Expression e && (e.is(ExprType.SELECT) || e.is(ExprType.SET_OPERATION))) {
             thisSql = sql(e);
@@ -269,7 +269,7 @@ public abstract class GeneratorCore {
     }
 
     /** Runs {@code fn} with identifier quoting disabled. */
-    protected String noIdentify(Supplier<String> fn) {
+    public String noIdentify(Supplier<String> fn) {
         Object original = identify;
         identify = Boolean.FALSE;
         try {
@@ -279,7 +279,7 @@ public abstract class GeneratorCore {
         }
     }
 
-    protected String normalizeFunc(String name) {
+    public String normalizeFunc(String name) {
         Object nf = normalizeFunctions;
         if ("upper".equals(nf) || Boolean.TRUE.equals(nf)) {
             return name.toUpperCase(Locale.ROOT);
@@ -290,7 +290,7 @@ public abstract class GeneratorCore {
         return name;
     }
 
-    protected String indent(String sqlText, int level, Integer pad, boolean skipFirst, boolean skipLast) {
+    public String indent(String sqlText, int level, Integer pad, boolean skipFirst, boolean skipLast) {
         if (!pretty || sqlText.isEmpty()) {
             return sqlText;
         }
@@ -311,7 +311,7 @@ public abstract class GeneratorCore {
         return sb.toString();
     }
 
-    protected String indent(String sqlText) {
+    public String indent(String sqlText) {
         return indent(sqlText, 0, null, false, false);
     }
 
@@ -357,7 +357,7 @@ public abstract class GeneratorCore {
      * entries ({@link #transform}), then the {@code <key>_sql} method ({@link #sqlFor}), then the
      * function/property fallbacks.
      */
-    protected String dispatch(Expression e) {
+    public String dispatch(Expression e) {
         ExprType t = e.type();
         String rename = g.TRANSFORMS_RENAME.get(t);
         if (rename != null) {
@@ -380,18 +380,18 @@ public abstract class GeneratorCore {
     }
 
     /** Custom (non-rename) entries of the dialect's TRANSFORMS table. */
-    protected String transform(Expression e) {
+    public String transform(Expression e) {
         throw notPorted("TRANSFORMS[" + e.type().className() + "]");
     }
 
     /** The {@code <key>_sql} method for this node type, or null if the generator has none. */
-    protected abstract String sqlFor(Expression e);
+    public abstract String sqlFor(Expression e);
 
     /** sqlglot's {@code property_sql}; ported in the Generator fragments. */
-    protected abstract String propertySql(Expression e);
+    public abstract String propertySql(Expression e);
 
     /** sqlglot's {@code rename_func(name)}: the function's args under a different name. */
-    protected String renameFunc(String name, Expression e) {
+    public String renameFunc(String name, Expression e) {
         List<Object> args = new ArrayList<>();
         for (int i = 0; i < e.type().argCount(); i++) {
             Object v = e.get(e.type().argAt(i));
@@ -410,13 +410,13 @@ public abstract class GeneratorCore {
      * it changed type, its TRANSFORMS entry).
      */
     @SafeVarargs
-    protected final String applyTransforms(Expression expression, java.util.function.UnaryOperator<Expression>... transforms) {
+    public final String applyTransforms(Expression expression, java.util.function.UnaryOperator<Expression>... transforms) {
         return applyTransformsThen(expression, null, transforms);
     }
 
     /** {@code transforms.preprocess(transforms, generator)}: as above, then renders with {@code then}. */
     @SafeVarargs
-    protected final String applyTransformsThen(Expression expression, java.util.function.Function<Expression, String> then,
+    public final String applyTransformsThen(Expression expression, java.util.function.Function<Expression, String> then,
             java.util.function.UnaryOperator<Expression>... transforms) {
         ExprType originalType = expression.type();
         try {
@@ -452,7 +452,7 @@ public abstract class GeneratorCore {
     // Common rendering helpers
 
     /** sqlglot's {@code binary}: left-deep chains of the same operator are rendered iteratively. */
-    protected String binary(Expression expression, String op) {
+    public String binary(Expression expression, String op) {
         StringBuilder sb = new StringBuilder();
         ArrayDeque<Object> stack = new ArrayDeque<>();
         stack.push(expression);
@@ -480,7 +480,7 @@ public abstract class GeneratorCore {
     }
 
     /** sqlglot's {@code function_fallback_sql}: NAME(arg, ...) over all set args in order. */
-    protected String functionFallbackSql(Expression expression) {
+    public String functionFallbackSql(Expression expression) {
         List<Object> args = new ArrayList<>();
         ExprType t = expression.type();
         for (int i = 0; i < t.argCount(); i++) {
@@ -494,7 +494,7 @@ public abstract class GeneratorCore {
         return func(functionName(expression), args.toArray());
     }
 
-    protected String functionName(Expression expression) {
+    public String functionName(Expression expression) {
         String key = dd.ORIGINAL_NAME_META_KEY;
         Object original = key == null ? null : expression.metaGet(key);
         if (original instanceof String s && !s.isEmpty()) {
@@ -504,22 +504,22 @@ public abstract class GeneratorCore {
     }
 
     /** {@code func(name, *args)}: NAME(args) with the dialect's function-name normalization. */
-    protected String func(String name, Object... args) {
+    public String func(String name, Object... args) {
         return funcWith(name, "(", ")", true, args);
     }
 
     /** {@code func(name, *args, prefix=, suffix=, normalize=)}. */
-    protected String funcWith(String name, String prefix, String suffix, boolean normalize, Object... args) {
+    public String funcWith(String name, String prefix, String suffix, boolean normalize, Object... args) {
         String n = normalize ? normalizeFunc(name) : name;
         return n + prefix + formatArgs(args) + suffix;
     }
 
     /** {@code format_args(*args)}: comma-joins the SQL of non-null, non-boolean args. */
-    protected String formatArgs(Object... args) {
+    public String formatArgs(Object... args) {
         return formatArgsSep(", ", args);
     }
 
-    protected String formatArgsSep(String sep, Object... args) {
+    public String formatArgsSep(String sep, Object... args) {
         List<String> argSqls = new ArrayList<>(args.length);
         for (Object a : args) {
             if (a != null && !(a instanceof Boolean)) {
@@ -532,7 +532,7 @@ public abstract class GeneratorCore {
         return String.join(sep, argSqls);
     }
 
-    protected boolean tooWide(List<String> args) {
+    public boolean tooWide(List<String> args) {
         int total = 0;
         for (String a : args) {
             total += a.length();
@@ -631,31 +631,31 @@ public abstract class GeneratorCore {
     }
 
     /** Starts options for {@code expressions(expression, ...)}. */
-    protected static ExprsOpts opts(Expression expression) {
+    public static ExprsOpts opts(Expression expression) {
         ExprsOpts o = new ExprsOpts();
         o.expression = expression;
         return o;
     }
 
     /** Starts options for {@code expressions(sqls=...)}. */
-    protected static ExprsOpts optsSqls(List<?> sqls) {
+    public static ExprsOpts optsSqls(List<?> sqls) {
         ExprsOpts o = new ExprsOpts();
         o.sqls = sqls;
         return o;
     }
 
     /** {@code expressions(expression)}: renders the {@code expressions} list arg. */
-    protected String expressions(Expression expression) {
+    public String expressions(Expression expression) {
         return expressions(opts(expression));
     }
 
     /** {@code expressions(expression, key=key)}. */
-    protected String expressions(Expression expression, Arg key) {
+    public String expressions(Expression expression, Arg key) {
         return expressions(opts(expression).key(key));
     }
 
     /** sqlglot's {@code expressions(...)} with all keyword options. */
-    protected String expressions(ExprsOpts o) {
+    public String expressions(ExprsOpts o) {
         List<?> exprs;
         if (o.expression != null) {
             Object v = o.expression.get(o.key == null ? Args.EXPRESSIONS : o.key);

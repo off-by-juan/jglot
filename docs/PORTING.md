@@ -32,7 +32,9 @@ Every method of sqlglot's `Parser` and `Generator` has exactly one Java signatur
 `ParserMethods.java` / `GeneratorMethods.java` (stubs) and listed in
 `tools/porting/contracts/{parser,generator}.txt` (`module:lines  python_name  java_signature  defaults`).
 
-* When you port a method, **override that exact signature** (`@Override protected ...`). Don't
+* When you port a method, **override that exact signature**: `@Override protected ...` for parser
+  methods, `@Override public ...` for generator methods (the generator API is public so the static
+  dialect helpers can call it). Don't
   change it. If it's genuinely wrong (for example a parameter typed `Object` that is always an
   `Expression`), keep it anyway, cast inside, and mention it in your report.
 * Python default arguments are generated as `final` convenience overloads for trailing defaults,
@@ -178,6 +180,22 @@ the base `Generator` has no `foo_sql` for, override `sqlFor`: handle the type, t
 * sqlglot builder factories like `build_formatted_time(exp.StrToTime, "postgres")` become methods
   that take the factory's arguments followed by `args`, e.g.
   `buildFormattedTime(ExprType.STR_TO_TIME, "postgres", null, args)`.
+
+## Cross-module APIs
+
+Some sqlglot modules outside the parser and generator are ported separately. Call them with these
+names (they exist as stubs until they're ported):
+
+* `io.github.offbyjuan.jglot.transforms.Transforms`: `transforms.py` functions as
+  `public static Expression camelName(Expression)`, e.g. `Transforms.eliminateQualify(e)`.
+  Functions with extra parameters get extra Java parameters.
+* `io.github.offbyjuan.jglot.dialects.DialectHelpers`: `dialects/dialect.py` module functions.
+  Generator helpers become `static String fooSql(Generator self, Expression e, ...)`; parser
+  builders become `static Expression buildFoo(..., List<Expression> args, Dialect dialect)`.
+* `io.github.offbyjuan.jglot.optimizer`: `Scopes.findAllInScope/findInScope/traverseScope`,
+  `Scope`, `TypeAnnotator.annotateTypes(e, dialect)`, `Simplify.simplify(e, dialect)`,
+  `NormalizeIdentifiers.normalizeIdentifiers(e, dialect)`, `Canonicalize.ensureBools(e)`,
+  `Normalize.normalize(e, dnf)` / `normalized(e, dnf)`.
 
 ## Fragments
 
