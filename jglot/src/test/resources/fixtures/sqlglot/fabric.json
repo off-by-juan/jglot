@@ -1,0 +1,406 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_fabric.py",
+ "cases": [
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (a MONEY, b SMALLMONEY, c XML, d IMAGE, e JSON)",
+   "expected": "CREATE TABLE t (a DECIMAL(19, 4), b DECIMAL(10, 4), c VARCHAR(MAX), d VARBINARY(MAX), e VARCHAR(MAX))",
+   "test": "TestFabric.test_lossy_type_mappings_keep_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIME)",
+   "expected": "CAST(x AS TIME(6))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DATETIME2)",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIME(3))",
+   "expected": "CAST(x AS TIME(3))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DATETIME2(3))",
+   "expected": "CAST(x AS DATETIME2(3))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIME(6))",
+   "expected": "CAST(x AS TIME(6))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DATETIME2(6))",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIME(7))",
+   "expected": "CAST(x AS TIME(6))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DATETIME2(7))",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIME(9))",
+   "expected": "CAST(x AS TIME(6))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DATETIME2(9))",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_precision_capping"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPTZ) AT TIME ZONE 'Pacific Standard Time'",
+   "expected": "CAST(CAST(x AS DATETIMEOFFSET(6)) AT TIME ZONE 'Pacific Standard Time' AS DATETIME2(6))",
+   "test": "TestFabric.test_timestamptz_with_at_time_zone"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPTZ(3)) AT TIME ZONE 'Pacific Standard Time'",
+   "expected": "CAST(CAST(x AS DATETIMEOFFSET(3)) AT TIME ZONE 'Pacific Standard Time' AS DATETIME2(3))",
+   "test": "TestFabric.test_timestamptz_with_at_time_zone"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPTZ(6)) AT TIME ZONE 'Pacific Standard Time'",
+   "expected": "CAST(CAST(x AS DATETIMEOFFSET(6)) AT TIME ZONE 'Pacific Standard Time' AS DATETIME2(6))",
+   "test": "TestFabric.test_timestamptz_with_at_time_zone"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPTZ(9)) AT TIME ZONE 'Pacific Standard Time'",
+   "expected": "CAST(CAST(x AS DATETIMEOFFSET(6)) AT TIME ZONE 'Pacific Standard Time' AS DATETIME2(6))",
+   "test": "TestFabric.test_timestamptz_with_at_time_zone"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPTZ)",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_timestamptz_without_at_time_zone"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPTZ(3))",
+   "expected": "CAST(x AS DATETIME2(3))",
+   "test": "TestFabric.test_timestamptz_without_at_time_zone"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPTZ(6))",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_timestamptz_without_at_time_zone"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPTZ(9))",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_timestamptz_without_at_time_zone"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS BOOLEAN)",
+   "expected": "CAST(x AS BIT)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DATE)",
+   "expected": "CAST(x AS DATE)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DATETIME)",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DECIMAL)",
+   "expected": "CAST(x AS DECIMAL)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS DOUBLE)",
+   "expected": "CAST(x AS FLOAT)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS IMAGE)",
+   "expected": "CAST(x AS VARBINARY(MAX))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS INT)",
+   "expected": "CAST(x AS INT)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS JSON)",
+   "expected": "CAST(x AS VARCHAR(MAX))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS MONEY)",
+   "expected": "CAST(x AS DECIMAL(19, 4))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS NCHAR)",
+   "expected": "CAST(x AS CHAR)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS NVARCHAR)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS ROWVERSION)",
+   "expected": "CAST(x AS ROWVERSION)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS SMALLDATETIME)",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS SMALLMONEY)",
+   "expected": "CAST(x AS DECIMAL(10, 4))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TEXT)",
+   "expected": "CAST(x AS VARCHAR(MAX))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMP)",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TIMESTAMPNTZ)",
+   "expected": "CAST(x AS DATETIME2(6))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS TINYINT)",
+   "expected": "CAST(x AS SMALLINT)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS UTINYINT)",
+   "expected": "CAST(x AS SMALLINT)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS UUID)",
+   "expected": "CAST(x AS UNIQUEIDENTIFIER)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS VARIANT)",
+   "expected": "CAST(x AS SQL_VARIANT)",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CAST(x AS XML)",
+   "expected": "CAST(x AS VARCHAR(MAX))",
+   "test": "TestFabric.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "UNIX_TO_TIME(column)",
+   "expected": "DATEADD(MICROSECONDS, CAST(ROUND(column * 1e6, 0) AS BIGINT), CAST('1970-01-01' AS DATETIME2(6)))",
+   "test": "TestFabric.test_unix_to_time"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (col VARCHAR)",
+   "expected": "CREATE TABLE t (col VARCHAR(1))",
+   "test": "TestFabric.test_varchar_precision_inference"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (col VARCHAR(50))",
+   "expected": "CREATE TABLE t (col VARCHAR(50))",
+   "test": "TestFabric.test_varchar_precision_inference"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (col CHAR)",
+   "expected": "CREATE TABLE t (col CHAR(1))",
+   "test": "TestFabric.test_varchar_precision_inference"
+  },
+  {
+   "kind": "identity",
+   "read": "fabric",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (col CHAR(10))",
+   "expected": "CREATE TABLE t (col CHAR(10))",
+   "test": "TestFabric.test_varchar_precision_inference"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (col VARCHAR)",
+   "expected": "CREATE TABLE t (col VARCHAR(MAX))",
+   "test": "TestFabric.test_varchar_precision_inference"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (col VARCHAR(MAX))",
+   "expected": "CREATE TABLE t (col VARCHAR(MAX))",
+   "test": "TestFabric.test_varchar_precision_inference"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (col CHAR)",
+   "expected": "CREATE TABLE t (col CHAR(MAX))",
+   "test": "TestFabric.test_varchar_precision_inference"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "fabric",
+   "sql": "CREATE TABLE t (col CHAR(MAX))",
+   "expected": "CREATE TABLE t (col CHAR(MAX))",
+   "test": "TestFabric.test_varchar_precision_inference"
+  }
+ ]
+}

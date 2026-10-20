@@ -1,0 +1,505 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_athena.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "SELECT '\\d+'",
+   "expected": "SELECT '\\d+'",
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "SELECT 'foo''bar'",
+   "expected": "SELECT 'foo''bar'",
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "SELECT '\\'",
+   "expected": "SELECT '\\'",
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "SELECT * FROM t WHERE name LIKE 'a\\_%' ESCAPE '\\'",
+   "expected": "SELECT * FROM t WHERE name LIKE 'a\\_%' ESCAPE '\\'",
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE IF NOT EXISTS t (name STRING) LOCATION 's3://bucket/tmp/mytable/' TBLPROPERTIES ('table_type'='iceberg', 'FORMAT'='parquet')",
+   "expected": "CREATE TABLE IF NOT EXISTS t (name STRING) LOCATION 's3://bucket/tmp/mytable/' TBLPROPERTIES ('table_type'='iceberg', 'FORMAT'='parquet')",
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "UNLOAD (SELECT name1, address1, comment1, key1 FROM table1) TO 's3://amzn-s3-demo-bucket/ partitioned/' WITH (format = 'TEXTFILE', partitioned_by = ARRAY['key1'])",
+   "expected": "UNLOAD (SELECT name1, address1, comment1, key1 FROM table1) TO 's3://amzn-s3-demo-bucket/ partitioned/' WITH (format = 'TEXTFILE', partitioned_by = ARRAY['key1'])",
+   "command": true,
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "USING EXTERNAL FUNCTION some_function(input VARBINARY)\n            RETURNS VARCHAR\n                LAMBDA 'some-name'\n            SELECT\n            some_function(1)",
+   "expected": "USING EXTERNAL FUNCTION some_function(input VARBINARY)\n            RETURNS VARCHAR\n                LAMBDA 'some-name'\n            SELECT\n            some_function(1)",
+   "command": true,
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "/* leading comment */CREATE SCHEMA foo",
+   "expected": "/* leading comment */ CREATE SCHEMA `foo`",
+   "identify": true,
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "/* leading comment */SELECT * FROM foo",
+   "expected": "/* leading comment */ SELECT * FROM \"foo\"",
+   "identify": true,
+   "test": "TestAthena.test_athena"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE t WITH (format='PARQUET') AS USING EXTERNAL FUNCTION f(x VARCHAR) RETURNS VARCHAR LAMBDA 'l' SELECT f('a') AS b",
+   "expected": "CREATE TABLE t WITH (format='PARQUET') AS USING EXTERNAL FUNCTION f(x VARCHAR) RETURNS VARCHAR LAMBDA 'l' SELECT f('a') AS b",
+   "command": true,
+   "test": "TestAthena.test_ctas_using_external_function"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE t WITH (format='PARQUET') AS SELECT 1 AS a",
+   "expected": "CREATE TABLE t WITH (format='PARQUET') AS SELECT 1 AS a",
+   "test": "TestAthena.test_ctas_using_external_function"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE DATABASE foo COMMENT \"a\\\"b\"",
+   "expected": "CREATE DATABASE foo COMMENT 'a\"b'",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE foo (id INT) COMMENT 'test comment'",
+   "expected": "CREATE EXTERNAL TABLE foo (id INT) COMMENT 'test comment'",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE george.t (id INT COMMENT 'foo \\\\ bar') LOCATION 's3://my-bucket/'",
+   "expected": "CREATE EXTERNAL TABLE george.t (id INT COMMENT 'foo \\\\ bar') LOCATION 's3://my-bucket/'",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE my_table (id BIGINT COMMENT 'this is the row\\'s id') LOCATION 's3://my-s3-bucket'",
+   "expected": "CREATE EXTERNAL TABLE my_table (id BIGINT COMMENT 'this is the row\\'s id') LOCATION 's3://my-s3-bucket'",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE foo (id INT, val STRING) CLUSTERED BY (id, val) INTO 10 BUCKETS",
+   "expected": "CREATE EXTERNAL TABLE foo (id INT, val STRING) CLUSTERED BY (id, val) INTO 10 BUCKETS",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE foo (id INT, val STRING) STORED AS PARQUET LOCATION 's3://foo' TBLPROPERTIES ('has_encryped_data'='true', 'classification'='test')",
+   "expected": "CREATE EXTERNAL TABLE foo (id INT, val STRING) STORED AS PARQUET LOCATION 's3://foo' TBLPROPERTIES ('has_encryped_data'='true', 'classification'='test')",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE IF NOT EXISTS foo (a INT, b STRING) ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe' WITH SERDEPROPERTIES ('case.insensitive'='FALSE') LOCATION 's3://table/path'",
+   "expected": "CREATE EXTERNAL TABLE IF NOT EXISTS foo (a INT, b STRING) ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe' WITH SERDEPROPERTIES ('case.insensitive'='FALSE') LOCATION 's3://table/path'",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE x (y INT) ROW FORMAT SERDE 'serde' ROW FORMAT DELIMITED FIELDS TERMINATED BY '1' WITH SERDEPROPERTIES ('input.regex'='')",
+   "expected": "CREATE EXTERNAL TABLE x (y INT) ROW FORMAT SERDE 'serde' ROW FORMAT DELIMITED FIELDS TERMINATED BY '1' WITH SERDEPROPERTIES ('input.regex'='')",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE `my_table` (`a7` ARRAY<DATE>) ROW FORMAT SERDE 'a' STORED AS INPUTFORMAT 'b' OUTPUTFORMAT 'c' LOCATION 'd' TBLPROPERTIES ('e'='f')",
+   "expected": "CREATE EXTERNAL TABLE `my_table` (`a7` ARRAY<DATE>) ROW FORMAT SERDE 'a' STORED AS INPUTFORMAT 'b' OUTPUTFORMAT 'c' LOCATION 'd' TBLPROPERTIES ('e'='f')",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE iceberg_table (`id` BIGINT, `data` STRING, category STRING) PARTITIONED BY (category, BUCKET(16, id)) LOCATION 's3://amzn-s3-demo-bucket/your-folder/' TBLPROPERTIES ('table_type'='ICEBERG', 'write_compression'='snappy')",
+   "expected": "CREATE TABLE iceberg_table (`id` BIGINT, `data` STRING, category STRING) PARTITIONED BY (category, BUCKET(16, id)) LOCATION 's3://amzn-s3-demo-bucket/your-folder/' TBLPROPERTIES ('table_type'='ICEBERG', 'write_compression'='snappy')",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE OR REPLACE TABLE iceberg_table (`id` BIGINT, `data` STRING, category STRING) PARTITIONED BY (category, BUCKET(16, id)) LOCATION 's3://amzn-s3-demo-bucket/your-folder/' TBLPROPERTIES ('table_type'='ICEBERG', 'write_compression'='snappy')",
+   "expected": "CREATE OR REPLACE TABLE iceberg_table (`id` BIGINT, `data` STRING, category STRING) PARTITIONED BY (category, BUCKET(16, id)) LOCATION 's3://amzn-s3-demo-bucket/your-folder/' TBLPROPERTIES ('table_type'='ICEBERG', 'write_compression'='snappy')",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE foo WITH (table_type='ICEBERG', location='s3://foo/', format='orc', partitioning=ARRAY['bucket(id, 5)']) AS SELECT * FROM a",
+   "expected": "CREATE TABLE foo WITH (table_type='ICEBERG', location='s3://foo/', format='orc', partitioning=ARRAY['bucket(id, 5)']) AS SELECT * FROM a",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE foo WITH (table_type='HIVE', external_location='s3://foo/', format='parquet', partitioned_by=ARRAY['ds']) AS SELECT * FROM a",
+   "expected": "CREATE TABLE foo WITH (table_type='HIVE', external_location='s3://foo/', format='parquet', partitioned_by=ARRAY['ds']) AS SELECT * FROM a",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE foo AS WITH foo AS (SELECT a, b FROM bar) SELECT * FROM foo",
+   "expected": "CREATE TABLE foo AS WITH foo AS (SELECT a, b FROM bar) SELECT * FROM foo",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "ALTER TABLE `foo`.`bar` ADD COLUMN `end_ts` BIGINT",
+   "expected": "ALTER TABLE `foo`.`bar` ADD COLUMNS (`end_ts` BIGINT)",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "ALTER TABLE `foo` DROP COLUMN `id`",
+   "expected": "ALTER TABLE `foo` DROP COLUMN `id`",
+   "test": "TestAthena.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE SCHEMA `foo`",
+   "expected": "CREATE SCHEMA `foo`",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE SCHEMA foo",
+   "expected": "CREATE SCHEMA foo",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE `foo` (`id` INT) LOCATION 's3://foo/'",
+   "expected": "CREATE EXTERNAL TABLE `foo` (`id` INT) LOCATION 's3://foo/'",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE foo (id INT) LOCATION 's3://foo/'",
+   "expected": "CREATE EXTERNAL TABLE foo (id INT) LOCATION 's3://foo/'",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE EXTERNAL TABLE foo (id INT) LOCATION 's3://foo/'",
+   "expected": "CREATE EXTERNAL TABLE `foo` (`id` INT) LOCATION 's3://foo/'",
+   "identify": true,
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE foo AS SELECT * FROM a",
+   "expected": "CREATE TABLE foo AS SELECT * FROM a",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE \"foo\" AS SELECT * FROM \"a\"",
+   "expected": "CREATE TABLE \"foo\" AS SELECT * FROM \"a\"",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "DROP VIEW IF EXISTS \"foo\".\"bar\"",
+   "expected": "DROP VIEW IF EXISTS \"foo\".\"bar\"",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE VIEW \"foo\" AS SELECT \"id\" FROM \"tbl\"",
+   "expected": "CREATE VIEW \"foo\" AS SELECT \"id\" FROM \"tbl\"",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE VIEW foo AS SELECT id FROM tbl",
+   "expected": "CREATE VIEW \"foo\" AS SELECT \"id\" FROM \"tbl\"",
+   "identify": true,
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "DROP TABLE `foo`",
+   "expected": "DROP TABLE `foo`",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "DROP TABLE foo",
+   "expected": "DROP TABLE foo",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "DROP TABLE foo",
+   "expected": "DROP TABLE `foo`",
+   "identify": true,
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE VIEW \"foo\" AS SELECT \"id\" FROM \"tbl\"",
+   "expected": "CREATE VIEW \"foo\" AS SELECT \"id\" FROM \"tbl\"",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE VIEW foo AS SELECT id FROM tbl",
+   "expected": "CREATE VIEW foo AS SELECT id FROM tbl",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE VIEW foo AS SELECT id FROM tbl",
+   "expected": "CREATE VIEW \"foo\" AS SELECT \"id\" FROM \"tbl\"",
+   "identify": true,
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE SCHEMA \"foo\"",
+   "expected": "CREATE SCHEMA `foo`",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "DROP TABLE \"foo\"",
+   "expected": "DROP TABLE `foo`",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "DESCRIBE foo.bar",
+   "expected": "DESCRIBE `foo`.`bar`",
+   "identify": true,
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "CREATE TABLE \"foo\" AS WITH \"foo\" AS (SELECT \"a\", \"b\" FROM \"bar\") SELECT * FROM \"foo\"",
+   "expected": "CREATE TABLE \"foo\" AS WITH \"foo\" AS (SELECT \"a\", \"b\" FROM \"bar\") SELECT * FROM \"foo\"",
+   "test": "TestAthena.test_ddl_quoting"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "athena",
+   "sql": "SELECT CAST(ds AS STRING) AS ds FROM (VALUES ('2022-01-01')) AS t(ds)",
+   "expected": "SELECT CAST(ds AS VARCHAR) AS ds FROM (VALUES ('2022-01-01')) AS t(ds)",
+   "test": "TestAthena.test_dml"
+  },
+  {
+   "kind": "write",
+   "read": "athena",
+   "write": "hive",
+   "sql": "SELECT CAST(ds AS VARCHAR) AS ds FROM (VALUES ('2022-01-01')) AS t(ds)",
+   "expected": "SELECT CAST(ds AS STRING) AS ds FROM (VALUES ('2022-01-01')) AS t(ds)",
+   "test": "TestAthena.test_dml"
+  },
+  {
+   "kind": "write",
+   "read": "athena",
+   "write": "trino",
+   "sql": "SELECT CAST(ds AS VARCHAR) AS ds FROM (VALUES ('2022-01-01')) AS t(ds)",
+   "expected": "SELECT CAST(ds AS VARCHAR) AS ds FROM (VALUES ('2022-01-01')) AS t(ds)",
+   "test": "TestAthena.test_dml"
+  },
+  {
+   "kind": "write",
+   "read": "athena",
+   "write": "athena",
+   "sql": "SELECT CAST(ds AS VARCHAR) AS ds FROM (VALUES ('2022-01-01')) AS t(ds)",
+   "expected": "SELECT CAST(ds AS VARCHAR) AS ds FROM (VALUES ('2022-01-01')) AS t(ds)",
+   "test": "TestAthena.test_dml"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "SELECT a AS foo FROM tbl",
+   "expected": "SELECT a AS foo FROM tbl",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "SELECT \"a\" AS \"foo\" FROM \"tbl\"",
+   "expected": "SELECT \"a\" AS \"foo\" FROM \"tbl\"",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "INSERT INTO foo (id) VALUES (1)",
+   "expected": "INSERT INTO foo (id) VALUES (1)",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "INSERT INTO \"foo\" (\"id\") VALUES (1)",
+   "expected": "INSERT INTO \"foo\" (\"id\") VALUES (1)",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "UPDATE foo SET id = 3 WHERE id = 7",
+   "expected": "UPDATE foo SET id = 3 WHERE id = 7",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "UPDATE \"foo\" SET \"id\" = 3 WHERE \"id\" = 7",
+   "expected": "UPDATE \"foo\" SET \"id\" = 3 WHERE \"id\" = 7",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "DELETE FROM foo WHERE id > 10",
+   "expected": "DELETE FROM foo WHERE id > 10",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "DELETE FROM \"foo\" WHERE \"id\" > 10",
+   "expected": "DELETE FROM \"foo\" WHERE \"id\" > 10",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "WITH foo AS (SELECT a, b FROM bar) SELECT * FROM foo",
+   "expected": "WITH foo AS (SELECT a, b FROM bar) SELECT * FROM foo",
+   "test": "TestAthena.test_dml_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "athena",
+   "write": "athena",
+   "sql": "WITH foo AS (SELECT a, b FROM bar) SELECT * FROM foo",
+   "expected": "WITH \"foo\" AS (SELECT \"a\", \"b\" FROM \"bar\") SELECT * FROM \"foo\"",
+   "identify": true,
+   "test": "TestAthena.test_dml_quoting"
+  }
+ ]
+}

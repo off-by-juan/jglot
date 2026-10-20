@@ -1,0 +1,2569 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_redshift.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE s.t ALTER SORTKEY (c)",
+   "expected": "ALTER TABLE s.t ALTER SORTKEY (c)",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER SORTKEY AUTO",
+   "expected": "ALTER TABLE t ALTER SORTKEY AUTO",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER SORTKEY NONE",
+   "expected": "ALTER TABLE t ALTER SORTKEY NONE",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER SORTKEY (c1, c2)",
+   "expected": "ALTER TABLE t ALTER SORTKEY (c1, c2)",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER SORTKEY (c1, c2)",
+   "expected": "ALTER TABLE t ALTER SORTKEY (c1, c2)",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER COMPOUND SORTKEY (c1, c2)",
+   "expected": "ALTER TABLE t ALTER COMPOUND SORTKEY (c1, c2)",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER DISTSTYLE ALL",
+   "expected": "ALTER TABLE t ALTER DISTSTYLE ALL",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER DISTSTYLE EVEN",
+   "expected": "ALTER TABLE t ALTER DISTSTYLE EVEN",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER DISTSTYLE AUTO",
+   "expected": "ALTER TABLE t ALTER DISTSTYLE AUTO",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER DISTSTYLE KEY DISTKEY c",
+   "expected": "ALTER TABLE t ALTER DISTSTYLE KEY DISTKEY c",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t SET TABLE PROPERTIES ('a' = '5', 'b' = 'c')",
+   "expected": "ALTER TABLE t SET TABLE PROPERTIES ('a' = '5', 'b' = 'c')",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t SET LOCATION 's3://bucket/folder/'",
+   "expected": "ALTER TABLE t SET LOCATION 's3://bucket/folder/'",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t SET FILE FORMAT AVRO",
+   "expected": "ALTER TABLE t SET FILE FORMAT AVRO",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t ALTER DISTKEY c",
+   "expected": "ALTER TABLE t ALTER DISTSTYLE KEY DISTKEY c",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark",
+   "sql": "ALTER TABLE db.t1 RENAME TO db.t2",
+   "expected": "ALTER TABLE db.t1 RENAME TO db.t2",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE db.t1 RENAME TO db.t2",
+   "expected": "ALTER TABLE db.t1 RENAME TO t2",
+   "test": "TestRedshift.test_alter_table"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ANALYZE TBL(col1, col2)",
+   "expected": "ANALYZE TBL(col1, col2)",
+   "test": "TestRedshift.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ANALYZE VERBOSE TBL",
+   "expected": "ANALYZE VERBOSE TBL",
+   "test": "TestRedshift.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ANALYZE TBL PREDICATE COLUMNS",
+   "expected": "ANALYZE TBL PREDICATE COLUMNS",
+   "test": "TestRedshift.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ANALYZE TBL ALL COLUMNS",
+   "expected": "ANALYZE TBL ALL COLUMNS",
+   "test": "TestRedshift.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "1::\"int\"",
+   "expected": "CAST(1 AS INTEGER)",
+   "test": "TestRedshift.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CAST(65 AS \"char\")",
+   "expected": "CAST(65 AS \"char\")",
+   "test": "TestRedshift.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "65::\"char\"",
+   "expected": "CAST(65 AS \"char\")",
+   "test": "TestRedshift.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CAST(x AS \"CHAR\")",
+   "expected": "CAST(x AS CHAR)",
+   "test": "TestRedshift.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT c.*, o FROM bloo AS c, c.c_orders AS o",
+   "expected": "SELECT c.*, o FROM bloo AS c, c.c_orders AS o",
+   "test": "TestRedshift.test_column_unnesting"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT c.*, o, l FROM bloo AS c, c.c_orders AS o, o.o_lineitems AS l",
+   "expected": "SELECT c.*, o, l FROM bloo AS c, c.c_orders AS o, o.o_lineitems AS l",
+   "test": "TestRedshift.test_column_unnesting"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE SOUP (LIKE other_table) DISTKEY(soup1) SORTKEY(soup2) DISTSTYLE ALL",
+   "expected": "CREATE TABLE SOUP (LIKE other_table) DISTKEY(soup1) SORTKEY(soup2) DISTSTYLE ALL",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "CREATE TABLE t1 (LIKE t2)",
+   "expected": "CREATE TABLE t1 (LIKE t2)",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "CREATE TABLE t1 (LIKE t2)",
+   "expected": "CREATE TABLE t1 (LIKE t2)",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE t1 (LIKE t2)",
+   "expected": "CREATE TABLE t1 (LIKE t2)",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "trino",
+   "sql": "CREATE TABLE t1 (LIKE t2)",
+   "expected": "CREATE TABLE t1 (LIKE t2)",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "CREATE TABLE t1 (col VARCHAR, LIKE t2)",
+   "expected": "CREATE TABLE t1 (col VARCHAR, LIKE t2)",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "CREATE TABLE t1 (col VARCHAR, LIKE t2)",
+   "expected": "CREATE TABLE t1 (col VARCHAR, LIKE t2)",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE t1 (col VARCHAR, LIKE t2)",
+   "expected": "CREATE TABLE t1 (col VARCHAR, LIKE t2)",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "trino",
+   "sql": "CREATE TABLE t1 (col VARCHAR, LIKE t2)",
+   "expected": "CREATE TABLE t1 (col VARCHAR, LIKE t2)",
+   "test": "TestRedshift.test_create_table_like"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT * FROM t FETCH FIRST 1 ROWS ONLY",
+   "expected": "SELECT * FROM t LIMIT 1",
+   "test": "TestRedshift.test_fetch_to_limit"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT * FROM t FETCH FIRST 1 ROWS ONLY",
+   "expected": "SELECT * FROM t FETCH FIRST 1 ROWS ONLY",
+   "test": "TestRedshift.test_fetch_to_limit"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT SELECT ON ALL TABLES IN SCHEMA qa_tickit TO fred",
+   "expected": "GRANT SELECT ON ALL TABLES IN SCHEMA qa_tickit TO fred",
+   "command": true,
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT USAGE ON DATASHARE salesshare TO NAMESPACE '13b8833d-17c6-4f16-8fe4-1a018f5ed00d'",
+   "expected": "GRANT USAGE ON DATASHARE salesshare TO NAMESPACE '13b8833d-17c6-4f16-8fe4-1a018f5ed00d'",
+   "command": true,
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT USAGE FOR SCHEMAS IN DATABASE Sales_db TO ROLE Sales",
+   "expected": "GRANT USAGE FOR SCHEMAS IN DATABASE Sales_db TO ROLE Sales",
+   "command": true,
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT EXECUTE FOR FUNCTIONS IN SCHEMA Sales_schema TO bob",
+   "expected": "GRANT EXECUTE FOR FUNCTIONS IN SCHEMA Sales_schema TO bob",
+   "command": true,
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT SELECT FOR TABLES IN DATABASE Sales_db TO alice WITH GRANT OPTION",
+   "expected": "GRANT SELECT FOR TABLES IN DATABASE Sales_db TO alice WITH GRANT OPTION",
+   "command": true,
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT ALL FOR TABLES IN SCHEMA ShareSchema DATABASE ShareDb TO ROLE Sales",
+   "expected": "GRANT ALL FOR TABLES IN SCHEMA ShareSchema DATABASE ShareDb TO ROLE Sales",
+   "command": true,
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT ASSUMEROLE ON 'arn:aws:iam::123456789012:role/Redshift-Exfunc' TO reg_user1 FOR EXTERNAL FUNCTION",
+   "expected": "GRANT ASSUMEROLE ON 'arn:aws:iam::123456789012:role/Redshift-Exfunc' TO reg_user1 FOR EXTERNAL FUNCTION",
+   "command": true,
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT ROLE sample_role1 TO ROLE sample_role2",
+   "expected": "GRANT ROLE sample_role1 TO ROLE sample_role2",
+   "command": true,
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT SELECT ON TABLE sales TO fred",
+   "expected": "GRANT SELECT ON TABLE sales TO fred",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT ALL ON SCHEMA qa_tickit TO GROUP qa_users",
+   "expected": "GRANT ALL ON SCHEMA qa_tickit TO GROUP qa_users",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT ALL ON TABLE qa_tickit.sales TO GROUP qa_users",
+   "expected": "GRANT ALL ON TABLE qa_tickit.sales TO GROUP qa_users",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT ALL ON TABLE qa_tickit.sales TO GROUP qa_users, GROUP ro_users",
+   "expected": "GRANT ALL ON TABLE qa_tickit.sales TO GROUP qa_users, GROUP ro_users",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT ALL ON view_date TO view_user",
+   "expected": "GRANT ALL ON view_date TO view_user",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT SELECT(cust_name, cust_phone), UPDATE(cust_contact_preference) ON cust_profile TO GROUP sales_group",
+   "expected": "GRANT SELECT(cust_name, cust_phone), UPDATE(cust_contact_preference) ON cust_profile TO GROUP sales_group",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT ALL(cust_name, cust_phone, cust_contact_preference) ON cust_profile TO GROUP sales_admin",
+   "expected": "GRANT ALL(cust_name, cust_phone, cust_contact_preference) ON cust_profile TO GROUP sales_admin",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT USAGE ON DATABASE sales_db TO Bob",
+   "expected": "GRANT USAGE ON DATABASE sales_db TO Bob",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT USAGE ON SCHEMA sales_schema TO ROLE Analyst_role",
+   "expected": "GRANT USAGE ON SCHEMA sales_schema TO ROLE Analyst_role",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GRANT SELECT ON sales_db.sales_schema.tickit_sales_redshift TO Bob",
+   "expected": "GRANT SELECT ON sales_db.sales_schema.tickit_sales_redshift TO Bob",
+   "test": "TestRedshift.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT GETBIT(FROM_HEX('4d'), 2)",
+   "expected": "SELECT GETBIT(FROM_HEX('4d'), 2)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT EXP(1)",
+   "expected": "SELECT EXP(1)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE table_name ALTER COLUMN bla TYPE VARCHAR",
+   "expected": "ALTER TABLE table_name ALTER COLUMN bla TYPE VARCHAR",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ALTER TABLE t DROP b CASCADE",
+   "expected": "ALTER TABLE t DROP COLUMN b CASCADE",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT CAST(value AS FLOAT(8))",
+   "expected": "SELECT CAST(value AS FLOAT(8))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "1 div",
+   "expected": "1 AS div",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "LISTAGG(DISTINCT foo, ', ')",
+   "expected": "LISTAGG(DISTINCT foo, ', ')",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE MATERIALIZED VIEW orders AUTO REFRESH YES AS SELECT 1",
+   "expected": "CREATE MATERIALIZED VIEW orders AUTO REFRESH YES AS SELECT 1",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATEADD(DAY, 1, 'today')",
+   "expected": "SELECT DATEADD(DAY, 1, 'today')",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT * FROM #x",
+   "expected": "SELECT * FROM #x",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT INTERVAL '5 DAY'",
+   "expected": "SELECT INTERVAL '5 DAY'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT date_col - INTERVAL '30' FROM t",
+   "expected": "SELECT date_col - INTERVAL '30' FROM t",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT date_col - INTERVAL '1' AS one_second_later",
+   "expected": "SELECT date_col - INTERVAL '1' AS one_second_later",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT date_col - INTERVAL '30' DAY FROM t",
+   "expected": "SELECT date_col - INTERVAL '30 DAY' FROM t",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT date_col - INTERVAL '1' HOUR AS one_hour_later",
+   "expected": "SELECT date_col - INTERVAL '1 HOUR' AS one_hour_later",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "foo$",
+   "expected": "foo$",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CAST('bla' AS SUPER)",
+   "expected": "CAST('bla' AS SUPER)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE real1 (realcol REAL)",
+   "expected": "CREATE TABLE real1 (realcol REAL)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CAST('foo' AS HLLSKETCH)",
+   "expected": "CAST('foo' AS HLLSKETCH)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "'abc' SIMILAR TO '(b|c)%'",
+   "expected": "'abc' SIMILAR TO '(b|c)%'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "'%' SIMILAR TO '^%' ESCAPE '^'",
+   "expected": "'%' SIMILAR TO '^%' ESCAPE '^'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE datetable (start_date DATE, end_date DATE)",
+   "expected": "CREATE TABLE datetable (start_date DATE, end_date DATE)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT APPROXIMATE AS y",
+   "expected": "SELECT APPROXIMATE AS y",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT APPROXIMATE PERCENTILE_DISC(0.5) WITHIN GROUP (ORDER BY totalprice)",
+   "expected": "SELECT APPROXIMATE PERCENTILE_DISC(0.5) WITHIN GROUP (ORDER BY totalprice)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE t (c BIGINT IDENTITY(0, 1))",
+   "expected": "CREATE TABLE t (c BIGINT IDENTITY(0, 1))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "COPY test_staging_tbl FROM 's3://your/bucket/prefix/here' IAM_ROLE default FORMAT AS AVRO 'auto'",
+   "expected": "COPY test_staging_tbl FROM 's3://your/bucket/prefix/here' IAM_ROLE default FORMAT AS AVRO 'auto'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "COPY test_staging_tbl FROM 's3://your/bucket/prefix/here' IAM_ROLE default FORMAT AS JSON 's3://jsonpaths_file'",
+   "expected": "COPY test_staging_tbl FROM 's3://your/bucket/prefix/here' IAM_ROLE default FORMAT AS JSON 's3://jsonpaths_file'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT * FROM venue WHERE (venuecity, venuestate) IN (('Miami', 'FL'), ('Tampa', 'FL')) ORDER BY venueid",
+   "expected": "SELECT * FROM venue WHERE (venuecity, venuestate) IN (('Miami', 'FL'), ('Tampa', 'FL')) ORDER BY venueid",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT tablename, \"column\" FROM pg_table_def WHERE \"column\" LIKE '%start\\\\_%' LIMIT 5",
+   "expected": "SELECT tablename, \"column\" FROM pg_table_def WHERE \"column\" LIKE '%start\\\\_%' LIMIT 5",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{\"f2\":{\"f3\":1},\"f4\":{\"f5\":99,\"f6\":\"star\"}', 'f4', 'f6', TRUE)",
+   "expected": "SELECT JSON_EXTRACT_PATH_TEXT('{\"f2\":{\"f3\":1},\"f4\":{\"f5\":99,\"f6\":\"star\"}', 'f4', 'f6', TRUE)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "DATE_PART(year, \"somecol\")",
+   "expected": "EXTRACT(YEAR FROM \"somecol\")",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT CONCAT('abc', 'def')",
+   "expected": "SELECT 'abc' || 'def'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT TOP 1 x FROM y",
+   "expected": "SELECT x FROM y LIMIT 1",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATE_DIFF('month', CAST('2020-02-29 00:00:00' AS TIMESTAMP), CAST('2020-03-02 00:00:00' AS TIMESTAMP))",
+   "expected": "SELECT DATEDIFF(MONTH, CAST('2020-02-29 00:00:00' AS TIMESTAMP), CAST('2020-03-02 00:00:00' AS TIMESTAMP))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT * FROM x WHERE y = DATEADD('month', -1, DATE_TRUNC('month', (SELECT y FROM #temp_table)))",
+   "expected": "SELECT * FROM x WHERE y = DATEADD(MONTH, -1, DATE_TRUNC('MONTH', (SELECT y FROM #temp_table)))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT 'a''b'",
+   "expected": "SELECT 'a\\'b'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE t (c BIGINT GENERATED BY DEFAULT AS IDENTITY (0, 1))",
+   "expected": "CREATE TABLE t (c BIGINT IDENTITY(0, 1))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATEADD(HOUR, 0, CAST('2020-02-02 01:03:05.124' AS TIMESTAMP))",
+   "expected": "SELECT DATEADD(HOUR, 0, CAST('2020-02-02 01:03:05.124' AS TIMESTAMP))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATEDIFF(SECOND, '2020-02-02 00:00:00.000', '2020-02-02 01:03:05.124')",
+   "expected": "SELECT DATEDIFF(SECOND, '2020-02-02 00:00:00.000', '2020-02-02 01:03:05.124')",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE OR REPLACE VIEW v1 AS SELECT id, AVG(average_metric1) AS m1, AVG(average_metric2) AS m2 FROM t GROUP BY id WITH NO SCHEMA BINDING",
+   "expected": "CREATE OR REPLACE VIEW v1 AS SELECT id, AVG(average_metric1) AS m1, AVG(average_metric2) AS m2 FROM t GROUP BY id WITH NO SCHEMA BINDING",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT caldate + INTERVAL '1 SECOND' AS dateplus FROM date WHERE caldate = '12-31-2008'",
+   "expected": "SELECT caldate + INTERVAL '1 SECOND' AS dateplus FROM date WHERE caldate = '12-31-2008'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT COUNT(*) FROM event WHERE eventname LIKE '%Ring%' OR eventname LIKE '%Die%'",
+   "expected": "SELECT COUNT(*) FROM event WHERE eventname LIKE '%Ring%' OR eventname LIKE '%Die%'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE SOUP (LIKE other_table) DISTKEY(soup1) SORTKEY(soup2) DISTSTYLE ALL",
+   "expected": "CREATE TABLE SOUP (LIKE other_table) DISTKEY(soup1) SORTKEY(soup2) DISTSTYLE ALL",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE sales (salesid INTEGER NOT NULL) DISTKEY(listid) COMPOUND SORTKEY(listid, sellerid) DISTSTYLE AUTO",
+   "expected": "CREATE TABLE sales (salesid INTEGER NOT NULL) DISTKEY(listid) COMPOUND SORTKEY(listid, sellerid) DISTSTYLE AUTO",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "COPY customer FROM 's3://mybucket/customer' IAM_ROLE 'arn:aws:iam::0123456789012:role/MyRedshiftRole' REGION 'us-east-1' FORMAT orc",
+   "expected": "COPY customer FROM 's3://mybucket/customer' IAM_ROLE 'arn:aws:iam::0123456789012:role/MyRedshiftRole' REGION 'us-east-1' FORMAT orc",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "COPY customer FROM 's3://mybucket/mydata' CREDENTIALS 'aws_iam_role=arn:aws:iam::<aws-account-id>:role/<role-name>;master_symmetric_key=<root-key>' emptyasnull blanksasnull timeformat 'YYYY-MM-DD HH:MI:SS'",
+   "expected": "COPY customer FROM 's3://mybucket/mydata' CREDENTIALS 'aws_iam_role=arn:aws:iam::<aws-account-id>:role/<role-name>;master_symmetric_key=<root-key>' emptyasnull blanksasnull timeformat 'YYYY-MM-DD HH:MI:SS'",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "UNLOAD ('select * from venue') TO 's3://mybucket/unload/' IAM_ROLE 'arn:aws:iam::0123456789012:role/MyRedshiftRole'",
+   "expected": "UNLOAD ('select * from venue') TO 's3://mybucket/unload/' IAM_ROLE 'arn:aws:iam::0123456789012:role/MyRedshiftRole'",
+   "command": true,
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE SOUP (SOUP1 VARCHAR(50) NOT NULL ENCODE ZSTD, SOUP2 VARCHAR(70) NULL ENCODE DELTA)",
+   "expected": "CREATE TABLE SOUP (SOUP1 VARCHAR(50) NOT NULL ENCODE ZSTD, SOUP2 VARCHAR(70) NULL ENCODE DELTA)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATEADD('day', ndays, caldate)",
+   "expected": "SELECT DATEADD(DAY, ndays, caldate)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CONVERT(INT, x)",
+   "expected": "CAST(x AS INTEGER)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATE_ADD('day', 1, DATE('2023-01-01'))",
+   "expected": "SELECT DATEADD(DAY, 1, DATE('2023-01-01'))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT\n  c_name,\n  orders.o_orderkey AS orderkey,\n  index AS orderkey_index\nFROM customer_orders_lineitem AS c, c.c_orders AS orders AT index\nORDER BY\n  orderkey_index",
+   "expected": "SELECT\n  c_name,\n  orders.o_orderkey AS orderkey,\n  index AS orderkey_index\nFROM customer_orders_lineitem AS c, c.c_orders AS orders AT index\nORDER BY\n  orderkey_index",
+   "pretty": true,
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT attr AS attr, JSON_TYPEOF(val) AS value_type FROM customer_orders_lineitem AS c, UNPIVOT c.c_orders[0] WHERE c_custkey = 9451",
+   "expected": "SELECT attr AS attr, JSON_TYPEOF(val) AS value_type FROM customer_orders_lineitem AS c, UNPIVOT c.c_orders[0] WHERE c_custkey = 9451",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT attr AS attr, JSON_TYPEOF(val) AS value_type FROM customer_orders_lineitem AS c, UNPIVOT c.c_orders AS val AT attr WHERE c_custkey = 9451",
+   "expected": "SELECT attr AS attr, JSON_TYPEOF(val) AS value_type FROM customer_orders_lineitem AS c, UNPIVOT c.c_orders AS val AT attr WHERE c_custkey = 9451",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT JSON_PARSE('[]')",
+   "expected": "SELECT JSON_PARSE('[]')",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT ARRAY(1, 2, 3)",
+   "expected": "SELECT ARRAY(1, 2, 3)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT ARRAY[1, 2, 3]",
+   "expected": "SELECT ARRAY[1, 2, 3]",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT CONVERT_TIMEZONE('America/New_York', '2024-08-06 09:10:00.000')",
+   "expected": "SELECT CONVERT_TIMEZONE('UTC', 'America/New_York', '2024-08-06 09:10:00.000')",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT *, 4 AS col4 EXCLUDE (col2, col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT *, 4 AS col4 EXCLUDE (col2, col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "SELECT *, 4 AS col4 EXCLUDE (col2, col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT * EXCLUDE (col2, col3) FROM (SELECT *, 4 AS col4 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT *, 4 AS col4 EXCLUDE (col2, col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT * EXCLUDE (col2, col3) FROM (SELECT *, 4 AS col4 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT *, 4 AS col4 EXCLUDE col2, col3 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT *, 4 AS col4 EXCLUDE (col2, col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "SELECT *, 4 AS col4 EXCLUDE col2, col3 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT * EXCLUDE (col2, col3) FROM (SELECT *, 4 AS col4 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT *, 4 AS col4 EXCLUDE col2, col3 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT * EXCLUDE (col2, col3) FROM (SELECT *, 4 AS col4 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT col1, *, col2 EXCLUDE(col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT col1, *, col2 EXCLUDE (col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "SELECT col1, *, col2 EXCLUDE(col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT * EXCLUDE (col3) FROM (SELECT col1, *, col2 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT col1, *, col2 EXCLUDE(col3) FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3)",
+   "expected": "SELECT * EXCLUDE (col3) FROM (SELECT col1, *, col2 FROM (SELECT 1 AS col1, 2 AS col2, 3 AS col3))",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT 1 EXCLUDE",
+   "expected": "SELECT 1 AS EXCLUDE",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT 1 EXCLUDE FROM t",
+   "expected": "SELECT 1 AS EXCLUDE FROM t",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT 1 AS EXCLUDE",
+   "expected": "SELECT 1 AS EXCLUDE",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT * FROM (SELECT 1 AS EXCLUDE) AS t",
+   "expected": "SELECT * FROM (SELECT 1 AS EXCLUDE) AS t",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT 1 AS EXCLUDE, 2 AS foo",
+   "expected": "SELECT 1 AS EXCLUDE, 2 AS foo",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "WITH qualify AS (SELECT 1 AS x) SELECT * FROM qualify",
+   "expected": "WITH qualify AS (SELECT 1 AS x) SELECT * FROM qualify",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT qualify FROM t",
+   "expected": "SELECT qualify FROM t",
+   "test": "TestRedshift.test_identity"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "select a.foo, b.bar, a.baz from a, b where a.baz = b.baz (+)",
+   "expected": "SELECT a.foo, b.bar, a.baz FROM a, b WHERE a.baz = b.baz (+)",
+   "test": "TestRedshift.test_join_markers"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE OR REPLACE VIEW v1 AS SELECT cola, colb FROM t1 WITH NO SCHEMA BINDING",
+   "expected": "CREATE OR REPLACE VIEW v1 AS SELECT cola, colb FROM t1 WITH NO SCHEMA BINDING",
+   "test": "TestRedshift.test_no_schema_binding"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT COSH(1.5)",
+   "expected": "SELECT COSH(1.5)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "ROUND(CAST(a AS DOUBLE PRECISION) / CAST(b AS DOUBLE PRECISION), 2)",
+   "expected": "ROUND(CAST(a AS DOUBLE PRECISION) / CAST(b AS DOUBLE PRECISION), 2)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT SPLIT_TO_ARRAY('12,345,6789')",
+   "expected": "SELECT STRING_TO_ARRAY('12,345,6789', ',')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SPLIT_TO_ARRAY('12,345,6789')",
+   "expected": "SELECT SPLIT_TO_ARRAY('12,345,6789', ',')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "redshift",
+   "sql": "CURRENT_TIMESTAMP",
+   "expected": "GETDATE()",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "GETDATE()",
+   "expected": "CURRENT_TIMESTAMP",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "GETDATE()",
+   "expected": "GETDATE()",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "bigquery",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "expected": "SELECT JSON_EXTRACT_SCALAR('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', '$.farm.barn.color')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "databricks",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "expected": "SELECT GET_JSON_OBJECT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', '$.farm.barn.color')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "expected": "SELECT '{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}' ->> '$.farm.barn.color'",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "expected": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "expected": "SELECT JSON_EXTRACT_SCALAR('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', '$.farm.barn.color')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "expected": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "expected": "SELECT GET_JSON_OBJECT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', '$.farm.barn.color')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "sqlite",
+   "sql": "SELECT JSON_EXTRACT_PATH_TEXT('{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}', 'farm', 'barn', 'color')",
+   "expected": "SELECT '{ \"farm\": {\"barn\": { \"color\": \"red\", \"feed stocked\": true }}}' ->> '$.farm.barn.color'",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "redshift",
+   "sql": "STRING_AGG(sellerid, ', ')",
+   "expected": "LISTAGG(sellerid, ', ')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "redshift",
+   "sql": "STRING_AGG(sellerid, ', ')",
+   "expected": "LISTAGG(sellerid, ', ')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "LISTAGG(sellerid, ', ')",
+   "expected": "LISTAGG(sellerid, ', ')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "LISTAGG(sellerid, ', ')",
+   "expected": "LISTAGG(sellerid, ', ')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark, version=3.0.0",
+   "sql": "LISTAGG(sellerid, ', ')",
+   "expected": "ARRAY_JOIN(COLLECT_LIST(sellerid), ', ')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark, version=4.0.0",
+   "sql": "LISTAGG(sellerid, ', ')",
+   "expected": "LISTAGG(sellerid, ', ')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark",
+   "sql": "LISTAGG(sellerid, ', ')",
+   "expected": "LISTAGG(sellerid, ', ')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "databricks",
+   "sql": "LISTAGG(sellerid, ', ')",
+   "expected": "LISTAGG(sellerid, ', ')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FILTER (WHERE z > 0) FROM t",
+   "expected": "SELECT LISTAGG(IFF(z > 0, x, NULL), ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "redshift",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(y)",
+   "expected": "SELECT APPROXIMATE COUNT(DISTINCT y)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT APPROXIMATE COUNT(DISTINCT y)",
+   "expected": "SELECT APPROXIMATE COUNT(DISTINCT y)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark",
+   "sql": "SELECT APPROXIMATE COUNT(DISTINCT y)",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(y)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "x ~* 'pat'",
+   "expected": "x ~* 'pat'",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "x ~* 'pat'",
+   "expected": "REGEXP_LIKE(x, 'pat', 'i')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "redshift",
+   "sql": "SELECT CAST('01:03:05.124' AS TIMETZ(2))",
+   "expected": "SELECT CAST('01:03:05.124' AS TIME(2) WITH TIME ZONE)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT CAST('01:03:05.124' AS TIME(2) WITH TIME ZONE)",
+   "expected": "SELECT CAST('01:03:05.124' AS TIMETZ(2))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT CAST('01:03:05.124' AS TIME(2) WITH TIME ZONE)",
+   "expected": "SELECT CAST('01:03:05.124' AS TIME(2) WITH TIME ZONE)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "redshift",
+   "sql": "SELECT CAST('2020-02-02 01:03:05.124' AS TIMESTAMPTZ(2))",
+   "expected": "SELECT CAST('2020-02-02 01:03:05.124' AS TIMESTAMP(2) WITH TIME ZONE)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT CAST('2020-02-02 01:03:05.124' AS TIMESTAMP(2) WITH TIME ZONE)",
+   "expected": "SELECT CAST('2020-02-02 01:03:05.124' AS TIMESTAMPTZ(2))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT CAST('2020-02-02 01:03:05.124' AS TIMESTAMP(2) WITH TIME ZONE)",
+   "expected": "SELECT CAST('2020-02-02 01:03:05.124' AS TIMESTAMP(2) WITH TIME ZONE)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "redshift",
+   "sql": "SELECT INTERVAL '5' days",
+   "expected": "SELECT INTERVAL '5 DAYS'",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "bigquery",
+   "sql": "SELECT ADD_MONTHS('2008-03-31', 1)",
+   "expected": "SELECT DATE_ADD(CAST('2008-03-31' AS DATETIME), INTERVAL 1 MONTH)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "SELECT ADD_MONTHS('2008-03-31', 1)",
+   "expected": "SELECT CAST('2008-03-31' AS TIMESTAMP) + INTERVAL 1 MONTH",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT ADD_MONTHS('2008-03-31', 1)",
+   "expected": "SELECT DATEADD(MONTH, 1, '2008-03-31')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "trino",
+   "sql": "SELECT ADD_MONTHS('2008-03-31', 1)",
+   "expected": "SELECT DATE_ADD('MONTH', 1, CAST('2008-03-31' AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "tsql",
+   "sql": "SELECT ADD_MONTHS('2008-03-31', 1)",
+   "expected": "SELECT DATEADD(MONTH, 1, CAST('2008-03-31' AS DATETIME2))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "redshift",
+   "sql": "SELECT FROM_BASE('abc', 16)",
+   "expected": "SELECT STRTOL('abc', 16)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT STRTOL('abc', 16)",
+   "expected": "SELECT STRTOL('abc', 16)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "trino",
+   "sql": "SELECT STRTOL('abc', 16)",
+   "expected": "SELECT FROM_BASE('abc', 16)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "",
+   "sql": "SELECT SNAPSHOT, type",
+   "expected": "SELECT SNAPSHOT, type",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SNAPSHOT, type",
+   "expected": "SELECT \"SNAPSHOT\", \"type\"",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "x is true",
+   "expected": "x IS TRUE",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "x is true",
+   "expected": "x",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "x is false",
+   "expected": "x IS FALSE",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "x is false",
+   "expected": "NOT x",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "x is not false",
+   "expected": "NOT x IS FALSE",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "x is not false",
+   "expected": "NOT NOT x",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "LEN(x)",
+   "expected": "LENGTH(x)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "LEN(x)",
+   "expected": "LENGTH(x)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "redshift",
+   "sql": "STARTS_WITH(x, 'abc')",
+   "expected": "x LIKE 'abc' || '%'",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "x LIKE 'abc' || '%'",
+   "expected": "x LIKE 'abc' || '%'",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "",
+   "sql": "SELECT SYSDATE",
+   "expected": "SELECT CURRENT_TIMESTAMP()",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT SYSDATE",
+   "expected": "SELECT CURRENT_TIMESTAMP",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SYSDATE",
+   "expected": "SELECT SYSDATE",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT DATE_PART(minute, timestamp '2023-01-04 04:05:06.789')",
+   "expected": "SELECT EXTRACT(MINUTE FROM CAST('2023-01-04 04:05:06.789' AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATE_PART(minute, timestamp '2023-01-04 04:05:06.789')",
+   "expected": "SELECT EXTRACT(MINUTE FROM CAST('2023-01-04 04:05:06.789' AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT DATE_PART(minute, timestamp '2023-01-04 04:05:06.789')",
+   "expected": "SELECT DATE_PART(MINUTE, CAST('2023-01-04 04:05:06.789' AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT DATE_PART(month, date '20220502')",
+   "expected": "SELECT EXTRACT(MONTH FROM CAST('20220502' AS DATE))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATE_PART(month, date '20220502')",
+   "expected": "SELECT EXTRACT(MONTH FROM CAST('20220502' AS DATE))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT DATE_PART(month, date '20220502')",
+   "expected": "SELECT DATE_PART(MONTH, CAST('20220502' AS DATE))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "create table \"group\" (\"col\" char(10))",
+   "expected": "CREATE TABLE \"group\" (\"col\" CHAR(10))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "mysql",
+   "sql": "create table \"group\" (\"col\" char(10))",
+   "expected": "CREATE TABLE `group` (`col` CHAR(10))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "create table if not exists city_slash_id(\"city/id\" integer not null, state char(2) not null)",
+   "expected": "CREATE TABLE IF NOT EXISTS city_slash_id (\"city/id\" INTEGER NOT NULL, state CHAR(2) NOT NULL)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "create table if not exists city_slash_id(\"city/id\" integer not null, state char(2) not null)",
+   "expected": "CREATE TABLE IF NOT EXISTS city_slash_id (\"city/id\" INTEGER NOT NULL, state CHAR(2) NOT NULL)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT ST_AsEWKT(ST_GeomFromEWKT('SRID=4326;POINT(10 20)')::geography)",
+   "expected": "SELECT ST_ASEWKT(CAST(ST_GEOMFROMEWKT('SRID=4326;POINT(10 20)') AS GEOGRAPHY))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "bigquery",
+   "sql": "SELECT ST_AsEWKT(ST_GeomFromEWKT('SRID=4326;POINT(10 20)')::geography)",
+   "expected": "SELECT ST_AsEWKT(CAST(ST_GeomFromEWKT('SRID=4326;POINT(10 20)') AS GEOGRAPHY))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT ST_AsEWKT(ST_GeogFromText('LINESTRING(110 40, 2 3, -10 80, -7 9)')::geometry)",
+   "expected": "SELECT ST_ASEWKT(CAST(ST_GEOGFROMTEXT('LINESTRING(110 40, 2 3, -10 80, -7 9)') AS GEOMETRY))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT 'abc'::BINARY",
+   "expected": "SELECT CAST('abc' AS VARBYTE)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE a (b BINARY VARYING(10))",
+   "expected": "CREATE TABLE a (b VARBYTE(10))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT 'abc'::CHARACTER",
+   "expected": "SELECT CAST('abc' AS CHAR)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "bigquery",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "databricks",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "drill",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "hive",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "mysql",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY CASE WHEN c IS NULL THEN 1 ELSE 0 END DESC, c DESC) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "oracle",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC) AS _row_number FROM x) _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "sqlite",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "starrocks",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY CASE WHEN c IS NULL THEN 1 ELSE 0 END DESC, c DESC) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "tableau",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "teradata",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "trino",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY c DESC NULLS FIRST) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "tsql",
+   "sql": "SELECT DISTINCT ON (a) a, b FROM x ORDER BY c DESC",
+   "expected": "SELECT a, b FROM (SELECT a AS a, b AS b, ROW_NUMBER() OVER (PARTITION BY a ORDER BY CASE WHEN c IS NULL THEN 1 ELSE 0 END DESC, c DESC) AS _row_number FROM x) AS _t WHERE _row_number = 1",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "",
+   "sql": "DECODE(x, a, b, c, d)",
+   "expected": "DECODE(x, a, b, c, d)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "DECODE(x, a, b, c, d)",
+   "expected": "CASE WHEN x = a OR (x IS NULL AND a IS NULL) THEN b WHEN x = c OR (x IS NULL AND c IS NULL) THEN d END",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "oracle",
+   "sql": "DECODE(x, a, b, c, d)",
+   "expected": "DECODE(x, a, b, c, d)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "DECODE(x, a, b, c, d)",
+   "expected": "DECODE(x, a, b, c, d)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "DECODE(x, a, b, c, d)",
+   "expected": "DECODE(x, a, b, c, d)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark",
+   "sql": "DECODE(x, a, b, c, d)",
+   "expected": "DECODE(x, a, b, c, d)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "NVL(a, b, c, d)",
+   "expected": "COALESCE(a, b, c, d)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "mysql",
+   "sql": "NVL(a, b, c, d)",
+   "expected": "COALESCE(a, b, c, d)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "NVL(a, b, c, d)",
+   "expected": "COALESCE(a, b, c, d)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "DATEDIFF(days, a, b)",
+   "expected": "DATEDIFF(DAY, a, b)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "bigquery",
+   "sql": "DATEDIFF('day', a, b)",
+   "expected": "DATE_DIFF(CAST(b AS DATETIME), CAST(a AS DATETIME), DAY)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "DATEDIFF('day', a, b)",
+   "expected": "DATE_DIFF('DAY', CAST(a AS TIMESTAMP), CAST(b AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "hive",
+   "sql": "DATEDIFF('day', a, b)",
+   "expected": "DATEDIFF(b, a)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "DATEDIFF('day', a, b)",
+   "expected": "DATEDIFF(DAY, a, b)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "DATEDIFF('day', a, b)",
+   "expected": "DATE_DIFF('DAY', CAST(a AS TIMESTAMP), CAST(b AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "bigquery",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT DATE_ADD(CAST('2008-02-28' AS DATETIME), INTERVAL 18 MONTH)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT CAST('2008-02-28' AS TIMESTAMP) + INTERVAL 18 MONTH",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "hive",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT ADD_MONTHS('2008-02-28', 18)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "mysql",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT DATE_ADD('2008-02-28', INTERVAL 18 MONTH)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT CAST('2008-02-28' AS TIMESTAMP) + INTERVAL '18 MONTH'",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT DATE_ADD('MONTH', 18, CAST('2008-02-28' AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT DATEADD(MONTH, 18, '2008-02-28')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT DATEADD(MONTH, 18, CAST('2008-02-28' AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "tsql",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT DATEADD(MONTH, 18, CAST('2008-02-28' AS DATETIME2))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT DATE_ADD(MONTH, 18, '2008-02-28')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "spark2",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT ADD_MONTHS('2008-02-28', 18)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "databricks",
+   "sql": "SELECT DATEADD(month, 18, '2008-02-28')",
+   "expected": "SELECT DATE_ADD(MONTH, 18, '2008-02-28')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "bigquery",
+   "sql": "SELECT DATEDIFF(week, '2009-01-01', '2009-12-31')",
+   "expected": "SELECT DATE_DIFF(CAST('2009-12-31' AS DATETIME), CAST('2009-01-01' AS DATETIME), WEEK)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "SELECT DATEDIFF(week, '2009-01-01', '2009-12-31')",
+   "expected": "SELECT DATE_DIFF('WEEK', CAST('2009-01-01' AS TIMESTAMP), CAST('2009-12-31' AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "hive",
+   "sql": "SELECT DATEDIFF(week, '2009-01-01', '2009-12-31')",
+   "expected": "SELECT CAST(DATEDIFF('2009-12-31', '2009-01-01') / 7 AS INT)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(week, '2009-01-01', '2009-12-31')",
+   "expected": "SELECT CAST(EXTRACT(days FROM (CAST('2009-12-31' AS TIMESTAMP) - CAST('2009-01-01' AS TIMESTAMP))) / 7 AS BIGINT)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "SELECT DATEDIFF(week, '2009-01-01', '2009-12-31')",
+   "expected": "SELECT DATE_DIFF('WEEK', CAST('2009-01-01' AS TIMESTAMP), CAST('2009-12-31' AS TIMESTAMP))",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT DATEDIFF(week, '2009-01-01', '2009-12-31')",
+   "expected": "SELECT DATEDIFF(WEEK, '2009-01-01', '2009-12-31')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT DATEDIFF(week, '2009-01-01', '2009-12-31')",
+   "expected": "SELECT DATEDIFF(WEEK, '2009-01-01', '2009-12-31')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "tsql",
+   "sql": "SELECT DATEDIFF(week, '2009-01-01', '2009-12-31')",
+   "expected": "SELECT DATEDIFF(WEEK, '2009-01-01', '2009-12-31')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "snowflake",
+   "sql": "SELECT EXTRACT(EPOCH FROM CURRENT_DATE)",
+   "expected": "SELECT DATE_PART(EPOCH, CURRENT_DATE)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT EXTRACT(EPOCH FROM CURRENT_DATE)",
+   "expected": "SELECT EXTRACT(EPOCH FROM CURRENT_DATE)",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT VERSION()",
+   "expected": "SELECT VERSION()",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT TEXTLEN('hello world')",
+   "expected": "SELECT LENGTH('hello world')",
+   "test": "TestRedshift.test_redshift"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT REGEXP_SUBSTR(abc, 'pattern(group)', 2) FROM table",
+   "expected": "SELECT REGEXP_SUBSTR(abc, 'pattern(group)', 2) FROM \"table\"",
+   "test": "TestRedshift.test_regexp_extract"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "duckdb",
+   "sql": "SELECT REGEXP_SUBSTR(abc, 'pattern(group)', 2) FROM table",
+   "expected": "SELECT REGEXP_EXTRACT(SUBSTRING(abc, 2), 'pattern(group)') FROM \"table\"",
+   "test": "TestRedshift.test_regexp_extract"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE SELECT ON ALL TABLES IN SCHEMA qa_tickit FROM fred",
+   "expected": "REVOKE SELECT ON ALL TABLES IN SCHEMA qa_tickit FROM fred",
+   "command": true,
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE USAGE ON DATASHARE salesshare FROM NAMESPACE '13b8833d-17c6-4f16-8fe4-1a018f5ed00d'",
+   "expected": "REVOKE USAGE ON DATASHARE salesshare FROM NAMESPACE '13b8833d-17c6-4f16-8fe4-1a018f5ed00d'",
+   "command": true,
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE USAGE FOR SCHEMAS IN DATABASE Sales_db FROM ROLE Sales",
+   "expected": "REVOKE USAGE FOR SCHEMAS IN DATABASE Sales_db FROM ROLE Sales",
+   "command": true,
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE EXECUTE FOR FUNCTIONS IN SCHEMA Sales_schema FROM bob",
+   "expected": "REVOKE EXECUTE FOR FUNCTIONS IN SCHEMA Sales_schema FROM bob",
+   "command": true,
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE SELECT FOR TABLES IN DATABASE Sales_db FROM alice",
+   "expected": "REVOKE SELECT FOR TABLES IN DATABASE Sales_db FROM alice",
+   "command": true,
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE ROLE sample_role1 FROM ROLE sample_role2",
+   "expected": "REVOKE ROLE sample_role1 FROM ROLE sample_role2",
+   "command": true,
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE SELECT ON TABLE sales FROM fred",
+   "expected": "REVOKE SELECT ON TABLE sales FROM fred",
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE ALL ON SCHEMA qa_tickit FROM GROUP qa_users",
+   "expected": "REVOKE ALL ON SCHEMA qa_tickit FROM GROUP qa_users",
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE USAGE ON DATABASE sales_db FROM Bob",
+   "expected": "REVOKE USAGE ON DATABASE sales_db FROM Bob",
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "REVOKE USAGE ON SCHEMA sales_schema FROM ROLE Analyst_role",
+   "expected": "REVOKE USAGE ON SCHEMA sales_schema FROM ROLE Analyst_role",
+   "test": "TestRedshift.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "WITH cte AS (SELECT CAST('abc' AS VARCHAR(20)) AS value, 256 AS bits) SELECT SHA2(value, 128) AS invalid_bits, SHA2(value, 256) AS valid_bits, SHA2(value, bits) AS variable_bits FROM cte",
+   "expected": "WITH cte AS (SELECT CAST('abc' AS VARCHAR(20)) AS value, 256 AS bits) SELECT SHA2(value, 128) AS invalid_bits, SHA2(value, 256) AS valid_bits, SHA2(value, bits) AS variable_bits FROM cte",
+   "test": "TestRedshift.test_sha2_cte_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "WITH cte AS (SELECT CAST(NULL AS VARCHAR(20)) AS value, 256 AS bits) SELECT SHA2(value, 128) AS invalid_bits, SHA2(value, 256) AS valid_bits, SHA2(value, bits) AS variable_bits FROM cte",
+   "expected": "WITH cte AS (SELECT CAST(NULL AS VARCHAR(20)) AS value, 256 AS bits) SELECT SHA2(value, 128) AS invalid_bits, SHA2(value, 256) AS valid_bits, SHA2(value, bits) AS variable_bits FROM cte",
+   "test": "TestRedshift.test_sha2_cte_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', 0) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', 0) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, 0) AS hash FROM t",
+   "expected": "SELECT SHA2(value, 0) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', 224) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', 224) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, 224) AS hash FROM t",
+   "expected": "SELECT SHA2(value, 224) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', 256) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', 256) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, 256) AS hash FROM t",
+   "expected": "SELECT SHA2(value, 256) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', 384) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', 384) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, 384) AS hash FROM t",
+   "expected": "SELECT SHA2(value, 384) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', 512) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', 512) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, 512) AS hash FROM t",
+   "expected": "SELECT SHA2(value, 512) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', 128) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', 128) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, 128) AS hash FROM t",
+   "expected": "SELECT SHA2(value, 128) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', -256) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', -256) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, -256) AS hash FROM t",
+   "expected": "SELECT SHA2(value, -256) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', CAST(NULL AS INTEGER)) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', CAST(NULL AS INTEGER)) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, CAST(NULL AS INTEGER)) AS hash FROM t",
+   "expected": "SELECT SHA2(value, CAST(NULL AS INTEGER)) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', bits) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', bits) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, bits) AS hash FROM t",
+   "expected": "SELECT SHA2(value, bits) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2('abc', bits + 0) AS hash FROM t",
+   "expected": "SELECT SHA2('abc', bits + 0) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT SHA2(value, bits + 0) AS hash FROM t",
+   "expected": "SELECT SHA2(value, bits + 0) AS hash FROM t",
+   "test": "TestRedshift.test_sha2_type"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "TIME_TO_STR(a, '%Y-%m-%d %H:%M:%S.%f')",
+   "expected": "TO_CHAR(a, 'YYYY-MM-DD HH24:MI:SS.US')",
+   "test": "TestRedshift.test_time"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT LAG(x) IGNORE NULLS OVER (PARTITION BY y ORDER BY z)",
+   "expected": "SELECT LAG(x) IGNORE NULLS OVER (PARTITION BY y ORDER BY z)",
+   "test": "TestRedshift.test_to_timestamp"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT LAG(x) RESPECT NULLS OVER (PARTITION BY y ORDER BY z)",
+   "expected": "SELECT LAG(x) RESPECT NULLS OVER (PARTITION BY y ORDER BY z)",
+   "test": "TestRedshift.test_to_timestamp"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT LAG(x IGNORE NULLS) OVER (PARTITION BY y ORDER BY z)",
+   "expected": "SELECT LAG(x) IGNORE NULLS OVER (PARTITION BY y ORDER BY z)",
+   "test": "TestRedshift.test_to_timestamp"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "SELECT LAG(x RESPECT NULLS) OVER (PARTITION BY y ORDER BY z)",
+   "expected": "SELECT LAG(x) RESPECT NULLS OVER (PARTITION BY y ORDER BY z)",
+   "test": "TestRedshift.test_to_timestamp"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "INSERT INTO t (a) VALUES (1), (2), (3)",
+   "expected": "INSERT INTO t (a) VALUES (1), (2), (3)",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "INSERT INTO t (a, b) VALUES (1, 2), (3, 4)",
+   "expected": "INSERT INTO t (a, b) VALUES (1, 2), (3, 4)",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "redshift",
+   "sql": "SELECT * FROM (VALUES (1, 2)) AS t",
+   "expected": "SELECT * FROM (SELECT 1, 2) AS t",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "mysql",
+   "sql": "SELECT * FROM (SELECT 1, 2) AS t",
+   "expected": "SELECT * FROM (SELECT 1, 2) AS t",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "SELECT * FROM (SELECT 1, 2) AS t",
+   "expected": "SELECT * FROM (SELECT 1, 2) AS t",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "redshift",
+   "sql": "SELECT * FROM (VALUES (1)) AS t1(id) CROSS JOIN (VALUES (1)) AS t2(id)",
+   "expected": "SELECT * FROM (SELECT 1 AS id) AS t1 CROSS JOIN (SELECT 1 AS id) AS t2",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "redshift",
+   "sql": "SELECT a, b FROM (VALUES (1, 2)) AS t (a, b)",
+   "expected": "SELECT a, b FROM (SELECT 1 AS a, 2 AS b) AS t",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "redshift",
+   "sql": "SELECT a, b FROM (VALUES (1, 2), (3, 4)) AS \"t\" (a, b)",
+   "expected": "SELECT a, b FROM (SELECT 1 AS a, 2 AS b UNION ALL SELECT 3, 4) AS \"t\"",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "redshift",
+   "sql": "SELECT a, b FROM (VALUES (1, 2), (3, 4), (5, 6), (7, 8)) AS t (a, b)",
+   "expected": "SELECT a, b FROM (SELECT 1 AS a, 2 AS b UNION ALL SELECT 3, 4 UNION ALL SELECT 5, 6 UNION ALL SELECT 7, 8) AS t",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "redshift",
+   "sql": "INSERT INTO t(a, b) SELECT a, b FROM (VALUES (1, 2), (3, 4)) AS t (a, b)",
+   "expected": "INSERT INTO t (a, b) SELECT a, b FROM (SELECT 1 AS a, 2 AS b UNION ALL SELECT 3, 4) AS t",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE table_backup BACKUP NO AS SELECT * FROM event",
+   "expected": "CREATE TABLE table_backup BACKUP NO AS SELECT * FROM event",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE table_backup BACKUP YES AS SELECT * FROM event",
+   "expected": "CREATE TABLE table_backup BACKUP YES AS SELECT * FROM event",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE table_backup (i INTEGER, b VARCHAR) BACKUP NO",
+   "expected": "CREATE TABLE table_backup (i INTEGER, b VARCHAR) BACKUP NO",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE table_backup (i INTEGER, b VARCHAR) BACKUP YES",
+   "expected": "CREATE TABLE table_backup (i INTEGER, b VARCHAR) BACKUP YES",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "identity",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "select foo, bar from table_1 minus select foo, bar from table_2",
+   "expected": "SELECT foo, bar FROM table_1 EXCEPT SELECT foo, bar FROM table_2",
+   "test": "TestRedshift.test_values"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE TEST (cola VARCHAR(max))",
+   "expected": "CREATE TABLE \"TEST\" (\"cola\" VARCHAR(MAX))",
+   "identify": true,
+   "test": "TestRedshift.test_varchar_max"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "redshift",
+   "sql": "CREATE TABLE TEST (cola VARCHAR(max))",
+   "expected": "CREATE TABLE \"TEST\" (\"cola\" VARCHAR(MAX))",
+   "identify": true,
+   "test": "TestRedshift.test_varchar_max"
+  },
+  {
+   "kind": "write",
+   "read": "redshift",
+   "write": "redshift",
+   "sql": "CREATE TABLE \"TEST\" (\"cola\" VARCHAR(MAX))",
+   "expected": "CREATE TABLE \"TEST\" (\"cola\" VARCHAR(MAX))",
+   "identify": true,
+   "test": "TestRedshift.test_varchar_max"
+  }
+ ]
+}

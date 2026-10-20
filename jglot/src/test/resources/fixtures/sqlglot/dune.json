@@ -1,0 +1,358 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_dune.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "dune",
+   "write": "dune",
+   "sql": "CAST(x AS INT256)",
+   "expected": "CAST(x AS INT256)",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "identity",
+   "read": "dune",
+   "write": "dune",
+   "sql": "CAST(x AS UINT256)",
+   "expected": "CAST(x AS UINT256)",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT X'deadbeef'",
+   "expected": "SELECT 0xdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dune",
+   "sql": "SELECT x'deadbeef'",
+   "expected": "SELECT 0xdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "dune",
+   "sql": "SELECT X'deadbeef'",
+   "expected": "SELECT 0xdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT 0xdeadbeef",
+   "expected": "SELECT 0xdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "postgres",
+   "sql": "SELECT 0xdeadbeef",
+   "expected": "SELECT x'deadbeef'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "trino",
+   "sql": "SELECT 0xdeadbeef",
+   "expected": "SELECT x'deadbeef'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdead'",
+   "expected": "SELECT 0xdeadbeefdead",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dune",
+   "sql": "SELECT x'deadbeefdead'",
+   "expected": "SELECT 0xdeadbeefdead",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdead'",
+   "expected": "SELECT 0xdeadbeefdead",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT 0xdeadbeefdead",
+   "expected": "SELECT 0xdeadbeefdead",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "postgres",
+   "sql": "SELECT 0xdeadbeefdead",
+   "expected": "SELECT x'deadbeefdead'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "trino",
+   "sql": "SELECT 0xdeadbeefdead",
+   "expected": "SELECT x'deadbeefdead'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dune",
+   "sql": "SELECT x'deadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT 0xdeadbeefdeadbeef",
+   "expected": "SELECT 0xdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "postgres",
+   "sql": "SELECT 0xdeadbeefdeadbeef",
+   "expected": "SELECT x'deadbeefdeadbeef'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "trino",
+   "sql": "SELECT 0xdeadbeefdeadbeef",
+   "expected": "SELECT x'deadbeefdeadbeef'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeefde'",
+   "expected": "SELECT 0xdeadbeefdeadbeefde",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dune",
+   "sql": "SELECT x'deadbeefdeadbeefde'",
+   "expected": "SELECT 0xdeadbeefdeadbeefde",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeefde'",
+   "expected": "SELECT 0xdeadbeefdeadbeefde",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT 0xdeadbeefdeadbeefde",
+   "expected": "SELECT 0xdeadbeefdeadbeefde",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "postgres",
+   "sql": "SELECT 0xdeadbeefdeadbeefde",
+   "expected": "SELECT x'deadbeefdeadbeefde'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "trino",
+   "sql": "SELECT 0xdeadbeefdeadbeefde",
+   "expected": "SELECT x'deadbeefdeadbeefde'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeefdead'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdead",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dune",
+   "sql": "SELECT x'deadbeefdeadbeefdead'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdead",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeefdead'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdead",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT 0xdeadbeefdeadbeefdead",
+   "expected": "SELECT 0xdeadbeefdeadbeefdead",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "postgres",
+   "sql": "SELECT 0xdeadbeefdeadbeefdead",
+   "expected": "SELECT x'deadbeefdeadbeefdead'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "trino",
+   "sql": "SELECT 0xdeadbeefdeadbeefdead",
+   "expected": "SELECT x'deadbeefdeadbeefdead'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dune",
+   "sql": "SELECT x'deadbeefdeadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT 0xdeadbeefdeadbeefdeadbeef",
+   "expected": "SELECT 0xdeadbeefdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "postgres",
+   "sql": "SELECT 0xdeadbeefdeadbeefdeadbeef",
+   "expected": "SELECT x'deadbeefdeadbeefdeadbeef'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "trino",
+   "sql": "SELECT 0xdeadbeefdeadbeefdeadbeef",
+   "expected": "SELECT x'deadbeefdeadbeefdeadbeef'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeefdeadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dune",
+   "sql": "SELECT x'deadbeefdeadbeefdeadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "dune",
+   "sql": "SELECT X'deadbeefdeadbeefdeadbeefdeadbeef'",
+   "expected": "SELECT 0xdeadbeefdeadbeefdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "dune",
+   "sql": "SELECT 0xdeadbeefdeadbeefdeadbeefdeadbeef",
+   "expected": "SELECT 0xdeadbeefdeadbeefdeadbeefdeadbeef",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "postgres",
+   "sql": "SELECT 0xdeadbeefdeadbeefdeadbeefdeadbeef",
+   "expected": "SELECT x'deadbeefdeadbeefdeadbeefdeadbeef'",
+   "test": "TestDune.test_dune"
+  },
+  {
+   "kind": "write",
+   "read": "dune",
+   "write": "trino",
+   "sql": "SELECT 0xdeadbeefdeadbeefdeadbeefdeadbeef",
+   "expected": "SELECT x'deadbeefdeadbeefdeadbeefdeadbeef'",
+   "test": "TestDune.test_dune"
+  }
+ ]
+}

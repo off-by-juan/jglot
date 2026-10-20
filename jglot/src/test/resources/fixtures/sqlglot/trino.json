@@ -1,0 +1,1582 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_trino.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ANALYZE tbl",
+   "expected": "ANALYZE tbl",
+   "test": "TestTrino.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ANALYZE tbl WITH (prop1=val1, prop2=val2)",
+   "expected": "ANALYZE tbl WITH (prop1=val1, prop2=val2)",
+   "test": "TestTrino.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT ARRAY_FIRST(ARRAY['a', 'b']) FROM tbl",
+   "expected": "SELECT ARRAY_FIRST(ARRAY['a', 'b']) FROM tbl",
+   "test": "TestTrino.test_array_first"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT ARRAY_FIRST(ARRAY['a', 'b'], x -> x = 'b') FROM tbl",
+   "expected": "SELECT ARRAY_FIRST(ARRAY['a', 'b'], x -> x = 'b') FROM tbl",
+   "test": "TestTrino.test_array_first"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', ARRAY['a', NULL, 'b'])",
+   "expected": "SELECT CONCAT_WS('-', ARRAY['a', NULL, 'b'])",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', CAST(NULL AS ARRAY(VARCHAR)))",
+   "expected": "SELECT CONCAT_WS('-', CAST(NULL AS ARRAY(VARCHAR)))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('', ARRAY('a', 'b'))",
+   "expected": "SELECT CONCAT_WS('', COALESCE(CAST(ARRAY['a', 'b'] AS ARRAY(VARCHAR)), ARRAY[]))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', ARRAY('a', NULL, '', 'b'))",
+   "expected": "SELECT CONCAT_WS('-', COALESCE(CAST(ARRAY['a', NULL, '', 'b'] AS ARRAY(VARCHAR)), ARRAY[]))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', ARRAY())",
+   "expected": "SELECT CONCAT_WS('-', COALESCE(CAST(ARRAY[] AS ARRAY(VARCHAR)), ARRAY[]))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', CAST(NULL AS ARRAY<STRING>))",
+   "expected": "SELECT CONCAT_WS('-', COALESCE(TRY_CAST(NULL AS ARRAY(VARCHAR)), ARRAY[]))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS(NULL, CAST(NULL AS ARRAY<STRING>))",
+   "expected": "SELECT CONCAT_WS(NULL, COALESCE(TRY_CAST(NULL AS ARRAY(VARCHAR)), ARRAY[]))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', ARRAY('abc', 'def'), 'ghi')",
+   "expected": "SELECT CONCAT_WS('-', CONCAT(COALESCE(CAST(ARRAY['abc', 'def'] AS ARRAY(VARCHAR)), ARRAY[]), ARRAY[CAST('ghi' AS VARCHAR)]))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', ARRAY('abc', 'def'), ARRAY('bla', 'bob'))",
+   "expected": "SELECT CONCAT_WS('-', CONCAT(COALESCE(CAST(ARRAY['abc', 'def'] AS ARRAY(VARCHAR)), ARRAY[]), COALESCE(CAST(ARRAY['bla', 'bob'] AS ARRAY(VARCHAR)), ARRAY[])))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', 'x', ARRAY(), ARRAY(NULL), CAST(NULL AS ARRAY<STRING>), NULL, 'y')",
+   "expected": "SELECT CONCAT_WS('-', CONCAT(ARRAY[CAST('x' AS VARCHAR)], COALESCE(CAST(ARRAY[] AS ARRAY(VARCHAR)), ARRAY[]), COALESCE(CAST(ARRAY[NULL] AS ARRAY(VARCHAR)), ARRAY[]), COALESCE(TRY_CAST(NULL AS ARRAY(VARCHAR)), ARRAY[]), ARRAY[CAST(NULL AS VARCHAR)], ARRAY[CAST('y' AS VARCHAR)]))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT CONCAT_WS('-', 1, NULL, 'a')",
+   "expected": "SELECT CONCAT_WS('-', CAST(1 AS VARCHAR), CAST(NULL AS VARCHAR), CAST('a' AS VARCHAR))",
+   "test": "TestTrino.test_concat_ws"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE users RENAME TO people",
+   "expected": "ALTER TABLE users RENAME TO people",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE IF EXISTS users RENAME TO people",
+   "expected": "ALTER TABLE IF EXISTS users RENAME TO people",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE users ADD COLUMN zip VARCHAR",
+   "expected": "ALTER TABLE users ADD COLUMN zip VARCHAR",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE IF EXISTS users ADD COLUMN IF NOT EXISTS zip VARCHAR",
+   "expected": "ALTER TABLE IF EXISTS users ADD COLUMN IF NOT EXISTS zip VARCHAR",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE users DROP COLUMN zip",
+   "expected": "ALTER TABLE users DROP COLUMN zip",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE IF EXISTS users DROP COLUMN IF EXISTS zip",
+   "expected": "ALTER TABLE IF EXISTS users DROP COLUMN IF EXISTS zip",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE users RENAME COLUMN id TO user_id",
+   "expected": "ALTER TABLE users RENAME COLUMN id TO user_id",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE IF EXISTS users RENAME COLUMN IF EXISTS id TO user_id",
+   "expected": "ALTER TABLE IF EXISTS users RENAME COLUMN IF EXISTS id TO user_id",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE users ALTER COLUMN id SET DATA TYPE BIGINT",
+   "expected": "ALTER TABLE users ALTER COLUMN id SET DATA TYPE BIGINT",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE users ALTER COLUMN id DROP NOT NULL",
+   "expected": "ALTER TABLE users ALTER COLUMN id DROP NOT NULL",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE people SET AUTHORIZATION alice",
+   "expected": "ALTER TABLE people SET AUTHORIZATION alice",
+   "command": true,
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE people SET AUTHORIZATION ROLE PUBLIC",
+   "expected": "ALTER TABLE people SET AUTHORIZATION ROLE PUBLIC",
+   "command": true,
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE people SET PROPERTIES x = 'y'",
+   "expected": "ALTER TABLE people SET PROPERTIES x = 'y'",
+   "command": true,
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE people SET PROPERTIES foo = 123, 'foo bar' = 456",
+   "expected": "ALTER TABLE people SET PROPERTIES foo = 123, 'foo bar' = 456",
+   "command": true,
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER TABLE people SET PROPERTIES x = DEFAULT",
+   "expected": "ALTER TABLE people SET PROPERTIES x = DEFAULT",
+   "command": true,
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER VIEW people RENAME TO users",
+   "expected": "ALTER VIEW people RENAME TO users",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "ALTER VIEW people SET AUTHORIZATION alice",
+   "expected": "ALTER VIEW people SET AUTHORIZATION alice",
+   "command": true,
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "CREATE SCHEMA foo WITH (LOCATION='s3://bucket/foo')",
+   "expected": "CREATE SCHEMA foo WITH (LOCATION='s3://bucket/foo')",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "CREATE TABLE foo.bar WITH (LOCATION='s3://bucket/foo/bar') AS SELECT 1",
+   "expected": "CREATE TABLE foo.bar WITH (LOCATION='s3://bucket/foo/bar') AS SELECT 1",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "CREATE TABLE foo (a VARCHAR, b INTEGER, c DATE) WITH (PARTITIONED_BY=ARRAY['a', 'b'])",
+   "expected": "CREATE TABLE foo (a VARCHAR, b INTEGER, c DATE) WITH (PARTITIONED_BY=ARRAY['a', 'b'])",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "CREATE TABLE \"foo\" (\"a\" VARCHAR, \"b\" INTEGER, \"c\" DATE) WITH (PARTITIONED_BY=ARRAY['a', 'b'])",
+   "expected": "CREATE TABLE \"foo\" (\"a\" VARCHAR, \"b\" INTEGER, \"c\" DATE) WITH (PARTITIONED_BY=ARRAY['a', 'b'])",
+   "identify": true,
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "CREATE TABLE foo (a VARCHAR, b INTEGER, c DATE) WITH (PARTITIONING=ARRAY['a', 'bucket(4, b)', 'month(c)'])",
+   "expected": "CREATE TABLE foo (a VARCHAR, b INTEGER, c DATE) WITH (PARTITIONING=ARRAY['a', 'bucket(4, b)', 'month(c)'])",
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "CREATE TABLE \"foo\" (\"a\" VARCHAR, \"b\" INTEGER, \"c\" DATE) WITH (PARTITIONING=ARRAY['a', 'bucket(4, b)', 'month(c)'])",
+   "expected": "CREATE TABLE \"foo\" (\"a\" VARCHAR, \"b\" INTEGER, \"c\" DATE) WITH (PARTITIONING=ARRAY['a', 'bucket(4, b)', 'month(c)'])",
+   "identify": true,
+   "test": "TestTrino.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT * FROM t ORDER BY x FETCH FIRST 1 ROW ONLY",
+   "expected": "SELECT * FROM t ORDER BY x FETCH FIRST 1 ROWS ONLY",
+   "test": "TestTrino.test_fetch"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT * FROM t ORDER BY x FETCH NEXT 1 ROW WITH TIES",
+   "expected": "SELECT * FROM t ORDER BY x FETCH NEXT 1 ROWS WITH TIES",
+   "test": "TestTrino.test_fetch"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT * FROM t ORDER BY x OFFSET 1 ROW FETCH NEXT 1 ROW ONLY",
+   "expected": "SELECT * FROM t ORDER BY x OFFSET 1 FETCH NEXT 1 ROWS ONLY",
+   "test": "TestTrino.test_fetch"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT * FROM t ORDER BY x FETCH FIRST ROW ONLY",
+   "expected": "SELECT * FROM t ORDER BY x FETCH FIRST ROWS ONLY",
+   "test": "TestTrino.test_fetch"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f(num INTEGER) RETURNS INTEGER RETURN num SELECT F(1)",
+   "expected": "WITH FUNCTION f(num INTEGER) RETURNS INTEGER RETURN num SELECT F(1)",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION hello(name VARCHAR) RETURNS VARCHAR RETURN FORMAT('Hello %s!', name), FUNCTION bye() RETURNS VARCHAR RETURN 'Bye!' SELECT HELLO('Finn') || BYE()",
+   "expected": "WITH FUNCTION hello(name VARCHAR) RETURNS VARCHAR RETURN FORMAT('Hello %s!', name), FUNCTION bye() RETURNS VARCHAR RETURN 'Bye!' SELECT HELLO('Finn') || BYE()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION doubled(x INTEGER) RETURNS INTEGER RETURN x * 2 WITH t AS (SELECT 3 AS v) SELECT DOUBLED(v) FROM t",
+   "expected": "WITH FUNCTION doubled(x INTEGER) RETURNS INTEGER RETURN x * 2 WITH t AS (SELECT 3 AS v) SELECT DOUBLED(v) FROM t",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f(x INTEGER) RETURNS INTEGER RETURN x WITH RECURSIVE t(n) AS (SELECT 1 AS n) SELECT F(n) FROM t",
+   "expected": "WITH FUNCTION f(x INTEGER) RETURNS INTEGER RETURN x WITH RECURSIVE t(n) AS (SELECT 1 AS n) SELECT F(n) FROM t",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f(num int)\n    RETURNS int\n    RETURN num\nSELECT f(1)",
+   "expected": "WITH FUNCTION f(num INTEGER) RETURNS INTEGER RETURN num SELECT F(1)",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH function AS (SELECT 1 AS x) SELECT x FROM function",
+   "expected": "WITH function AS (SELECT 1 AS x) SELECT x FROM function",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH function(x) AS (SELECT 1) SELECT x FROM function",
+   "expected": "WITH function(x) AS (SELECT 1) SELECT x FROM function",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER LANGUAGE SQL RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER LANGUAGE SQL RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER DETERMINISTIC RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER DETERMINISTIC RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER NOT DETERMINISTIC RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER NOT DETERMINISTIC RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT NOT deterministic FROM t",
+   "expected": "SELECT NOT deterministic FROM t",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER CALLED ON NULL INPUT RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER CALLED ON NULL INPUT RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER RETURNS NULL ON NULL INPUT RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER RETURNS NULL ON NULL INPUT RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER COMMENT 'hi' RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER COMMENT 'hi' RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER SECURITY DEFINER RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER SECURITY DEFINER RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER SECURITY INVOKER RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER SECURITY INVOKER RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER WITH (weight=42) RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER WITH (weight=42) RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER LANGUAGE SQL WITH (weight=42, cost='low') RETURN 1 SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER LANGUAGE SQL WITH (weight=42, cost='low') RETURN 1 SELECT F()",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION custom_sqrt(a INTEGER) RETURNS DOUBLE COMMENT 'Custom sqrt function' RETURNS NULL ON NULL INPUT NOT DETERMINISTIC LANGUAGE SQL SECURITY DEFINER WITH (weight=42, cost='low') RETURN a SELECT CUSTOM_SQRT(4)",
+   "expected": "WITH FUNCTION custom_sqrt(a INTEGER) RETURNS DOUBLE COMMENT 'Custom sqrt function' RETURNS NULL ON NULL INPUT NOT DETERMINISTIC LANGUAGE SQL SECURITY DEFINER WITH (weight=42, cost='low') RETURN a SELECT CUSTOM_SQRT(4)",
+   "test": "TestTrino.test_inline_udf"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION meaning_of_life() RETURNS INTEGER BEGIN DECLARE a INTEGER DEFAULT 6; DECLARE b INTEGER DEFAULT 7; RETURN a * b; END SELECT MEANING_OF_LIFE()",
+   "expected": "WITH FUNCTION meaning_of_life() RETURNS INTEGER BEGIN DECLARE a INTEGER DEFAULT 6; DECLARE b INTEGER DEFAULT 7; RETURN a * b; END SELECT MEANING_OF_LIFE()",
+   "test": "TestTrino.test_inline_udf_begin_end"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION one() RETURNS INTEGER BEGIN DECLARE counter INTEGER DEFAULT 1; SET counter = 0; SET counter = counter + 2; SET counter = counter / counter; RETURN counter; END SELECT ONE()",
+   "expected": "WITH FUNCTION one() RETURNS INTEGER BEGIN DECLARE counter INTEGER DEFAULT 1; SET counter = 0; SET counter = counter + 2; SET counter = counter / counter; RETURN counter; END SELECT ONE()",
+   "test": "TestTrino.test_inline_udf_begin_end"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER BEGIN DECLARE first_name, last_name, middle_name VARCHAR(25); RETURN 1; END SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER BEGIN DECLARE first_name, last_name, middle_name VARCHAR(25); RETURN 1; END SELECT F()",
+   "test": "TestTrino.test_inline_udf_begin_end"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER BEGIN DECLARE x INTEGER DEFAULT 1; BEGIN SET x = x + 1; END; RETURN x; END SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER BEGIN DECLARE x INTEGER DEFAULT 1; BEGIN SET x = x + 1; END; RETURN x; END SELECT F()",
+   "test": "TestTrino.test_inline_udf_begin_end"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT declare FROM (VALUES (1), (2)) AS t(declare)",
+   "expected": "SELECT declare FROM (VALUES (1), (2)) AS t(declare)",
+   "test": "TestTrino.test_inline_udf_begin_end"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION declare() RETURNS INTEGER RETURN 1 SELECT DECLARE()",
+   "expected": "WITH FUNCTION declare() RETURNS INTEGER RETURN 1 SELECT DECLARE()",
+   "test": "TestTrino.test_inline_udf_begin_end"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION simple_case(a BIGINT) RETURNS VARCHAR BEGIN CASE a WHEN 0 THEN RETURN 'zero'; WHEN 1 THEN RETURN 'one'; ELSE RETURN 'more than one or negative'; END CASE; RETURN NULL; END SELECT SIMPLE_CASE(0)",
+   "expected": "WITH FUNCTION simple_case(a BIGINT) RETURNS VARCHAR BEGIN CASE a WHEN 0 THEN RETURN 'zero'; WHEN 1 THEN RETURN 'one'; ELSE RETURN 'more than one or negative'; END CASE; RETURN NULL; END SELECT SIMPLE_CASE(0)",
+   "test": "TestTrino.test_inline_udf_case"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION searched_case(a BIGINT) RETURNS VARCHAR BEGIN CASE WHEN a = 0 THEN RETURN 'zero'; WHEN a = 1 THEN RETURN 'one'; ELSE RETURN 'other'; END CASE; RETURN NULL; END SELECT SEARCHED_CASE(0)",
+   "expected": "WITH FUNCTION searched_case(a BIGINT) RETURNS VARCHAR BEGIN CASE WHEN a = 0 THEN RETURN 'zero'; WHEN a = 1 THEN RETURN 'one'; ELSE RETURN 'other'; END CASE; RETURN NULL; END SELECT SEARCHED_CASE(0)",
+   "test": "TestTrino.test_inline_udf_case"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION no_else(a BIGINT) RETURNS VARCHAR BEGIN CASE a WHEN 0 THEN RETURN 'zero'; END CASE; RETURN 'fallthrough'; END SELECT NO_ELSE(0)",
+   "expected": "WITH FUNCTION no_else(a BIGINT) RETURNS VARCHAR BEGIN CASE a WHEN 0 THEN RETURN 'zero'; END CASE; RETURN 'fallthrough'; END SELECT NO_ELSE(0)",
+   "test": "TestTrino.test_inline_udf_case"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION no_operand_no_else(a INTEGER) RETURNS VARCHAR BEGIN CASE WHEN a = 0 THEN RETURN 'zero'; END CASE; RETURN 'other'; END SELECT NO_OPERAND_NO_ELSE(1)",
+   "expected": "WITH FUNCTION no_operand_no_else(a INTEGER) RETURNS VARCHAR BEGIN CASE WHEN a = 0 THEN RETURN 'zero'; END CASE; RETURN 'other'; END SELECT NO_OPERAND_NO_ELSE(1)",
+   "test": "TestTrino.test_inline_udf_case"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION nested_case(a BIGINT, b BIGINT) RETURNS VARCHAR BEGIN DECLARE result VARCHAR; CASE WHEN a = 0 THEN CASE b WHEN 0 THEN SET result = 'a0b0'; ELSE SET result = 'a0bN'; END CASE; ELSE SET result = 'aN'; END CASE; RETURN result; END SELECT NESTED_CASE(0, 0)",
+   "expected": "WITH FUNCTION nested_case(a BIGINT, b BIGINT) RETURNS VARCHAR BEGIN DECLARE result VARCHAR; CASE WHEN a = 0 THEN CASE b WHEN 0 THEN SET result = 'a0b0'; ELSE SET result = 'a0bN'; END CASE; ELSE SET result = 'aN'; END CASE; RETURN result; END SELECT NESTED_CASE(0, 0)",
+   "test": "TestTrino.test_inline_udf_case"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION mix(a INTEGER) RETURNS INTEGER BEGIN DECLARE result INTEGER DEFAULT 0; CASE WHEN a > 0 THEN IF a > 10 THEN SET result = 1; ELSE SET result = 2; END IF; ELSE SET result = CASE WHEN a < -10 THEN -1 ELSE -2 END; END CASE; RETURN result; END SELECT MIX(1)",
+   "expected": "WITH FUNCTION mix(a INTEGER) RETURNS INTEGER BEGIN DECLARE result INTEGER DEFAULT 0; CASE WHEN a > 0 THEN IF a > 10 THEN SET result = 1; ELSE SET result = 2; END IF; ELSE SET result = CASE WHEN a < -10 THEN -1 ELSE -2 END; END CASE; RETURN result; END SELECT MIX(1)",
+   "test": "TestTrino.test_inline_udf_case"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION last_stmt(a INTEGER) RETURNS VARCHAR BEGIN CASE a WHEN 0 THEN RETURN 'zero'; ELSE RETURN 'other'; END CASE; END SELECT LAST_STMT(1)",
+   "expected": "WITH FUNCTION last_stmt(a INTEGER) RETURNS VARCHAR BEGIN CASE a WHEN 0 THEN RETURN 'zero'; ELSE RETURN 'other'; END CASE; END SELECT LAST_STMT(1)",
+   "test": "TestTrino.test_inline_udf_case"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION simple_if(a BIGINT) RETURNS VARCHAR BEGIN IF a = 0 THEN RETURN 'zero'; ELSEIF a = 1 THEN RETURN 'one'; ELSE RETURN 'more than one or negative'; END IF; END SELECT SIMPLE_IF(3)",
+   "expected": "WITH FUNCTION simple_if(a BIGINT) RETURNS VARCHAR BEGIN IF a = 0 THEN RETURN 'zero'; ELSEIF a = 1 THEN RETURN 'one'; ELSE RETURN 'more than one or negative'; END IF; END SELECT SIMPLE_IF(3)",
+   "test": "TestTrino.test_inline_udf_if"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f(a INTEGER) RETURNS VARCHAR BEGIN IF a = 0 THEN RETURN 'zero'; END IF; RETURN 'other'; END SELECT F(1)",
+   "expected": "WITH FUNCTION f(a INTEGER) RETURNS VARCHAR BEGIN IF a = 0 THEN RETURN 'zero'; END IF; RETURN 'other'; END SELECT F(1)",
+   "test": "TestTrino.test_inline_udf_if"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f(a INTEGER) RETURNS VARCHAR BEGIN IF a = 0 THEN RETURN 'zero'; ELSEIF a = 1 THEN RETURN 'one'; END IF; RETURN 'other'; END SELECT F(1)",
+   "expected": "WITH FUNCTION f(a INTEGER) RETURNS VARCHAR BEGIN IF a = 0 THEN RETURN 'zero'; ELSEIF a = 1 THEN RETURN 'one'; END IF; RETURN 'other'; END SELECT F(1)",
+   "test": "TestTrino.test_inline_udf_if"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f(a INTEGER, b INTEGER) RETURNS VARCHAR BEGIN IF a = 0 THEN IF b = 0 THEN RETURN 'both zero'; ELSE RETURN 'a zero'; END IF; ELSE RETURN 'a nonzero'; END IF; RETURN 'unreachable'; END SELECT F(1, 2)",
+   "expected": "WITH FUNCTION f(a INTEGER, b INTEGER) RETURNS VARCHAR BEGIN IF a = 0 THEN IF b = 0 THEN RETURN 'both zero'; ELSE RETURN 'a zero'; END IF; ELSE RETURN 'a nonzero'; END IF; RETURN 'unreachable'; END SELECT F(1, 2)",
+   "test": "TestTrino.test_inline_udf_if"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f(a INTEGER) RETURNS INTEGER BEGIN DECLARE result INTEGER DEFAULT 0; IF a > 0 THEN RETURN CASE WHEN a > 10 THEN 1 ELSE 2 END; ELSE SET result = -1; END IF; RETURN result; END SELECT F(1)",
+   "expected": "WITH FUNCTION f(a INTEGER) RETURNS INTEGER BEGIN DECLARE result INTEGER DEFAULT 0; IF a > 0 THEN RETURN CASE WHEN a > 10 THEN 1 ELSE 2 END; ELSE SET result = -1; END IF; RETURN result; END SELECT F(1)",
+   "test": "TestTrino.test_inline_udf_if"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION f() RETURNS INTEGER LANGUAGE SQL NOT DETERMINISTIC BEGIN DECLARE x INTEGER DEFAULT 1; RETURN x; END SELECT F()",
+   "expected": "WITH FUNCTION f() RETURNS INTEGER LANGUAGE SQL NOT DETERMINISTIC BEGIN DECLARE x INTEGER DEFAULT 1; RETURN x; END SELECT F()",
+   "test": "TestTrino.test_inline_udf_if"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION doubled(x INTEGER) RETURNS INTEGER BEGIN RETURN x * 2; END WITH t AS (SELECT 3 AS v) SELECT DOUBLED(v) FROM t",
+   "expected": "WITH FUNCTION doubled(x INTEGER) RETURNS INTEGER BEGIN RETURN x * 2; END WITH t AS (SELECT 3 AS v) SELECT DOUBLED(v) FROM t",
+   "test": "TestTrino.test_inline_udf_if"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION to_one_hundred(start_value BIGINT, step BIGINT) RETURNS BIGINT BEGIN DECLARE count BIGINT DEFAULT 0; DECLARE current BIGINT DEFAULT 0; SET current = start_value; abc: LOOP IF current >= 100 THEN LEAVE abc; END IF; SET count = count + 1; SET current = current + step; END LOOP; RETURN count; END SELECT TO_ONE_HUNDRED(0, 10)",
+   "expected": "WITH FUNCTION to_one_hundred(start_value BIGINT, step BIGINT) RETURNS BIGINT BEGIN DECLARE count BIGINT DEFAULT 0; DECLARE current BIGINT DEFAULT 0; SET current = start_value; abc: LOOP IF current >= 100 THEN LEAVE abc; END IF; SET count = count + 1; SET current = current + step; END LOOP; RETURN count; END SELECT TO_ONE_HUNDRED(0, 10)",
+   "test": "TestTrino.test_inline_udf_loop_repeat"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION test_repeat(a BIGINT) RETURNS BIGINT BEGIN REPEAT SET a = a + 1; UNTIL a >= 10 END REPEAT; RETURN a; END SELECT TEST_REPEAT(5)",
+   "expected": "WITH FUNCTION test_repeat(a BIGINT) RETURNS BIGINT BEGIN REPEAT SET a = a + 1; UNTIL a >= 10 END REPEAT; RETURN a; END SELECT TEST_REPEAT(5)",
+   "test": "TestTrino.test_inline_udf_loop_repeat"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION iter_count() RETURNS BIGINT BEGIN DECLARE a BIGINT DEFAULT 0; DECLARE b BIGINT DEFAULT 0; top: REPEAT SET a = a + 1; IF a <= 3 THEN ITERATE top; END IF; SET b = b + 1; UNTIL a >= 10 END REPEAT; RETURN b; END SELECT ITER_COUNT()",
+   "expected": "WITH FUNCTION iter_count() RETURNS BIGINT BEGIN DECLARE a BIGINT DEFAULT 0; DECLARE b BIGINT DEFAULT 0; top: REPEAT SET a = a + 1; IF a <= 3 THEN ITERATE top; END IF; SET b = b + 1; UNTIL a >= 10 END REPEAT; RETURN b; END SELECT ITER_COUNT()",
+   "test": "TestTrino.test_inline_udf_loop_repeat"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION nested_test(n BIGINT) RETURNS BIGINT BEGIN DECLARE total BIGINT DEFAULT 0; DECLARE i BIGINT DEFAULT 0; DECLARE j BIGINT DEFAULT 0; outer_loop: WHILE i < n DO SET j = 0; inner_loop: LOOP IF j >= 3 THEN LEAVE inner_loop; END IF; SET total = total + 1; SET j = j + 1; END LOOP; SET i = i + 1; END WHILE; RETURN total; END SELECT NESTED_TEST(2)",
+   "expected": "WITH FUNCTION nested_test(n BIGINT) RETURNS BIGINT BEGIN DECLARE total BIGINT DEFAULT 0; DECLARE i BIGINT DEFAULT 0; DECLARE j BIGINT DEFAULT 0; outer_loop: WHILE i < n DO SET j = 0; inner_loop: LOOP IF j >= 3 THEN LEAVE inner_loop; END IF; SET total = total + 1; SET j = j + 1; END LOOP; SET i = i + 1; END WHILE; RETURN total; END SELECT NESTED_TEST(2)",
+   "test": "TestTrino.test_inline_udf_loop_repeat"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION last_stmt(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; top: LOOP IF i >= n THEN LEAVE top; END IF; SET i = i + 1; END LOOP; END SELECT LAST_STMT(5)",
+   "expected": "WITH FUNCTION last_stmt(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; top: LOOP IF i >= n THEN LEAVE top; END IF; SET i = i + 1; END LOOP; END SELECT LAST_STMT(5)",
+   "test": "TestTrino.test_inline_udf_loop_repeat"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION label_test(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; iterate: LOOP IF i >= n THEN LEAVE iterate; END IF; SET i = i + 1; END LOOP; RETURN i; END SELECT LABEL_TEST(5)",
+   "expected": "WITH FUNCTION label_test(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; iterate: LOOP IF i >= n THEN LEAVE iterate; END IF; SET i = i + 1; END LOOP; RETURN i; END SELECT LABEL_TEST(5)",
+   "test": "TestTrino.test_inline_udf_loop_repeat"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION label_test2(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; leave: LOOP IF i >= n THEN LEAVE leave; END IF; SET i = i + 1; END LOOP; RETURN i; END SELECT LABEL_TEST2(5)",
+   "expected": "WITH FUNCTION label_test2(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; leave: LOOP IF i >= n THEN LEAVE leave; END IF; SET i = i + 1; END LOOP; RETURN i; END SELECT LABEL_TEST2(5)",
+   "test": "TestTrino.test_inline_udf_loop_repeat"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION label_test3(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; set: LOOP IF i >= n THEN LEAVE set; END IF; SET i = i + 1; END LOOP; RETURN i; END SELECT LABEL_TEST3(5)",
+   "expected": "WITH FUNCTION label_test3(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; set: LOOP IF i >= n THEN LEAVE set; END IF; SET i = i + 1; END LOOP; RETURN i; END SELECT LABEL_TEST3(5)",
+   "test": "TestTrino.test_inline_udf_loop_repeat"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION npow(n BIGINT) RETURNS BIGINT BEGIN DECLARE r BIGINT DEFAULT 1; DECLARE p BIGINT DEFAULT n; WHILE p > 1 DO SET r = r * n; SET p = p - 1; END WHILE; RETURN r; END SELECT NPOW(5)",
+   "expected": "WITH FUNCTION npow(n BIGINT) RETURNS BIGINT BEGIN DECLARE r BIGINT DEFAULT 1; DECLARE p BIGINT DEFAULT n; WHILE p > 1 DO SET r = r * n; SET p = p - 1; END WHILE; RETURN r; END SELECT NPOW(5)",
+   "test": "TestTrino.test_inline_udf_while"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION npow_labeled(n BIGINT) RETURNS BIGINT BEGIN DECLARE r BIGINT DEFAULT 1; DECLARE p BIGINT DEFAULT n; abc: WHILE p > 1 DO SET r = r * n; SET p = p - 1; END WHILE; RETURN r; END SELECT NPOW_LABELED(5)",
+   "expected": "WITH FUNCTION npow_labeled(n BIGINT) RETURNS BIGINT BEGIN DECLARE r BIGINT DEFAULT 1; DECLARE p BIGINT DEFAULT n; abc: WHILE p > 1 DO SET r = r * n; SET p = p - 1; END WHILE; RETURN r; END SELECT NPOW_LABELED(5)",
+   "test": "TestTrino.test_inline_udf_while"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION last_stmt(n BIGINT) RETURNS BIGINT BEGIN DECLARE r BIGINT DEFAULT 1; WHILE r < n DO SET r = r + 1; END WHILE; END SELECT LAST_STMT(5)",
+   "expected": "WITH FUNCTION last_stmt(n BIGINT) RETURNS BIGINT BEGIN DECLARE r BIGINT DEFAULT 1; WHILE r < n DO SET r = r + 1; END WHILE; END SELECT LAST_STMT(5)",
+   "test": "TestTrino.test_inline_udf_while"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION count_evens(n BIGINT) RETURNS BIGINT BEGIN DECLARE total BIGINT DEFAULT 0; DECLARE i BIGINT DEFAULT 0; WHILE i < n DO SET total = total + 1; IF i = 0 THEN SET total = total + 1; END IF; SET i = i + 1; END WHILE; RETURN total; END SELECT COUNT_EVENS(3)",
+   "expected": "WITH FUNCTION count_evens(n BIGINT) RETURNS BIGINT BEGIN DECLARE total BIGINT DEFAULT 0; DECLARE i BIGINT DEFAULT 0; WHILE i < n DO SET total = total + 1; IF i = 0 THEN SET total = total + 1; END IF; SET i = i + 1; END WHILE; RETURN total; END SELECT COUNT_EVENS(3)",
+   "test": "TestTrino.test_inline_udf_while"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "WITH FUNCTION while_case(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; WHILE i < n DO CASE WHEN i = 0 THEN SET i = 1; ELSE SET i = i + 1; END CASE; END WHILE; RETURN i; END SELECT WHILE_CASE(3)",
+   "expected": "WITH FUNCTION while_case(n BIGINT) RETURNS BIGINT BEGIN DECLARE i BIGINT DEFAULT 0; WHILE i < n DO CASE WHEN i = 0 THEN SET i = 1; ELSE SET i = i + 1; END CASE; END WHILE; RETURN i; END SELECT WHILE_CASE(3)",
+   "test": "TestTrino.test_inline_udf_while"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_VALUE(jl.extra_attributes, 'lax $.amount_source' RETURNING VARCHAR)",
+   "expected": "JSON_VALUE(jl.extra_attributes, 'lax $.amount_source' RETURNING VARCHAR)",
+   "test": "TestTrino.test_json_value"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'strict $.price')",
+   "expected": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'strict $.price')",
+   "test": "TestTrino.test_json_value"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'lax $.price' RETURNING DECIMAL(4, 2))",
+   "expected": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'lax $.price' RETURNING DECIMAL(4, 2))",
+   "test": "TestTrino.test_json_value"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'lax $.price' RETURNING DECIMAL(4, 2) NULL ON EMPTY NULL ON ERROR) AS price",
+   "expected": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'lax $.price' RETURNING DECIMAL(4, 2) NULL ON EMPTY NULL ON ERROR) AS price",
+   "test": "TestTrino.test_json_value"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'lax $.price' RETURNING DECIMAL(4, 2) ERROR ON EMPTY ERROR ON ERROR) AS price",
+   "expected": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'lax $.price' RETURNING DECIMAL(4, 2) ERROR ON EMPTY ERROR ON ERROR) AS price",
+   "test": "TestTrino.test_json_value"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'lax $.price' RETURNING DECIMAL(4, 2) DEFAULT 1 ON EMPTY DEFAULT 1 ON ERROR) AS price",
+   "expected": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'lax $.price' RETURNING DECIMAL(4, 2) DEFAULT 1 ON EMPTY DEFAULT 1 ON ERROR) AS price",
+   "test": "TestTrino.test_json_value"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT LISTAGG(DISTINCT col, ',') WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "expected": "SELECT LISTAGG(DISTINCT col, ',') WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "test": "TestTrino.test_listagg"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT LISTAGG(col, '; ' ON OVERFLOW ERROR) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "expected": "SELECT LISTAGG(col, '; ' ON OVERFLOW ERROR) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "test": "TestTrino.test_listagg"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT LISTAGG(col, '; ' ON OVERFLOW TRUNCATE WITH COUNT) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "expected": "SELECT LISTAGG(col, '; ' ON OVERFLOW TRUNCATE WITH COUNT) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "test": "TestTrino.test_listagg"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT LISTAGG(col, '; ' ON OVERFLOW TRUNCATE WITHOUT COUNT) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "expected": "SELECT LISTAGG(col, '; ' ON OVERFLOW TRUNCATE WITHOUT COUNT) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "test": "TestTrino.test_listagg"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT LISTAGG(col, '; ' ON OVERFLOW TRUNCATE '...' WITH COUNT) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "expected": "SELECT LISTAGG(col, '; ' ON OVERFLOW TRUNCATE '...' WITH COUNT) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "test": "TestTrino.test_listagg"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT LISTAGG(col, '; ' ON OVERFLOW TRUNCATE '...' WITHOUT COUNT) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "expected": "SELECT LISTAGG(col, '; ' ON OVERFLOW TRUNCATE '...' WITHOUT COUNT) WITHIN GROUP (ORDER BY col ASC) FROM tbl",
+   "test": "TestTrino.test_listagg"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT LISTAGG(col) WITHIN GROUP (ORDER BY col DESC) FROM tbl",
+   "expected": "SELECT LISTAGG(col, ',') WITHIN GROUP (ORDER BY col DESC) FROM tbl",
+   "test": "TestTrino.test_listagg"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00' AS TIMESTAMP)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00' AS TIMESTAMP(0))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.1'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.1' AS TIMESTAMP)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.1'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.1' AS TIMESTAMP(1))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.10'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.10' AS TIMESTAMP)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.10'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.10' AS TIMESTAMP(2))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.100'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.100' AS TIMESTAMP)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.100'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.100' AS TIMESTAMP(3))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('2020-01-01 00:00:00.123' AS TIMESTAMP)",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.123' AS TIMESTAMP)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('2020-01-01 00:00:00.123' AS TIMESTAMP(0))",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.123' AS TIMESTAMP(0))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('2020-01-01 00:00:00.123' AS TIMESTAMP(2))",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.123' AS TIMESTAMP(2))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('2020-01-01 00:00:00.123' AS TIMESTAMP(6))",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.123' AS TIMESTAMP(6))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00 +02:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00 +02:00' AS TIMESTAMP WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00 +02:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00 +02:00' AS TIMESTAMP(0) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.1 +02:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.1 +02:00' AS TIMESTAMP WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.1 +02:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.1 +02:00' AS TIMESTAMP(1) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.10 +02:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.10 +02:00' AS TIMESTAMP WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.10 +02:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.10 +02:00' AS TIMESTAMP(2) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.100 +02:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.100 +02:00' AS TIMESTAMP WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01 00:00:00.100 +02:00'",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.100 +02:00' AS TIMESTAMP(3) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('2020-01-01 00:00:00.123 +02:00' AS TIMESTAMP WITH TIME ZONE)",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.123 +02:00' AS TIMESTAMP WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('2020-01-01 00:00:00.123 +02:00' AS TIMESTAMP(0) WITH TIME ZONE)",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.123 +02:00' AS TIMESTAMP(0) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('2020-01-01 00:00:00.123 +02:00' AS TIMESTAMP(2) WITH TIME ZONE)",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.123 +02:00' AS TIMESTAMP(2) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('2020-01-01 00:00:00.123 +02:00' AS TIMESTAMP(6) WITH TIME ZONE)",
+   "expected": "SELECT CAST('2020-01-01 00:00:00.123 +02:00' AS TIMESTAMP(6) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIME '12:00:00'",
+   "expected": "SELECT CAST('12:00:00' AS TIME)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '12:00:00'",
+   "expected": "SELECT CAST('12:00:00' AS TIME(0))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIME '12:00:00.1'",
+   "expected": "SELECT CAST('12:00:00.1' AS TIME)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '12:00:00.1'",
+   "expected": "SELECT CAST('12:00:00.1' AS TIME(1))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIME '12:00:00.10'",
+   "expected": "SELECT CAST('12:00:00.10' AS TIME)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '12:00:00.10'",
+   "expected": "SELECT CAST('12:00:00.10' AS TIME(2))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIME '12:00:00.100'",
+   "expected": "SELECT CAST('12:00:00.100' AS TIME)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '12:00:00.100'",
+   "expected": "SELECT CAST('12:00:00.100' AS TIME(3))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('12:00:00.123' AS TIME)",
+   "expected": "SELECT CAST('12:00:00.123' AS TIME)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('12:00:00.123' AS TIME(0))",
+   "expected": "SELECT CAST('12:00:00.123' AS TIME(0))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('12:00:00.123' AS TIME(2))",
+   "expected": "SELECT CAST('12:00:00.123' AS TIME(2))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('12:00:00.123' AS TIME(6))",
+   "expected": "SELECT CAST('12:00:00.123' AS TIME(6))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIME '12:00:00 +02:00'",
+   "expected": "SELECT CAST('12:00:00 +02:00' AS TIME WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '12:00:00 +02:00'",
+   "expected": "SELECT CAST('12:00:00 +02:00' AS TIME(0) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIME '12:00:00.1 +02:00'",
+   "expected": "SELECT CAST('12:00:00.1 +02:00' AS TIME WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '12:00:00.1 +02:00'",
+   "expected": "SELECT CAST('12:00:00.1 +02:00' AS TIME(1) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIME '12:00:00.10 +02:00'",
+   "expected": "SELECT CAST('12:00:00.10 +02:00' AS TIME WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '12:00:00.10 +02:00'",
+   "expected": "SELECT CAST('12:00:00.10 +02:00' AS TIME(2) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "presto",
+   "sql": "SELECT TIME '12:00:00.100 +02:00'",
+   "expected": "SELECT CAST('12:00:00.100 +02:00' AS TIME WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '12:00:00.100 +02:00'",
+   "expected": "SELECT CAST('12:00:00.100 +02:00' AS TIME(3) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('12:00:00.123 +02:00' AS TIME WITH TIME ZONE)",
+   "expected": "SELECT CAST('12:00:00.123 +02:00' AS TIME WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('12:00:00.123 +02:00' AS TIME(0) WITH TIME ZONE)",
+   "expected": "SELECT CAST('12:00:00.123 +02:00' AS TIME(0) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('12:00:00.123 +02:00' AS TIME(2) WITH TIME ZONE)",
+   "expected": "SELECT CAST('12:00:00.123 +02:00' AS TIME(2) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT CAST('12:00:00.123 +02:00' AS TIME(6) WITH TIME ZONE)",
+   "expected": "SELECT CAST('12:00:00.123 +02:00' AS TIME(6) WITH TIME ZONE)",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2020-01-01'",
+   "expected": "SELECT CAST('2020-01-01' AS TIMESTAMP(0))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT DATE_ADD('MILLISECOND', 1, TIMESTAMP '2020-01-01 00:00:00')",
+   "expected": "SELECT DATE_ADD('MILLISECOND', 1, CAST('2020-01-01 00:00:00' AS TIMESTAMP(0)))",
+   "test": "TestTrino.test_temporal_literal_precision"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TRIM('!' FROM '!foo!')",
+   "expected": "SELECT TRIM('!' FROM '!foo!')",
+   "test": "TestTrino.test_trim"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TRIM(BOTH '$' FROM '$var$')",
+   "expected": "SELECT TRIM(BOTH '$' FROM '$var$')",
+   "test": "TestTrino.test_trim"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TRIM(TRAILING 'ER' FROM UPPER('worker'))",
+   "expected": "SELECT TRIM(TRAILING 'ER' FROM UPPER('worker'))",
+   "test": "TestTrino.test_trim"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TRIM(LEADING FROM '  abcd')",
+   "expected": "SELECT LTRIM('  abcd')",
+   "test": "TestTrino.test_trim"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TRIM('!foo!', '!')",
+   "expected": "SELECT TRIM('!' FROM '!foo!')",
+   "test": "TestTrino.test_trim"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "REFRESH MATERIALIZED VIEW mynamespace.test_view",
+   "expected": "REFRESH MATERIALIZED VIEW mynamespace.test_view",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(m.properties, 'lax $.area' OMIT QUOTES NULL ON ERROR)",
+   "expected": "JSON_QUERY(m.properties, 'lax $.area' OMIT QUOTES NULL ON ERROR)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_EXTRACT(content, json_path)",
+   "expected": "JSON_EXTRACT(content, json_path)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(content, 'lax $.HY.*')",
+   "expected": "JSON_QUERY(content, 'lax $.HY.*')",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(content, 'strict $.HY.*' WITH WRAPPER)",
+   "expected": "JSON_QUERY(content, 'strict $.HY.*' WITH WRAPPER)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(content, 'strict $.HY.*' WITH ARRAY WRAPPER)",
+   "expected": "JSON_QUERY(content, 'strict $.HY.*' WITH ARRAY WRAPPER)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(content, 'strict $.HY.*' WITH UNCONDITIONAL WRAPPER)",
+   "expected": "JSON_QUERY(content, 'strict $.HY.*' WITH UNCONDITIONAL WRAPPER)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(content, 'strict $.HY.*' WITHOUT CONDITIONAL WRAPPER)",
+   "expected": "JSON_QUERY(content, 'strict $.HY.*' WITHOUT CONDITIONAL WRAPPER)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(description, 'strict $.comment' KEEP QUOTES)",
+   "expected": "JSON_QUERY(description, 'strict $.comment' KEEP QUOTES)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(description, 'strict $.comment' OMIT QUOTES ON SCALAR STRING)",
+   "expected": "JSON_QUERY(description, 'strict $.comment' OMIT QUOTES ON SCALAR STRING)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "JSON_QUERY(content, 'strict $.HY.*' WITH UNCONDITIONAL WRAPPER KEEP QUOTES)",
+   "expected": "JSON_QUERY(content, 'strict $.HY.*' WITH UNCONDITIONAL WRAPPER KEEP QUOTES)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2012-10-31 01:00 -2'",
+   "expected": "SELECT CAST('2012-10-31 01:00 -2' AS TIMESTAMP(0) WITH TIME ZONE)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2012-10-31 01:00 +2'",
+   "expected": "SELECT CAST('2012-10-31 01:00 +2' AS TIMESTAMP(0) WITH TIME ZONE)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2026-03-01 00:00:00.1234'",
+   "expected": "SELECT CAST('2026-03-01 00:00:00.1234' AS TIMESTAMP(4))",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2026-03-01 00:00:00.123456789'",
+   "expected": "SELECT CAST('2026-03-01 00:00:00.123456789' AS TIMESTAMP(9))",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2026-03-01 00:00:00.1234 +02:00'",
+   "expected": "SELECT CAST('2026-03-01 00:00:00.1234 +02:00' AS TIMESTAMP(4) WITH TIME ZONE)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '01:02:03.1234'",
+   "expected": "SELECT CAST('01:02:03.1234' AS TIME(4))",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '01:02:03.456 -08:00'",
+   "expected": "SELECT CAST('01:02:03.456 -08:00' AS TIME(3) WITH TIME ZONE)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '01:02:03.456'",
+   "expected": "SELECT CAST('01:02:03.456' AS TIME(3))",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "duckdb",
+   "sql": "SELECT TIME '01:02:03.456 -08:00'",
+   "expected": "SELECT CAST('01:02:03.456 -08:00' AS TIMETZ)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIME '01:02:03.456 -08:00'",
+   "expected": "SELECT CAST('01:02:03.456 -08:00' AS TIME(3) WITH TIME ZONE)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "duckdb",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP_NANOS('2020-05-11T11:15:05.000000000')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05.000000000' AS TIMESTAMPTZ)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP_NANOS('2020-05-11T11:15:05.000000000')",
+   "expected": "SELECT FROM_ISO8601_TIMESTAMP_NANOS('2020-05-11T11:15:05.000000000')",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "snowflake",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP_NANOS('2020-05-11T11:15:05.000000000')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05.000000000' AS TIMESTAMPTZ)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "spark",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP_NANOS('2020-05-11T11:15:05.000000000')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05.000000000' AS TIMESTAMP)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "databricks",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP_NANOS('2020-05-11T11:15:05.000000000')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05.000000000' AS TIMESTAMP)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "bigquery",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP_NANOS('2020-05-11T11:15:05.000000000')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05.000000000' AS TIMESTAMP)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "duckdb",
+   "sql": "SELECT TIMESTAMP '2012-10-31 01:00:00 +02:00'",
+   "expected": "SELECT CAST('2012-10-31 01:00:00 +02:00' AS TIMESTAMPTZ)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT TIMESTAMP '2012-10-31 01:00:00 +02:00'",
+   "expected": "SELECT CAST('2012-10-31 01:00:00 +02:00' AS TIMESTAMP(0) WITH TIME ZONE)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "duckdb",
+   "sql": "SELECT FORMAT('%s', 123)",
+   "expected": "SELECT FORMAT('{}', 123)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "snowflake",
+   "sql": "SELECT FORMAT('%s', 123)",
+   "expected": "SELECT TO_CHAR(123)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "write",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT FORMAT('%s', 123)",
+   "expected": "SELECT FORMAT('%s', 123)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT * FROM tbl MATCH_RECOGNIZE (PARTITION BY id ORDER BY col MEASURES FIRST(col, 2) AS col1, LAST(col, 2) AS col2 PATTERN (B* A) DEFINE A AS col = 1)",
+   "expected": "SELECT * FROM tbl MATCH_RECOGNIZE (PARTITION BY id ORDER BY col MEASURES FIRST(col, 2) AS col1, LAST(col, 2) AS col2 PATTERN (B* A) DEFINE A AS col = 1)",
+   "test": "TestTrino.test_trino"
+  },
+  {
+   "kind": "identity",
+   "read": "trino",
+   "write": "trino",
+   "sql": "SELECT VERSION()",
+   "expected": "SELECT VERSION()",
+   "test": "TestTrino.test_trino"
+  }
+ ]
+}

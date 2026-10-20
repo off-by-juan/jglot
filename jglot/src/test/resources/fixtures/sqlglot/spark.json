@@ -1,0 +1,4452 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_spark.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ANALYZE TABLE tbl COMPUTE STATISTICS NOSCAN",
+   "expected": "ANALYZE TABLE tbl COMPUTE STATISTICS NOSCAN",
+   "test": "TestSpark.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ANALYZE TABLE tbl COMPUTE STATISTICS FOR ALL COLUMNS",
+   "expected": "ANALYZE TABLE tbl COMPUTE STATISTICS FOR ALL COLUMNS",
+   "test": "TestSpark.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ANALYZE TABLE tbl COMPUTE STATISTICS FOR COLUMNS foo, bar",
+   "expected": "ANALYZE TABLE tbl COMPUTE STATISTICS FOR COLUMNS foo, bar",
+   "test": "TestSpark.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ANALYZE TABLE ctlg.db.tbl COMPUTE STATISTICS NOSCAN",
+   "expected": "ANALYZE TABLE ctlg.db.tbl COMPUTE STATISTICS NOSCAN",
+   "test": "TestSpark.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ANALYZE TABLES COMPUTE STATISTICS NOSCAN",
+   "expected": "ANALYZE TABLES COMPUTE STATISTICS NOSCAN",
+   "test": "TestSpark.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ANALYZE TABLES FROM db COMPUTE STATISTICS",
+   "expected": "ANALYZE TABLES FROM db COMPUTE STATISTICS",
+   "test": "TestSpark.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ANALYZE TABLES IN db COMPUTE STATISTICS",
+   "expected": "ANALYZE TABLES IN db COMPUTE STATISTICS",
+   "test": "TestSpark.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ANALYZE TABLE ctlg.db.tbl PARTITION(foo = 'foo', bar = 'bar') COMPUTE STATISTICS NOSCAN",
+   "expected": "ANALYZE TABLE ctlg.db.tbl PARTITION(foo = 'foo', bar = 'bar') COMPUTE STATISTICS NOSCAN",
+   "test": "TestSpark.test_analyze"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "APPROX_PERCENTILE(DISTINCT col, 0.3)",
+   "expected": "PERCENTILE_APPROX(DISTINCT col, 0.3)",
+   "test": "TestSpark.test_approx_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "APPROX_PERCENTILE(DISTINCT col, 0.3)",
+   "expected": "PERCENTILE_APPROX(DISTINCT col, 0.3)",
+   "test": "TestSpark.test_approx_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "APPROX_PERCENTILE(DISTINCT col, 0.3, 200)",
+   "expected": "PERCENTILE_APPROX(DISTINCT col, 0.3, 200)",
+   "test": "TestSpark.test_approx_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "APPROX_PERCENTILE(DISTINCT col, 0.3, 200)",
+   "expected": "PERCENTILE_APPROX(DISTINCT col, 0.3, 200)",
+   "test": "TestSpark.test_approx_percentile"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "PERCENTILE_APPROX(DISTINCT col, 0.3)",
+   "expected": "PERCENTILE_APPROX(DISTINCT col, 0.3)",
+   "test": "TestSpark.test_approx_percentile"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "PERCENTILE_APPROX(DISTINCT col, 0.3, 200)",
+   "expected": "PERCENTILE_APPROX(DISTINCT col, 0.3, 200)",
+   "test": "TestSpark.test_approx_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), 1, 'z')",
+   "expected": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), 1, 'z')",
+   "test": "TestSpark.test_array_insert"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), 1, 'z')",
+   "expected": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), 1, 'z')",
+   "test": "TestSpark.test_array_insert"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), 1, 'z')",
+   "expected": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), 1, 'z')",
+   "test": "TestSpark.test_array_insert"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), 1, 'z')",
+   "expected": "SELECT ARRAY_INSERT(['a', 'b', 'c'], 0, 'z')",
+   "test": "TestSpark.test_array_insert"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "spark",
+   "sql": "SELECT ARRAY_INSERT(['a', 'b', 'c'], -1, 'z')",
+   "expected": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), -2, 'z')",
+   "test": "TestSpark.test_array_insert"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), -2, 'z')",
+   "expected": "SELECT ARRAY_INSERT(['a', 'b', 'c'], -1, 'z')",
+   "test": "TestSpark.test_array_insert"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), -1, 'z')",
+   "expected": "SELECT ARRAY_INSERT(['a', 'b', 'c'], ARRAY_SIZE(['a', 'b', 'c']), 'z')",
+   "test": "TestSpark.test_array_insert"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "spark",
+   "sql": "SELECT ARRAY_INSERT(['a', 'b', 'c'], 2, 'z')",
+   "expected": "SELECT ARRAY_INSERT(ARRAY('a', 'b', 'c'), 3, 'z')",
+   "test": "TestSpark.test_array_insert"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "spark",
+   "sql": "arraySlice(x, 2, 3)",
+   "expected": "SLICE(x, 2, 3)",
+   "test": "TestSpark.test_array_slice"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SLICE(x, 2, 3)",
+   "expected": "SLICE(x, 2, 3)",
+   "test": "TestSpark.test_array_slice"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SLICE(x, 2, 3)",
+   "expected": "SLICE(x, 2, 3)",
+   "test": "TestSpark.test_array_slice"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT a, LOGICAL_OR(b) FROM table GROUP BY a",
+   "expected": "SELECT a, BOOL_OR(b) FROM table GROUP BY a",
+   "test": "TestSpark.test_bool_or"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CURRENT_USER",
+   "expected": "CURRENT_USER()",
+   "test": "TestSpark.test_current_user"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CURRENT_USER()",
+   "expected": "CURRENT_USER()",
+   "test": "TestSpark.test_current_user"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DAYOFWEEK(TO_DATE(x))",
+   "expected": "DAYOFWEEK(TO_DATE(x))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DAYOFMONTH(TO_DATE(x))",
+   "expected": "DAYOFMONTH(TO_DATE(x))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DAYOFYEAR(TO_DATE(x))",
+   "expected": "DAYOFYEAR(TO_DATE(x))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "WEEKOFYEAR(TO_DATE(x))",
+   "expected": "WEEKOFYEAR(TO_DATE(x))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT MODE(category)",
+   "expected": "SELECT MODE(category)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT MODE(price, TRUE) AS deterministic_mode FROM products",
+   "expected": "SELECT MODE(price, TRUE) AS deterministic_mode FROM products",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT MODE() WITHIN GROUP (ORDER BY status) FROM orders",
+   "expected": "SELECT MODE() WITHIN GROUP (ORDER BY status) FROM orders",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DROP NAMESPACE my_catalog.my_namespace",
+   "expected": "DROP NAMESPACE my_catalog.my_namespace",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE NAMESPACE my_catalog.my_namespace",
+   "expected": "CREATE NAMESPACE my_catalog.my_namespace",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "INSERT OVERWRITE TABLE db1.tb1 TABLE db2.tb2",
+   "expected": "INSERT OVERWRITE TABLE db1.tb1 TABLE db2.tb2",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE foo AS WITH t AS (SELECT 1 AS col) SELECT col FROM t",
+   "expected": "CREATE TABLE foo AS WITH t AS (SELECT 1 AS col) SELECT col FROM t",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TEMPORARY VIEW test AS SELECT 1",
+   "expected": "CREATE TEMPORARY VIEW test AS SELECT 1",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE foo (col VARCHAR(50))",
+   "expected": "CREATE TABLE foo (col VARCHAR(50))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE foo (col STRUCT<struct_col_a: VARCHAR((50))>)",
+   "expected": "CREATE TABLE foo (col STRUCT<struct_col_a: VARCHAR((50))>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE foo (col STRING) CLUSTERED BY (col) INTO 10 BUCKETS",
+   "expected": "CREATE TABLE foo (col STRING) CLUSTERED BY (col) INTO 10 BUCKETS",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE foo (col STRING) CLUSTERED BY (col) SORTED BY (col) INTO 10 BUCKETS",
+   "expected": "CREATE TABLE foo (col STRING) CLUSTERED BY (col) SORTED BY (col) INTO 10 BUCKETS",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TRUNCATE TABLE t1 PARTITION(age = 10, name = 'test', address)",
+   "expected": "TRUNCATE TABLE t1 PARTITION(age = 10, name = 'test', address)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE FUNCTION f(col STRING) RETURNS STRING DETERMINISTIC RETURN col",
+   "expected": "CREATE FUNCTION f(col STRING) RETURNS STRING DETERMINISTIC RETURN col",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE FUNCTION f(col STRING) RETURNS STRING NOT DETERMINISTIC RETURN col",
+   "expected": "CREATE FUNCTION f(col STRING) RETURNS STRING NOT DETERMINISTIC RETURN col",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "CREATE TABLE t (a INT, b STRING, UNIQUE (a))",
+   "expected": "CREATE TABLE t (a INT, b STRING)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "CREATE TABLE t (a INT, b STRING, UNIQUE (a))",
+   "expected": "CREATE TABLE t (a INT, b STRING)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "materialize",
+   "sql": "CREATE TABLE t (a INT, b STRING, UNIQUE (a))",
+   "expected": "CREATE TABLE t (a INT, b TEXT)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE t (a INT, b STRING, UNIQUE (a))",
+   "expected": "CREATE TABLE t (a INT, b STRING)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "CREATE TABLE t (a INT, b STRING, UNIQUE (a))",
+   "expected": "CREATE TABLE t (a INT, b STRING)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "CREATE TABLE t (a INT, b STRING, UNIQUE (a))",
+   "expected": "CREATE TABLE t (a INT, b TEXT, UNIQUE (a))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:string>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT(struct_col_a INT, struct_col_b TEXT))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:string>)",
+   "expected": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b VARCHAR))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:string>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRING>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:string>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRING>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a INT64, struct_col_b STRUCT<nested_col_a STRING, nested_col_b STRING>>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT(struct_col_a INT, struct_col_b STRUCT(nested_col_a TEXT, nested_col_b TEXT)))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b ROW(nested_col_a VARCHAR, nested_col_b VARCHAR)))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRUCT<nested_col_a: STRING, nested_col_b: STRING>>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRUCT<nested_col_a: STRING, nested_col_b: STRING>>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "CREATE TABLE db.example_table (col_a array<int>, col_b array<array<int>>)",
+   "expected": "CREATE TABLE db.example_table (col_a ARRAY<INT64>, col_b ARRAY<ARRAY<INT64>>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "CREATE TABLE db.example_table (col_a array<int>, col_b array<array<int>>)",
+   "expected": "CREATE TABLE db.example_table (col_a INT[], col_b INT[][])",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "CREATE TABLE db.example_table (col_a array<int>, col_b array<array<int>>)",
+   "expected": "CREATE TABLE db.example_table (col_a ARRAY(INTEGER), col_b ARRAY(ARRAY(INTEGER)))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "CREATE TABLE db.example_table (col_a array<int>, col_b array<array<int>>)",
+   "expected": "CREATE TABLE db.example_table (col_a ARRAY<INT>, col_b ARRAY<ARRAY<INT>>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE db.example_table (col_a array<int>, col_b array<array<int>>)",
+   "expected": "CREATE TABLE db.example_table (col_a ARRAY<INT>, col_b ARRAY<ARRAY<INT>>)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "CREATE TABLE db.example_table (col_a array<int>, col_b array<array<int>>)",
+   "expected": "CREATE TABLE db.example_table (col_a ARRAY(INT), col_b ARRAY(ARRAY(INT)))",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "CREATE TABLE x USING ICEBERG PARTITIONED BY (MONTHS(y)) LOCATION 's3://z'",
+   "expected": "CREATE TABLE x",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "CREATE TABLE x USING ICEBERG PARTITIONED BY (MONTHS(y)) LOCATION 's3://z'",
+   "expected": "CREATE TABLE x WITH (format='ICEBERG', PARTITIONED_BY=ARRAY['MONTHS(y)'])",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "CREATE TABLE x USING ICEBERG PARTITIONED BY (MONTHS(y)) LOCATION 's3://z'",
+   "expected": "CREATE TABLE x STORED AS ICEBERG PARTITIONED BY (MONTHS(y)) LOCATION 's3://z'",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE x USING ICEBERG PARTITIONED BY (MONTHS(y)) LOCATION 's3://z'",
+   "expected": "CREATE TABLE x USING ICEBERG PARTITIONED BY (MONTHS(y)) LOCATION 's3://z'",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "expected": "CREATE TABLE test AS SELECT 1",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "expected": "CREATE TABLE test WITH (format='PARQUET') AS SELECT 1",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "trino",
+   "sql": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "expected": "CREATE TABLE test WITH (format='PARQUET') AS SELECT 1",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "athena",
+   "sql": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "expected": "CREATE TABLE test WITH (format='PARQUET') AS SELECT 1",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "expected": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "expected": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "CREATE TABLE blah (col_a INT) COMMENT \"Test comment: blah\" PARTITIONED BY (date STRING) USING ICEBERG TBLPROPERTIES('x' = '1')",
+   "expected": "CREATE TABLE blah (\n  col_a INT\n)",
+   "pretty": true,
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "CREATE TABLE blah (col_a INT) COMMENT \"Test comment: blah\" PARTITIONED BY (date STRING) USING ICEBERG TBLPROPERTIES('x' = '1')",
+   "expected": "CREATE TABLE blah (\n  col_a INTEGER,\n  date VARCHAR\n)\nCOMMENT 'Test comment: blah'\nWITH (\n  PARTITIONED_BY=ARRAY['date'],\n  format='ICEBERG',\n  x='1'\n)",
+   "pretty": true,
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "CREATE TABLE blah (col_a INT) COMMENT \"Test comment: blah\" PARTITIONED BY (date STRING) USING ICEBERG TBLPROPERTIES('x' = '1')",
+   "expected": "CREATE TABLE blah (\n  col_a INT\n)\nCOMMENT 'Test comment: blah'\nPARTITIONED BY (\n  date STRING\n)\nSTORED AS ICEBERG\nTBLPROPERTIES (\n  'x'='1'\n)",
+   "pretty": true,
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE TABLE blah (col_a INT) COMMENT \"Test comment: blah\" PARTITIONED BY (date STRING) USING ICEBERG TBLPROPERTIES('x' = '1')",
+   "expected": "CREATE TABLE blah (\n  col_a INT,\n  date STRING\n)\nCOMMENT 'Test comment: blah'\nPARTITIONED BY (\n  date\n)\nUSING ICEBERG\nTBLPROPERTIES (\n  'x'='1'\n)",
+   "pretty": true,
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CACHE TABLE testCache OPTIONS ('storageLevel' 'DISK_ONLY') SELECT * FROM testData",
+   "expected": "CACHE TABLE testCache OPTIONS('storageLevel' = 'DISK_ONLY') AS SELECT * FROM testData",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE StudentInfo ADD COLUMNS (LastName STRING, DOB TIMESTAMP)",
+   "expected": "ALTER TABLE StudentInfo ADD COLUMNS (LastName STRING, DOB TIMESTAMP)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE t ADD COLUMNS (a.b INT COMMENT 'x' AFTER c, d.e.f STRING)",
+   "expected": "ALTER TABLE t ADD COLUMNS (a.b INT COMMENT 'x' AFTER c, d.e.f STRING)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE t DROP COLUMN a",
+   "expected": "ALTER TABLE t DROP COLUMN a",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE t DROP COLUMN IF EXISTS a.b",
+   "expected": "ALTER TABLE t DROP COLUMN IF EXISTS a.b",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE t DROP COLUMNS (a, b.c)",
+   "expected": "ALTER TABLE t DROP COLUMNS (a, b.c)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE t DROP COLUMNS (from)",
+   "expected": "ALTER TABLE t DROP COLUMNS (from)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE t DROP COLUMNS IF EXISTS (a, b.c)",
+   "expected": "ALTER TABLE t DROP COLUMNS IF EXISTS (a, b.c)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE t DROP COLUMNS a, b",
+   "expected": "ALTER TABLE t DROP COLUMNS (a, b)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE db.example ALTER COLUMN col_a TYPE BIGINT",
+   "expected": "ALTER TABLE db.example ALTER COLUMN col_a TYPE BIGINT",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "ALTER TABLE db.example ALTER COLUMN col_a TYPE BIGINT",
+   "expected": "ALTER TABLE db.example CHANGE COLUMN col_a col_a BIGINT",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE db.example CHANGE COLUMN col_a col_a BIGINT",
+   "expected": "ALTER TABLE db.example ALTER COLUMN col_a TYPE BIGINT",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "ALTER TABLE db.example CHANGE COLUMN col_a col_a BIGINT",
+   "expected": "ALTER TABLE db.example CHANGE COLUMN col_a col_a BIGINT",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE db.example RENAME COLUMN col_a TO col_b",
+   "expected": "ALTER TABLE db.example RENAME COLUMN col_a TO col_b",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "ALTER TABLE db.example RENAME COLUMN col_a TO col_b",
+   "expectedError": "unsupported",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE StudentInfo DROP COLUMNS (LastName, DOB)",
+   "expected": "ALTER TABLE StudentInfo DROP COLUMNS (LastName, DOB)",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER VIEW StudentInfoView AS SELECT * FROM StudentInfo",
+   "expected": "ALTER VIEW StudentInfoView AS SELECT * FROM StudentInfo",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER VIEW StudentInfoView AS SELECT LastName FROM StudentInfo",
+   "expected": "ALTER VIEW StudentInfoView AS SELECT LastName FROM StudentInfo",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER VIEW StudentInfoView RENAME TO StudentInfoViewRenamed",
+   "expected": "ALTER VIEW StudentInfoView RENAME TO StudentInfoViewRenamed",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER VIEW StudentInfoView SET TBLPROPERTIES ('key1'='val1', 'key2'='val2')",
+   "expected": "ALTER VIEW StudentInfoView SET TBLPROPERTIES ('key1'='val1', 'key2'='val2')",
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER VIEW StudentInfoView UNSET TBLPROPERTIES ('key1', 'key2')",
+   "expected": "ALTER VIEW StudentInfoView UNSET TBLPROPERTIES ('key1', 'key2')",
+   "command": true,
+   "test": "TestSpark.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE VAR x INT",
+   "expected": "DECLARE x INT",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE x INT",
+   "expected": "DECLARE x INT",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE VARIABLE myvar INT DEFAULT 5",
+   "expected": "DECLARE myvar INT = 5",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE x, y, z INT DEFAULT 1",
+   "expected": "DECLARE x, y, z INT = 1",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE x INT = 5",
+   "expected": "DECLARE x INT = 5",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE five = 5",
+   "expected": "DECLARE five = 5",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE OR REPLACE five = 55",
+   "expected": "DECLARE OR REPLACE five = 55",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE VARIABLE size DEFAULT 6",
+   "expected": "DECLARE size = 6",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DECLARE some_var STRING",
+   "expected": "DECLARE some_var STRING",
+   "test": "TestSpark.test_declare"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT EXPLODE(x) FROM tbl",
+   "expected": "SELECT IF(pos = pos_2, col, NULL) AS col FROM tbl CROSS JOIN UNNEST(GENERATE_ARRAY(0, GREATEST(ARRAY_LENGTH(x)) - 1)) AS pos CROSS JOIN UNNEST(x) AS col WITH OFFSET AS pos_2 WHERE pos = pos_2 OR (pos > (ARRAY_LENGTH(x) - 1) AND pos_2 = (ARRAY_LENGTH(x) - 1))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT EXPLODE(x) FROM tbl",
+   "expected": "SELECT IF(_u.pos = _u_2.pos_2, _u_2.col) AS col FROM tbl CROSS JOIN UNNEST(SEQUENCE(1, GREATEST(CARDINALITY(x)))) AS _u(pos) CROSS JOIN UNNEST(x) WITH ORDINALITY AS _u_2(col, pos_2) WHERE _u.pos = _u_2.pos_2 OR (_u.pos > CARDINALITY(x) AND _u_2.pos_2 = CARDINALITY(x))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT EXPLODE(x) FROM tbl",
+   "expected": "SELECT EXPLODE(x) FROM tbl",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT EXPLODE(col) FROM _u",
+   "expected": "SELECT IF(pos = pos_2, col_2, NULL) AS col_2 FROM _u CROSS JOIN UNNEST(GENERATE_ARRAY(0, GREATEST(ARRAY_LENGTH(col)) - 1)) AS pos CROSS JOIN UNNEST(col) AS col_2 WITH OFFSET AS pos_2 WHERE pos = pos_2 OR (pos > (ARRAY_LENGTH(col) - 1) AND pos_2 = (ARRAY_LENGTH(col) - 1))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT EXPLODE(col) FROM _u",
+   "expected": "SELECT IF(_u_2.pos = _u_3.pos_2, _u_3.col_2) AS col_2 FROM _u CROSS JOIN UNNEST(SEQUENCE(1, GREATEST(CARDINALITY(col)))) AS _u_2(pos) CROSS JOIN UNNEST(col) WITH ORDINALITY AS _u_3(col_2, pos_2) WHERE _u_2.pos = _u_3.pos_2 OR (_u_2.pos > CARDINALITY(col) AND _u_3.pos_2 = CARDINALITY(col))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT EXPLODE(col) FROM _u",
+   "expected": "SELECT EXPLODE(col) FROM _u",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT EXPLODE(col) AS exploded FROM schema.tbl",
+   "expected": "SELECT IF(_u.pos = _u_2.pos_2, _u_2.exploded) AS exploded FROM schema.tbl CROSS JOIN UNNEST(SEQUENCE(1, GREATEST(CARDINALITY(col)))) AS _u(pos) CROSS JOIN UNNEST(col) WITH ORDINALITY AS _u_2(exploded, pos_2) WHERE _u.pos = _u_2.pos_2 OR (_u.pos > CARDINALITY(col) AND _u_2.pos_2 = CARDINALITY(col))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT EXPLODE(ARRAY(1, 2))",
+   "expected": "SELECT IF(pos = pos_2, col, NULL) AS col FROM UNNEST(GENERATE_ARRAY(0, GREATEST(ARRAY_LENGTH([1, 2])) - 1)) AS pos CROSS JOIN UNNEST([1, 2]) AS col WITH OFFSET AS pos_2 WHERE pos = pos_2 OR (pos > (ARRAY_LENGTH([1, 2]) - 1) AND pos_2 = (ARRAY_LENGTH([1, 2]) - 1))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT EXPLODE(ARRAY(1, 2))",
+   "expected": "SELECT IF(_u.pos = _u_2.pos_2, _u_2.col) AS col FROM UNNEST(SEQUENCE(1, GREATEST(CARDINALITY(ARRAY[1, 2])))) AS _u(pos) CROSS JOIN UNNEST(ARRAY[1, 2]) WITH ORDINALITY AS _u_2(col, pos_2) WHERE _u.pos = _u_2.pos_2 OR (_u.pos > CARDINALITY(ARRAY[1, 2]) AND _u_2.pos_2 = CARDINALITY(ARRAY[1, 2]))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT POSEXPLODE(ARRAY(2, 3)) AS x",
+   "expected": "SELECT IF(pos = pos_2, x, NULL) AS x, IF(pos = pos_2, pos_2, NULL) AS pos_2 FROM UNNEST(GENERATE_ARRAY(0, GREATEST(ARRAY_LENGTH([2, 3])) - 1)) AS pos CROSS JOIN UNNEST([2, 3]) AS x WITH OFFSET AS pos_2 WHERE pos = pos_2 OR (pos > (ARRAY_LENGTH([2, 3]) - 1) AND pos_2 = (ARRAY_LENGTH([2, 3]) - 1))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT POSEXPLODE(ARRAY(2, 3)) AS x",
+   "expected": "SELECT IF(_u.pos = _u_2.pos_2, _u_2.x) AS x, IF(_u.pos = _u_2.pos_2, _u_2.pos_2) AS pos_2 FROM UNNEST(SEQUENCE(1, GREATEST(CARDINALITY(ARRAY[2, 3])))) AS _u(pos) CROSS JOIN UNNEST(ARRAY[2, 3]) WITH ORDINALITY AS _u_2(x, pos_2) WHERE _u.pos = _u_2.pos_2 OR (_u.pos > CARDINALITY(ARRAY[2, 3]) AND _u_2.pos_2 = CARDINALITY(ARRAY[2, 3]))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT POSEXPLODE(ARRAY('a'))",
+   "expected": "SELECT GENERATE_SUBSCRIPTS(['a'], 1) - 1 AS pos, UNNEST(['a']) AS col",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT POSEXPLODE(ARRAY('a'))",
+   "expected": "SELECT POSEXPLODE(ARRAY('a'))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT POSEXPLODE(x) AS (a, b)",
+   "expected": "SELECT IF(_u.pos = _u_2.a, _u_2.b) AS b, IF(_u.pos = _u_2.a, _u_2.a) AS a FROM UNNEST(SEQUENCE(1, GREATEST(CARDINALITY(x)))) AS _u(pos) CROSS JOIN UNNEST(x) WITH ORDINALITY AS _u_2(b, a) WHERE _u.pos = _u_2.a OR (_u.pos > CARDINALITY(x) AND _u_2.a = CARDINALITY(x))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT POSEXPLODE(x) AS (a, b)",
+   "expected": "SELECT GENERATE_SUBSCRIPTS(x, 1) - 1 AS a, UNNEST(x) AS b",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT POSEXPLODE(x) AS (a, b)",
+   "expected": "SELECT POSEXPLODE(x) AS (a, b)",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT * FROM POSEXPLODE(ARRAY('a'))",
+   "expected": "SELECT * FROM (SELECT GENERATE_SUBSCRIPTS(['a'], 1) - 1 AS pos, UNNEST(['a']) AS col)",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM POSEXPLODE(ARRAY('a'))",
+   "expected": "SELECT * FROM POSEXPLODE(ARRAY('a'))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT * FROM POSEXPLODE(ARRAY('a')) AS (a, b)",
+   "expected": "SELECT * FROM (SELECT GENERATE_SUBSCRIPTS(['a'], 1) - 1 AS a, UNNEST(['a']) AS b)",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM POSEXPLODE(ARRAY('a')) AS (a, b)",
+   "expected": "SELECT * FROM POSEXPLODE(ARRAY('a')) AS _t0(a, b)",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT POSEXPLODE(ARRAY(2, 3)), EXPLODE(ARRAY(4, 5, 6)) FROM tbl",
+   "expected": "SELECT IF(pos = pos_2, col, NULL) AS col, IF(pos = pos_2, pos_2, NULL) AS pos_2, IF(pos = pos_3, col_2, NULL) AS col_2 FROM tbl CROSS JOIN UNNEST(GENERATE_ARRAY(0, GREATEST(ARRAY_LENGTH([2, 3]), ARRAY_LENGTH([4, 5, 6])) - 1)) AS pos CROSS JOIN UNNEST([2, 3]) AS col WITH OFFSET AS pos_2 CROSS JOIN UNNEST([4, 5, 6]) AS col_2 WITH OFFSET AS pos_3 WHERE (pos = pos_2 OR (pos > (ARRAY_LENGTH([2, 3]) - 1) AND pos_2 = (ARRAY_LENGTH([2, 3]) - 1))) AND (pos = pos_3 OR (pos > (ARRAY_LENGTH([4, 5, 6]) - 1) AND pos_3 = (ARRAY_LENGTH([4, 5, 6]) - 1)))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT POSEXPLODE(ARRAY(2, 3)), EXPLODE(ARRAY(4, 5, 6)) FROM tbl",
+   "expected": "SELECT IF(_u.pos = _u_2.pos_2, _u_2.col) AS col, IF(_u.pos = _u_2.pos_2, _u_2.pos_2) AS pos_2, IF(_u.pos = _u_3.pos_3, _u_3.col_2) AS col_2 FROM tbl CROSS JOIN UNNEST(SEQUENCE(1, GREATEST(CARDINALITY(ARRAY[2, 3]), CARDINALITY(ARRAY[4, 5, 6])))) AS _u(pos) CROSS JOIN UNNEST(ARRAY[2, 3]) WITH ORDINALITY AS _u_2(col, pos_2) CROSS JOIN UNNEST(ARRAY[4, 5, 6]) WITH ORDINALITY AS _u_3(col_2, pos_3) WHERE (_u.pos = _u_2.pos_2 OR (_u.pos > CARDINALITY(ARRAY[2, 3]) AND _u_2.pos_2 = CARDINALITY(ARRAY[2, 3]))) AND (_u.pos = _u_3.pos_3 OR (_u.pos > CARDINALITY(ARRAY[4, 5, 6]) AND _u_3.pos_3 = CARDINALITY(ARRAY[4, 5, 6])))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT col, pos, POSEXPLODE(ARRAY(2, 3)) FROM _u",
+   "expected": "SELECT col, pos, IF(_u_2.pos_2 = _u_3.pos_3, _u_3.col_2) AS col_2, IF(_u_2.pos_2 = _u_3.pos_3, _u_3.pos_3) AS pos_3 FROM _u CROSS JOIN UNNEST(SEQUENCE(1, GREATEST(CARDINALITY(ARRAY[2, 3])))) AS _u_2(pos_2) CROSS JOIN UNNEST(ARRAY[2, 3]) WITH ORDINALITY AS _u_3(col_2, pos_3) WHERE _u_2.pos_2 = _u_3.pos_3 OR (_u_2.pos_2 > CARDINALITY(ARRAY[2, 3]) AND _u_3.pos_3 = CARDINALITY(ARRAY[2, 3]))",
+   "test": "TestSpark.test_explode_projection_to_unnest"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT COUNT(1), d, h FROM t GROUP BY d, h GROUPING SETS ((d, h), (d))",
+   "expected": "SELECT COUNT(1), d, h FROM t GROUP BY d, h GROUPING SETS ((d, h), (d))",
+   "test": "TestSpark.test_grouping_sets_as_group_by_element"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT COUNT(1), d, h FROM t GROUP BY d, h, GROUPING SETS ((d, h), (d))",
+   "expected": "SELECT COUNT(1), d, h FROM t GROUP BY d, h, GROUPING SETS ((d, h), (d))",
+   "test": "TestSpark.test_grouping_sets_as_group_by_element"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT a FROM t GROUP BY a, GROUPING SETS ((a)), GROUPING SETS ((a))",
+   "expected": "SELECT a FROM t GROUP BY a, GROUPING SETS ((a)), GROUPING SETS ((a))",
+   "test": "TestSpark.test_grouping_sets_as_group_by_element"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT COUNT(1), d, h FROM t GROUP BY GROUPING SETS ((d, h), (d))",
+   "expected": "SELECT COUNT(1), d, h FROM t GROUP BY GROUPING SETS ((d, h), (d))",
+   "test": "TestSpark.test_grouping_sets_as_group_by_element"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT c1, c2, c3, c4 FROM t GROUP BY CUBE (c1, c2), c3, c4",
+   "expected": "SELECT c1, c2, c3, c4 FROM t GROUP BY CUBE (c1, c2), c3, c4",
+   "test": "TestSpark.test_grouping_sets_as_group_by_element"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT c1, c2, c3, c4 FROM t GROUP BY c3, CUBE (c1, c2), c4",
+   "expected": "SELECT c1, c2, c3, c4 FROM t GROUP BY c3, CUBE (c1, c2), c4",
+   "test": "TestSpark.test_grouping_sets_as_group_by_element"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT a, b, c FROM t GROUP BY ROLLUP (a), b, CUBE (c)",
+   "expected": "SELECT a, b, c FROM t GROUP BY ROLLUP (a), b, CUBE (c)",
+   "test": "TestSpark.test_grouping_sets_as_group_by_element"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT a, b, c FROM t GROUP BY a, GROUPING SETS ((a), (b)), c",
+   "expected": "SELECT a, b, c FROM t GROUP BY a, GROUPING SETS ((a), (b)), c",
+   "test": "TestSpark.test_grouping_sets_as_group_by_element"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ COALESCE(3) */ * FROM x",
+   "expected": "SELECT /*+ COALESCE(3) */ * FROM x",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ COALESCE(3) */ * FROM x",
+   "expected": "SELECT * FROM x",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ COALESCE(3), REPARTITION(1) */ * FROM x",
+   "expected": "SELECT /*+ COALESCE(3), REPARTITION(1) */ * FROM x",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ COALESCE(3), REPARTITION(1) */ * FROM x",
+   "expected": "SELECT * FROM x",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ BROADCAST(table) */ cola FROM table",
+   "expected": "SELECT /*+ BROADCAST(table) */ cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ BROADCAST(table) */ cola FROM table",
+   "expected": "SELECT cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ BROADCASTJOIN(table) */ cola FROM table",
+   "expected": "SELECT /*+ BROADCASTJOIN(table) */ cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ BROADCASTJOIN(table) */ cola FROM table",
+   "expected": "SELECT cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ MAPJOIN(table) */ cola FROM table",
+   "expected": "SELECT /*+ MAPJOIN(table) */ cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ MAPJOIN(table) */ cola FROM table",
+   "expected": "SELECT cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ MERGE(table) */ cola FROM table",
+   "expected": "SELECT /*+ MERGE(table) */ cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ MERGE(table) */ cola FROM table",
+   "expected": "SELECT cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ SHUFFLEMERGE(table) */ cola FROM table",
+   "expected": "SELECT /*+ SHUFFLEMERGE(table) */ cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ SHUFFLEMERGE(table) */ cola FROM table",
+   "expected": "SELECT cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ MERGEJOIN(table) */ cola FROM table",
+   "expected": "SELECT /*+ MERGEJOIN(table) */ cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ MERGEJOIN(table) */ cola FROM table",
+   "expected": "SELECT cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ SHUFFLE_HASH(table) */ cola FROM table",
+   "expected": "SELECT /*+ SHUFFLE_HASH(table) */ cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ SHUFFLE_HASH(table) */ cola FROM table",
+   "expected": "SELECT cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT /*+ SHUFFLE_REPLICATE_NL(table) */ cola FROM table",
+   "expected": "SELECT /*+ SHUFFLE_REPLICATE_NL(table) */ cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT /*+ SHUFFLE_REPLICATE_NL(table) */ cola FROM table",
+   "expected": "SELECT cola FROM table",
+   "test": "TestSpark.test_hint"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "INSERT OVERWRITE TABLE table WITH cte AS (SELECT cola FROM other_table) SELECT cola FROM cte",
+   "expected": "WITH cte AS (SELECT cola FROM other_table) INSERT OVERWRITE TABLE table SELECT cola FROM cte",
+   "test": "TestSpark.test_insert_cte"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "INSERT OVERWRITE TABLE table WITH cte AS (SELECT cola FROM other_table) SELECT cola FROM cte",
+   "expected": "WITH cte AS (SELECT cola FROM other_table) INSERT OVERWRITE TABLE table SELECT cola FROM cte",
+   "test": "TestSpark.test_insert_cte"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "INSERT OVERWRITE TABLE table WITH cte AS (SELECT cola FROM other_table) SELECT cola FROM cte",
+   "expected": "WITH cte AS (SELECT cola FROM other_table) INSERT OVERWRITE TABLE table SELECT cola FROM cte",
+   "test": "TestSpark.test_insert_cte"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "INSERT OVERWRITE TABLE table WITH cte AS (SELECT cola FROM other_table) SELECT cola FROM cte",
+   "expected": "WITH cte AS (SELECT cola FROM other_table) INSERT OVERWRITE TABLE table SELECT cola FROM cte",
+   "test": "TestSpark.test_insert_cte"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM db.table1 MINUS SELECT * FROM db.table2",
+   "expected": "SELECT * FROM db.table1 EXCEPT SELECT * FROM db.table2",
+   "test": "TestSpark.test_minus"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT * FROM db.table1 MINUS SELECT * FROM db.table2",
+   "expected": "SELECT * FROM db.table1 EXCEPT SELECT * FROM db.table2",
+   "test": "TestSpark.test_minus"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "FROM x INSERT OVERWRITE TABLE a PARTITION(ds = '1') SELECT k WHERE v > 0 INSERT INTO b SELECT k, v",
+   "expected": "FROM x INSERT OVERWRITE TABLE a PARTITION(ds = '1') SELECT k WHERE v > 0 INSERT INTO b SELECT k, v",
+   "test": "TestSpark.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "FROM (SELECT k, v FROM x QUALIFY ROW_NUMBER() OVER (PARTITION BY k ORDER BY v) = 1) AS s INSERT INTO t SELECT s.v INSERT INTO u SELECT s.k",
+   "expected": "FROM (SELECT k, v FROM (SELECT k, v, ROW_NUMBER() OVER (PARTITION BY k ORDER BY v) AS _w FROM x) AS _t WHERE _w = 1) AS s INSERT INTO t SELECT s.v INSERT INTO u SELECT s.k",
+   "test": "TestSpark.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT named_struct('a', 1, 'b', 'x')",
+   "expected": "SELECT STRUCT(1 AS a, 'x' AS b)",
+   "test": "TestSpark.test_named_struct"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT named_struct('a', 1, 'b', 'x')",
+   "expected": "SELECT STRUCT(1 AS a, 'x' AS b)",
+   "test": "TestSpark.test_named_struct"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE VIEW emp_v WITH SCHEMA BINDING AS SELECT * FROM emp",
+   "expected": "CREATE VIEW emp_v WITH SCHEMA BINDING AS SELECT * FROM emp",
+   "test": "TestSpark.test_schema_binding_options"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE VIEW emp_v WITH SCHEMA COMPENSATION AS SELECT * FROM emp",
+   "expected": "CREATE VIEW emp_v WITH SCHEMA COMPENSATION AS SELECT * FROM emp",
+   "test": "TestSpark.test_schema_binding_options"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE VIEW emp_v WITH SCHEMA TYPE EVOLUTION AS SELECT * FROM emp",
+   "expected": "CREATE VIEW emp_v WITH SCHEMA TYPE EVOLUTION AS SELECT * FROM emp",
+   "test": "TestSpark.test_schema_binding_options"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CREATE VIEW emp_v WITH SCHEMA EVOLUTION AS SELECT * FROM emp",
+   "expected": "CREATE VIEW emp_v WITH SCHEMA EVOLUTION AS SELECT * FROM emp",
+   "test": "TestSpark.test_schema_binding_options"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SET VAR v = 5",
+   "expected": "SET VARIABLE v = 5",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SET VAR v = 5",
+   "expected": "SET VARIABLE v = 5",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SET VARIABLE v = 5",
+   "expected": "SET VARIABLE v = 5",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SET VARIABLE v = 5",
+   "expected": "SET VARIABLE v = 5",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SET VARIABLE v = (SELECT MAX(c1) FROM VALUES (1), (2) AS T(c1))",
+   "expected": "SET VARIABLE v = (SELECT MAX(c1) FROM VALUES (1), (2) AS T(c1))",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SET VARIABLE v = (SELECT MAX(c1) FROM VALUES (1), (2) AS T(c1))",
+   "expected": "SET VARIABLE v = (SELECT MAX(c1) FROM VALUES (1), (2) AS T(c1))",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SET VARIABLE v = DEFAULT",
+   "expected": "SET VARIABLE v = DEFAULT",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SET VARIABLE v = DEFAULT",
+   "expected": "SET VARIABLE v = DEFAULT",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SET VARIABLE v1 = 1, v2 = '2'",
+   "expected": "SET VARIABLE v1 = 1, v2 = '2'",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SET VARIABLE v1 = 1, v2 = '2'",
+   "expected": "SET VARIABLE v1 = 1, v2 = '2'",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SET VARIABLE (v1, v2) = (SELECT 1, 2)",
+   "expected": "SET VARIABLE (v1, v2) = (SELECT 1, 2)",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SET VARIABLE (v1, v2) = (SELECT 1, 2)",
+   "expected": "SET VARIABLE (v1, v2) = (SELECT 1, 2)",
+   "test": "TestSpark.test_set_variable"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CAST('a' AS CHAR(10) COLLATE UTF8_BINARY)",
+   "expected": "SELECT CAST('a' AS STRING COLLATE UTF8_BINARY)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CAST('a' AS VARCHAR(10) COLLATE UTF8_BINARY)",
+   "expected": "SELECT CAST('a' AS STRING COLLATE UTF8_BINARY)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "spark",
+   "sql": "SELECT CAST('a' AS VARCHAR COLLATE foo)",
+   "expected": "SELECT CAST('a' AS STRING COLLATE foo)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "CONCAT_WS(' ', NULL, 'Smith')",
+   "expected": "CONCAT_WS(' ', NULL, 'Smith')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "CONCAT_WS(' ', NULL, 'Smith')",
+   "expected": "CONCAT_WS(' ', NULL, 'Smith')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "CONCAT_WS(' ', NULL, 'Smith')",
+   "expected": "CONCAT_WS(' ', NULL, 'Smith')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TRUNC(date_col, 'MM')",
+   "expected": "TRUNC(date_col, 'MM')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "spark",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "CAST(3.14159 AS BIGINT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT APPROX_TOP_K_ACCUMULATE(col, 10)",
+   "expected": "SELECT APPROX_TOP_K_ACCUMULATE(col, 10)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT APPROX_TOP_K_ACCUMULATE(col)",
+   "expected": "SELECT APPROX_TOP_K_ACCUMULATE(col)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT BITMAP_BIT_POSITION(10)",
+   "expected": "SELECT BITMAP_BIT_POSITION(10)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT BITMAP_CONSTRUCT_AGG(value)",
+   "expected": "SELECT BITMAP_CONSTRUCT_AGG(value)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE foo ADD PARTITION(event = 'click')",
+   "expected": "ALTER TABLE foo ADD PARTITION(event = 'click')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ALTER TABLE foo ADD IF NOT EXISTS PARTITION(event = 'click')",
+   "expected": "ALTER TABLE foo ADD IF NOT EXISTS PARTITION(event = 'click')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "IF(cond, foo AS bar, bla AS baz)",
+   "expected": "IF(cond, foo AS bar, bla AS baz)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "any_value(col, true)",
+   "expected": "ANY_VALUE(col) IGNORE NULLS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "first(col, true)",
+   "expected": "FIRST(col) IGNORE NULLS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "first_value(col, true)",
+   "expected": "FIRST_VALUE(col) IGNORE NULLS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "last(col, true)",
+   "expected": "LAST(col) IGNORE NULLS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "last_value(col, true)",
+   "expected": "LAST_VALUE(col) IGNORE NULLS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DESCRIBE EXTENDED db.tbl",
+   "expected": "DESCRIBE EXTENDED db.tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM test TABLESAMPLE (50 PERCENT)",
+   "expected": "SELECT * FROM test TABLESAMPLE (50 PERCENT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM test TABLESAMPLE (5 ROWS)",
+   "expected": "SELECT * FROM test TABLESAMPLE (5 ROWS)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM test TABLESAMPLE (BUCKET 4 OUT OF 10)",
+   "expected": "SELECT * FROM test TABLESAMPLE (BUCKET 4 OUT OF 10)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "REFRESH 'hdfs://path/to/table'",
+   "expected": "REFRESH 'hdfs://path/to/table'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "REFRESH TABLE tempDB.view1",
+   "expected": "REFRESH TABLE tempDB.view1",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CASE WHEN a = NULL THEN 1 ELSE 2 END",
+   "expected": "SELECT CASE WHEN a = NULL THEN 1 ELSE 2 END",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM t1 SEMI JOIN t2 ON t1.x = t2.x",
+   "expected": "SELECT * FROM t1 SEMI JOIN t2 ON t1.x = t2.x",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRANSFORM(ARRAY(1, 2, 3), x -> x + 1)",
+   "expected": "SELECT TRANSFORM(ARRAY(1, 2, 3), x -> x + 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRANSFORM(ARRAY(1, 2, 3), (x, i) -> x + i)",
+   "expected": "SELECT TRANSFORM(ARRAY(1, 2, 3), (x, i) -> x + i)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "REFRESH TABLE a.b.c",
+   "expected": "REFRESH TABLE a.b.c",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "REFRESH FUNCTION db.func1",
+   "expected": "REFRESH FUNCTION db.func1",
+   "command": true,
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "INTERVAL '-86' DAYS",
+   "expected": "INTERVAL '-86' DAYS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TRIM('    SparkSQL   ')",
+   "expected": "TRIM('    SparkSQL   ')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TRIM(BOTH 'SL' FROM 'SSparkSQLS')",
+   "expected": "TRIM(BOTH 'SL' FROM 'SSparkSQLS')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TRIM(LEADING 'SL' FROM 'SSparkSQLS')",
+   "expected": "TRIM(LEADING 'SL' FROM 'SSparkSQLS')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TRIM(TRAILING 'SL' FROM 'SSparkSQLS')",
+   "expected": "TRIM(TRAILING 'SL' FROM 'SSparkSQLS')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SPLIT(str, pattern, lim)",
+   "expected": "SPLIT(str, pattern, lim)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM t1, t2",
+   "expected": "SELECT * FROM t1 CROSS JOIN t2",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT 1 limit",
+   "expected": "SELECT 1 AS limit",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT 1 offset",
+   "expected": "SELECT 1 AS offset",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT UNIX_TIMESTAMP()",
+   "expected": "SELECT UNIX_TIMESTAMP(CURRENT_TIMESTAMP())",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CAST('2023-01-01' AS TIMESTAMP) + INTERVAL 23 HOUR + 59 MINUTE + 59 SECONDS",
+   "expected": "SELECT CAST('2023-01-01' AS TIMESTAMP) + INTERVAL '23' HOUR + INTERVAL '59' MINUTE + INTERVAL '59' SECONDS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CAST('2023-01-01' AS TIMESTAMP) + INTERVAL '23' HOUR + '59' MINUTE + '59' SECONDS",
+   "expected": "SELECT CAST('2023-01-01' AS TIMESTAMP) + INTERVAL '23' HOUR + INTERVAL '59' MINUTE + INTERVAL '59' SECONDS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT INTERVAL '5' HOURS '30' MINUTES '5' SECONDS '6' MILLISECONDS '7' MICROSECONDS",
+   "expected": "SELECT INTERVAL '5' HOURS + INTERVAL '30' MINUTES + INTERVAL '5' SECONDS + INTERVAL '6' MILLISECONDS + INTERVAL '7' MICROSECONDS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT INTERVAL 5 HOURS 30 MINUTES 5 SECONDS 6 MILLISECONDS 7 MICROSECONDS",
+   "expected": "SELECT INTERVAL '5' HOURS + INTERVAL '30' MINUTES + INTERVAL '5' SECONDS + INTERVAL '6' MILLISECONDS + INTERVAL '7' MICROSECONDS",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT REGEXP_REPLACE('100-200', r'([^0-9])', '')",
+   "expected": "SELECT REGEXP_REPLACE('100-200', '([^0-9])', '')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT REGEXP_REPLACE('100-200', R'([^0-9])', '')",
+   "expected": "SELECT REGEXP_REPLACE('100-200', '([^0-9])', '')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT STR_TO_MAP('a:1,b:2,c:3')",
+   "expected": "SELECT STR_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "spark",
+   "sql": "SELECT * FROM READ_PARQUET('name.parquet')",
+   "expected": "SELECT * FROM parquet.`name.parquet`",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM parquet.`name.parquet`",
+   "expected": "SELECT * FROM parquet.`name.parquet`",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT TO_JSON(STRUCT('blah' AS x)) AS y",
+   "expected": "SELECT JSON_FORMAT(CAST(CAST(ROW('blah') AS ROW(x VARCHAR)) AS JSON)) AS y",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_JSON(STRUCT('blah' AS x)) AS y",
+   "expected": "SELECT TO_JSON(STRUCT('blah' AS x)) AS y",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT TO_JSON(STRUCT('blah' AS x)) AS y",
+   "expected": "SELECT JSON_FORMAT(CAST(CAST(ROW('blah') AS ROW(x VARCHAR)) AS JSON)) AS y",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "expected": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT ELEMENT_AT(ARRAY[1, 2, 3], 2)",
+   "expected": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "expected": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "expected": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "expected": "SELECT [1, 2, 3][2]",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb, version=1.1.0",
+   "sql": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "expected": "SELECT ([1, 2, 3])[2]",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT TRY_ELEMENT_AT(ARRAY(1, 2, 3), 2)",
+   "expected": "SELECT ELEMENT_AT(ARRAY[1, 2, 3], 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "spark",
+   "sql": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "expected": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "expected": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "expected": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "expected": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "expected": "SELECT ELEMENT_AT(ARRAY(1, 2, 3), 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT h.id, amount FROM hourlycostagg h LATERAL VIEW inline(h.costs) c",
+   "expected": "SELECT h.id, amount FROM hourlycostagg AS h CROSS JOIN LATERAL (SELECT UNNEST(h.costs, max_depth => 2)) AS c",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT h.id, amount FROM hourlycostagg h LATERAL VIEW inline(h.adjustments) as type, val, curr",
+   "expected": "SELECT h.id, amount FROM hourlycostagg AS h CROSS JOIN LATERAL (SELECT UNNEST(h.adjustments, max_depth => 2)) AS _u_0(type, val, curr)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "\n            WITH hourlycostagg AS (\n                SELECT\n                    101 AS id,\n                    ARRAY(\n                        STRUCT(10.0 AS amount, 'USD' AS currency),\n                        STRUCT(20.0 AS amount, 'EUR' AS currency)\n                    ) AS costs,\n                    ARRAY(\n                        STRUCT('tax' AS type, 0.15 AS val, 'EUR' AS currency),\n                        STRUCT('fee' AS type, 5.00 AS val, 'EUR' AS currency)\n                    ) AS adjustments,\n                    ARRAY(\n                        STRUCT(\n                            12.0 AS length,\n                            STRUCT('A' AS tag, 98.5 AS score) AS details\n                        ),\n                        STRUCT(\n                            23.0 AS length,\n                            STRUCT('B' AS tag, 99.5 AS score) AS details\n                        )\n                    ) AS info\n            )\n            SELECT\n                h.id,\n                amount,\n                currency,\n                type,\n                val,\n                leng\n            FROM hourlycostagg h\n            LATERAL VIEW inline(h.costs) c\n            LATERAL VIEW inline(h.adjustments) as type, val, curr\n            LATERAL VIEW inline(h.info) exploded as leng, det\n            ",
+   "expected": "WITH hourlycostagg AS (SELECT 101 AS id, [{'amount': 10.0, 'currency': 'USD'}, {'amount': 20.0, 'currency': 'EUR'}] AS costs, [{'type': 'tax', 'val': 0.15, 'currency': 'EUR'}, {'type': 'fee', 'val': 5.00, 'currency': 'EUR'}] AS adjustments, [{'length': 12.0, 'details': {'tag': 'A', 'score': 98.5}}, {'length': 23.0, 'details': {'tag': 'B', 'score': 99.5}}] AS info) SELECT h.id, amount, currency, type, val, leng FROM hourlycostagg AS h CROSS JOIN LATERAL (SELECT UNNEST(h.costs, max_depth => 2)) AS c CROSS JOIN LATERAL (SELECT UNNEST(h.adjustments, max_depth => 2)) AS _u_1(type, val, curr) CROSS JOIN LATERAL (SELECT UNNEST(h.info, max_depth => 2)) AS exploded(leng, det)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT id_column, name, age FROM test_table LATERAL VIEW INLINE(struc_column) explode_view AS name, age",
+   "expected": "SELECT id_column, name, age FROM test_table CROSS JOIN UNNEST(struc_column) AS explode_view(name, age)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT id_column, name, age FROM test_table LATERAL VIEW INLINE(struc_column) explode_view AS name, age",
+   "expected": "SELECT id_column, name, age FROM test_table LATERAL VIEW INLINE(struc_column) explode_view AS name, age",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT id_column, name, age FROM test_table LATERAL VIEW INLINE(struc_column) explode_view AS name, age",
+   "expected": "SELECT id_column, name, age FROM test_table CROSS JOIN LATERAL (SELECT UNNEST(struc_column, max_depth => 2)) AS explode_view(name, age)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT ARRAY_AGG(x) FILTER (WHERE x = 5) FROM (SELECT 1 UNION ALL SELECT NULL) AS t(x)",
+   "expected": "SELECT ARRAY_AGG(x) FILTER(WHERE x = 5 AND NOT x IS NULL) FROM (SELECT 1 UNION ALL SELECT NULL) AS t(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT ARRAY_AGG(x) FILTER (WHERE x = 5) FROM (SELECT 1 UNION ALL SELECT NULL) AS t(x)",
+   "expected": "SELECT COLLECT_LIST(x) FILTER(WHERE x = 5) FROM (SELECT 1 UNION ALL SELECT NULL) AS t(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT ARRAY_AGG(1)",
+   "expected": "SELECT ARRAY_AGG(1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT ARRAY_AGG(1)",
+   "expected": "SELECT COLLECT_LIST(1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT ARRAY_AGG(DISTINCT STRUCT('a'))",
+   "expected": "SELECT ARRAY_AGG(DISTINCT {'col1': 'a'})",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT ARRAY_AGG(DISTINCT STRUCT('a'))",
+   "expected": "SELECT COLLECT_LIST(DISTINCT STRUCT('a' AS col1))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT DATE_FORMAT(DATE '2020-01-01', 'EEEE') AS weekday",
+   "expected": "SELECT DATE_FORMAT(CAST(CAST('2020-01-01' AS DATE) AS TIMESTAMP), '%W') AS weekday",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT DATE_FORMAT(DATE '2020-01-01', 'EEEE') AS weekday",
+   "expected": "SELECT DATE_FORMAT(CAST('2020-01-01' AS DATE), 'EEEE') AS weekday",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT TRY_ELEMENT_AT(MAP(1, 'a', 2, 'b'), 2)",
+   "expected": "SELECT TRY_ELEMENT_AT(MAP(1, 'a', 2, 'b'), 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT TRY_ELEMENT_AT(MAP(1, 'a', 2, 'b'), 2)",
+   "expected": "SELECT TRY_ELEMENT_AT(MAP(1, 'a', 2, 'b'), 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TRY_ELEMENT_AT(MAP(1, 'a', 2, 'b'), 2)",
+   "expected": "SELECT MAP([1, 2], ['a', 'b'])[2]",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb, version=1.1.0",
+   "sql": "SELECT TRY_ELEMENT_AT(MAP(1, 'a', 2, 'b'), 2)",
+   "expected": "SELECT (MAP([1, 2], ['a', 'b'])[2])[1]",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRY_ELEMENT_AT(MAP(1, 'a', 2, 'b'), 2)",
+   "expected": "SELECT TRY_ELEMENT_AT(MAP(1, 'a', 2, 'b'), 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "spark",
+   "sql": "SELECT STR_SPLIT_REGEX('123|789', '\\|')",
+   "expected": "SELECT SPLIT('123|789', '\\\\|')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT REGEXP_SPLIT('123|789', '\\|')",
+   "expected": "SELECT SPLIT('123|789', '\\\\|')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT SPLIT('123|789', '\\\\|')",
+   "expected": "SELECT STR_SPLIT_REGEX('123|789', '\\|')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT SPLIT('123|789', '\\\\|')",
+   "expected": "SELECT REGEXP_SPLIT('123|789', '\\|')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT SPLIT('123|789', '\\\\|')",
+   "expected": "SELECT SPLIT('123|789', '\\\\|')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "clickhouse",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "doris",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS `name` UNION ALL SELECT NULL AS id, 'jake' AS `name`) SELECT COUNT(DISTINCT id, `name`) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT CASE WHEN id IS NULL THEN NULL WHEN name IS NULL THEN NULL ELSE (id, name) END) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "mysql",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "postgres",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT CASE WHEN id IS NULL THEN NULL WHEN name IS NULL THEN NULL ELSE (id, name) END) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT CASE WHEN id IS NULL THEN NULL WHEN name IS NULL THEN NULL ELSE (id, name) END) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "expected": "WITH tbl AS (SELECT 1 AS id, 'eggy' AS name UNION ALL SELECT NULL AS id, 'jake' AS name) SELECT COUNT(DISTINCT id, name) AS cnt FROM tbl",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT TO_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT DATETIME(TIMESTAMP(CAST('2016-08-31' AS DATETIME), 'Asia/Seoul'), 'UTC')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT CAST('2016-08-31' AS TIMESTAMP) AT TIME ZONE 'Asia/Seoul' AT TIME ZONE 'UTC'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "postgres",
+   "sql": "SELECT TO_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT CAST('2016-08-31' AS TIMESTAMP) AT TIME ZONE 'Asia/Seoul' AT TIME ZONE 'UTC'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT TO_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT WITH_TIMEZONE(CAST('2016-08-31' AS TIMESTAMP), 'Asia/Seoul') AT TIME ZONE 'UTC'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "redshift",
+   "sql": "SELECT TO_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT CAST('2016-08-31' AS TIMESTAMP) AT TIME ZONE 'Asia/Seoul' AT TIME ZONE 'UTC'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "SELECT TO_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT CONVERT_TIMEZONE('Asia/Seoul', 'UTC', CAST('2016-08-31' AS TIMESTAMP))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT TO_UTC_TIMESTAMP(CAST('2016-08-31' AS TIMESTAMP), 'Asia/Seoul')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT FROM_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT AT_TIMEZONE(CAST('2016-08-31' AS TIMESTAMP), 'Asia/Seoul')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT FROM_UTC_TIMESTAMP('2016-08-31', 'Asia/Seoul')",
+   "expected": "SELECT FROM_UTC_TIMESTAMP(CAST('2016-08-31' AS TIMESTAMP), 'Asia/Seoul')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "spark",
+   "sql": "STRUCT_EXTRACT(foo, bar)",
+   "expected": "foo.bar",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "MAP(1, 2, 3, 4)",
+   "expected": "MAP(1, 2, 3, 4)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "trino",
+   "sql": "MAP(1, 2, 3, 4)",
+   "expected": "MAP(ARRAY[1, 3], ARRAY[2, 4])",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "MAP()",
+   "expected": "MAP()",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "spark",
+   "sql": "MAP()",
+   "expected": "MAP()",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "trino",
+   "sql": "MAP()",
+   "expected": "MAP(ARRAY[], ARRAY[])",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT SPLIT_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "expected": "SELECT STR_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT STR_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "expected": "SELECT STR_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT STR_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "expected": "SELECT SPLIT_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT STR_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "expected": "SELECT STR_TO_MAP('a:1,b:2,c:3', ',', ':')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "spark",
+   "sql": "SELECT DATEDIFF('month', CAST('1996-10-30' AS TIMESTAMPTZ), CAST('1997-02-28 10:30:00' AS TIMESTAMPTZ))",
+   "expected": "SELECT DATEDIFF(MONTH, CAST('1996-10-30' AS TIMESTAMP), CAST('1997-02-28 10:30:00' AS TIMESTAMP))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT DATEDIFF(MONTH, CAST('1996-10-30' AS TIMESTAMP), CAST('1997-02-28 10:30:00' AS TIMESTAMP))",
+   "expected": "SELECT DATEDIFF(MONTH, CAST('1996-10-30' AS TIMESTAMP), CAST('1997-02-28 10:30:00' AS TIMESTAMP))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "SELECT DATEDIFF(MONTH, CAST('1996-10-30' AS TIMESTAMP), CAST('1997-02-28 10:30:00' AS TIMESTAMP))",
+   "expected": "SELECT CAST(MONTHS_BETWEEN(CAST('1997-02-28 10:30:00' AS TIMESTAMP), CAST('1996-10-30' AS TIMESTAMP)) AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT DATEDIFF(week, '2020-01-01', '2020-12-31')",
+   "expected": "SELECT DATE_DIFF(CAST('2020-12-31' AS DATE), CAST('2020-01-01' AS DATE), WEEK)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT DATEDIFF(week, '2020-01-01', '2020-12-31')",
+   "expected": "SELECT DATE_DIFF('WEEK', CAST('2020-01-01' AS DATE), CAST('2020-12-31' AS DATE))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT DATEDIFF(week, '2020-01-01', '2020-12-31')",
+   "expected": "SELECT CAST(DATEDIFF('2020-12-31', '2020-01-01') / 7 AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(week, '2020-01-01', '2020-12-31')",
+   "expected": "SELECT CAST(EXTRACT(days FROM (CAST(CAST('2020-12-31' AS DATE) AS TIMESTAMP) - CAST(CAST('2020-01-01' AS DATE) AS TIMESTAMP))) / 7 AS BIGINT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "redshift",
+   "sql": "SELECT DATEDIFF(week, '2020-01-01', '2020-12-31')",
+   "expected": "SELECT DATEDIFF(WEEK, CAST('2020-01-01' AS DATE), CAST('2020-12-31' AS DATE))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "SELECT DATEDIFF(week, '2020-01-01', '2020-12-31')",
+   "expected": "SELECT DATEDIFF(WEEK, TO_DATE('2020-01-01'), TO_DATE('2020-12-31'))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT DATEDIFF(week, '2020-01-01', '2020-12-31')",
+   "expected": "SELECT DATEDIFF(WEEK, '2020-01-01', '2020-12-31')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30')",
+   "expected": "SELECT DATE_DIFF('MONTH', CAST('1996-10-30' AS DATE), CAST('1997-02-28 10:30:00' AS DATE)) + CASE WHEN DAY(CAST('1997-02-28 10:30:00' AS DATE)) = DAY(LAST_DAY(CAST('1997-02-28 10:30:00' AS DATE))) AND DAY(CAST('1996-10-30' AS DATE)) = DAY(LAST_DAY(CAST('1996-10-30' AS DATE))) THEN 0 ELSE (DAY(CAST('1997-02-28 10:30:00' AS DATE)) - DAY(CAST('1996-10-30' AS DATE))) / 31.0 END",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30')",
+   "expected": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30')",
+   "expected": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30', FALSE)",
+   "expected": "SELECT DATE_DIFF('MONTH', CAST('1996-10-30' AS DATE), CAST('1997-02-28 10:30:00' AS DATE)) + CASE WHEN DAY(CAST('1997-02-28 10:30:00' AS DATE)) = DAY(LAST_DAY(CAST('1997-02-28 10:30:00' AS DATE))) AND DAY(CAST('1996-10-30' AS DATE)) = DAY(LAST_DAY(CAST('1996-10-30' AS DATE))) THEN 0 ELSE (DAY(CAST('1997-02-28 10:30:00' AS DATE)) - DAY(CAST('1996-10-30' AS DATE))) / 31.0 END",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30', FALSE)",
+   "expected": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30', FALSE)",
+   "expected": "SELECT MONTHS_BETWEEN('1997-02-28 10:30:00', '1996-10-30', FALSE)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31 00:12:00')",
+   "expected": "SELECT CAST('2016-12-31 00:12:00' AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31 00:12:00')",
+   "expected": "SELECT CAST('2016-12-31 00:12:00' AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31 00:12:00')",
+   "expected": "SELECT CAST('2016-12-31 00:12:00' AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT TO_TIMESTAMP(x, 'zZ')",
+   "expected": "SELECT STR_TO_TIME(x, '%Z%z')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP(x, 'zZ')",
+   "expected": "SELECT STRPTIME(x, '%Z%z')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "spark",
+   "sql": "SELECT STRPTIME('2016-1-1', '%Y-%m-%d')",
+   "expected": "SELECT TO_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT TO_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "expected": "SELECT STR_TO_TIME('2016-1-1', '%Y-%-m-%-d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "expected": "SELECT STRPTIME('2016-1-1', '%Y-%-m-%-d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "expected": "SELECT TO_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_DATE(x, 'yyyy-M-d')",
+   "expected": "SELECT TO_DATE(x, 'yyyy-M-d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "expected": "SELECT STR_TO_TIME('2016-12-31', '%Y-%mstrict-%dstrict')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "expected": "SELECT STRPTIME('2016-12-31', '%Y-%m-%d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "expected": "SELECT TO_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "expected": "SELECT TO_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "spark",
+   "sql": "SELECT STRPTIME('20161231', '%Y%m%d')",
+   "expected": "SELECT TO_TIMESTAMP('20161231', 'yyyyMMdd')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP('20161231', 'yyyyMMdd')",
+   "expected": "SELECT STRPTIME('20161231', '%Y%m%d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_TIMESTAMP('20161231', 'yyyyMMdd')",
+   "expected": "SELECT TO_TIMESTAMP('20161231', 'yyyyMMdd')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT DATE_FORMAT(x, 'yyyy-MM-dd')",
+   "expected": "SELECT DATE_FORMAT(x, 'yyyy-MM-dd')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT TO_DATE(x, 'MM/dd/yyyy')",
+   "expected": "SELECT CAST(STR_TO_TIME(x, '%mstrict/%dstrict/%Y') AS DATE)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_DATE(x, 'MM/dd/yyyy')",
+   "expected": "SELECT CAST(CAST(TRY_STRPTIME(x, '%m/%d/%Y') AS TIMESTAMP) AS DATE)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT TO_DATE(x, 'MM/dd/yyyy')",
+   "expected": "SELECT CAST(SAFE_CAST(x AS TIMESTAMP FORMAT 'MM/DD/YYYY') AS DATE)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_DATE(x, 'MM/dd/yyyy')",
+   "expected": "SELECT TO_DATE(x, 'MM/dd/yyyy')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT TO_DATE(x, 'MM/dd/yyyy')",
+   "expected": "SELECT TO_DATE(x, 'MM/dd/yyyy')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "spark",
+   "sql": "SELECT STR_TO_UNIX('2016-1-1', '%Y-%m-%d')",
+   "expected": "SELECT UNIX_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT UNIX_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "expected": "SELECT EPOCH(STRPTIME('2016-1-1', '%Y-%-m-%-d'))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT UNIX_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "expected": "SELECT UNIX_TIMESTAMP('2016-1-1', 'yyyy-M-d')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT UNIX_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "expected": "SELECT EPOCH(STRPTIME('2016-12-31', '%Y-%m-%d'))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT UNIX_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "expected": "SELECT UNIX_TIMESTAMP('2016-12-31', 'yyyy-MM-dd')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "spark",
+   "sql": "SELECT STRPTIME('2016-1-1 3:4:5', '%Y-%m-%d %H:%M:%S')",
+   "expected": "SELECT TO_TIMESTAMP('2016-1-1 3:4:5', 'yyyy-M-d H:m:s')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT TO_TIMESTAMP('2016-1-1 3:4:5', 'yyyy-M-d H:m:s')",
+   "expected": "SELECT STR_TO_TIME('2016-1-1 3:4:5', '%Y-%-m-%-d %-H:%-M:%-S')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP('2016-1-1 3:4:5', 'yyyy-M-d H:m:s')",
+   "expected": "SELECT STRPTIME('2016-1-1 3:4:5', '%Y-%-m-%-d %-H:%-M:%-S')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_TIMESTAMP('2016-1-1 3:4:5', 'yyyy-M-d H:m:s')",
+   "expected": "SELECT TO_TIMESTAMP('2016-1-1 3:4:5', 'yyyy-M-d H:m:s')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31 03:04:05', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "SELECT STR_TO_TIME('2016-12-31 03:04:05', '%Y-%mstrict-%dstrict %Hstrict:%Mstrict:%Sstrict')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31 03:04:05', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "SELECT STRPTIME('2016-12-31 03:04:05', '%Y-%m-%d %H:%M:%S')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31 03:04:05', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "SELECT TO_TIMESTAMP('2016-12-31 03:04:05', 'yyyy-MM-dd HH:mm:ss')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT TO_TIMESTAMP('2016-12-31 03:04:05', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "SELECT TO_TIMESTAMP('2016-12-31 03:04:05', 'yyyy-MM-dd HH:mm:ss')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "spark",
+   "sql": "SELECT STRPTIME('20161231030405', '%Y%m%d%H%M%S')",
+   "expected": "SELECT TO_TIMESTAMP('20161231030405', 'yyyyMMddHHmmss')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP('20161231030405', 'yyyyMMddHHmmss')",
+   "expected": "SELECT STRPTIME('20161231030405', '%Y%m%d%H%M%S')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_TIMESTAMP('20161231030405', 'yyyyMMddHHmmss')",
+   "expected": "SELECT TO_TIMESTAMP('20161231030405', 'yyyyMMddHHmmss')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "spark",
+   "sql": "SELECT STRPTIME('3:4:5 PM', '%I:%M:%S %p')",
+   "expected": "SELECT TO_TIMESTAMP('3:4:5 PM', 'h:m:s a')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TO_TIMESTAMP('3:4:5 PM', 'h:m:s a')",
+   "expected": "SELECT TO_TIMESTAMP('3:4:5 PM', 'h:m:s a')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT DATE_FORMAT(x, 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "SELECT DATE_FORMAT(x, 'yyyy-MM-dd HH:mm:ss')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT RLIKE('John Doe', 'John.*')",
+   "expected": "SELECT REGEXP_CONTAINS('John Doe', 'John.*')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT RLIKE('John Doe', 'John.*')",
+   "expected": "SELECT 'John Doe' RLIKE 'John.*'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "postgres",
+   "sql": "SELECT RLIKE('John Doe', 'John.*')",
+   "expected": "SELECT 'John Doe' ~ 'John.*'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "SELECT RLIKE('John Doe', 'John.*')",
+   "expected": "SELECT REGEXP_LIKE('John Doe', 'John.*')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT RLIKE('John Doe', 'John.*')",
+   "expected": "SELECT 'John Doe' RLIKE 'John.*'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "UNHEX(MD5(x))",
+   "expected": "FROM_HEX(TO_HEX(MD5(x)))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "UNHEX(MD5(x))",
+   "expected": "UNHEX(MD5(x))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM ((VALUES 1))",
+   "expected": "SELECT * FROM (VALUES (1))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CAST(STRUCT('fooo') AS STRUCT<a: VARCHAR(2)>)",
+   "expected": "SELECT CAST(STRUCT('fooo' AS col1) AS STRUCT<a: STRING>)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT CAST(123456 AS VARCHAR(3))",
+   "expected": "SELECT TRY_CAST(123456 AS TEXT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT CAST(123456 AS VARCHAR(3))",
+   "expected": "SELECT TRY_CAST(123456 AS STRING)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CAST(123456 AS VARCHAR(3))",
+   "expected": "SELECT CAST(123456 AS STRING)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "SELECT CAST(123456 AS VARCHAR(3))",
+   "expected": "SELECT CAST(123456 AS STRING)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "SELECT TRY_CAST('a' AS INT)",
+   "expected": "SELECT TRY_CAST('a' AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT TRY_CAST('a' AS INT)",
+   "expected": "SELECT TRY_CAST('a' AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRY_CAST('a' AS INT)",
+   "expected": "SELECT TRY_CAST('a' AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "SELECT TRY_CAST('a' AS INT)",
+   "expected": "SELECT CAST('a' AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "spark",
+   "sql": "SELECT piv.Q1 FROM produce PIVOT(SUM(sales) FOR quarter IN ('Q1', 'Q2')) piv",
+   "expected": "SELECT piv.Q1 FROM (SELECT * FROM produce PIVOT(SUM(sales) FOR quarter IN ('Q1' AS `'Q1'`, 'Q2' AS `'Q2'`))) AS piv",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "spark",
+   "sql": "SELECT piv.Q1 FROM (SELECT * FROM produce) PIVOT(SUM(sales) FOR quarter IN ('Q1', 'Q2')) piv",
+   "expected": "SELECT piv.Q1 FROM (SELECT * FROM (SELECT * FROM produce) PIVOT(SUM(sales) FOR quarter IN ('Q1' AS `'Q1'`, 'Q2' AS `'Q2'`))) AS piv",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "spark",
+   "sql": "SELECT * FROM produce PIVOT (SUM(produce.sales) FOR produce.quarter IN ('Q1', 'Q2'))",
+   "expected": "SELECT * FROM produce PIVOT(SUM(produce.sales) FOR quarter IN ('Q1' AS `'Q1'`, 'Q2' AS `'Q2'`))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "spark",
+   "sql": "SELECT * FROM produce AS p PIVOT(SUM(p.sales) AS sales FOR p.quarter IN ('Q1' AS Q1, 'Q2' AS Q1))",
+   "expected": "SELECT * FROM produce AS p PIVOT(SUM(p.sales) AS sales FOR quarter IN ('Q1' AS Q1, 'Q2' AS Q1))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(MONTH, '2020-01-01', '2020-03-05')",
+   "expected": "SELECT DATEDIFF(MONTH, '2020-01-01', '2020-03-05')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT DATEDIFF(MONTH, '2020-01-01', '2020-03-05')",
+   "expected": "SELECT CAST(MONTHS_BETWEEN('2020-03-05', '2020-01-01') AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT DATEDIFF(MONTH, '2020-01-01', '2020-03-05')",
+   "expected": "SELECT DATE_DIFF('MONTH', CAST(CAST('2020-01-01' AS TIMESTAMP) AS DATE), CAST(CAST('2020-03-05' AS TIMESTAMP) AS DATE))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT DATEDIFF(MONTH, '2020-01-01', '2020-03-05')",
+   "expected": "SELECT DATEDIFF(MONTH, '2020-01-01', '2020-03-05')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "SELECT DATEDIFF(MONTH, '2020-01-01', '2020-03-05')",
+   "expected": "SELECT CAST(MONTHS_BETWEEN('2020-03-05', '2020-01-01') AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT DATEDIFF(MONTH, '2020-01-01', '2020-03-05')",
+   "expected": "SELECT DATE_DIFF('MONTH', CAST(CAST('2020-01-01' AS TIMESTAMP) AS DATE), CAST(CAST('2020-03-05' AS TIMESTAMP) AS DATE))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM quarterly_sales PIVOT(SUM(amount) amount, 'dummy' bar FOR quarter IN ('2023_Q1'))",
+   "expected": "SELECT * FROM quarterly_sales PIVOT(SUM(amount) AS amount, 'dummy' AS bar FOR quarter IN ('2023_Q1'))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT * FROM quarterly_sales PIVOT(SUM(amount) amount, 'dummy' bar FOR quarter IN ('2023_Q1'))",
+   "expected": "SELECT * FROM quarterly_sales PIVOT(SUM(amount) AS amount, 'dummy' AS bar FOR quarter IN ('2023_Q1'))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT * FROM quarterly_sales PIVOT(SUM(amount) AS amount, 'dummy' AS bar FOR quarter IN ('2023_Q1'))",
+   "expected": "SELECT * FROM quarterly_sales PIVOT(SUM(amount) AS amount, 'dummy' AS bar FOR quarter IN ('2023_Q1'))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "BOOLEAN(x)",
+   "expected": "CAST(x AS BOOLEAN)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "BOOLEAN(x)",
+   "expected": "CAST(x AS BOOLEAN)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "DATE(x)",
+   "expected": "CAST(x AS DATE)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DATE(x)",
+   "expected": "CAST(x AS DATE)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "DOUBLE(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DOUBLE(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "FLOAT(x)",
+   "expected": "CAST(x AS FLOAT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "FLOAT(x)",
+   "expected": "CAST(x AS FLOAT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "INT(x)",
+   "expected": "CAST(x AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "INT(x)",
+   "expected": "CAST(x AS INT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "TIMESTAMP(x)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TIMESTAMP(x)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "TIMESTAMP_NTZ(x)",
+   "expected": "CAST(x AS TIMESTAMPNTZ)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TIMESTAMP_NTZ(x)",
+   "expected": "CAST(x AS TIMESTAMP_NTZ)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "TIMESTAMP_LTZ(x)",
+   "expected": "CAST(x AS TIMESTAMPLTZ)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TIMESTAMP_LTZ(x)",
+   "expected": "CAST(x AS TIMESTAMP_LTZ)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "",
+   "sql": "STRING(x)",
+   "expected": "CAST(x AS TEXT)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "STRING(x)",
+   "expected": "CAST(x AS STRING)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "spark",
+   "sql": "CAST(x AS TIMESTAMP(6) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT DATE_ADD(my_date_column, 1)",
+   "expected": "SELECT DATE_ADD(my_date_column, 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "SELECT DATE_ADD(my_date_column, 1)",
+   "expected": "SELECT DATE_ADD(my_date_column, 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "SELECT DATE_ADD(my_date_column, 1)",
+   "expected": "SELECT DATE_ADD(CAST(CAST(my_date_column AS DATETIME) AS DATE), INTERVAL 1 DAY)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "trino",
+   "sql": "AGGREGATE(my_arr, 0, (acc, x) -> acc + x, s -> s * 2)",
+   "expected": "REDUCE(my_arr, 0, (acc, x) -> acc + x, s -> s * 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "AGGREGATE(my_arr, 0, (acc, x) -> acc + x, s -> s * 2)",
+   "expected": "REDUCE(my_arr, 0, (acc, x) -> acc + x, s -> s * 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "AGGREGATE(my_arr, 0, (acc, x) -> acc + x, s -> s * 2)",
+   "expected": "REDUCE(my_arr, 0, (acc, x) -> acc + x, s -> s * 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "AGGREGATE(my_arr, 0, (acc, x) -> acc + x, s -> s * 2)",
+   "expected": "AGGREGATE(my_arr, 0, (acc, x) -> acc + x, s -> s * 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TRIM('SL', 'SSparkSQLS')",
+   "expected": "TRIM('SL' FROM 'SSparkSQLS')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "ARRAY_SORT(x, (left, right) -> -1)",
+   "expected": "ARRAY_SORT(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "ARRAY_SORT(x, (left, right) -> -1)",
+   "expected": "ARRAY_SORT(x, (\"left\", \"right\") -> -1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "ARRAY_SORT(x, (left, right) -> -1)",
+   "expected": "SORT_ARRAY(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ARRAY_SORT(x, (left, right) -> -1)",
+   "expected": "ARRAY_SORT(x, (left, right) -> -1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "bigquery",
+   "sql": "ARRAY(0, 1, 2)",
+   "expected": "[0, 1, 2]",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "ARRAY(0, 1, 2)",
+   "expected": "[0, 1, 2]",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "ARRAY(0, 1, 2)",
+   "expected": "ARRAY[0, 1, 2]",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "ARRAY(0, 1, 2)",
+   "expected": "ARRAY(0, 1, 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ARRAY(0, 1, 2)",
+   "expected": "ARRAY(0, 1, 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "clickhouse",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC, lname NULLS FIRST",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC, lname NULLS FIRST",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "postgres",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC, fname ASC, lname NULLS FIRST",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC, lname NULLS FIRST",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC, fname ASC, lname NULLS FIRST",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(a) FROM foo",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(a) FROM foo",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(a) FROM foo",
+   "expected": "SELECT APPROX_DISTINCT(a) FROM foo",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(a) FROM foo",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(a) FROM foo",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(a) FROM foo",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(a) FROM foo",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "MONTH('2021-03-01')",
+   "expected": "MONTH(CAST('2021-03-01' AS DATE))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "MONTH('2021-03-01')",
+   "expected": "MONTH(CAST(CAST('2021-03-01' AS TIMESTAMP) AS DATE))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "MONTH('2021-03-01')",
+   "expected": "MONTH('2021-03-01')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "MONTH('2021-03-01')",
+   "expected": "MONTH('2021-03-01')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "YEAR('2021-03-01')",
+   "expected": "YEAR(CAST('2021-03-01' AS DATE))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "YEAR('2021-03-01')",
+   "expected": "YEAR(CAST(CAST('2021-03-01' AS TIMESTAMP) AS DATE))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "YEAR('2021-03-01')",
+   "expected": "YEAR('2021-03-01')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "YEAR('2021-03-01')",
+   "expected": "YEAR('2021-03-01')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "'毛'",
+   "expected": "'毛'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "'毛'",
+   "expected": "'毛'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "'毛'",
+   "expected": "'毛'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "'毛'",
+   "expected": "'毛'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT LEFT(x, 2), RIGHT(x, 2)",
+   "expected": "SELECT LEFT(x, 2), RIGHT(x, 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT LEFT(x, 2), RIGHT(x, 2)",
+   "expected": "SELECT SUBSTR(x, 1, 2), SUBSTR(x, LENGTH(x) - (2 - 1))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT LEFT(x, 2), RIGHT(x, 2)",
+   "expected": "SELECT SUBSTRING(x, 1, 2), SUBSTRING(x, LENGTH(x) - (2 - 1))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT LEFT(x, 2), RIGHT(x, 2)",
+   "expected": "SELECT LEFT(x, 2), RIGHT(x, 2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT SUBSTR('Spark' FROM 5 FOR 1)",
+   "expected": "SELECT SUBSTRING('Spark', 5, 1)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT SUBSTR('Spark SQL', 5)",
+   "expected": "SELECT SUBSTRING('Spark SQL', 5)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT SUBSTR(ENCODE('Spark SQL', 'utf-8'), 5)",
+   "expected": "SELECT SUBSTRING(ENCODE('Spark SQL', 'utf-8'), 5)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "MAP_FROM_ARRAYS(ARRAY(1), c)",
+   "expected": "MAP([1], c)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "MAP_FROM_ARRAYS(ARRAY(1), c)",
+   "expected": "MAP(ARRAY[1], c)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "MAP_FROM_ARRAYS(ARRAY(1), c)",
+   "expected": "MAP(ARRAY(1), c)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "MAP_FROM_ARRAYS(ARRAY(1), c)",
+   "expected": "MAP_FROM_ARRAYS(ARRAY(1), c)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "MAP_FROM_ARRAYS(ARRAY(1), c)",
+   "expected": "OBJECT_CONSTRUCT([1], c)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT ARRAY_SORT(x)",
+   "expected": "SELECT ARRAY_SORT(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT ARRAY_SORT(x)",
+   "expected": "SELECT ARRAY_SORT(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT ARRAY_SORT(x)",
+   "expected": "SELECT SORT_ARRAY(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT ARRAY_SORT(x)",
+   "expected": "SELECT ARRAY_SORT(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TIMESTAMPADD(MONTH, 20, col)",
+   "expected": "SELECT DATE_ADD(MONTH, 20, col)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT DATE_ADD(MONTH, 20, col)",
+   "expected": "SELECT DATE_ADD(MONTH, 20, col)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT DATE_ADD(MONTH, 20, col)",
+   "expected": "SELECT DATE_ADD(MONTH, 20, col)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT DATE_ADD(MONTH, 20, col)",
+   "expected": "SELECT DATE_ADD('MONTH', 20, col)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "trino",
+   "sql": "SELECT DATE_ADD(MONTH, 20, col)",
+   "expected": "SELECT DATE_ADD('MONTH', 20, col)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "DESCRIBE schema.test PARTITION(ds = '2024-01-01')",
+   "expected": "DESCRIBE schema.test PARTITION(ds = '2024-01-01')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT ANY_VALUE(col, true), FIRST(col, true), FIRST_VALUE(col, true) OVER ()",
+   "expected": "SELECT ANY_VALUE(col), ANY_VALUE(col), FIRST_VALUE(col IGNORE NULLS) OVER ()",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT STRUCT(1, 2)",
+   "expected": "SELECT STRUCT(1 AS col1, 2 AS col2)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT STRUCT(1, 2)",
+   "expected": "SELECT CAST(ROW(1, 2) AS ROW(col1 INTEGER, col2 INTEGER))",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT STRUCT(1, 2)",
+   "expected": "SELECT {'col1': 1, 'col2': 2}",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT STRUCT(x, 1, y AS col3, STRUCT(5)) FROM t",
+   "expected": "SELECT STRUCT(x AS x, 1 AS col2, y AS col3, STRUCT(5 AS col1) AS col4) FROM t",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT STRUCT(x, 1, y AS col3, STRUCT(5)) FROM t",
+   "expected": "SELECT {'x': x, 'col2': 1, 'col3': y, 'col4': {'col1': 5}} FROM t",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT TIMESTAMPDIFF(MONTH, foo, bar)",
+   "expected": "SELECT TIMESTAMPDIFF(MONTH, foo, bar)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TIMESTAMPDIFF(MONTH, foo, bar)",
+   "expected": "SELECT TIMESTAMPDIFF(MONTH, foo, bar)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT TIMESTAMPDIFF(MONTH, foo, bar)",
+   "expected": "SELECT TIMESTAMPDIFF(MONTH, foo, bar)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark2",
+   "sql": "SELECT CAST(col AS TIMESTAMP)",
+   "expected": "SELECT CAST(col AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CAST(col AS TIMESTAMP)",
+   "expected": "SELECT CAST(col AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT CAST(col AS TIMESTAMP)",
+   "expected": "SELECT TRY_CAST(col AS TIMESTAMP)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT CAST(col AS TIMESTAMP)",
+   "expected": "SELECT TRY_CAST(col AS TIMESTAMPTZ)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT * FROM {df}",
+   "expected": "SELECT * FROM {df}",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM {df}",
+   "expected": "SELECT * FROM {df}",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT * FROM {df}",
+   "expected": "SELECT * FROM {df}",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT * FROM {df} WHERE id > :foo",
+   "expected": "SELECT * FROM {df} WHERE id > :foo",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM {df} WHERE id > :foo",
+   "expected": "SELECT * FROM {df} WHERE id > :foo",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT * FROM {df} WHERE id > :foo",
+   "expected": "SELECT * FROM {df} WHERE id > :foo",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark, version=3.0.0",
+   "sql": "STRING_AGG(x, ', ')",
+   "expected": "ARRAY_JOIN(COLLECT_LIST(x), ', ')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark, version=4.0.0",
+   "sql": "STRING_AGG(x, ', ')",
+   "expected": "LISTAGG(x, ', ')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "STRING_AGG(x, ', ')",
+   "expected": "LISTAGG(x, ', ')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark, version=3.0.0",
+   "sql": "LISTAGG(x, ', ')",
+   "expected": "ARRAY_JOIN(COLLECT_LIST(x), ', ')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark, version=4.0.0",
+   "sql": "LISTAGG(x, ', ')",
+   "expected": "LISTAGG(x, ', ')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "LISTAGG(x, ', ')",
+   "expected": "LISTAGG(x, ', ')",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "LIKE(foo, 'pattern')",
+   "expected": "foo LIKE 'pattern'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "LIKE(foo, 'pattern')",
+   "expected": "foo LIKE 'pattern'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "LIKE(foo, 'pattern', '!')",
+   "expected": "foo LIKE 'pattern' ESCAPE '!'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "LIKE(foo, 'pattern', '!')",
+   "expected": "foo LIKE 'pattern' ESCAPE '!'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ILIKE(foo, 'pattern')",
+   "expected": "foo ILIKE 'pattern'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "ILIKE(foo, 'pattern')",
+   "expected": "foo ILIKE 'pattern'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "ILIKE(foo, 'pattern', '!')",
+   "expected": "foo ILIKE 'pattern' ESCAPE '!'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "ILIKE(foo, 'pattern', '!')",
+   "expected": "foo ILIKE 'pattern' ESCAPE '!'",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "BIT_GET(11, 0)",
+   "expected": "GETBIT(11, 0)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "BITMAP_OR_AGG(x)",
+   "expected": "BITMAP_OR_AGG(x)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT ELT(2, 'foo', 'bar', 'baz') AS Result",
+   "expected": "SELECT ELT(2, 'foo', 'bar', 'baz') AS Result",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT MAKE_INTERVAL(100, 11, 12, 13, 14, 14, 15)",
+   "expected": "SELECT MAKE_INTERVAL(100, 11, 12, 13, 14, 14, 15)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT name, GROUPING_ID() FROM customer GROUP BY ROLLUP (name)",
+   "expected": "SELECT name, GROUPING_ID() FROM customer GROUP BY ROLLUP (name)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT MAKE_TIMESTAMP(2014, 12, 28, 6, 30, 45.887)",
+   "expected": "SELECT MAKE_TIMESTAMP(2014, 12, 28, 6, 30, 45.887)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT CURDATE()",
+   "expected": "SELECT CURRENT_DATE",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT BIT_COUNT(0)",
+   "expected": "SELECT BIT_COUNT(0)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT BIT_COUNT(0)",
+   "expected": "SELECT BIT_COUNT(0)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT BIT_COUNT(0)",
+   "expected": "SELECT BIT_COUNT(0)",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT * FROM foo TIMESTAMP AS OF '2020-01-01 00:00:00' AS bar",
+   "expected": "SELECT * FROM foo TIMESTAMP AS OF '2020-01-01 00:00:00' AS bar",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT * FROM foo TIMESTAMP AS OF '2020-01-01 00:00:00' AS bar",
+   "expected": "SELECT * FROM foo TIMESTAMP AS OF '2020-01-01 00:00:00' AS bar",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT * FROM foo TIMESTAMP AS OF '2020-01-01 00:00:00' AS bar",
+   "expected": "SELECT * FROM foo TIMESTAMP AS OF '2020-01-01 00:00:00' AS bar",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT timestamp AS of FROM t",
+   "expected": "SELECT timestamp AS of FROM t",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT version AS of FROM t",
+   "expected": "SELECT version AS of FROM t",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "WITH RECURSIVE t(n) AS (SELECT * FROM VALUES (1) AS _values) SELECT n FROM t",
+   "expected": "WITH RECURSIVE t(n) AS (SELECT * FROM VALUES (1) AS _values) SELECT n FROM t",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "WITH RECURSIVE t(n) AS (SELECT * FROM VALUES (1) AS _values) SELECT n FROM t",
+   "expected": "WITH RECURSIVE t(n) AS (SELECT * FROM VALUES (1) AS _values) SELECT n FROM t",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "WITH RECURSIVE t(n) AS (SELECT * FROM VALUES (1) AS _values) SELECT n FROM t",
+   "expected": "WITH RECURSIVE t(n) AS (SELECT * FROM VALUES (1) AS _values) SELECT n FROM t",
+   "test": "TestSpark.test_spark"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "'\\U0001F600'",
+   "expected": "'😀'",
+   "test": "TestSpark.test_string_escapes"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "r'\\u0041\\101\\z'",
+   "expected": "'\\\\u0041\\\\101\\\\z'",
+   "test": "TestSpark.test_string_escapes"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "spark",
+   "sql": "'\\U0001F600'",
+   "expected": "'U0001F600'",
+   "test": "TestSpark.test_string_escapes"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "TO_DATE(x, 'yyyy-MM-dd')",
+   "expected": "TRY_CAST(x AS DATE)",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "TO_DATE(x, 'yyyy-MM-dd')",
+   "expected": "TO_DATE(x)",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "TO_DATE(x, 'yyyy-MM-dd')",
+   "expected": "CAST(CAST(x AS TIMESTAMP) AS DATE)",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TO_DATE(x, 'yyyy-MM-dd')",
+   "expected": "TO_DATE(x)",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "TO_DATE(x, 'yyyy-MM-dd')",
+   "expected": "TRY_TO_DATE(x, 'yyyy-mm-DD')",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "TO_DATE(x, 'yyyy-MM-dd')",
+   "expected": "TO_DATE(x)",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "TO_DATE(x, 'yyyy')",
+   "expected": "CAST(CAST(TRY_STRPTIME(x, '%Y') AS TIMESTAMP) AS DATE)",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "hive",
+   "sql": "TO_DATE(x, 'yyyy')",
+   "expected": "TO_DATE(x, 'yyyy')",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "presto",
+   "sql": "TO_DATE(x, 'yyyy')",
+   "expected": "CAST(DATE_PARSE(x, '%Y') AS DATE)",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "TO_DATE(x, 'yyyy')",
+   "expected": "TO_DATE(x, 'yyyy')",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "TO_DATE(x, 'yyyy')",
+   "expected": "TRY_TO_DATE(x, 'yyyy')",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "TO_DATE(x, 'yyyy')",
+   "expected": "TO_DATE(x, 'yyyy')",
+   "test": "TestSpark.test_to_date"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRANSFORM(x) USING 'x' AS (x INT) FROM t",
+   "expected": "SELECT TRANSFORM(x) USING 'x' AS (x INT) FROM t",
+   "test": "TestSpark.test_transform_query"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRANSFORM(zip_code, name, age) USING 'cat' AS (a, b, c) FROM person WHERE zip_code > 94511",
+   "expected": "SELECT TRANSFORM(zip_code, name, age) USING 'cat' AS (a, b, c) FROM person WHERE zip_code > 94511",
+   "test": "TestSpark.test_transform_query"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRANSFORM(zip_code, name, age) USING 'cat' AS (a STRING, b STRING, c STRING) FROM person WHERE zip_code > 94511",
+   "expected": "SELECT TRANSFORM(zip_code, name, age) USING 'cat' AS (a STRING, b STRING, c STRING) FROM person WHERE zip_code > 94511",
+   "test": "TestSpark.test_transform_query"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRANSFORM(name, age) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\\n' NULL DEFINED AS 'NULL' USING 'cat' AS (name_age STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '@' LINES TERMINATED BY '\\n' NULL DEFINED AS 'NULL' FROM person",
+   "expected": "SELECT TRANSFORM(name, age) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\\n' NULL DEFINED AS 'NULL' USING 'cat' AS (name_age STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '@' LINES TERMINATED BY '\\n' NULL DEFINED AS 'NULL' FROM person",
+   "test": "TestSpark.test_transform_query"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRANSFORM(zip_code, name, age) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' WITH SERDEPROPERTIES ('field.delim'='\\t') USING 'cat' AS (a STRING, b STRING, c STRING) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' WITH SERDEPROPERTIES ('field.delim'='\\t') FROM person WHERE zip_code > 94511",
+   "expected": "SELECT TRANSFORM(zip_code, name, age) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' WITH SERDEPROPERTIES ('field.delim'='\\t') USING 'cat' AS (a STRING, b STRING, c STRING) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' WITH SERDEPROPERTIES ('field.delim'='\\t') FROM person WHERE zip_code > 94511",
+   "test": "TestSpark.test_transform_query"
+  },
+  {
+   "kind": "identity",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRANSFORM(zip_code, name, age) USING 'cat' FROM person WHERE zip_code > 94500",
+   "expected": "SELECT TRANSFORM(zip_code, name, age) USING 'cat' FROM person WHERE zip_code > 94500",
+   "test": "TestSpark.test_transform_query"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT TRY_DIVIDE(a, b)",
+   "test": "TestSpark.test_try_divide"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT TRY_DIVIDE(a, b)",
+   "test": "TestSpark.test_try_divide"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "spark",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT TRY_DIVIDE(a, b)",
+   "test": "TestSpark.test_try_divide"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT TRY_DIVIDE(a, b)",
+   "test": "TestSpark.test_try_divide"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "snowflake",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT IFF(b <> 0, a / b, NULL)",
+   "test": "TestSpark.test_try_divide"
+  },
+  {
+   "kind": "write",
+   "read": "spark",
+   "write": "duckdb",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT CASE WHEN b <> 0 THEN a / b ELSE NULL END",
+   "test": "TestSpark.test_try_divide"
+  }
+ ]
+}

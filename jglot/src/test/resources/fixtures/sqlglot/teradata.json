@@ -1,0 +1,1268 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_teradata.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a LT b",
+   "expected": "a < b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a LE b",
+   "expected": "a <= b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a GT b",
+   "expected": "a > b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a GE b",
+   "expected": "a >= b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a ^= b",
+   "expected": "a <> b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a NE b",
+   "expected": "a <> b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a NOT= b",
+   "expected": "a <> b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a EQ b",
+   "expected": "a = b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SEL a FROM b",
+   "expected": "SELECT a FROM b",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT col1, col2 FROM dbc.table1 WHERE col1 EQ 'value1' MINUS SELECT col1, col2 FROM dbc.table2",
+   "expected": "SELECT col1, col2 FROM dbc.table1 WHERE col1 = 'value1' EXCEPT SELECT col1, col2 FROM dbc.table2",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "UPD a SET b = 1",
+   "expected": "UPDATE a SET b = 1",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "DEL FROM a",
+   "expected": "DELETE FROM a",
+   "test": "TestTeradata.test_abbrev"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "teradata",
+   "sql": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "expected": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "expected": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "bigquery",
+   "sql": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "expected": "PARSE_DATE('%Y-%d', '1992-01')",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "databricks",
+   "sql": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "expected": "TO_DATE('1992-01', 'yyyy-d')",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "mysql",
+   "sql": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "expected": "STR_TO_DATE('1992-01', '%Y-%d')",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "spark",
+   "sql": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "expected": "TO_DATE('1992-01', 'yyyy-d')",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "",
+   "sql": "CAST('1992-01' AS DATE FORMAT 'YYYY-DD')",
+   "expected": "STR_TO_DATE('1992-01', '%Y-%d')",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CAST('1992-01' AS FORMAT 'YYYY-DD')",
+   "expected": "CAST('1992-01' AS FORMAT 'YYYY-DD')",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "TRY_CAST('-2.5' AS DECIMAL(5, 2))",
+   "expected": "TRYCAST('-2.5' AS DECIMAL(5, 2))",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "snowflake",
+   "sql": "TRYCAST('-2.5' AS DECIMAL(5, 2))",
+   "expected": "TRY_CAST('-2.5' AS DECIMAL(5, 2))",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "TRYCAST('-2.5' AS DECIMAL(5, 2))",
+   "expected": "TRYCAST('-2.5' AS DECIMAL(5, 2))",
+   "test": "TestTeradata.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "REPLACE VIEW view_b (COL1, COL2) AS LOCKING ROW FOR ACCESS SELECT COL1, COL2 FROM table_b",
+   "expected": "CREATE OR REPLACE VIEW view_b (COL1, COL2) AS LOCKING ROW FOR ACCESS SELECT COL1, COL2 FROM table_b",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "REPLACE VIEW view_b (COL1, COL2) AS LOCKING ROW FOR ACCESS SELECT COL1, COL2 FROM table_b",
+   "expected": "CREATE OR REPLACE VIEW view_b (COL1, COL2) AS LOCKING ROW FOR ACCESS SELECT COL1, COL2 FROM table_b",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE x (y INT) PRIMARY INDEX (y) PARTITION BY y INDEX (y)",
+   "expected": "CREATE TABLE x (y INT) PRIMARY INDEX (y) PARTITION BY y INDEX (y)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE x (y INT) PARTITION BY y INDEX (y)",
+   "expected": "CREATE TABLE x (y INT) PARTITION BY y INDEX (y)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE MULTISET VOLATILE TABLE my_table (id INT) PRIMARY INDEX (id) ON COMMIT PRESERVE ROWS",
+   "expected": "CREATE MULTISET VOLATILE TABLE my_table (id INT) PRIMARY INDEX (id) ON COMMIT PRESERVE ROWS",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE SET VOLATILE TABLE my_table (id INT) PRIMARY INDEX (id) ON COMMIT DELETE ROWS",
+   "expected": "CREATE SET VOLATILE TABLE my_table (id INT) PRIMARY INDEX (id) ON COMMIT DELETE ROWS",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a (b INT) PRIMARY INDEX (y) PARTITION BY RANGE_N(b BETWEEN 'a', 'b' AND 'c' EACH '1')",
+   "expected": "CREATE TABLE a (b INT) PRIMARY INDEX (y) PARTITION BY RANGE_N(b BETWEEN 'a', 'b' AND 'c' EACH '1')",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a (b INT) PARTITION BY RANGE_N(b BETWEEN 0, 1 AND 2 EACH 1)",
+   "expected": "CREATE TABLE a (b INT) PARTITION BY RANGE_N(b BETWEEN 0, 1 AND 2 EACH 1)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a (b INT) PARTITION BY RANGE_N(b BETWEEN *, 1 AND * EACH b) INDEX (a)",
+   "expected": "CREATE TABLE a (b INT) PARTITION BY RANGE_N(b BETWEEN *, 1 AND * EACH b) INDEX (a)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a, NO FALLBACK PROTECTION, NO LOG, NO JOURNAL, CHECKSUM=ON, NO MERGEBLOCKRATIO, BLOCKCOMPRESSION=ALWAYS (a INT)",
+   "expected": "CREATE TABLE a, NO FALLBACK PROTECTION, NO LOG, NO JOURNAL, CHECKSUM=ON, NO MERGEBLOCKRATIO, BLOCKCOMPRESSION=ALWAYS (a INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a, NO FALLBACK PROTECTION, NO LOG, NO JOURNAL, CHECKSUM=ON, NO MERGEBLOCKRATIO, BLOCKCOMPRESSION=ALWAYS (a INT)",
+   "expected": "CREATE TABLE a, NO FALLBACK PROTECTION, NO LOG, NO JOURNAL, CHECKSUM=ON, NO MERGEBLOCKRATIO, BLOCKCOMPRESSION=ALWAYS (a INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a, WITH JOURNAL TABLE=x.y.z, CHECKSUM=OFF, MERGEBLOCKRATIO=1, DATABLOCKSIZE=10 KBYTES (a INT)",
+   "expected": "CREATE TABLE a, WITH JOURNAL TABLE=x.y.z, CHECKSUM=OFF, MERGEBLOCKRATIO=1, DATABLOCKSIZE=10 KBYTES (a INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a, BEFORE JOURNAL, AFTER JOURNAL, FREESPACE=1, DEFAULT DATABLOCKSIZE, BLOCKCOMPRESSION=DEFAULT (a INT)",
+   "expected": "CREATE TABLE a, BEFORE JOURNAL, AFTER JOURNAL, FREESPACE=1, DEFAULT DATABLOCKSIZE, BLOCKCOMPRESSION=DEFAULT (a INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a, DUAL JOURNAL, DUAL AFTER JOURNAL, MERGEBLOCKRATIO=1 PERCENT, DATABLOCKSIZE=10 KILOBYTES (a INT)",
+   "expected": "CREATE TABLE a, DUAL JOURNAL, DUAL AFTER JOURNAL, MERGEBLOCKRATIO=1 PERCENT, DATABLOCKSIZE=10 KILOBYTES (a INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE a, DUAL BEFORE JOURNAL, LOCAL AFTER JOURNAL, MAXIMUM DATABLOCKSIZE, BLOCKCOMPRESSION=AUTOTEMP(c1 INT) (a INT)",
+   "expected": "CREATE TABLE a, DUAL BEFORE JOURNAL, LOCAL AFTER JOURNAL, MAXIMUM DATABLOCKSIZE, BLOCKCOMPRESSION=AUTOTEMP(c1 INT) (a INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE VOLATILE MULTISET TABLE a, NOT LOCAL AFTER JOURNAL, FREESPACE=1 PERCENT, DATABLOCKSIZE=10 BYTES, WITH NO CONCURRENT ISOLATED LOADING FOR ALL (a INT)",
+   "expected": "CREATE VOLATILE MULTISET TABLE a, NOT LOCAL AFTER JOURNAL, FREESPACE=1 PERCENT, DATABLOCKSIZE=10 BYTES, WITH NO CONCURRENT ISOLATED LOADING FOR ALL (a INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE VOLATILE SET TABLE example1 AS (SELECT col1, col2, col3 FROM table1) WITH DATA PRIMARY INDEX (col1) ON COMMIT PRESERVE ROWS",
+   "expected": "CREATE VOLATILE SET TABLE example1 AS (SELECT col1, col2, col3 FROM table1) WITH DATA PRIMARY INDEX (col1) ON COMMIT PRESERVE ROWS",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE SET GLOBAL TEMPORARY TABLE a, NO BEFORE JOURNAL, NO AFTER JOURNAL, MINIMUM DATABLOCKSIZE, BLOCKCOMPRESSION=NEVER (a INT)",
+   "expected": "CREATE SET GLOBAL TEMPORARY TABLE a, NO BEFORE JOURNAL, NO AFTER JOURNAL, MINIMUM DATABLOCKSIZE, BLOCKCOMPRESSION=NEVER (a INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "\n            CREATE SET TABLE test, NO FALLBACK, NO BEFORE JOURNAL, NO AFTER JOURNAL,\n            CHECKSUM = DEFAULT (x INT, y INT, z CHAR(30), a INT, b DATE, e INT)\n            PRIMARY INDEX (a),\n            INDEX(x, y)\n            ",
+   "expected": "CREATE SET TABLE test, NO FALLBACK, NO BEFORE JOURNAL, NO AFTER JOURNAL, CHECKSUM=DEFAULT (x INT, y INT, z CHAR(30), a INT, b DATE, e INT) PRIMARY INDEX (a) INDEX (x, y)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "REPLACE VIEW a AS (SELECT b FROM c)",
+   "expected": "CREATE OR REPLACE VIEW a AS (SELECT b FROM c)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE VOLATILE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "bigquery",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "clickhouse",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "databricks",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "drill",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "duckdb",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "hive",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "mysql",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "oracle",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "postgres",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "presto",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "redshift",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "snowflake",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "spark",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "sqlite",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "starrocks",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "tableau",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "trino",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "tsql",
+   "sql": "CREATE VOLATILE TABLE a",
+   "expected": "CREATE TABLE a",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE db.foo (id INT NOT NULL, valid_date DATE FORMAT 'YYYY-MM-DD', measurement INT COMPRESS)",
+   "expected": "CREATE TABLE db.foo (id INT NOT NULL, valid_date DATE FORMAT 'YYYY-MM-DD', measurement INT COMPRESS)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE db.foo (id INT NOT NULL, valid_date DATE FORMAT 'YYYY-MM-DD', measurement INT COMPRESS (1, 2, 3))",
+   "expected": "CREATE TABLE db.foo (id INT NOT NULL, valid_date DATE FORMAT 'YYYY-MM-DD', measurement INT COMPRESS (1, 2, 3))",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE db.foo (id INT NOT NULL, valid_date DATE FORMAT 'YYYY-MM-DD' COMPRESS (CAST('9999-09-09' AS DATE)), measurement INT)",
+   "expected": "CREATE TABLE db.foo (id INT NOT NULL, valid_date DATE FORMAT 'YYYY-MM-DD' COMPRESS (CAST('9999-09-09' AS DATE)), measurement INT)",
+   "test": "TestTeradata.test_create"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE z (a ST_GEOMETRY(1))",
+   "expected": "CREATE TABLE z (a ST_GEOMETRY(1))",
+   "test": "TestTeradata.test_datatype"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "redshift",
+   "sql": "CREATE TABLE z (a ST_GEOMETRY(1))",
+   "expected": "CREATE TABLE z (a GEOMETRY(1))",
+   "test": "TestTeradata.test_datatype"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE TABLE z (a SYSUDTLIB.INT)",
+   "expected": "CREATE TABLE z (a SYSUDTLIB.INT)",
+   "test": "TestTeradata.test_datatype"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT ('a' || 'b') (FORMAT '...')",
+   "expected": "SELECT ('a' || 'b') (FORMAT '...')",
+   "test": "TestTeradata.test_format_override"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT Col1 (FORMAT '+9999') FROM Test1",
+   "expected": "SELECT Col1 (FORMAT '+9999') FROM Test1",
+   "test": "TestTeradata.test_format_override"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT date_col (FORMAT 'YYYY-MM-DD') FROM t",
+   "expected": "SELECT date_col (FORMAT 'YYYY-MM-DD') FROM t",
+   "test": "TestTeradata.test_format_override"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT CAST(Col1 AS INTEGER) FROM Test1",
+   "expected": "SELECT CAST(Col1 AS INT) FROM Test1",
+   "test": "TestTeradata.test_format_override"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "INS INTO x SELECT * FROM y",
+   "expected": "INSERT INTO x SELECT * FROM y",
+   "test": "TestTeradata.test_insert"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "LOCKING ROW FOR ACCESS SELECT * FROM table1",
+   "expected": "LOCKING ROW FOR ACCESS SELECT * FROM table1",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "LOCKING TABLE table1 FOR ACCESS SELECT col1, col2 FROM table1",
+   "expected": "LOCKING TABLE table1 FOR ACCESS SELECT col1, col2 FROM table1",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "LOCKING ROW FOR SHARE SELECT * FROM table1",
+   "expected": "LOCKING ROW FOR SHARE SELECT * FROM table1",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "LOCKING DATABASE db1 FOR READ SELECT * FROM table1",
+   "expected": "LOCKING DATABASE db1 FOR READ SELECT * FROM table1",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "LOCKING ROW FOR EXCLUSIVE SELECT * FROM table1",
+   "expected": "LOCKING ROW FOR EXCLUSIVE SELECT * FROM table1",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "LOCKING VIEW view1 FOR ACCESS SELECT * FROM view1",
+   "expected": "LOCKING VIEW view1 FOR ACCESS SELECT * FROM view1",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "LOCKING ROW FOR ACCESS SELECT col1, col2 FROM table1 WHERE col1 > 10",
+   "expected": "LOCKING ROW FOR ACCESS SELECT col1, col2 FROM table1 WHERE col1 > 10",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "LOCKING TABLE table1 FOR ACCESS SELECT * FROM table1 JOIN table2 ON table1.id = table2.id",
+   "expected": "LOCKING TABLE table1 FOR ACCESS SELECT * FROM table1 JOIN table2 ON table1.id = table2.id",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CREATE VIEW view_b AS LOCKING ROW FOR ACCESS SELECT COL1, COL2 FROM table_b",
+   "expected": "CREATE VIEW view_b AS LOCKING ROW FOR ACCESS SELECT COL1, COL2 FROM table_b",
+   "test": "TestTeradata.test_locking"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a MOD b",
+   "expected": "a MOD b",
+   "test": "TestTeradata.test_mod"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "mysql",
+   "sql": "a MOD b",
+   "expected": "a % b",
+   "test": "TestTeradata.test_mod"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT MOD(8, 5)",
+   "expected": "SELECT 8 MOD 5",
+   "test": "TestTeradata.test_mod"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT 2 ** MOD(8, 5)",
+   "expected": "SELECT 2 ** (8 MOD 5)",
+   "test": "TestTeradata.test_mod"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "a ** b",
+   "expected": "a ** b",
+   "test": "TestTeradata.test_power"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "mysql",
+   "sql": "a ** b",
+   "expected": "POWER(a, b)",
+   "test": "TestTeradata.test_power"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = 'app=myapp;' FOR SESSION",
+   "expected": "SET QUERY_BAND = 'app=myapp;' FOR SESSION",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = 'app=myapp;user=john;' FOR TRANSACTION",
+   "expected": "SET QUERY_BAND = 'app=myapp;user=john;' FOR TRANSACTION",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = 'priority=high;' UPDATE FOR SESSION",
+   "expected": "SET QUERY_BAND = 'priority=high;' UPDATE FOR SESSION",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = 'workload=batch;' UPDATE FOR TRANSACTION",
+   "expected": "SET QUERY_BAND = 'workload=batch;' UPDATE FOR TRANSACTION",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = 'org=Finance;report=Fin123;' FOR SESSION",
+   "expected": "SET QUERY_BAND = 'org=Finance;report=Fin123;' FOR SESSION",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = NONE FOR SESSION",
+   "expected": "SET QUERY_BAND = NONE FOR SESSION",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = NONE FOR SESSION VOLATILE",
+   "expected": "SET QUERY_BAND = NONE FOR SESSION VOLATILE",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = 'priority=high;' UPDATE FOR SESSION VOLATILE",
+   "expected": "SET QUERY_BAND = 'priority=high;' UPDATE FOR SESSION VOLATILE",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = 'NONE' FOR SESSION",
+   "expected": "SET QUERY_BAND = 'NONE' FOR SESSION",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SET QUERY_BAND = '' FOR SESSION",
+   "expected": "SET QUERY_BAND = '' FOR SESSION",
+   "test": "TestTeradata.test_query_band"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "COLLECT STATISTICS ON tbl INDEX(col)",
+   "expected": "COLLECT STATISTICS ON tbl INDEX(col)",
+   "command": true,
+   "test": "TestTeradata.test_statistics"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "COLLECT STATS ON tbl COLUMNS(col)",
+   "expected": "COLLECT STATS ON tbl COLUMNS(col)",
+   "command": true,
+   "test": "TestTeradata.test_statistics"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "COLLECT STATS COLUMNS(col) ON tbl",
+   "expected": "COLLECT STATS COLUMNS(col) ON tbl",
+   "command": true,
+   "test": "TestTeradata.test_statistics"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "HELP STATISTICS personel.employee",
+   "expected": "HELP STATISTICS personel.employee",
+   "command": true,
+   "test": "TestTeradata.test_statistics"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "HELP STATISTICS personnel.employee FROM my_qcd",
+   "expected": "HELP STATISTICS personnel.employee FROM my_qcd",
+   "command": true,
+   "test": "TestTeradata.test_statistics"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "",
+   "sql": "RANDOM(l, u)",
+   "expected": "(u - l) * RAND() + l",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "RANDOM(l, u)",
+   "expected": "RANDOM(l, u)",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "TO_NUMBER(expr, fmt, nlsparam)",
+   "expected": "TO_NUMBER(expr, fmt, nlsparam)",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT TOP 10 * FROM tbl",
+   "expected": "SELECT TOP 10 * FROM tbl",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT * FROM tbl SAMPLE 5",
+   "expected": "SELECT * FROM tbl SAMPLE 5",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT * FROM tbl SAMPLE 0.33, .25, .1",
+   "expected": "SELECT * FROM tbl SAMPLE 0.33, 0.25, 0.1",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "teradata",
+   "sql": "USE tduser",
+   "expected": "DATABASE tduser",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "databricks",
+   "sql": "DATABASE tduser",
+   "expected": "USE tduser",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "DATABASE tduser",
+   "expected": "DATABASE tduser",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT 0x1d",
+   "expected": "SELECT X'1d'",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT X'1D'",
+   "expected": "SELECT X'1D'",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT x'1d'",
+   "expected": "SELECT X'1d'",
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "RENAME TABLE emp TO employee",
+   "expected": "RENAME TABLE emp TO employee",
+   "command": true,
+   "test": "TestTeradata.test_teradata"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CAST(CURRENT_TIMESTAMP(6) AS TIMESTAMP WITH TIME ZONE)",
+   "expected": "CAST(CURRENT_TIMESTAMP(6) AS TIMESTAMP WITH TIME ZONE)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CURRENT_TIMESTAMP",
+   "expected": "CURRENT_TIMESTAMP",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "CURRENT_TIMESTAMP()",
+   "expected": "CURRENT_TIMESTAMP",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT '2023-01-01' + INTERVAL '5' YEAR",
+   "expected": "SELECT '2023-01-01' + INTERVAL '5' YEAR",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "SELECT DATEADD(YEAR, 5, '2023-01-01')",
+   "expected": "SELECT '2023-01-01' + INTERVAL '5' YEAR",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT '2023-01-01' - INTERVAL '5' YEAR",
+   "expected": "SELECT '2023-01-01' - INTERVAL '5' YEAR",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "SELECT DATEADD(YEAR, -5, '2023-01-01')",
+   "expected": "SELECT '2023-01-01' - INTERVAL '5' YEAR",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT '2023-01-01' - INTERVAL '5' YEAR",
+   "expected": "SELECT '2023-01-01' - INTERVAL '5' YEAR",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "teradata",
+   "sql": "SELECT DATE_SUB('2023-01-01', 5, YEAR)",
+   "expected": "SELECT '2023-01-01' - INTERVAL '5' YEAR",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT '2023-01-01' + INTERVAL '5' YEAR",
+   "expected": "SELECT '2023-01-01' + INTERVAL '5' YEAR",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "teradata",
+   "sql": "SELECT DATE_SUB('2023-01-01', -5, YEAR)",
+   "expected": "SELECT '2023-01-01' + INTERVAL '5' YEAR",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT (90 * INTERVAL '1' DAY)",
+   "expected": "SELECT (90 * INTERVAL '1' DAY)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "SELECT INTERVAL '1' QUARTER",
+   "expected": "SELECT (90 * INTERVAL '1' DAY)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT (7 * INTERVAL '1' DAY)",
+   "expected": "SELECT (7 * INTERVAL '1' DAY)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "SELECT INTERVAL '1' WEEK",
+   "expected": "SELECT (7 * INTERVAL '1' DAY)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT '2023-01-01' + (90 * INTERVAL '5' DAY)",
+   "expected": "SELECT '2023-01-01' + (90 * INTERVAL '5' DAY)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "SELECT DATEADD(QUARTER, 5, '2023-01-01')",
+   "expected": "SELECT '2023-01-01' + (90 * INTERVAL '5' DAY)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT '2023-01-01' + (7 * INTERVAL '5' DAY)",
+   "expected": "SELECT '2023-01-01' + (7 * INTERVAL '5' DAY)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "SELECT DATEADD(WEEK, 5, '2023-01-01')",
+   "expected": "SELECT '2023-01-01' + (7 * INTERVAL '5' DAY)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CAST(TO_CHAR(x, 'Q') AS INT)",
+   "expected": "CAST(TO_CHAR(x, 'Q') AS INT)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "DATE_PART(QUARTER, x)",
+   "expected": "CAST(TO_CHAR(x, 'Q') AS INT)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "teradata",
+   "sql": "EXTRACT(QUARTER FROM x)",
+   "expected": "CAST(TO_CHAR(x, 'Q') AS INT)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "EXTRACT(MONTH FROM x)",
+   "expected": "EXTRACT(MONTH FROM x)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "DATE_PART(MONTH, x)",
+   "expected": "EXTRACT(MONTH FROM x)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "teradata",
+   "sql": "EXTRACT(MONTH FROM x)",
+   "expected": "EXTRACT(MONTH FROM x)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "teradata",
+   "sql": "quarter(x)",
+   "expected": "CAST(TO_CHAR(x, 'Q') AS INT)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "CAST(TO_CHAR(x, 'Q') AS INT)",
+   "expected": "CAST(TO_CHAR(x, 'Q') AS INT)",
+   "test": "TestTeradata.test_time"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "TRANSLATE(x USING LATIN_TO_UNICODE)",
+   "expected": "TRANSLATE(x USING LATIN_TO_UNICODE)",
+   "test": "TestTeradata.test_translate"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "TRANSLATE(x USING LATIN_TO_UNICODE WITH ERROR)",
+   "expected": "TRANSLATE(x USING LATIN_TO_UNICODE WITH ERROR)",
+   "test": "TestTeradata.test_translate"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "UPDATE A FROM schema.tableA AS A, (SELECT col1 FROM schema.tableA GROUP BY col1) AS B SET col2 = '' WHERE A.col1 = B.col1",
+   "expected": "UPDATE A FROM schema.tableA AS A, (SELECT col1 FROM schema.tableA GROUP BY col1) AS B SET col2 = '' WHERE A.col1 = B.col1",
+   "test": "TestTeradata.test_update"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "mysql",
+   "sql": "UPDATE A FROM schema.tableA AS A, (SELECT col1 FROM schema.tableA GROUP BY col1) AS B SET col2 = '' WHERE A.col1 = B.col1",
+   "expected": "UPDATE A JOIN `schema`.tableA AS A ON TRUE JOIN (SELECT col1 FROM `schema`.tableA GROUP BY col1) AS B ON TRUE SET A.col2 = '' WHERE A.col1 = B.col1",
+   "test": "TestTeradata.test_update"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT SUM(x) OVER (PARTITION BY p ORDER BY d) FROM t",
+   "expected": "SELECT SUM(x) OVER (PARTITION BY p ORDER BY d) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "snowflake",
+   "sql": "SELECT SUM(x) OVER (PARTITION BY p ORDER BY d) FROM t",
+   "expected": "SELECT SUM(x) OVER (PARTITION BY p ORDER BY d NULLS FIRST ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "duckdb",
+   "sql": "SELECT SUM(x) OVER (PARTITION BY p ORDER BY d) FROM t",
+   "expected": "SELECT SUM(x) OVER (PARTITION BY p ORDER BY d NULLS FIRST ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT COUNT(*) OVER (ORDER BY d) FROM t",
+   "expected": "SELECT COUNT(*) OVER (ORDER BY d) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "snowflake",
+   "sql": "SELECT COUNT(*) OVER (ORDER BY d) FROM t",
+   "expected": "SELECT COUNT(*) OVER (ORDER BY d NULLS FIRST ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT SUM(x) OVER (PARTITION BY p) FROM t",
+   "expected": "SELECT SUM(x) OVER (PARTITION BY p) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "snowflake",
+   "sql": "SELECT SUM(x) OVER (PARTITION BY p) FROM t",
+   "expected": "SELECT SUM(x) OVER (PARTITION BY p) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "write",
+   "read": "teradata",
+   "write": "snowflake",
+   "sql": "SELECT RANK() OVER (ORDER BY d), ROW_NUMBER() OVER (ORDER BY d), LAG(x) OVER (ORDER BY d), FIRST_VALUE(x) OVER (ORDER BY d) FROM t",
+   "expected": "SELECT RANK() OVER (ORDER BY d NULLS FIRST), ROW_NUMBER() OVER (ORDER BY d NULLS FIRST), LAG(x) OVER (ORDER BY d NULLS FIRST), FIRST_VALUE(x) OVER (ORDER BY d NULLS FIRST) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT SUM(x) OVER (ORDER BY d ROWS UNBOUNDED PRECEDING) FROM t",
+   "expected": "SELECT SUM(x) OVER (ORDER BY d ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  },
+  {
+   "kind": "identity",
+   "read": "teradata",
+   "write": "teradata",
+   "sql": "SELECT AVG(x) OVER (ORDER BY d ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) FROM t",
+   "expected": "SELECT AVG(x) OVER (ORDER BY d) FROM t",
+   "test": "TestTeradata.test_window_aggregate_default_frame"
+  }
+ ]
+}

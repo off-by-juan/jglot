@@ -1,0 +1,4552 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_hive.py",
+ "cases": [
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "x & 1",
+   "expected": "x & 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "BITWISE_AND(x, 1)",
+   "expected": "x & 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "x & 1",
+   "expected": "x & 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "x & 1",
+   "expected": "x & 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "x & 1",
+   "expected": "x & 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "x & 1",
+   "expected": "BITWISE_AND(x, 1)",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "x & 1",
+   "expected": "x & 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "x & 1 > 0",
+   "expected": "x & 1 > 0",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "BITWISE_AND(x, 1) > 0",
+   "expected": "x & 1 > 0",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "x & 1 > 0",
+   "expected": "x & 1 > 0",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "x & 1 > 0",
+   "expected": "x & 1 > 0",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "x & 1 > 0",
+   "expected": "BITWISE_AND(x, 1) > 0",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "x & 1 > 0",
+   "expected": "x & 1 > 0",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "x & 1 > 0",
+   "expected": "x & 1 > 0",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "~x",
+   "expected": "~x",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "BITWISE_NOT(x)",
+   "expected": "~x",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "~x",
+   "expected": "~x",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "~x",
+   "expected": "~x",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "~x",
+   "expected": "~x",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "~x",
+   "expected": "BITWISE_NOT(x)",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "~x",
+   "expected": "~x",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "x | 1",
+   "expected": "x | 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "BITWISE_OR(x, 1)",
+   "expected": "x | 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "x | 1",
+   "expected": "x | 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "x | 1",
+   "expected": "x | 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "x | 1",
+   "expected": "x | 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "x | 1",
+   "expected": "BITWISE_OR(x, 1)",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "x | 1",
+   "expected": "x | 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SHIFTLEFT(x, 1)",
+   "expected": "x << 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "x << 1",
+   "expected": "x << 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "x << 1",
+   "expected": "BITWISE_LEFT_SHIFT(x, 1)",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "x << 1",
+   "expected": "x << 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "x << 1",
+   "expected": "SHIFTLEFT(x, 1)",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SHIFTRIGHT(x, 1)",
+   "expected": "x >> 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "x >> 1",
+   "expected": "x >> 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "x >> 1",
+   "expected": "BITWISE_RIGHT_SHIFT(x, 1)",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "x >> 1",
+   "expected": "x >> 1",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "x >> 1",
+   "expected": "SHIFTRIGHT(x, 1)",
+   "test": "TestHive.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "1s",
+   "expected": "TRY_CAST(1 AS SMALLINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "1s",
+   "expected": "TRY_CAST(1 AS SMALLINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "1s",
+   "expected": "CAST(1 AS SMALLINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "1s",
+   "expected": "CAST(1 AS SMALLINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "1S",
+   "expected": "TRY_CAST(1 AS SMALLINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "1S",
+   "expected": "TRY_CAST(1 AS SMALLINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "1S",
+   "expected": "CAST(1 AS SMALLINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "1S",
+   "expected": "CAST(1 AS SMALLINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "1Y",
+   "expected": "TRY_CAST(1 AS TINYINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "1Y",
+   "expected": "TRY_CAST(1 AS TINYINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "1Y",
+   "expected": "CAST(1 AS TINYINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "1Y",
+   "expected": "CAST(1 AS TINYINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "1L",
+   "expected": "TRY_CAST(1 AS BIGINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "1L",
+   "expected": "TRY_CAST(1 AS BIGINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "1L",
+   "expected": "CAST(1 AS BIGINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "1L",
+   "expected": "CAST(1 AS BIGINT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "1.0bd",
+   "expected": "TRY_CAST('1.0' AS DECIMAL(1, 0))",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "1.0bd",
+   "expected": "TRY_CAST('1.0' AS DECIMAL(1, 0))",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "1.0bd",
+   "expected": "CAST('1.0' AS DECIMAL(1, 0))",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "1.0bd",
+   "expected": "CAST('1.0' AS DECIMAL(1, 0))",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "TRY_CAST(1 AS INT)",
+   "expected": "CAST(1 AS INT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "CAST(1 AS INT)",
+   "expected": "TRY_CAST(1 AS INT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "CAST(1 AS INT)",
+   "expected": "TRY_CAST(1 AS INTEGER)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CAST(1 AS INT)",
+   "expected": "CAST(1 AS INT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "CAST(1 AS INT)",
+   "expected": "CAST(1 AS INT)",
+   "test": "TestHive.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE FUNCTION my_func AS 'com.example.MyFunc' USING JAR 'hdfs://path/to/my.jar'",
+   "expected": "CREATE FUNCTION my_func AS 'com.example.MyFunc' USING JAR 'hdfs://path/to/my.jar'",
+   "test": "TestHive.test_create_function_using"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE OR REPLACE TEMPORARY FUNCTION some_func AS 'my_jar.SomeFunctionUDF' USING JAR 's3://bucket/my.jar'",
+   "expected": "CREATE OR REPLACE TEMPORARY FUNCTION some_func AS 'my_jar.SomeFunctionUDF' USING JAR 's3://bucket/my.jar'",
+   "test": "TestHive.test_create_function_using"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE FUNCTION my_func AS 'com.example.MyFunc' USING FILE 'hdfs://path/to/file.py'",
+   "expected": "CREATE FUNCTION my_func AS 'com.example.MyFunc' USING FILE 'hdfs://path/to/file.py'",
+   "test": "TestHive.test_create_function_using"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE FUNCTION my_func AS 'com.example.MyFunc' USING ARCHIVE 'hdfs://path/to/archive.zip'",
+   "expected": "CREATE FUNCTION my_func AS 'com.example.MyFunc' USING ARCHIVE 'hdfs://path/to/archive.zip'",
+   "test": "TestHive.test_create_function_using"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CAST(a AS BIT)",
+   "expected": "CAST(a AS BOOLEAN)",
+   "test": "TestHive.test_data_type"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "CREATE TABLE x (w STRING) PARTITIONED BY (y INT, z INT)",
+   "expected": "CREATE TABLE x (w TEXT)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "CREATE TABLE x (w STRING) PARTITIONED BY (y INT, z INT)",
+   "expected": "CREATE TABLE x (w VARCHAR, y INTEGER, z INTEGER) WITH (PARTITIONED_BY=ARRAY['y', 'z'])",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE TABLE x (w STRING) PARTITIONED BY (y INT, z INT)",
+   "expected": "CREATE TABLE x (w STRING) PARTITIONED BY (y INT, z INT)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "CREATE TABLE x (w STRING) PARTITIONED BY (y INT, z INT)",
+   "expected": "CREATE TABLE x (w STRING, y INT, z INT) PARTITIONED BY (y, z)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "CREATE TABLE test STORED AS parquet TBLPROPERTIES ('x'='1', 'Z'='2') AS SELECT 1",
+   "expected": "CREATE TABLE test AS SELECT 1",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "CREATE TABLE test STORED AS parquet TBLPROPERTIES ('x'='1', 'Z'='2') AS SELECT 1",
+   "expected": "CREATE TABLE test WITH (format='parquet', x='1', Z='2') AS SELECT 1",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE TABLE test STORED AS parquet TBLPROPERTIES ('x'='1', 'Z'='2') AS SELECT 1",
+   "expected": "CREATE TABLE test STORED AS PARQUET TBLPROPERTIES ('x'='1', 'Z'='2') AS SELECT 1",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "CREATE TABLE test STORED AS parquet TBLPROPERTIES ('x'='1', 'Z'='2') AS SELECT 1",
+   "expected": "CREATE TABLE test STORED AS PARQUET TBLPROPERTIES ('x'='1', 'Z'='2') AS SELECT 1",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE TABLE test STORED AS INPUTFORMAT 'foo1' OUTPUTFORMAT 'foo2'",
+   "expected": "CREATE TABLE test STORED AS INPUTFORMAT 'foo1' OUTPUTFORMAT 'foo2'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "CREATE TABLE test STORED AS INPUTFORMAT 'foo1' OUTPUTFORMAT 'foo2'",
+   "expected": "CREATE TABLE test STORED AS INPUTFORMAT 'foo1' OUTPUTFORMAT 'foo2'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "CREATE TABLE test STORED AS INPUTFORMAT 'foo1' OUTPUTFORMAT 'foo2'",
+   "expected": "CREATE TABLE test STORED AS INPUTFORMAT 'foo1' OUTPUTFORMAT 'foo2'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE x PARTITION(y = z) ADD COLUMN a VARCHAR(10)",
+   "expected": "ALTER TABLE x PARTITION(y = z) ADD COLUMN a VARCHAR(10)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE x CHANGE a a VARCHAR(10)",
+   "expected": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10)",
+   "expected": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10)",
+   "expected": "ALTER TABLE x ALTER COLUMN a TYPE VARCHAR(10)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10) COMMENT 'comment'",
+   "expected": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10) COMMENT 'comment'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10) COMMENT 'comment'",
+   "expected": "ALTER TABLE x ALTER COLUMN a COMMENT 'comment'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE x CHANGE COLUMN a b VARCHAR(10)",
+   "expected": "ALTER TABLE x CHANGE COLUMN a b VARCHAR(10)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "ALTER TABLE x CHANGE COLUMN a b VARCHAR(10)",
+   "expected": "ALTER TABLE x RENAME COLUMN a TO b",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10) CASCADE",
+   "expected": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10) CASCADE",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "ALTER TABLE x CHANGE COLUMN a a VARCHAR(10) CASCADE",
+   "expected": "ALTER TABLE x ALTER COLUMN a TYPE VARCHAR(10)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE X ADD COLUMNS (y INT, z STRING)",
+   "expected": "ALTER TABLE X ADD COLUMNS (y INT, z STRING)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE X ADD COLUMNS (y INT, z STRING) CASCADE",
+   "expected": "ALTER TABLE X ADD COLUMNS (y INT, z STRING) CASCADE",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE EXTERNAL TABLE x (y INT) ROW FORMAT SERDE 'serde' ROW FORMAT DELIMITED FIELDS TERMINATED BY '1' WITH SERDEPROPERTIES ('input.regex'='')",
+   "expected": "CREATE EXTERNAL TABLE x (y INT) ROW FORMAT SERDE 'serde' ROW FORMAT DELIMITED FIELDS TERMINATED BY '1' WITH SERDEPROPERTIES ('input.regex'='')",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE EXTERNAL TABLE `my_table` (`a7` ARRAY<DATE>) ROW FORMAT SERDE 'a' STORED AS INPUTFORMAT 'b' OUTPUTFORMAT 'c' LOCATION 'd' TBLPROPERTIES ('e'='f')",
+   "expected": "CREATE EXTERNAL TABLE `my_table` (`a7` ARRAY<DATE>) ROW FORMAT SERDE 'a' STORED AS INPUTFORMAT 'b' OUTPUTFORMAT 'c' LOCATION 'd' TBLPROPERTIES ('e'='f')",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE EXTERNAL TABLE X (y INT) STORED BY 'x'",
+   "expected": "CREATE EXTERNAL TABLE X (y INT) STORED BY 'x'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER VIEW v1 AS SELECT x, UPPER(s) AS s FROM t2",
+   "expected": "ALTER VIEW v1 AS SELECT x, UPPER(s) AS s FROM t2",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER VIEW v1 (c1, c2) AS SELECT x, UPPER(s) AS s FROM t2",
+   "expected": "ALTER VIEW v1 (c1, c2) AS SELECT x, UPPER(s) AS s FROM t2",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER VIEW v7 (c1 COMMENT 'Comment for c1', c2) AS SELECT t1.c1, t1.c2 FROM t1",
+   "expected": "ALTER VIEW v7 (c1 COMMENT 'Comment for c1', c2) AS SELECT t1.c1, t1.c2 FROM t1",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER VIEW db1.v1 RENAME TO db2.v2",
+   "expected": "ALTER VIEW db1.v1 RENAME TO db2.v2",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER VIEW v1 SET TBLPROPERTIES ('tblp1'='1', 'tblp2'='2')",
+   "expected": "ALTER VIEW v1 SET TBLPROPERTIES ('tblp1'='1', 'tblp2'='2')",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER VIEW v1 UNSET TBLPROPERTIES ('tblp1', 'tblp2')",
+   "expected": "ALTER VIEW v1 UNSET TBLPROPERTIES ('tblp1', 'tblp2')",
+   "command": true,
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE TABLE foo (col STRUCT<struct_col_a: VARCHAR((50))>)",
+   "expected": "CREATE TABLE foo (col STRUCT<struct_col_a: VARCHAR((50))>)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:string>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT(struct_col_a INT, struct_col_b TEXT))",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:string>)",
+   "expected": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b VARCHAR))",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:string>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRING>)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:string>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRING>)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "bigquery",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a INT64, struct_col_b STRUCT<nested_col_a STRING, nested_col_b STRING>>)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT(struct_col_a INT, struct_col_b STRUCT(nested_col_a TEXT, nested_col_b TEXT)))",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b ROW(nested_col_a VARCHAR, nested_col_b VARCHAR)))",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRUCT<nested_col_a: STRING, nested_col_b: STRING>>)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "CREATE TABLE db.example_table (col_a struct<struct_col_a:int, struct_col_b:struct<nested_col_a:string, nested_col_b:string>>)",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRUCT<nested_col_a: STRING, nested_col_b: STRING>>)",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "expected": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "expected": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "expected": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "expected": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "expected": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "expected": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "expected": "ALTER TABLE db.example_table ADD PARTITION(col_a = 'a') LOCATION 'b'",
+   "test": "TestHive.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\n'",
+   "expected": "'\\n'",
+   "test": "TestHive.test_escapes"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\\n'",
+   "expected": "'\\n'",
+   "test": "TestHive.test_escapes"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\\\n'",
+   "expected": "'\\n'",
+   "test": "TestHive.test_escapes"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\\\\n'",
+   "expected": "'\\\\n'",
+   "test": "TestHive.test_escapes"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "''",
+   "expected": "''",
+   "test": "TestHive.test_escapes"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\\\\'",
+   "expected": "'\\\\'",
+   "test": "TestHive.test_escapes"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\\\\z'",
+   "expected": "'\\\\z'",
+   "test": "TestHive.test_escapes"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "TO_DATE(TO_DATE(x))",
+   "expected": "TO_DATE(TO_DATE(x))",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "DAY(TO_DATE(x))",
+   "expected": "DAY(TO_DATE(x))",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t WHERE col IN ('stream')",
+   "expected": "SELECT * FROM t WHERE col IN ('stream')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SET hiveconf:some_var = 5",
+   "expected": "SET hiveconf:some_var = 5",
+   "command": true,
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "(VALUES (1 AS a, 2 AS b, 3))",
+   "expected": "(VALUES (1 AS a, 2 AS b, 3))",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM my_table TIMESTAMP AS OF DATE_ADD(CURRENT_DATE, -1)",
+   "expected": "SELECT * FROM my_table TIMESTAMP AS OF DATE_ADD(CURRENT_DATE, -1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM my_table VERSION AS OF DATE_ADD(CURRENT_DATE, -1)",
+   "expected": "SELECT * FROM my_table VERSION AS OF DATE_ADD(CURRENT_DATE, -1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT WEEKOFYEAR('2024-05-22'), DAYOFMONTH('2024-05-22'), DAYOFWEEK('2024-05-22')",
+   "expected": "SELECT WEEKOFYEAR('2024-05-22'), DAYOFMONTH('2024-05-22'), DAYOFWEEK('2024-05-22')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT ROW() OVER (DISTRIBUTE BY x SORT BY y)",
+   "expected": "SELECT ROW() OVER (PARTITION BY x ORDER BY y)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT transform",
+   "expected": "SELECT transform",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM test DISTRIBUTE BY y SORT BY x DESC ORDER BY l",
+   "expected": "SELECT * FROM test DISTRIBUTE BY y SORT BY x DESC ORDER BY l",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM test WHERE RAND() <= 0.1 DISTRIBUTE BY RAND() SORT BY RAND()",
+   "expected": "SELECT * FROM test WHERE RAND() <= 0.1 DISTRIBUTE BY RAND() SORT BY RAND()",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "(SELECT 1 UNION SELECT 2) DISTRIBUTE BY z",
+   "expected": "(SELECT 1 UNION SELECT 2) DISTRIBUTE BY z",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "(SELECT 1 UNION SELECT 2) DISTRIBUTE BY z SORT BY x",
+   "expected": "(SELECT 1 UNION SELECT 2) DISTRIBUTE BY z SORT BY x",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "(SELECT 1 UNION SELECT 2) CLUSTER BY y",
+   "expected": "(SELECT 1 UNION SELECT 2) CLUSTER BY y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM test CLUSTER BY y",
+   "expected": "SELECT * FROM test CLUSTER BY y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "(SELECT 1 UNION SELECT 2) SORT BY z",
+   "expected": "(SELECT 1 UNION SELECT 2) SORT BY z",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "INSERT OVERWRITE TABLE zipcodes PARTITION(state = '0') VALUES (896, 'US', 'TAMPA', 33607)",
+   "expected": "INSERT OVERWRITE TABLE zipcodes PARTITION(state = '0') VALUES (896, 'US', 'TAMPA', 33607)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "INSERT OVERWRITE TABLE zipcodes PARTITION(state = 0) VALUES (896, 'US', 'TAMPA', 33607)",
+   "expected": "INSERT OVERWRITE TABLE zipcodes PARTITION(state = 0) VALUES (896, 'US', 'TAMPA', 33607)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "INSERT OVERWRITE DIRECTORY 'x' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\u0001' COLLECTION ITEMS TERMINATED BY ',' MAP KEYS TERMINATED BY ':' LINES TERMINATED BY '' STORED AS TEXTFILE SELECT * FROM `a`.`b`",
+   "expected": "INSERT OVERWRITE DIRECTORY 'x' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\\001' COLLECTION ITEMS TERMINATED BY ',' MAP KEYS TERMINATED BY ':' LINES TERMINATED BY '' STORED AS TEXTFILE SELECT * FROM `a`.`b`",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT a, b, SUM(c) FROM tabl AS t GROUP BY a, b GROUPING SETS ((a, b), a)",
+   "expected": "SELECT a, b, SUM(c) FROM tabl AS t GROUP BY a, b GROUPING SETS ((a, b), a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT a, b, SUM(c) FROM tabl AS t GROUP BY t.a, b GROUPING SETS ((t.a, b), t.a)",
+   "expected": "SELECT a, b, SUM(c) FROM tabl AS t GROUP BY t.a, b GROUPING SETS ((t.a, b), t.a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT a, ABS(b) AS b, SUM(c) FROM tabl AS t GROUP BY a, ABS(b) GROUPING SETS ((a, ABS(b)), a)",
+   "expected": "SELECT a, ABS(b) AS b, SUM(c) FROM tabl AS t GROUP BY a, ABS(b) GROUPING SETS ((a, ABS(b)), a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT key, value, GROUPING__ID, COUNT(*) FROM T1 GROUP BY key, value WITH CUBE",
+   "expected": "SELECT key, value, GROUPING__ID, COUNT(*) FROM T1 GROUP BY key, value WITH CUBE",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT key, value, GROUPING__ID, COUNT(*) FROM T1 GROUP BY key, value WITH ROLLUP",
+   "expected": "SELECT key, value, GROUPING__ID, COUNT(*) FROM T1 GROUP BY key, value WITH ROLLUP",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "TRUNCATE TABLE t1 PARTITION(age = 10, name = 'test', address = 'abc')",
+   "expected": "TRUNCATE TABLE t1 PARTITION(age = 10, name = 'test', address = 'abc')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1, t2",
+   "expected": "SELECT * FROM t1 CROSS JOIN t2",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT ${hiveconf:some_var}",
+   "expected": "SELECT ${hiveconf:some_var}",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT ${hiveconf:some_var}",
+   "expected": "SELECT ${hiveconf:some_var}",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT A.1a AS b FROM test_a AS A",
+   "expected": "SELECT A.1a AS b FROM test_a AS A",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT 1_a AS a FROM test_table",
+   "expected": "SELECT 1_a AS a FROM test_table",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "trino",
+   "sql": "SELECT 1_a AS a FROM test_table",
+   "expected": "SELECT \"1_a\" AS a FROM test_table",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT a_b AS 1_a FROM test_table",
+   "expected": "SELECT a_b AS 1_a FROM test_table",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT 1a_1a FROM test_a",
+   "expected": "SELECT 1a_1a FROM test_a",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT 1a AS 1a_1a FROM test_a",
+   "expected": "SELECT 1a AS 1a_1a FROM test_a",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "CREATE TABLE test_table (1a STRING)",
+   "expected": "CREATE TABLE test_table (1a STRING)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "CREATE TABLE test_table2 (1a_1a STRING)",
+   "expected": "CREATE TABLE test_table2 (1a_1a STRING)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "APPROX_PERCENTILE(x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "APPROX_QUANTILE(x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "PERCENTILE_APPROX(x, 0.5)",
+   "expected": "APPROX_PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "PERCENTILE_APPROX(x, 0.5)",
+   "expected": "APPROX_QUANTILE(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "PERCENTILE_APPROX(x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(ALL x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(ALL x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(ALL x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(ALL x, 0.5)",
+   "expected": "PERCENTILE_APPROX(x, 0.5)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(ALL x, 0.5, 200)",
+   "expected": "PERCENTILE_APPROX(x, 0.5, 200)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(ALL x, 0.5, 200)",
+   "expected": "PERCENTILE_APPROX(x, 0.5, 200)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(ALL x, 0.5, 200)",
+   "expected": "PERCENTILE_APPROX(x, 0.5, 200)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "PERCENTILE_APPROX(ALL x, 0.5, 200)",
+   "expected": "PERCENTILE_APPROX(x, 0.5, 200)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "bigquery",
+   "sql": "APPROX_COUNT_DISTINCT(a)",
+   "expected": "APPROX_COUNT_DISTINCT(a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "APPROX_COUNT_DISTINCT(a)",
+   "expected": "APPROX_COUNT_DISTINCT(a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "APPROX_COUNT_DISTINCT(a)",
+   "expected": "APPROX_DISTINCT(a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "APPROX_COUNT_DISTINCT(a)",
+   "expected": "APPROX_COUNT_DISTINCT(a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "snowflake",
+   "sql": "APPROX_COUNT_DISTINCT(a)",
+   "expected": "APPROX_COUNT_DISTINCT(a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "APPROX_COUNT_DISTINCT(a)",
+   "expected": "APPROX_COUNT_DISTINCT(a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "LIST_HAS(x, 1)",
+   "expected": "ARRAY_CONTAINS(x, 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "hive",
+   "sql": "ARRAY_CONTAINS(1, x)",
+   "expected": "ARRAY_CONTAINS(x, 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "ARRAY_CONTAINS(x, 1)",
+   "expected": "ARRAY_CONTAINS(x, 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "ARRAY_CONTAINS(x, 1)",
+   "expected": "CONTAINS(x, 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ARRAY_CONTAINS(x, 1)",
+   "expected": "ARRAY_CONTAINS(x, 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "ARRAY_CONTAINS(x, 1)",
+   "expected": "ARRAY_CONTAINS(x, 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "snowflake",
+   "sql": "ARRAY_CONTAINS(x, 1)",
+   "expected": "ARRAY_CONTAINS(CAST(1 AS VARIANT), x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SIZE(x)",
+   "expected": "ARRAY_LENGTH(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SIZE(x)",
+   "expected": "CARDINALITY(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SIZE(x)",
+   "expected": "SIZE(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SIZE(x)",
+   "expected": "SIZE(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "LOCATE('a', x)",
+   "expected": "STRPOS(x, 'a')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "LOCATE('a', x)",
+   "expected": "STRPOS(x, 'a')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "LOCATE('a', x)",
+   "expected": "LOCATE('a', x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "LOCATE('a', x)",
+   "expected": "LOCATE('a', x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "LOCATE('a', x, 3)",
+   "expected": "CASE WHEN STRPOS(SUBSTRING(x, 3), 'a') = 0 THEN 0 ELSE STRPOS(SUBSTRING(x, 3), 'a') + 3 - 1 END",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "LOCATE('a', x, 3)",
+   "expected": "IF(STRPOS(SUBSTR(x, 3), 'a') = 0, 0, STRPOS(SUBSTR(x, 3), 'a') + 3 - 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "LOCATE('a', x, 3)",
+   "expected": "LOCATE('a', x, 3)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "LOCATE('a', x, 3)",
+   "expected": "LOCATE('a', x, 3)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "INITCAP('new york')",
+   "expected": "INITCAP('new york')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "INITCAP('new york')",
+   "expected": "INITCAP('new york')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM x.z TABLESAMPLE(10 PERCENT) y",
+   "expected": "SELECT * FROM x.z TABLESAMPLE (10 PERCENT) AS y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM x.z TABLESAMPLE(10 PERCENT) y",
+   "expected": "SELECT * FROM x.z TABLESAMPLE (10 PERCENT) AS y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "SELECT ARRAY_REVERSE_SORT(x)",
+   "expected": "SELECT SORT_ARRAY(x, FALSE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT SORT_ARRAY(x, FALSE)",
+   "expected": "SELECT SORT_ARRAY(x, FALSE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT SORT_ARRAY(x, FALSE)",
+   "expected": "SELECT ARRAY_REVERSE_SORT(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SELECT SORT_ARRAY(x, FALSE)",
+   "expected": "SELECT ARRAY_SORT(x, (a, b) -> CASE WHEN a < b THEN 1 WHEN a > b THEN -1 ELSE 0 END)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT SORT_ARRAY(x, FALSE)",
+   "expected": "SELECT SORT_ARRAY(x, FALSE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT SORT_ARRAY(x, FALSE)",
+   "expected": "SELECT SORT_ARRAY(x, FALSE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "GET_JSON_OBJECT(x, '$.name')",
+   "expected": "JSON_EXTRACT_SCALAR(x, '$.name')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "GET_JSON_OBJECT(x, '$.name')",
+   "expected": "GET_JSON_OBJECT(x, '$.name')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "GET_JSON_OBJECT(x, '$.name')",
+   "expected": "GET_JSON_OBJECT(x, '$.name')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "hive",
+   "sql": "VAR_MAP(a, b, c, d)",
+   "expected": "MAP(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "hive",
+   "sql": "map(a, b, c, d)",
+   "expected": "MAP(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "MAP([a, c], [b, d])",
+   "expected": "MAP(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "MAP(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "MAP(ARRAY[a, c], ARRAY[b, d])",
+   "expected": "MAP(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "MAP(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "MAP(ARRAY(a, c), ARRAY(b, d))",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "clickhouse",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "map(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "MAP([a, c], [b, d])",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "MAP(ARRAY[a, c], ARRAY[b, d])",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "MAP(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "MAP(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "snowflake",
+   "sql": "MAP(a, b, c, d)",
+   "expected": "OBJECT_CONSTRUCT(a, b, c, d)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "MAP(a, b)",
+   "expected": "MAP([a], [b])",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "MAP(a, b)",
+   "expected": "MAP(ARRAY[a], ARRAY[b])",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "MAP(a, b)",
+   "expected": "MAP(a, b)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "MAP(a, b)",
+   "expected": "MAP(a, b)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "snowflake",
+   "sql": "MAP(a, b)",
+   "expected": "OBJECT_CONSTRUCT(a, b)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "LOG(10)",
+   "expected": "LN(10)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "LOG(10)",
+   "expected": "LN(10)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "LOG(10)",
+   "expected": "LN(10)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "LOG(10)",
+   "expected": "LN(10)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "ds = \"2020-01-01\"",
+   "expected": "ds = '2020-01-01'",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "ds = \"2020-01-01\"",
+   "expected": "ds = '2020-01-01'",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ds = \"2020-01-01\"",
+   "expected": "ds = '2020-01-01'",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "ds = \"2020-01-01\"",
+   "expected": "ds = '2020-01-01'",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "ds = \"1''2\"",
+   "expected": "ds = '1''''2'",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "ds = \"1''2\"",
+   "expected": "ds = '1''''2'",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "ds = \"1''2\"",
+   "expected": "ds = '1\\'\\'2'",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "ds = \"1''2\"",
+   "expected": "ds = '1\\'\\'2'",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "x == 1",
+   "expected": "x = 1",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "x == 1",
+   "expected": "x = 1",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "x == 1",
+   "expected": "x = 1",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "x == 1",
+   "expected": "x = 1",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "x DIV y",
+   "expected": "x DIV y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "x // y",
+   "expected": "x DIV y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "x DIV y",
+   "expected": "x DIV y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "x DIV y",
+   "expected": "x DIV y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "x DIV y",
+   "expected": "x DIV y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "x DIV y",
+   "expected": "x // y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "x DIV y",
+   "expected": "x DIV y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "x DIV y",
+   "expected": "CAST(TRUNCATE(CAST(x AS DOUBLE) / y) AS BIGINT)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "x DIV y",
+   "expected": "x DIV y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "x DIV y",
+   "expected": "x DIV y",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "ARRAY_AGG(x)",
+   "expected": "COLLECT_LIST(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "COLLECT_LIST(x)",
+   "expected": "ARRAY_AGG(x) FILTER(WHERE x IS NOT NULL)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "COLLECT_LIST(x)",
+   "expected": "ARRAY_AGG(x) FILTER(WHERE x IS NOT NULL)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "COLLECT_LIST(x)",
+   "expected": "COLLECT_LIST(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "COLLECT_LIST(x)",
+   "expected": "COLLECT_LIST(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "doris",
+   "write": "hive",
+   "sql": "COLLECT_SET(x)",
+   "expected": "COLLECT_SET(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "SET_AGG(x)",
+   "expected": "COLLECT_SET(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "hive",
+   "sql": "ARRAY_UNIQUE_AGG(x)",
+   "expected": "COLLECT_SET(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "doris",
+   "sql": "COLLECT_SET(x)",
+   "expected": "COLLECT_SET(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "COLLECT_SET(x)",
+   "expected": "COLLECT_SET(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "COLLECT_SET(x)",
+   "expected": "SET_AGG(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "snowflake",
+   "sql": "COLLECT_SET(x)",
+   "expected": "ARRAY_UNIQUE_AGG(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "COLLECT_SET(x)",
+   "expected": "COLLECT_SET(x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "trino",
+   "sql": "COLLECT_SET(x)",
+   "expected": "ARRAY_AGG(DISTINCT x)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "SELECT * FROM x AS foo TABLESAMPLE BERNOULLI (1)",
+   "expected": "SELECT * FROM x TABLESAMPLE (1 PERCENT) AS foo",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "hive",
+   "sql": "SELECT * FROM x AS foo TABLESAMPLE (1)",
+   "expected": "SELECT * FROM x TABLESAMPLE (1 PERCENT) AS foo",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM x TABLESAMPLE (1 PERCENT) AS foo",
+   "expected": "SELECT * FROM x TABLESAMPLE (1 PERCENT) AS foo",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "snowflake",
+   "sql": "SELECT * FROM x TABLESAMPLE (1 PERCENT) AS foo",
+   "expected": "SELECT * FROM x AS foo TABLESAMPLE (1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM x TABLESAMPLE (1 PERCENT) AS foo",
+   "expected": "SELECT * FROM x TABLESAMPLE (1 PERCENT) AS foo",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT a, SUM(c) FROM t GROUP BY a, DATE_FORMAT(b, 'yyyy') GROUPING SETS ((a, DATE_FORMAT(b, 'yyyy')), a)",
+   "expected": "SELECT a, SUM(c) FROM t GROUP BY a, DATE_FORMAT(b, 'yyyy') GROUPING SETS ((a, DATE_FORMAT(b, 'yyyy')), a)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT TRUNC(CAST(ds AS TIMESTAMP), 'MONTH')",
+   "expected": "SELECT TRUNC(CAST(ds AS TIMESTAMP), 'MONTH')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "SELECT DATE_TRUNC('MONTH', CAST(ds AS TIMESTAMP))",
+   "expected": "SELECT TRUNC(CAST(ds AS TIMESTAMP), 'MONTH')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SELECT TRUNC(CAST(ds AS TIMESTAMP), 'MONTH')",
+   "expected": "SELECT DATE_TRUNC('MONTH', TRY_CAST(ds AS TIMESTAMP))",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "TRUNC(date_col, 'MM')",
+   "expected": "TRUNC(date_col, 'MM')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "hive",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "CAST(3.14159 AS BIGINT)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)', 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "trino",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)', 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "REGEXP_EXTRACT('abc', '(a)(b)(c)')",
+   "expected": "REGEXP_EXTRACT('abc', '(a)(b)(c)', 1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "EXISTS(col, x -> x % 2 = 0)",
+   "expected": "EXISTS(col, x -> x % 2 = 0)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "expected": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "expected": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "expected": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "expected": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "expected": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "expected": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "expected": "SELECT EXISTS(ARRAY(2, 3), x -> x % 2 = 0)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT 1_2",
+   "expected": "SELECT 1_2",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT MAP(*), STRUCT(*) FROM t",
+   "expected": "SELECT MAP(*), STRUCT(*) FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "SELECT MAP(*), STRUCT(*) FROM t",
+   "expected": "SELECT MAP(*), STRUCT(*) FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT MAP(*), STRUCT(*) FROM t",
+   "expected": "SELECT MAP(*), STRUCT(*) FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT MAP(*), STRUCT(*) FROM t",
+   "expected": "SELECT MAP(*), STRUCT(*) FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT MAP(*), STRUCT(*) FROM t",
+   "expected": "SELECT MAP(*), STRUCT(*) FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT MAP(*), STRUCT(*) FROM t",
+   "expected": "SELECT MAP(*), STRUCT(*) FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT MAP(*), STRUCT(*) FROM t",
+   "expected": "SELECT MAP(*), STRUCT(*) FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT FIRST(sample_col, TRUE)",
+   "expected": "SELECT FIRST(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT FIRST(sample_col, TRUE)",
+   "expected": "SELECT FIRST(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT FIRST(sample_col, TRUE)",
+   "expected": "SELECT FIRST(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT FIRST(sample_col, TRUE)",
+   "expected": "SELECT FIRST(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT FIRST(sample_col, TRUE)",
+   "expected": "SELECT FIRST(sample_col) IGNORE NULLS",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT FIRST(sample_col, TRUE)",
+   "expected": "SELECT FIRST(sample_col) IGNORE NULLS",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT FIRST(sample_col, TRUE)",
+   "expected": "SELECT ANY_VALUE(sample_col)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT FIRST_VALUE(sample_col) IGNORE NULLS",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT FIRST_VALUE(sample_col) IGNORE NULLS",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT FIRST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT FIRST_VALUE(sample_col IGNORE NULLS)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT LAST_VALUE(sample_col) IGNORE NULLS",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT LAST_VALUE(sample_col) IGNORE NULLS",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT LAST_VALUE(sample_col, TRUE)",
+   "expected": "SELECT LAST_VALUE(sample_col IGNORE NULLS)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT LAST(sample_col, TRUE)",
+   "expected": "SELECT LAST(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT LAST(sample_col, TRUE)",
+   "expected": "SELECT LAST(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT LAST(sample_col, TRUE)",
+   "expected": "SELECT LAST(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT LAST(sample_col, TRUE)",
+   "expected": "SELECT LAST(sample_col, TRUE)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT LAST(sample_col, TRUE)",
+   "expected": "SELECT LAST(sample_col) IGNORE NULLS",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT LAST(sample_col, TRUE)",
+   "expected": "SELECT LAST(sample_col) IGNORE NULLS",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "DATE_SUB(CURRENT_DATE, 1 + 1)",
+   "expected": "DATE_ADD(CURRENT_DATE, (1 + 1) * -1)",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT ELT(2, 'foo', 'bar', 'baz') AS Result",
+   "expected": "SELECT ELT(2, 'foo', 'bar', 'baz') AS Result",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$.x-y') FROM t",
+   "expected": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$.x-y') FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$.x-y') FROM t",
+   "expected": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$.x-y') FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$.x-y') FROM t",
+   "expected": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$.x-y') FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$.x-y') FROM t",
+   "expected": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$[\"x-y\"]') FROM t",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT PARSE_JSON('{\"key\": 123}')",
+   "expected": "SELECT PARSE_JSON('{\"key\": 123}')",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT TO_JSON(PARSE_JSON('{\"key\": 123}'))",
+   "expected": "SELECT TO_JSON(PARSE_JSON('{\"key\": 123}'))",
+   "test": "TestHive.test_hive"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 FULL OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 LEFT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 RIGHT OUTER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 INNER JOIN t2",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 INNER JOIN t2",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 INNER JOIN t2",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 INNER JOIN t2",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 INNER JOIN t2",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "expected": "SELECT * FROM t1 INNER JOIN t2 ON TRUE",
+   "test": "TestHive.test_joins_without_on"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SELECT a, b FROM x LATERAL VIEW EXPLODE(y) t AS a LATERAL VIEW EXPLODE(z) u AS b",
+   "expected": "SELECT a, b FROM x CROSS JOIN UNNEST(y) AS t(a) CROSS JOIN UNNEST(z) AS u(b)",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT a, b FROM x LATERAL VIEW EXPLODE(y) t AS a LATERAL VIEW EXPLODE(z) u AS b",
+   "expected": "SELECT a, b FROM x CROSS JOIN UNNEST(y) AS t(a) CROSS JOIN UNNEST(z) AS u(b)",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT a, b FROM x LATERAL VIEW EXPLODE(y) t AS a LATERAL VIEW EXPLODE(z) u AS b",
+   "expected": "SELECT a, b FROM x LATERAL VIEW EXPLODE(y) t AS a LATERAL VIEW EXPLODE(z) u AS b",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT a, b FROM x LATERAL VIEW EXPLODE(y) t AS a LATERAL VIEW EXPLODE(z) u AS b",
+   "expected": "SELECT a, b FROM x LATERAL VIEW EXPLODE(y) t AS a LATERAL VIEW EXPLODE(z) u AS b",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SELECT a FROM x LATERAL VIEW EXPLODE(y) t AS a",
+   "expected": "SELECT a FROM x CROSS JOIN UNNEST(y) AS t(a)",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT a FROM x LATERAL VIEW EXPLODE(y) t AS a",
+   "expected": "SELECT a FROM x CROSS JOIN UNNEST(y) AS t(a)",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT a FROM x LATERAL VIEW EXPLODE(y) t AS a",
+   "expected": "SELECT a FROM x LATERAL VIEW EXPLODE(y) t AS a",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT a FROM x LATERAL VIEW EXPLODE(y) t AS a",
+   "expected": "SELECT a FROM x LATERAL VIEW EXPLODE(y) t AS a",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SELECT a FROM x LATERAL VIEW POSEXPLODE(y) t AS pos, col",
+   "expected": "SELECT a FROM x CROSS JOIN LATERAL (SELECT pos - 1 AS pos, col FROM UNNEST(y) WITH ORDINALITY AS t(col, pos))",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "trino",
+   "sql": "SELECT a FROM x LATERAL VIEW POSEXPLODE(y) t AS pos, col",
+   "expected": "SELECT a FROM x CROSS JOIN LATERAL (SELECT pos - 1 AS pos, col FROM UNNEST(y) WITH ORDINALITY AS t(col, pos))",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT a FROM x LATERAL VIEW POSEXPLODE(y) t AS pos, col",
+   "expected": "SELECT a FROM x CROSS JOIN LATERAL (SELECT pos - 1 AS pos, col FROM UNNEST(y) WITH ORDINALITY AS t(col, pos))",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT a FROM x LATERAL VIEW POSEXPLODE(y) t AS pos, col",
+   "expected": "SELECT a FROM x LATERAL VIEW POSEXPLODE(y) t AS pos, col",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT a FROM x LATERAL VIEW POSEXPLODE(y) t AS pos, col",
+   "expected": "SELECT a FROM x LATERAL VIEW POSEXPLODE(y) t AS pos, col",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SELECT * FROM x LATERAL VIEW POSEXPLODE(MAP(col, 'val')) t AS pos, key, value",
+   "expected": "SELECT * FROM x CROSS JOIN LATERAL (SELECT pos - 1 AS pos, key, value FROM UNNEST(MAP(ARRAY[col], ARRAY['val'])) WITH ORDINALITY AS t(key, value, pos))",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "trino",
+   "sql": "SELECT * FROM x LATERAL VIEW POSEXPLODE(MAP(col, 'val')) t AS pos, key, value",
+   "expected": "SELECT * FROM x CROSS JOIN LATERAL (SELECT pos - 1 AS pos, key, value FROM UNNEST(MAP(ARRAY[col], ARRAY['val'])) WITH ORDINALITY AS t(key, value, pos))",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM x LATERAL VIEW POSEXPLODE(MAP(col, 'val')) t AS pos, key, value",
+   "expected": "SELECT * FROM x LATERAL VIEW POSEXPLODE(MAP(col, 'val')) t AS pos, key, value",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT * FROM x LATERAL VIEW POSEXPLODE(MAP(col, 'val')) t AS pos, key, value",
+   "expected": "SELECT * FROM x LATERAL VIEW POSEXPLODE(MAP(col, 'val')) t AS pos, key, value",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SELECT a FROM x LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "expected": "SELECT a FROM x CROSS JOIN UNNEST(ARRAY[y]) AS t(a)",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT a FROM x LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "expected": "SELECT a FROM x CROSS JOIN UNNEST([y]) AS t(a)",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT a FROM x LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "expected": "SELECT a FROM x LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT a FROM x LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "expected": "SELECT a FROM x LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "FROM x LATERAL VIEW EXPLODE(y) t AS a SELECT a",
+   "expected": "SELECT a FROM x CROSS JOIN UNNEST(y) AS t(a)",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x LATERAL VIEW EXPLODE(y) t AS a SELECT a",
+   "expected": "SELECT a FROM x LATERAL VIEW EXPLODE(y) t AS a",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT * FROM (FROM x LATERAL VIEW EXPLODE(y) t AS a SELECT a) AS q",
+   "expected": "SELECT * FROM (SELECT a FROM x LATERAL VIEW EXPLODE(y) t AS a) AS q",
+   "test": "TestHive.test_lateral_view"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x INSERT OVERWRITE TABLE a SELECT k, v",
+   "expected": "FROM x INSERT OVERWRITE TABLE a SELECT k, v",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x INSERT INTO TABLE a SELECT k",
+   "expected": "FROM x INSERT INTO a SELECT k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x AS v INSERT OVERWRITE TABLE a PARTITION(ds = '1') SELECT v.k, v.m['c'] AS c WHERE v.os = 'ios' INSERT OVERWRITE TABLE b PARTITION(ds) SELECT v.k, v.ds WHERE v.os = 'android' INSERT INTO c SELECT v.os, COUNT(DISTINCT v.k) AS uv GROUP BY v.os",
+   "expected": "FROM x AS v INSERT OVERWRITE TABLE a PARTITION(ds = '1') SELECT v.k, v.m['c'] AS c WHERE v.os = 'ios' INSERT OVERWRITE TABLE b PARTITION(ds) SELECT v.k, v.ds WHERE v.os = 'android' INSERT INTO c SELECT v.os, COUNT(DISTINCT v.k) AS uv GROUP BY v.os",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x INSERT OVERWRITE LOCAL DIRECTORY '/tmp/a' SELECT k INSERT OVERWRITE DIRECTORY '/tmp/b' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' SELECT v",
+   "expected": "FROM x INSERT OVERWRITE LOCAL DIRECTORY '/tmp/a' SELECT k INSERT OVERWRITE DIRECTORY '/tmp/b' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' SELECT v",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM a JOIN b ON a.k = b.k LEFT JOIN c ON a.k = c.k INSERT OVERWRITE TABLE t SELECT a.k, c.v",
+   "expected": "FROM a JOIN b ON a.k = b.k LEFT JOIN c ON a.k = c.k INSERT OVERWRITE TABLE t SELECT a.k, c.v",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM (SELECT k, v FROM x WHERE v > 0) AS s INSERT OVERWRITE TABLE t SELECT s.k",
+   "expected": "FROM (SELECT k, v FROM x WHERE v > 0) AS s INSERT OVERWRITE TABLE t SELECT s.k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x LATERAL VIEW EXPLODE(arr) a AS c LATERAL VIEW OUTER EXPLODE(m) b AS mk, mv INSERT OVERWRITE TABLE t SELECT c, mk",
+   "expected": "FROM x LATERAL VIEW EXPLODE(arr) a AS c LATERAL VIEW OUTER EXPLODE(m) b AS mk, mv INSERT OVERWRITE TABLE t SELECT c, mk",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x INSERT OVERWRITE TABLE a SELECT k, COUNT(*) WHERE v > 1 GROUP BY k HAVING COUNT(*) > 2 ORDER BY k LIMIT 10 INSERT INTO b SELECT DISTINCT k DISTRIBUTE BY k SORT BY k",
+   "expected": "FROM x INSERT OVERWRITE TABLE a SELECT k, COUNT(*) WHERE v > 1 GROUP BY k HAVING COUNT(*) > 2 ORDER BY k LIMIT 10 INSERT INTO b SELECT DISTINCT k DISTRIBUTE BY k SORT BY k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "WITH c AS (SELECT 1 AS k) FROM c INSERT OVERWRITE TABLE a SELECT k INSERT INTO b SELECT k",
+   "expected": "WITH c AS (SELECT 1 AS k) FROM c INSERT OVERWRITE TABLE a SELECT k INSERT INTO b SELECT k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "-- a\nFROM x\n-- b\nINSERT OVERWRITE TABLE t SELECT k\n-- c\nINSERT INTO u SELECT v",
+   "expected": "/* a */ FROM x /* b */ INSERT OVERWRITE TABLE t SELECT k /* c */ INSERT INTO u SELECT v",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM (FROM x LATERAL VIEW EXPLODE(arr) a AS c SELECT k, c) AS s INSERT INTO t SELECT s.c INSERT INTO u SELECT s.k",
+   "expected": "FROM (SELECT k, c FROM x LATERAL VIEW EXPLODE(arr) a AS c) AS s INSERT INTO t SELECT s.c INSERT INTO u SELECT s.k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x INSERT INTO t SELECT v QUALIFY ROW_NUMBER() OVER (PARTITION BY k ORDER BY v) = 1",
+   "expectedError": "unsupported",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "FROM x INSERT INTO t SELECT v QUALIFY ROW_NUMBER() OVER (PARTITION BY k ORDER BY v) = 1",
+   "expectedError": "unsupported",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "FROM x INSERT INTO t SELECT v QUALIFY ROW_NUMBER() OVER (PARTITION BY k ORDER BY v) = 1",
+   "expected": "FROM x INSERT INTO t SELECT v QUALIFY ROW_NUMBER() OVER (PARTITION BY k ORDER BY v) = 1",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x INSERT OVERWRITE TABLE a SELECT k INSERT INTO b SELECT v WHERE k > 0",
+   "expected": "FROM x INSERT OVERWRITE TABLE a SELECT k INSERT INTO b SELECT v WHERE k > 0",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "FROM x INSERT OVERWRITE TABLE a SELECT k",
+   "expected": "FROM x INSERT OVERWRITE TABLE a SELECT k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "FROM x INSERT OVERWRITE TABLE a SELECT k",
+   "expected": "FROM x INSERT OVERWRITE TABLE a SELECT k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "FROM x INSERT OVERWRITE TABLE a SELECT k",
+   "expected": "FROM x INSERT OVERWRITE TABLE a SELECT k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "FROM x INSERT OVERWRITE TABLE a SELECT k",
+   "expected": "FROM x INSERT OVERWRITE TABLE a SELECT k",
+   "test": "TestHive.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC, lname NULLS FIRST",
+   "test": "TestHive.test_order_by"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC, lname NULLS FIRST",
+   "test": "TestHive.test_order_by"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "test": "TestHive.test_order_by"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "test": "TestHive.test_order_by"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "PERCENTILE(x, 0.5)",
+   "expected": "QUANTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "PERCENTILE(x, 0.5)",
+   "expected": "APPROX_PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE(x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark2",
+   "sql": "PERCENTILE(x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "PERCENTILE(x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "PERCENTILE(x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE(DISTINCT x, 0.5)",
+   "expected": "PERCENTILE(DISTINCT x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "PERCENTILE(DISTINCT x, 0.5)",
+   "expected": "PERCENTILE(DISTINCT x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "PERCENTILE(DISTINCT x, 0.5)",
+   "expected": "PERCENTILE(DISTINCT x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "PERCENTILE(DISTINCT x, 0.5)",
+   "expected": "PERCENTILE(DISTINCT x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "PERCENTILE(DISTINCT x, 0.5)",
+   "expected": "PERCENTILE(DISTINCT x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE(ALL x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "hive",
+   "sql": "PERCENTILE(ALL x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "hive",
+   "sql": "PERCENTILE(ALL x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "hive",
+   "sql": "PERCENTILE(ALL x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE(DISTINCT x, 0.5)",
+   "expected": "PERCENTILE(DISTINCT x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "identity",
+   "read": "hive",
+   "write": "hive",
+   "sql": "PERCENTILE(ALL x, 0.5)",
+   "expected": "PERCENTILE(x, 0.5)",
+   "test": "TestHive.test_percentile"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "'\\''",
+   "expected": "''''",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "'\\''",
+   "expected": "''''",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\\''",
+   "expected": "'\\''",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "'\\''",
+   "expected": "'\\''",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "'\"x\"'",
+   "expected": "'\"x\"'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "'\"x\"'",
+   "expected": "'\"x\"'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\"x\"'",
+   "expected": "'\"x\"'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "'\"x\"'",
+   "expected": "'\"x\"'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "\"'x'\"",
+   "expected": "'''x'''",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "\"'x'\"",
+   "expected": "'''x'''",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "\"'x'\"",
+   "expected": "'\\'x\\''",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "\"'x'\"",
+   "expected": "'\\'x\\''",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "read",
+   "read": "drill",
+   "write": "hive",
+   "sql": "'\\\\a'",
+   "expected": "'\\\\\\\\a'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "hive",
+   "sql": "'\\\\a'",
+   "expected": "'\\\\\\\\a'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "'\\\\a'",
+   "expected": "'\\\\\\\\a'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "drill",
+   "sql": "'\\\\\\\\a'",
+   "expected": "'\\\\a'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "'\\\\\\\\a'",
+   "expected": "'\\\\a'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "'\\\\\\\\a'",
+   "expected": "'\\\\\\\\a'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "'\\\\\\\\a'",
+   "expected": "'\\\\a'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "'\\\\\\\\a'",
+   "expected": "'\\\\\\\\a'",
+   "test": "TestHive.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "a RLIKE 'x'",
+   "expected": "REGEXP_MATCHES(a, 'x')",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "exasol",
+   "sql": "a RLIKE 'x'",
+   "expected": "a REGEXP_LIKE '.*x.*'",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "a RLIKE 'x'",
+   "expected": "REGEXP_LIKE(a, 'x')",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "a RLIKE 'x'",
+   "expected": "a RLIKE 'x'",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "a RLIKE 'x'",
+   "expected": "a RLIKE 'x'",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "a REGEXP 'x'",
+   "expected": "REGEXP_MATCHES(a, 'x')",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "exasol",
+   "sql": "a REGEXP 'x'",
+   "expected": "a REGEXP_LIKE '.*x.*'",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "a REGEXP 'x'",
+   "expected": "REGEXP_LIKE(a, 'x')",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "a REGEXP 'x'",
+   "expected": "a RLIKE 'x'",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "a REGEXP 'x'",
+   "expected": "a RLIKE 'x'",
+   "test": "TestHive.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "STR_TO_DATE(x)",
+   "expected": "CAST(x AS DATE)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_DIFF('millisecond', x, y)",
+   "expected": "(UNIX_TIMESTAMP(y) - UNIX_TIMESTAMP(x)) * 1000",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_DIFF('second', x, y)",
+   "expected": "UNIX_TIMESTAMP(y) - UNIX_TIMESTAMP(x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_DIFF('minute', x, y)",
+   "expected": "(UNIX_TIMESTAMP(y) - UNIX_TIMESTAMP(x)) / 60",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_DIFF('hour', x, y)",
+   "expected": "(UNIX_TIMESTAMP(y) - UNIX_TIMESTAMP(x)) / 3600",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "DATEDIFF(a, b)",
+   "expected": "DATE_DIFF('DAY', CAST(b AS DATE), CAST(a AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "DATEDIFF(a, b)",
+   "expected": "DATE_DIFF('DAY', CAST(CAST(b AS TIMESTAMP) AS DATE), CAST(CAST(a AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "DATEDIFF(a, b)",
+   "expected": "DATEDIFF(a, b)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "DATEDIFF(a, b)",
+   "expected": "DATEDIFF(a, b)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "",
+   "sql": "DATEDIFF(a, b)",
+   "expected": "DATEDIFF(CAST(a AS DATE), CAST(b AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "from_unixtime(x, \"yyyy-MM-dd'T'HH\")",
+   "expected": "STRFTIME(TO_TIMESTAMP(x), '%Y-%m-%d''T''%H')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "from_unixtime(x, \"yyyy-MM-dd'T'HH\")",
+   "expected": "DATE_FORMAT(FROM_UNIXTIME(x), '%Y-%m-%d''T''%H')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "from_unixtime(x, \"yyyy-MM-dd'T'HH\")",
+   "expected": "FROM_UNIXTIME(x, 'yyyy-MM-dd\\'T\\'HH')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "from_unixtime(x, \"yyyy-MM-dd'T'HH\")",
+   "expected": "FROM_UNIXTIME(x, 'yyyy-MM-dd\\'T\\'HH')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "bigquery",
+   "sql": "DATE_FORMAT('2020-01-01', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "FORMAT_DATE('%Y-%m-%d %H:%M:%S', CAST('2020-01-01' AS DATETIME))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "DATE_FORMAT('2020-01-01', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "STRFTIME(CAST('2020-01-01' AS TIMESTAMP), '%Y-%m-%d %H:%M:%S')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "DATE_FORMAT('2020-01-01', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "DATE_FORMAT(CAST('2020-01-01' AS TIMESTAMP), '%Y-%m-%d %H:%i:%s')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "DATE_FORMAT('2020-01-01', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "DATE_FORMAT('2020-01-01', 'yyyy-MM-dd HH:mm:ss')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "DATE_FORMAT('2020-01-01', 'yyyy-MM-dd HH:mm:ss')",
+   "expected": "DATE_FORMAT('2020-01-01', 'yyyy-MM-dd HH:mm:ss')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "TS_OR_DS_ADD('2020-01-01', 1, DAY)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "bigquery",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "DATE_ADD(CAST(CAST('2020-01-01' AS DATETIME) AS DATE), INTERVAL 1 DAY)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "CAST('2020-01-01' AS DATE) + INTERVAL 1 DAY",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "DATE_ADD('2020-01-01', 1)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "DATE_ADD('DAY', 1, CAST(CAST('2020-01-01' AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "redshift",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "DATEADD(DAY, 1, '2020-01-01')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "snowflake",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "DATEADD(DAY, 1, CAST(CAST('2020-01-01' AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "DATE_ADD('2020-01-01', 1)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "tsql",
+   "sql": "DATE_ADD('2020-01-01', 1)",
+   "expected": "DATEADD(DAY, 1, CAST(CAST('2020-01-01' AS DATETIME2) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "TS_OR_DS_ADD('2020-01-01', 1 * -1, DAY)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "bigquery",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "DATE_ADD(CAST(CAST('2020-01-01' AS DATETIME) AS DATE), INTERVAL (1 * -1) DAY)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "CAST('2020-01-01' AS DATE) + INTERVAL (1 * -1) DAY",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "DATE_ADD('2020-01-01', 1 * -1)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "DATE_ADD('DAY', 1 * -1, CAST(CAST('2020-01-01' AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "redshift",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "DATEADD(DAY, 1 * -1, '2020-01-01')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "snowflake",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "DATEADD(DAY, 1 * -1, CAST(CAST('2020-01-01' AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "DATE_ADD('2020-01-01', 1 * -1)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "tsql",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "DATEADD(DAY, 1 * -1, CAST(CAST('2020-01-01' AS DATETIME2) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "hive",
+   "sql": "DATE_SUB('2020-01-01', 1)",
+   "expected": "DATE_ADD('2020-01-01', -1)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "hive",
+   "sql": "DATE_SUB(a, b)",
+   "expected": "DATE_ADD(a, b * -1)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "hive",
+   "sql": "DATE_SUB('2020-01-01', 2, month)",
+   "expected": "ADD_MONTHS('2020-01-01', -2)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "DATEDIFF(TO_DATE(y), x)",
+   "expected": "DATE_DIFF('DAY', CAST(x AS DATE), TRY_CAST(y AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "DATEDIFF(TO_DATE(y), x)",
+   "expected": "DATE_DIFF('DAY', CAST(CAST(x AS TIMESTAMP) AS DATE), CAST(CAST(CAST(CAST(y AS TIMESTAMP) AS DATE) AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "DATEDIFF(TO_DATE(y), x)",
+   "expected": "DATEDIFF(TO_DATE(y), x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "DATEDIFF(TO_DATE(y), x)",
+   "expected": "DATEDIFF(TO_DATE(y), x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "",
+   "sql": "DATEDIFF(TO_DATE(y), x)",
+   "expected": "DATEDIFF(TRY_CAST(y AS DATE), CAST(x AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "UNIX_TIMESTAMP(x)",
+   "expected": "EPOCH(STRPTIME(x, '%Y-%m-%d %H:%M:%S'))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "UNIX_TIMESTAMP(x)",
+   "expected": "TO_UNIXTIME(COALESCE(TRY(DATE_PARSE(CAST(x AS VARCHAR), '%Y-%m-%d %H:%i:%s')), PARSE_DATETIME(DATE_FORMAT(x, '%Y-%m-%d %H:%i:%s'), 'yyyy-MM-dd HH:mm:ss')))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "UNIX_TIMESTAMP(x)",
+   "expected": "UNIX_TIMESTAMP(x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "UNIX_TIMESTAMP(x)",
+   "expected": "UNIX_TIMESTAMP(x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "",
+   "sql": "UNIX_TIMESTAMP(x)",
+   "expected": "STR_TO_UNIX(x, '%Y-%mstrict-%dstrict %Hstrict:%Mstrict:%Sstrict')",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "DAY(x)",
+   "expected": "DAY(CAST(x AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "DAY(x)",
+   "expected": "DAY(CAST(CAST(x AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "DAY(x)",
+   "expected": "DAY(x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "DAY(x)",
+   "expected": "DAY(x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "MONTH(x)",
+   "expected": "MONTH(CAST(x AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "MONTH(x)",
+   "expected": "MONTH(CAST(CAST(x AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "MONTH(x)",
+   "expected": "MONTH(x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "MONTH(x)",
+   "expected": "MONTH(x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "duckdb",
+   "sql": "YEAR(x)",
+   "expected": "YEAR(CAST(x AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "presto",
+   "sql": "YEAR(x)",
+   "expected": "YEAR(CAST(CAST(x AS TIMESTAMP) AS DATE))",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "hive",
+   "sql": "YEAR(x)",
+   "expected": "YEAR(x)",
+   "test": "TestHive.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "hive",
+   "write": "spark",
+   "sql": "YEAR(x)",
+   "expected": "YEAR(x)",
+   "test": "TestHive.test_time"
+  }
+ ]
+}

@@ -1,0 +1,638 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_dremio.py",
+ "cases": [
+  {
+   "kind": "read",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "ARRAY_GENERATE_RANGE(1, 4)",
+   "expected": "ARRAY_GENERATE_RANGE(1, 4)",
+   "test": "TestDremio.test_array_generate_range"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "duckdb",
+   "sql": "ARRAY_GENERATE_RANGE(1, 4)",
+   "expected": "GENERATE_SERIES(1, 4)",
+   "test": "TestDremio.test_array_generate_range"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT CONCAT('a', NULL)",
+   "expected": "SELECT CONCAT('a', NULL)",
+   "test": "TestDremio.test_concat_coalesce"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "",
+   "sql": "SELECT CONCAT('a', NULL)",
+   "expected": "SELECT CONCAT('a', COALESCE(NULL, ''))",
+   "test": "TestDremio.test_concat_coalesce"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT CONVERT_TIMEZONE('America/Chicago', DateColumn)",
+   "expected": "SELECT CONVERT_TIMEZONE('America/Chicago', DateColumn)",
+   "test": "TestDremio.test_convert_timezone"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "",
+   "sql": "SELECT CONVERT_TIMEZONE('America/Chicago', DateColumn)",
+   "expected": "SELECT DateColumn AT TIME ZONE 'America/Chicago'",
+   "test": "TestDremio.test_convert_timezone"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT CURRENT_DATE_UTC",
+   "expected": "SELECT CURRENT_DATE_UTC",
+   "test": "TestDremio.test_current_date_utc"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT CURRENT_DATE_UTC()",
+   "expected": "SELECT CURRENT_DATE_UTC",
+   "test": "TestDremio.test_current_date_utc"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT DATE_ADD(col, 1)",
+   "expected": "SELECT DATE_ADD(col, 1)",
+   "test": "TestDremio.test_date_add"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT DATE_ADD(col, CAST(1 AS INTERVAL HOUR))",
+   "expected": "SELECT DATE_ADD(col, CAST(1 AS INTERVAL HOUR))",
+   "test": "TestDremio.test_date_add"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT DATE_ADD(TIMESTAMP '2022-01-01 12:00:00', CAST(-1 AS INTERVAL HOUR))",
+   "expected": "SELECT DATE_ADD(CAST('2022-01-01 12:00:00' AS TIMESTAMP), CAST(-1 AS INTERVAL HOUR))",
+   "test": "TestDremio.test_date_add"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT DATE_PART('YEAR', date '2021-04-01')",
+   "expected": "SELECT EXTRACT('YEAR' FROM CAST('2021-04-01' AS DATE))",
+   "test": "TestDremio.test_date_part"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT DATE_SUB(col, 1)",
+   "expected": "SELECT DATE_SUB(col, 1)",
+   "test": "TestDremio.test_date_sub"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT DATE_SUB(col, CAST(1 AS INTERVAL HOUR))",
+   "expected": "SELECT DATE_SUB(col, CAST(1 AS INTERVAL HOUR))",
+   "test": "TestDremio.test_date_sub"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT DATE_SUB(TIMESTAMP '2022-01-01 12:00:00', CAST(-1 AS INTERVAL HOUR))",
+   "expected": "SELECT DATE_SUB(CAST('2022-01-01 12:00:00' AS TIMESTAMP), CAST(-1 AS INTERVAL HOUR))",
+   "test": "TestDremio.test_date_sub"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT DATE_FORMAT(CAST('2025-08-18 15:30:00' AS TIMESTAMP), 'yyyy-mm-dd')",
+   "expected": "SELECT TO_CHAR(CAST('2025-08-18 15:30:00' AS TIMESTAMP), 'yyyy-mm-dd')",
+   "test": "TestDremio.test_datetime_parsing"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "DATETYPE(2024,2,2)",
+   "expected": "DATE('2024-02-02')",
+   "test": "TestDremio.test_datetype"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "DATETYPE(x,y,z)",
+   "expected": "CAST(CONCAT(x, '-', y, '-', z) AS DATE)",
+   "test": "TestDremio.test_datetype"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "INTERVAL '7' DAYS",
+   "expected": "INTERVAL '7' DAY",
+   "test": "TestDremio.test_interval_plural"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT * FROM t LIMIT 1 + 1",
+   "expected": "SELECT * FROM t LIMIT 2",
+   "test": "TestDremio.test_limit_only_literals"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT COUNT(DISTINCT a, b) FROM t",
+   "expected": "SELECT COUNT(DISTINCT CASE WHEN a IS NULL THEN NULL WHEN b IS NULL THEN NULL ELSE (a, b) END) FROM t",
+   "test": "TestDremio.test_multi_arg_distinct_unsupported"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT * FROM t ORDER BY a NULLS LAST",
+   "expected": "SELECT * FROM t ORDER BY a",
+   "test": "TestDremio.test_null_ordering"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT * FROM t ORDER BY a DESC NULLS LAST",
+   "expected": "SELECT * FROM t ORDER BY a DESC",
+   "test": "TestDremio.test_null_ordering"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT * FROM t ORDER BY a NULLS FIRST",
+   "expected": "SELECT * FROM t ORDER BY a NULLS FIRST",
+   "test": "TestDremio.test_null_ordering"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT * FROM t ORDER BY a DESC NULLS FIRST",
+   "expected": "SELECT * FROM t ORDER BY a DESC NULLS FIRST",
+   "test": "TestDremio.test_null_ordering"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "REGEXP_MATCHES(x, y)",
+   "expected": "REGEXP_LIKE(x, y)",
+   "test": "TestDremio.test_regexp_like"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "duckdb",
+   "sql": "REGEXP_MATCHES(x, y)",
+   "expected": "REGEXP_MATCHES(x, y)",
+   "test": "TestDremio.test_regexp_like"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "presto",
+   "sql": "REGEXP_MATCHES(x, y)",
+   "expected": "REGEXP_LIKE(x, y)",
+   "test": "TestDremio.test_regexp_like"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "hive",
+   "sql": "REGEXP_MATCHES(x, y)",
+   "expected": "x RLIKE y",
+   "test": "TestDremio.test_regexp_like"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "spark",
+   "sql": "REGEXP_MATCHES(x, y)",
+   "expected": "x RLIKE y",
+   "test": "TestDremio.test_regexp_like"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "REGEXP_MATCHES(x, y)",
+   "expected": "REGEXP_LIKE(x, y)",
+   "test": "TestDremio.test_regexp_like"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT REGEXP_SPLIT(tags, ',', 'ALL', 1000) AS t",
+   "expected": "SELECT REGEXP_SPLIT(tags, ',', 'ALL', 1000) AS t",
+   "test": "TestDremio.test_regexp_split"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT REPEAT(x, 5)",
+   "expected": "SELECT REPEAT(x, 5)",
+   "test": "TestDremio.test_repeatstr"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT REPEATSTR(x, 5)",
+   "expected": "SELECT REPEAT(x, 5)",
+   "test": "TestDremio.test_repeatstr"
+  },
+  {
+   "kind": "read",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dremio",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'YYYY-MM-DD HH24:MI:SS')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "dremio",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'YYYY-MM-DD HH24:MI:SS')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "dremio",
+   "sql": "SELECT STRFTIME(CAST('2025-06-24 12:34:56' AS TIMESTAMP), '%Y-%m-%d %H:%M:%S')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "postgres",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'YYYY-MM-DD HH24:MI:SS')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "oracle",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'YYYY-MM-DD HH24:MI:SS')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "duckdb",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yyyy-mm-dd hh24:mi:ss')",
+   "expected": "SELECT STRFTIME(CAST('2025-06-24 12:34:56' AS TIMESTAMP), '%Y-%m-%d %H:%M:%S')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "read",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "dremio",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'YY-DDD HH24:MI:SS.US TZ')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "dremio",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'YY-DDD HH24:MI:SS.FF6 %Z')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "dremio",
+   "sql": "SELECT STRFTIME(CAST('2025-06-24 12:34:56' AS TIMESTAMP), '%y-%j %H:%M:%S.%f %Z')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "postgres",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'YY-DDD HH24:MI:SS.US TZ')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "oracle",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "expected": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'YY-DDD HH24:MI:SS.FF6 %Z')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "duckdb",
+   "sql": "SELECT TO_CHAR(CAST('2025-06-24 12:34:56' AS TIMESTAMP), 'yy-ddd hh24:mi:ss.fff tzd')",
+   "expected": "SELECT STRFTIME(CAST('2025-06-24 12:34:56' AS TIMESTAMP), '%y-%j %H:%M:%S.%f %Z')",
+   "test": "TestDremio.test_time_mapping"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT * FROM t AT SNAPSHOT '4132119532727284872'",
+   "expected": "SELECT * FROM t AT SNAPSHOT '4132119532727284872'",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT * FROM t AT TIMESTAMP '2024-01-01 12:00:00.000'",
+   "expected": "SELECT * FROM t AT TIMESTAMP '2024-01-01 12:00:00.000'",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "SELECT * FROM t AT SNAPSHOT '4132119532727284872' AS a",
+   "expected": "SELECT * FROM t AT SNAPSHOT '4132119532727284872' AS a",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "dremio",
+   "sql": "SELECT * FROM t VERSION AS OF '123'",
+   "expected": "SELECT * FROM t AT SNAPSHOT '123'",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "dremio",
+   "sql": "SELECT * FROM t FOR VERSION AS OF '123'",
+   "expected": "SELECT * FROM t AT SNAPSHOT '123'",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "spark",
+   "sql": "SELECT * FROM t AT SNAPSHOT '123'",
+   "expected": "SELECT * FROM t VERSION AS OF '123'",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "trino",
+   "sql": "SELECT * FROM t AT SNAPSHOT '123'",
+   "expected": "SELECT * FROM t FOR VERSION AS OF '123'",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "dremio",
+   "sql": "SELECT * FROM t TIMESTAMP AS OF '2024-01-01'",
+   "expected": "SELECT * FROM t AT TIMESTAMP '2024-01-01'",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "write",
+   "read": "dremio",
+   "write": "spark",
+   "sql": "SELECT * FROM t AT TIMESTAMP '2024-01-01'",
+   "expected": "SELECT * FROM t TIMESTAMP AS OF '2024-01-01'",
+   "test": "TestDremio.test_time_travel"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "TO_CHAR(5555, '#')",
+   "expected": "TO_CHAR(5555, '#')",
+   "test": "TestDremio.test_to_char_special"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "TO_CHAR(3.14, '#.#')",
+   "expected": "TO_CHAR(3.14, '#.#')",
+   "test": "TestDremio.test_to_char_special"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "TO_CHAR(columnname, '#.##')",
+   "expected": "TO_CHAR(columnname, '#.##')",
+   "test": "TestDremio.test_to_char_special"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "TO_CHAR(5555)",
+   "expected": "TO_CHAR(5555)",
+   "test": "TestDremio.test_to_char_special"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "TO_CHAR(3.14, columnname)",
+   "expected": "TO_CHAR(3.14, columnname)",
+   "test": "TestDremio.test_to_char_special"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "TO_CHAR(123, 'abcd')",
+   "expected": "TO_CHAR(123, 'abcd')",
+   "test": "TestDremio.test_to_char_special"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "TO_CHAR(3.14, UPPER('abcd'))",
+   "expected": "TO_CHAR(3.14, UPPER('abcd'))",
+   "test": "TestDremio.test_to_char_special"
+  },
+  {
+   "kind": "read",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(a AS FLOAT)",
+   "expected": "CAST(a AS FLOAT)",
+   "test": "TestDremio.test_try_cast"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "dremio",
+   "sql": "TRY_CAST(a AS FLOAT)",
+   "expected": "CAST(a AS FLOAT)",
+   "test": "TestDremio.test_try_cast"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "dremio",
+   "sql": "CAST(a AS FLOAT)",
+   "expected": "CAST(a AS FLOAT)",
+   "test": "TestDremio.test_try_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS SMALLINT)",
+   "expected": "CAST(x AS INT)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS TINYINT)",
+   "expected": "CAST(x AS INT)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS BINARY)",
+   "expected": "CAST(x AS VARBINARY)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS TEXT)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS NCHAR)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS CHAR)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS TIMESTAMPNTZ)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS DATETIME)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS ARRAY)",
+   "expected": "CAST(x AS LIST)",
+   "test": "TestDremio.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "dremio",
+   "write": "dremio",
+   "sql": "CAST(x AS BIT)",
+   "expected": "CAST(x AS BOOLEAN)",
+   "test": "TestDremio.test_type_mappings"
+  }
+ ]
+}

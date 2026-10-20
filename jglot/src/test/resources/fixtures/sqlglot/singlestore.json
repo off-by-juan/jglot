@@ -1,0 +1,2686 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_singlestore.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "ALTER TABLE t CHANGE middle_initial middle_name",
+   "expected": "ALTER TABLE t CHANGE middle_initial middle_name",
+   "test": "TestSingleStore.test_alter"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "ALTER TABLE t MODIFY COLUMN name TEXT COLLATE 'binary'",
+   "expected": "ALTER TABLE t MODIFY COLUMN name TEXT COLLATE 'binary'",
+   "test": "TestSingleStore.test_alter"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "ALTER TABLE t DROP b",
+   "expected": "ALTER TABLE t DROP COLUMN b",
+   "test": "TestSingleStore.test_alter"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT e'text'",
+   "expected": "SELECT e'text'",
+   "test": "TestSingleStore.test_byte_strings"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT E'text'",
+   "expected": "SELECT e'text'",
+   "test": "TestSingleStore.test_byte_strings"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CAST(1 AS INT)",
+   "expected": "SELECT 1 :> INT",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT 1 :> INT",
+   "expected": "SELECT 1 :> INT",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT 1 :> INT",
+   "expected": "SELECT CAST(1 AS INT)",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT TRY_CAST(1 AS INT)",
+   "expected": "SELECT 1 !:> INT",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT 1 !:> INT",
+   "expected": "SELECT 1 !:> INT",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT 1 !:> INT",
+   "expected": "SELECT TRY_CAST(1 AS INT)",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT '{\"a\" : 1}' :> JSON",
+   "expected": "SELECT '{\"a\" : 1}' :> JSON",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT NOW() !:> TIMESTAMP(6)",
+   "expected": "SELECT NOW() !:> TIMESTAMP(6)",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT x :> GEOGRAPHYPOINT",
+   "expected": "SELECT x :> GEOGRAPHYPOINT",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CAST(age, 'TEXT') FROM users",
+   "expected": "SELECT age :> TEXT FROM `users`",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT age :> TEXT FROM `users`",
+   "expected": "SELECT age :> TEXT FROM `users`",
+   "test": "TestSingleStore.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT name COLLATE 'utf8mb4_bin' FROM users",
+   "expected": "SELECT name :> LONGTEXT COLLATE 'utf8mb4_bin' FROM `users`",
+   "test": "TestSingleStore.test_collate_sql"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT name :> LONGTEXT COLLATE 'utf8mb4_bin' FROM `users`",
+   "expected": "SELECT name :> LONGTEXT COLLATE 'utf8mb4_bin' FROM `users`",
+   "test": "TestSingleStore.test_collate_sql"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT `t0`.`name` FROM `t0`",
+   "expected": "SELECT `t0`.`name` FROM `t0`",
+   "test": "TestSingleStore.test_column_with_tablename"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "CREATE TABLE ComputedColumnConstraint (points INT, score AS (points * 2) PERSISTED NOT NULL)",
+   "expected": "CREATE TABLE ComputedColumnConstraint (points INT, score AS (points * 2) PERSISTED AUTO NOT NULL)",
+   "test": "TestSingleStore.test_constraints"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE ComputedColumnConstraint (points INT, score AS (points * 2) AUTO NOT NULL)",
+   "expected": "CREATE TABLE ComputedColumnConstraint (points INT, score AS (points * 2) PERSISTED AUTO NOT NULL)",
+   "test": "TestSingleStore.test_constraints"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE ComputedColumnConstraint (points INT, score AS (points * 2) PERSISTED BIGINT NOT NULL)",
+   "expected": "CREATE TABLE ComputedColumnConstraint (points INT, score AS (points * 2) PERSISTED BIGINT NOT NULL)",
+   "test": "TestSingleStore.test_constraints"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DAYNAME('2014-04-18')",
+   "expected": "SELECT DATE_FORMAT('2014-04-18', '%W')",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT HOUR('2009-02-13 23:31:30')",
+   "expected": "SELECT DATE_FORMAT('2009-02-13 23:31:30' :> TIME(6), '%k') :> INT",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MICROSECOND('2009-02-13 23:31:30.123456')",
+   "expected": "SELECT DATE_FORMAT('2009-02-13 23:31:30.123456' :> TIME(6), '%f') :> INT",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT SECOND('2009-02-13 23:31:30.123456')",
+   "expected": "SELECT DATE_FORMAT('2009-02-13 23:31:30.123456' :> TIME(6), '%s') :> INT",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MONTHNAME('2014-04-18')",
+   "expected": "SELECT DATE_FORMAT('2014-04-18', '%M')",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT WEEKDAY('2014-04-18')",
+   "expected": "SELECT (DAYOFWEEK('2014-04-18') + 5) % 7",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MINUTE('2009-02-13 23:31:30.123456')",
+   "expected": "SELECT DATE_FORMAT('2009-02-13 23:31:30.123456' :> TIME(6), '%i') :> INT",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT ((DAYOFWEEK('2014-04-18') % 7) + 1)",
+   "expected": "SELECT ((DAYOFWEEK('2014-04-18') % 7) + 1)",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT DAYOFWEEK_ISO('2014-04-18')",
+   "expected": "SELECT ((DAYOFWEEK('2014-04-18') % 7) + 1)",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DAY('2014-04-18')",
+   "expected": "SELECT DAY('2014-04-18')",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT DAY_OF_MONTH('2014-04-18')",
+   "expected": "SELECT DAY('2014-04-18')",
+   "test": "TestSingleStore.test_date_parts_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT * FROM employee WHERE JSON_MATCH_ANY(payroll::?names)",
+   "expected": "SELECT * FROM employee WHERE JSON_MATCH_ANY(payroll::?names)",
+   "test": "TestSingleStore.test_dcolonqmark"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT ('a' RLIKE '^[\u0000-]*$')",
+   "expected": "SELECT ('a' RLIKE '^[\\0-]*$')",
+   "test": "TestSingleStore.test_is_ascii"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT IS_ASCII('a')",
+   "expected": "SELECT ('a' RLIKE '^[\\0-]*$')",
+   "test": "TestSingleStore.test_is_ascii"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT 1 + IS_ASCII('a')",
+   "expected": "SELECT 1 + ('a' RLIKE '^[\\0-]*$')",
+   "test": "TestSingleStore.test_is_ascii"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT NOT IS_ASCII('é')",
+   "expected": "SELECT NOT ('é' RLIKE '^[\\0-]*$')",
+   "test": "TestSingleStore.test_is_ascii"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_ARRAY_CONTAINS_STRING('[\"a\", \"b\"]', 'b')",
+   "expected": "SELECT JSON_ARRAY_CONTAINS_STRING('[\"a\", \"b\"]', 'b')",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_ARRAY_CONTAINS_DOUBLE('[1, 2]', 1)",
+   "expected": "SELECT JSON_ARRAY_CONTAINS_DOUBLE('[1, 2]', 1)",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_ARRAY_CONTAINS_JSON('[\"{\"a\": 1}\"]', '{\"a\":   1}')",
+   "expected": "SELECT JSON_ARRAY_CONTAINS_JSON('[\"{\"a\": 1}\"]', '{\"a\":   1}')",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "singlestore",
+   "sql": "SELECT 'a' MEMBER OF ('[\"a\"]')",
+   "expected": "SELECT JSON_ARRAY_CONTAINS_JSON('[\"a\"]', TO_JSON('a'))",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_ARRAY_CONTAINS_JSON('[\"a\"]', TO_JSON('a'))",
+   "expected": "SELECT JSON_ARRAY_CONTAINS_JSON('[\"a\"]', TO_JSON('a'))",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_PRETTY('[\"G\",\"alpha\",\"20\",10]')",
+   "expected": "SELECT JSON_PRETTY('[\"G\",\"alpha\",\"20\",10]')",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT JSON_FORMAT('[\"G\",\"alpha\",\"20\",10]')",
+   "expected": "SELECT JSON_PRETTY('[\"G\",\"alpha\",\"20\",10]')",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_AGG(name ORDER BY id ASC NULLS LAST, name DESC NULLS FIRST) FROM t",
+   "expected": "SELECT JSON_AGG(name ORDER BY id ASC NULLS LAST, name DESC NULLS FIRST) FROM t",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "singlestore",
+   "sql": "SELECT JSON_ARRAYAGG(name ORDER BY id ASC, name DESC) FROM t",
+   "expected": "SELECT JSON_AGG(name ORDER BY id ASC NULLS LAST, name DESC NULLS FIRST) FROM t",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_AGG(name) FROM t",
+   "expected": "SELECT JSON_AGG(name) FROM t",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_AGG(t.*) FROM t",
+   "expected": "SELECT JSON_AGG(t.*) FROM t",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_BUILD_ARRAY(id, name) FROM t",
+   "expected": "SELECT JSON_BUILD_ARRAY(id, name) FROM t",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "singlestore",
+   "sql": "SELECT JSON_ARRAY(id, name) FROM t",
+   "expected": "SELECT JSON_BUILD_ARRAY(id, name) FROM t",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "JSON_BUILD_ARRAY(id, name)",
+   "expected": "JSON_BUILD_ARRAY(id, name)",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT BSON_MATCH_ANY_EXISTS('{\"x\":true}', 'x')",
+   "expected": "SELECT BSON_MATCH_ANY_EXISTS('{\"x\":true}', 'x')",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT JSONB_EXISTS('{\"x\":true}', 'x')",
+   "expected": "SELECT BSON_MATCH_ANY_EXISTS('{\"x\":true}', 'x')",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_MATCH_ANY_EXISTS('{\"a\":1}', 'a')",
+   "expected": "SELECT JSON_MATCH_ANY_EXISTS('{\"a\":1}', 'a')",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "singlestore",
+   "sql": "SELECT JSON_EXISTS('{\"a\":1}', '$.a')",
+   "expected": "SELECT JSON_MATCH_ANY_EXISTS('{\"a\":1}', 'a')",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_BUILD_OBJECT('name', name) FROM t",
+   "expected": "SELECT JSON_BUILD_OBJECT('name', name) FROM t",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT JSON_OBJECT('name', name) FROM t",
+   "expected": "SELECT JSON_BUILD_OBJECT('name', name) FROM t",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "JSON_BUILD_OBJECT('name', name)",
+   "expected": "JSON_BUILD_OBJECT('name', name)",
+   "test": "TestSingleStore.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT a::b FROM t",
+   "expected": "SELECT JSON_EXTRACT_JSON(a, 'b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT a::b FROM t",
+   "expected": "SELECT JSON_EXTRACT_JSON(a, 'b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT a::$b FROM t",
+   "expected": "SELECT JSON_EXTRACT_STRING(a, 'b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT a::%b FROM t",
+   "expected": "SELECT JSON_EXTRACT_DOUBLE(a, 'b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT a::`b`::`2` FROM t",
+   "expected": "SELECT JSON_EXTRACT_JSON(JSON_EXTRACT_JSON(a, 'b'), '2') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT a::2 FROM t",
+   "expected": "SELECT JSON_EXTRACT_JSON(a, '2') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "singlestore",
+   "sql": "SELECT JSON_EXTRACT(a, '$.b') FROM t",
+   "expected": "SELECT JSON_EXTRACT_JSON(a, 'b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_EXTRACT_JSON(a, 'b') FROM t",
+   "expected": "SELECT JSON_EXTRACT_JSON(a, 'b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "mysql",
+   "sql": "SELECT JSON_EXTRACT_JSON(a, 'b') FROM t",
+   "expected": "SELECT JSON_EXTRACT(a, '$.b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT JSON_EXTRACT_STRING(a, 'b') FROM t",
+   "expected": "SELECT JSON_EXTRACT_SCALAR(a, '$.b', STRING) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT JSON_EXTRACT_DOUBLE(a, 'b') FROM t",
+   "expected": "SELECT JSON_EXTRACT_SCALAR(a, '$.b', DOUBLE) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT JSON_EXTRACT_BIGINT(a, 'b') FROM t",
+   "expected": "SELECT JSON_EXTRACT_SCALAR(a, '$.b', BIGINT) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT JSON_EXTRACT_BIGINT(a, 'b') FROM t",
+   "expected": "SELECT JSON_EXTRACT_SCALAR(a, '$.b', BIGINT) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "singlestore",
+   "sql": "SELECT JSON_EXTRACT(a, '$.b[2]') FROM t",
+   "expected": "SELECT JSON_EXTRACT_JSON(a, 'b', '2') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT JSON_EXTRACT_JSON(a, 'b', '2') FROM t",
+   "expected": "SELECT JSON_EXTRACT_JSON(a, 'b', '2') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "mysql",
+   "sql": "SELECT JSON_EXTRACT_JSON(a, 'b', '2') FROM t",
+   "expected": "SELECT JSON_EXTRACT(a, '$.b[2]') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT JSON_EXTRACT_STRING(a, 'b', 2) FROM t",
+   "expected": "SELECT JSON_EXTRACT_SCALAR(a, '$.b[2]', STRING) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "singlestore",
+   "sql": "SELECT JSONB_EXTRACT(a, 'b') FROM t",
+   "expected": "SELECT BSON_EXTRACT_BSON(a, 'b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT BSON_EXTRACT_BSON(a, 'b') FROM t",
+   "expected": "SELECT BSON_EXTRACT_BSON(a, 'b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "mysql",
+   "sql": "SELECT BSON_EXTRACT_BSON(a, 'b') FROM t",
+   "expected": "SELECT JSONB_EXTRACT(a, '$.b') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT BSON_EXTRACT_STRING(a, 'b') FROM t",
+   "expected": "SELECT JSONB_EXTRACT_SCALAR(a, '$.b', STRING) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT BSON_EXTRACT_DOUBLE(a, 'b') FROM t",
+   "expected": "SELECT JSONB_EXTRACT_SCALAR(a, '$.b', DOUBLE) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT BSON_EXTRACT_BIGINT(a, 'b') FROM t",
+   "expected": "SELECT JSONB_EXTRACT_SCALAR(a, '$.b', BIGINT) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT BSON_EXTRACT_BIGINT(a, 'b') FROM t",
+   "expected": "SELECT JSONB_EXTRACT_SCALAR(a, '$.b', BIGINT) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT BSON_EXTRACT_BSON(a, 'b', 2) FROM t",
+   "expected": "SELECT JSONB_EXTRACT(a, '$.b[2]') FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT BSON_EXTRACT_STRING(a, 'b', 2) FROM t",
+   "expected": "SELECT JSONB_EXTRACT_SCALAR(a, '$.b[2]', STRING) FROM t",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "singlestore",
+   "sql": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', '$.price' RETURNING DECIMAL(4, 2))",
+   "expected": "SELECT JSON_EXTRACT_STRING('{\"item\": \"shoes\", \"price\": \"49.95\"}', 'price') :> DECIMAL(4, 2)",
+   "test": "TestSingleStore.test_json_extract"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "singlestore",
+   "sql": "SELECT TRUE XOR FALSE",
+   "expected": "SELECT (TRUE AND (NOT FALSE)) OR ((NOT TRUE) AND FALSE)",
+   "test": "TestSingleStore.test_logical"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT (TRUE AND (NOT FALSE)) OR ((NOT TRUE) AND FALSE)",
+   "expected": "SELECT (TRUE AND (NOT FALSE)) OR ((NOT TRUE) AND FALSE)",
+   "test": "TestSingleStore.test_logical"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MATCH(name) AGAINST('search term') FROM products",
+   "expected": "SELECT MATCH(name) AGAINST('search term') FROM products",
+   "test": "TestSingleStore.test_match_against"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MATCH(name, name) AGAINST('book') FROM products",
+   "expected": "SELECT MATCH(name, name) AGAINST('book') FROM products",
+   "test": "TestSingleStore.test_match_against"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MATCH(TABLE products2) AGAINST('search term') FROM products2",
+   "expected": "SELECT MATCH(TABLE products2) AGAINST('search term') FROM products2",
+   "test": "TestSingleStore.test_match_against"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(asset_id) AS approx_distinct_asset_id FROM acd_assets",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(asset_id) AS approx_distinct_asset_id FROM acd_assets",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT HLL(asset_id) AS approx_distinct_asset_id FROM acd_assets",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(asset_id) AS approx_distinct_asset_id FROM acd_assets",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(asset_id1, asset_id2) AS approx_distinct_asset_id FROM acd_assets",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(asset_id1, asset_id2) AS approx_distinct_asset_id FROM acd_assets",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(asset_id) AS approx_distinct_asset_id FROM acd_assets",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(asset_id) AS approx_distinct_asset_id FROM acd_assets",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT APPROX_DISTINCT(asset_id) AS approx_distinct_asset_id FROM acd_assets",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(asset_id) AS approx_distinct_asset_id FROM acd_assets",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT SUM(CASE WHEN age > 18 THEN 1 ELSE 0 END) FROM `users`",
+   "expected": "SELECT SUM(CASE WHEN age > 18 THEN 1 ELSE 0 END) FROM `users`",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT COUNT_IF(age > 18) FROM users",
+   "expected": "SELECT SUM(IF(age > 18, 1, 0)) FROM `users`",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MAX(ABS(age > 18)) FROM `users`",
+   "expected": "SELECT MAX(ABS(age > 18)) FROM `users`",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT LOGICAL_OR(age > 18) FROM users",
+   "expected": "SELECT MAX(ABS(age > 18)) FROM `users`",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MIN(ABS(age > 18)) FROM `users`",
+   "expected": "SELECT MIN(ABS(age > 18)) FROM `users`",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT LOGICAL_AND(age > 18) FROM users",
+   "expected": "SELECT MIN(ABS(age > 18)) FROM `users`",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT `class`, student_id, test1, APPROX_PERCENTILE(test1, 0.3) OVER (PARTITION BY `class`) AS percentile FROM test_scores",
+   "expected": "SELECT `class`, student_id, test1, APPROX_PERCENTILE(test1, 0.3) OVER (PARTITION BY `class`) AS percentile FROM test_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT `class`, student_id, test1, APPROX_PERCENTILE(test1, 0.3, 0.4) OVER (PARTITION BY `class`) AS percentile FROM test_scores",
+   "expected": "SELECT `class`, student_id, test1, APPROX_PERCENTILE(test1, 0.3, 0.4) OVER (PARTITION BY `class`) AS percentile FROM test_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT APPROX_PERCENTILE(test1, 0.3) FROM test_scores",
+   "expected": "SELECT APPROX_PERCENTILE(test1, 0.3) FROM test_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT APPROX_QUANTILE(test1, 0.3, 0.4) FROM test_scores",
+   "expected": "SELECT APPROX_PERCENTILE(test1, 0.3) FROM test_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT VAR_SAMP(yearly_total) FROM player_scores",
+   "expected": "SELECT VAR_SAMP(yearly_total) FROM player_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT VARIANCE(yearly_total) FROM player_scores",
+   "expected": "SELECT VAR_SAMP(yearly_total) FROM player_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT VAR_SAMP(yearly_total) FROM player_scores",
+   "expected": "SELECT VARIANCE(yearly_total) FROM player_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT VARIANCE(yearly_total) FROM player_scores",
+   "expected": "SELECT VAR_POP(yearly_total) FROM player_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT VARIANCE_POP(yearly_total) FROM player_scores",
+   "expected": "SELECT VAR_POP(yearly_total) FROM player_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT VAR_POP(yearly_total) FROM player_scores",
+   "expected": "SELECT VARIANCE_POP(yearly_total) FROM player_scores",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CBRT(id) FROM orders",
+   "expected": "SELECT POWER(id, 1 / 3) FROM orders",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT POWER(id, 1 / 3) FROM orders",
+   "expected": "SELECT POWER(id, 1 / 3) FROM orders",
+   "test": "TestSingleStore.test_math_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT N'text'",
+   "expected": "SELECT 'text'",
+   "test": "TestSingleStore.test_national_strings"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT 'text'",
+   "expected": "SELECT 'text'",
+   "test": "TestSingleStore.test_national_strings"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY x) FROM t",
+   "expected": "SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY x) FROM t",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY x NULLS LAST) FROM t",
+   "expected": "SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY x) FROM t",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY x DESC) OVER (PARTITION BY g) FROM t",
+   "expected": "SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY x DESC NULLS FIRST) OVER (PARTITION BY g) FROM t",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY x DESC NULLS LAST) OVER (PARTITION BY g) FROM t",
+   "expected": "SELECT PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY x DESC NULLS FIRST) OVER (PARTITION BY g) FROM t",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY x) FROM t",
+   "expected": "SELECT PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY x) FROM t",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY x NULLS LAST) FROM t",
+   "expected": "SELECT PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY x) FROM t",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY x DESC) OVER (PARTITION BY g) FROM t",
+   "expected": "SELECT PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY x DESC NULLS FIRST) OVER (PARTITION BY g) FROM t",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY x DESC NULLS LAST) OVER (PARTITION BY g) FROM t",
+   "expected": "SELECT PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY x DESC NULLS FIRST) OVER (PARTITION BY g) FROM t",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "singlestore",
+   "sql": "SELECT PERCENTILE_CONT(1) WITHIN GROUP (ORDER BY x) FROM t ORDER BY x",
+   "expected": "SELECT PERCENTILE_CONT(1) WITHIN GROUP (ORDER BY x) FROM t ORDER BY x NULLS LAST",
+   "test": "TestSingleStore.test_percentile_null_ordering"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT REDUCE(JSON_TO_ARRAY('[1,2,3,4]'), 0, REDUCE_ACC() + REDUCE_VALUE(), REDUCE_ACC() + REDUCE_VALUE()) AS Result",
+   "expected": "SELECT REDUCE(0, JSON_TO_ARRAY('[1,2,3,4]'), REDUCE_ACC() + REDUCE_VALUE()) AS `Result`",
+   "test": "TestSingleStore.test_reduce_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT REDUCE(0, JSON_TO_ARRAY('[1,2,3,4]'), REDUCE_ACC() + REDUCE_VALUE()) AS `Result`",
+   "expected": "SELECT REDUCE(0, JSON_TO_ARRAY('[1,2,3,4]'), REDUCE_ACC() + REDUCE_VALUE()) AS `Result`",
+   "test": "TestSingleStore.test_reduce_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT * FROM abs",
+   "expected": "SELECT * FROM `abs`",
+   "test": "TestSingleStore.test_restricted_keywords"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT * FROM ABS",
+   "expected": "SELECT * FROM `ABS`",
+   "test": "TestSingleStore.test_restricted_keywords"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT * FROM security_lists_intersect",
+   "expected": "SELECT * FROM `security_lists_intersect`",
+   "test": "TestSingleStore.test_restricted_keywords"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT * FROM vacuum",
+   "expected": "SELECT * FROM `vacuum`",
+   "test": "TestSingleStore.test_restricted_keywords"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW AGGREGATES FROM db1",
+   "expected": "SHOW AGGREGATES FROM db1",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW AGGREGATES LIKE 'multiply%'",
+   "expected": "SHOW AGGREGATES LIKE 'multiply%'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW CDC EXTRACTOR POOL",
+   "expected": "SHOW CDC EXTRACTOR POOL",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW CREATE AGGREGATE avg_udaf",
+   "expected": "SHOW CREATE AGGREGATE avg_udaf",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW CREATE PIPELINE mypipeline",
+   "expected": "SHOW CREATE PIPELINE mypipeline",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW CREATE PROJECTION lineitem_sort_shipdate FOR TABLE lineitem",
+   "expected": "SHOW CREATE PROJECTION lineitem_sort_shipdate FOR TABLE lineitem",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW DATABASE STATUS",
+   "expected": "SHOW DATABASE STATUS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW DISTRIBUTED_PLANCACHE STATUS",
+   "expected": "SHOW DISTRIBUTED_PLANCACHE STATUS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW FULLTEXT SERVICE STATUS",
+   "expected": "SHOW FULLTEXT SERVICE STATUS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW FULLTEXT SERVICE METRICS LOCAL",
+   "expected": "SHOW FULLTEXT SERVICE METRICS LOCAL",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW FULLTEXT SERVICE METRICS FOR NODE 1",
+   "expected": "SHOW FULLTEXT SERVICE METRICS FOR NODE 1",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW FUNCTIONS FROM db LIKE 'a'",
+   "expected": "SHOW FUNCTIONS FROM db LIKE 'a'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW GROUPS",
+   "expected": "SHOW GROUPS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW GROUPS FOR ROLE 'role_name_0'",
+   "expected": "SHOW GROUPS FOR ROLE 'role_name_0'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW GROUPS FOR USER 'root'",
+   "expected": "SHOW GROUPS FOR USER 'root'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW INDEXES FROM mytbl",
+   "expected": "SHOW INDEX FROM mytbl",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW KEYS FROM mytbl",
+   "expected": "SHOW INDEX FROM mytbl",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW LINKS ON Orderdb",
+   "expected": "SHOW LINKS ON Orderdb",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW LOAD ERRORS",
+   "expected": "SHOW LOAD ERRORS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW LOAD WARNINGS",
+   "expected": "SHOW LOAD WARNINGS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PARTITIONS ON memsql_demo",
+   "expected": "SHOW PARTITIONS ON memsql_demo",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PIPELINES",
+   "expected": "SHOW PIPELINES",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PLAN JSON 25",
+   "expected": "SHOW PLAN JSON 25",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PLAN 25",
+   "expected": "SHOW PLAN 25",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PLANCACHE",
+   "expected": "SHOW PLANCACHE",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PROCEDURES FROM dbExample",
+   "expected": "SHOW PROCEDURES FROM dbExample",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PROCEDURES LIKE '%sp%'",
+   "expected": "SHOW PROCEDURES LIKE '%sp%'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PROJECTIONS ON TABLE t",
+   "expected": "SHOW PROJECTIONS ON TABLE t",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW PROJECTIONS",
+   "expected": "SHOW PROJECTIONS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW REPLICATION STATUS",
+   "expected": "SHOW REPLICATION STATUS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW REPRODUCTION",
+   "expected": "SHOW REPRODUCTION",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW REPRODUCTION INTO OUTFILE 'a'",
+   "expected": "SHOW REPRODUCTION INTO OUTFILE 'a'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW RESOURCE POOLS",
+   "expected": "SHOW RESOURCE POOLS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW ROLES LIKE 'xyz'",
+   "expected": "SHOW ROLES LIKE 'xyz'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW ROLES FOR GROUP 'group_0'",
+   "expected": "SHOW ROLES FOR GROUP 'group_0'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW ROLES FOR USER 'root'",
+   "expected": "SHOW ROLES FOR USER 'root'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW STATUS",
+   "expected": "SHOW STATUS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW USERS",
+   "expected": "SHOW USERS",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW USERS FOR GROUP 'group_name'",
+   "expected": "SHOW USERS FOR GROUP 'group_name'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SHOW USERS FOR ROLE 'role_name'",
+   "expected": "SHOW USERS FOR ROLE 'role_name'",
+   "test": "TestSingleStore.test_show"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT 1",
+   "expected": "SELECT 1",
+   "test": "TestSingleStore.test_singlestore"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT * FROM `users` ORDER BY ALL",
+   "expected": "SELECT * FROM `users` ORDER BY ALL",
+   "test": "TestSingleStore.test_singlestore"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT ELT(2, 'foo', 'bar', 'baz')",
+   "expected": "SELECT ELT(2, 'foo', 'bar', 'baz')",
+   "test": "TestSingleStore.test_singlestore"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CHARSET(CHAR(100 USING utf8))",
+   "expected": "SELECT CHARSET(CHAR(100 USING utf8))",
+   "test": "TestSingleStore.test_singlestore"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TO_JSON(ROW(1, 2) :> RECORD(a INT, b INT))",
+   "expected": "SELECT TO_JSON(ROW(1, 2) :> RECORD(a INT, b INT))",
+   "test": "TestSingleStore.test_singlestore"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "JSON_KEYS(json_doc, 'a', 'b', 'c', 2)",
+   "expected": "JSON_KEYS(json_doc, 'a', 'b', 'c', 2)",
+   "test": "TestSingleStore.test_singlestore"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT VERSION()",
+   "expected": "SELECT VERSION()",
+   "test": "TestSingleStore.test_singlestore"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CURTIME()",
+   "expected": "SELECT CURRENT_TIME()",
+   "test": "TestSingleStore.test_singlestore"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "singlestore",
+   "sql": "SELECT REGEXP_CONTAINS('a', 'b')",
+   "expected": "SELECT 'a' RLIKE 'b'",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT 'a' RLIKE 'b'",
+   "expected": "SELECT 'a' RLIKE 'b'",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT 'a' REGEXP 'b'",
+   "expected": "SELECT 'a' RLIKE 'b'",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT REPEAT('a', 3)",
+   "expected": "SELECT LPAD('', LENGTH('a') * 3, 'a')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT LPAD('', LENGTH('a') * 3, 'a')",
+   "expected": "SELECT LPAD('', LENGTH('a') * 3, 'a')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT REGEXP_EXTRACT('adog', 'O', 1, 1, 'c', 'gr1')",
+   "expected": "SELECT REGEXP_SUBSTR('adog', 'O', 1, 1, 'c')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT REGEXP_SUBSTR('adog', 'O', 1, 1, 'c')",
+   "expected": "SELECT REGEXP_SUBSTR('adog', 'O', 1, 1, 'c')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT UNHEX(MD5('data'))",
+   "expected": "SELECT UNHEX(MD5('data'))",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT MD5_DIGEST('data')",
+   "expected": "SELECT UNHEX(MD5('data'))",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CHR(101)",
+   "expected": "SELECT CHAR(101)",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CHAR(101)",
+   "expected": "SELECT CHAR(101)",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CONTAINS('ohai', 'i')",
+   "expected": "SELECT INSTR('ohai', 'i')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT INSTR('ohai', 'i')",
+   "expected": "SELECT INSTR('ohai', 'i')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT REGEXP_EXTRACT_ALL('adog', 'O', 1, 'c', 1, 'gr1')",
+   "expected": "SELECT REGEXP_MATCH('adog', 'O', 'c')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT REGEXP_MATCH('adog', 'O', 'c')",
+   "expected": "SELECT REGEXP_MATCH('adog', 'O', 'c')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT REGEXP_EXTRACT('adog', 'O', 1, 1, 'c', 'gr1')",
+   "expected": "SELECT REGEXP_SUBSTR('adog', 'O', 1, 1, 'c')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT REGEXP_SUBSTR('adog', 'O', 1, 1, 'c')",
+   "expected": "SELECT REGEXP_SUBSTR('adog', 'O', 1, 1, 'c')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT STARTS_WITH('abcd', 'ab')",
+   "expected": "SELECT REGEXP_INSTR('abcd', CONCAT('^', 'ab'))",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT REGEXP_INSTR('abcd', CONCAT('^', 'ab'))",
+   "expected": "SELECT REGEXP_INSTR('abcd', CONCAT('^', 'ab'))",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "singlestore",
+   "sql": "SELECT STRTOL('f',16)",
+   "expected": "SELECT CONV('f', 16, 10)",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CONV('f', 16, 10)",
+   "expected": "SELECT CONV('f', 16, 10)",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "singlestore",
+   "sql": "SELECT 'ABC' ~* 'a.*'",
+   "expected": "SELECT LOWER('ABC') RLIKE LOWER('a.*')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT LOWER('ABC') RLIKE LOWER('a.*')",
+   "expected": "SELECT LOWER('ABC') RLIKE LOWER('a.*')",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CONCAT(SUBSTRING('abcdef', 1, 2 - 1), 'xyz', SUBSTRING('abcdef', 2 + 3))",
+   "expected": "SELECT CONCAT(SUBSTRING('abcdef', 1, 2 - 1), 'xyz', SUBSTRING('abcdef', 2 + 3))",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT STUFF('abcdef', 2, 3, 'xyz')",
+   "expected": "SELECT CONCAT(SUBSTRING('abcdef', 1, 2 - 1), 'xyz', SUBSTRING('abcdef', 2 + 3))",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT SHA(email) FROM t",
+   "expected": "SELECT SHA(email) FROM t",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT STANDARD_HASH(email) FROM t",
+   "expected": "SELECT SHA(email) FROM t",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT SHA(email) FROM t",
+   "expected": "SELECT SHA(email) FROM t",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT STANDARD_HASH(email, 'sha') FROM t",
+   "expected": "SELECT SHA(email) FROM t",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT MD5(email) FROM t",
+   "expected": "SELECT MD5(email) FROM t",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT STANDARD_HASH(email, 'MD5') FROM t",
+   "expected": "SELECT MD5(email) FROM t",
+   "test": "TestSingleStore.test_string_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT STR_TO_DATE('March 3rd, 2015', '%M %D, %Y')",
+   "expected": "SELECT STR_TO_DATE('March 3rd, 2015', '%M %D, %Y')",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %h:%i:%s')",
+   "expected": "SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %h:%i:%s')",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TO_DATE('03/01/2019', 'MM/DD/YYYY') AS `result`",
+   "expected": "SELECT TO_DATE('03/01/2019', 'MM/DD/YYYY') AS `result`",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TO_TIMESTAMP('The date and time are 01/01/2018 2:30:15.123456', 'The date and time are MM/DD/YYYY HH12:MI:SS.FF6') AS `result`",
+   "expected": "SELECT TO_TIMESTAMP('The date and time are 01/01/2018 2:30:15.123456', 'The date and time are MM/DD/YYYY HH12:MI:SS.FF6') AS `result`",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TO_CHAR('2018-03-01', 'MM/DD')",
+   "expected": "SELECT TO_CHAR('2018-03-01', 'MM/DD')",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TIME_FORMAT('12:05:47', '%s, %i, %h')",
+   "expected": "SELECT DATE_FORMAT('12:05:47' :> TIME(6), '%s, %i, %h')",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATE('2019-01-01 05:06')",
+   "expected": "SELECT DATE('2019-01-01 05:06')",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT TS_OR_DS_TO_DATE('2019-01-01 05:06')",
+   "expected": "SELECT DATE('2019-01-01 05:06')",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATE('2019-01-01 05:06')",
+   "expected": "SELECT DATE('2019-01-01 05:06')",
+   "test": "TestSingleStore.test_time_formatting"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT DATE_BIN('1d', '2019-03-14 06:04:12', DAY, 'UTC', '2019-03-13 03:00:00')",
+   "expected": "SELECT TIME_BUCKET('1d', '2019-03-14 06:04:12', '2019-03-13 03:00:00')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TIME_BUCKET('1d', '2019-03-14 06:04:12', '2019-03-13 03:00:00')",
+   "expected": "SELECT TIME_BUCKET('1d', '2019-03-14 06:04:12', '2019-03-13 03:00:00')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT TIME_STR_TO_DATE('2019-03-14 06:04:12')",
+   "expected": "SELECT '2019-03-14 06:04:12' :> DATE",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT '2019-03-14 06:04:12' :> DATE",
+   "expected": "SELECT '2019-03-14 06:04:12' :> DATE",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "singlestore",
+   "sql": "SELECT TO_UTC_TIMESTAMP(NOW(), 'GMT')",
+   "expected": "SELECT CONVERT_TZ(NOW() :> TIMESTAMP, 'GMT', 'UTC')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CONVERT_TZ(NOW() :> TIMESTAMP, 'GMT', 'UTC')",
+   "expected": "SELECT CONVERT_TZ(NOW() :> TIMESTAMP, 'GMT', 'UTC')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT DI_TO_DATE(20190314)",
+   "expected": "SELECT STR_TO_DATE(20190314, '%Y%m%d')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT STR_TO_DATE(20190314, '%Y%m%d')",
+   "expected": "SELECT STR_TO_DATE(20190314, '%Y%m%d')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT (DATE_FORMAT('2019-03-14 06:04:12', '%Y%m%d') :> INT)",
+   "expected": "SELECT (DATE_FORMAT('2019-03-14 06:04:12', '%Y%m%d') :> INT)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT DATE_TO_DI('2019-03-14 06:04:12')",
+   "expected": "SELECT (DATE_FORMAT('2019-03-14 06:04:12', '%Y%m%d') :> INT)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT (DATE_FORMAT('2019-03-14 06:04:12', '%Y%m%d') :> INT)",
+   "expected": "SELECT (DATE_FORMAT('2019-03-14 06:04:12', '%Y%m%d') :> INT)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT TS_OR_DI_TO_DI('2019-03-14 06:04:12')",
+   "expected": "SELECT (DATE_FORMAT('2019-03-14 06:04:12', '%Y%m%d') :> INT)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "singlestore",
+   "sql": "SELECT TIME('2019-03-14 06:04:12', 'GMT')",
+   "expected": "SELECT '2019-03-14 06:04:12' :> TIME",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT '2019-03-14 06:04:12' :> TIME",
+   "expected": "SELECT '2019-03-14 06:04:12' :> TIME",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "singlestore",
+   "sql": "SELECT DATETIME_ADD(NOW(), INTERVAL 1 MONTH)",
+   "expected": "SELECT DATE_ADD(NOW(), INTERVAL '1' MONTH)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATE_ADD(NOW(), INTERVAL '1' MONTH)",
+   "expected": "SELECT DATE_ADD(NOW(), INTERVAL '1' MONTH)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "singlestore",
+   "sql": "SELECT DATETIME_TRUNC('2016-08-08 12:05:31', MINUTE)",
+   "expected": "SELECT DATE_TRUNC('MINUTE', '2016-08-08 12:05:31')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATE_TRUNC('MINUTE', '2016-08-08 12:05:31')",
+   "expected": "SELECT DATE_TRUNC('MINUTE', '2016-08-08 12:05:31')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "singlestore",
+   "sql": "SELECT DATETIME_SUB('2010-04-02', INTERVAL '1' WEEK)",
+   "expected": "SELECT DATE_SUB('2010-04-02', INTERVAL '1' WEEK)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATE_SUB('2010-04-02', INTERVAL '1' WEEK)",
+   "expected": "SELECT DATE_SUB('2010-04-02', INTERVAL '1' WEEK)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TIMESTAMPDIFF(QUARTER, '2009-02-13', '2013-09-01')",
+   "expected": "SELECT TIMESTAMPDIFF(QUARTER, '2009-02-13', '2013-09-01')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT DATETIME_DIFF('2013-09-01', '2009-02-13', QUARTER)",
+   "expected": "SELECT TIMESTAMPDIFF(QUARTER, '2009-02-13', '2013-09-01')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TIMESTAMPDIFF(QUARTER, '2009-02-13', '2013-09-01')",
+   "expected": "SELECT TIMESTAMPDIFF(QUARTER, '2009-02-13', '2013-09-01')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "singlestore",
+   "sql": "SELECT DATE_DIFF('2013-09-01', '2009-02-13', QUARTER)",
+   "expected": "SELECT TIMESTAMPDIFF(QUARTER, '2009-02-13', '2013-09-01')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "singlestore",
+   "sql": "SELECT DATE_DIFF('QUARTER', '2009-02-13', '2013-09-01')",
+   "expected": "SELECT TIMESTAMPDIFF(QUARTER, '2009-02-13', '2013-09-01')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "singlestore",
+   "sql": "SELECT DATEDIFF('2013-09-01', '2009-02-13')",
+   "expected": "SELECT DATEDIFF(DATE('2013-09-01'), DATE('2009-02-13'))",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATEDIFF(DATE('2013-09-01'), DATE('2009-02-13'))",
+   "expected": "SELECT DATEDIFF(DATE('2013-09-01'), DATE('2009-02-13'))",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT TIMESTAMP_TRUNC('2016-08-08 12:05:31', MINUTE)",
+   "expected": "SELECT DATE_TRUNC('MINUTE', '2016-08-08 12:05:31')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATE_TRUNC('MINUTE', '2016-08-08 12:05:31')",
+   "expected": "SELECT DATE_TRUNC('MINUTE', '2016-08-08 12:05:31')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "singlestore",
+   "sql": "SELECT datediff(week,'2009-01-01','2009-12-31') AS numweeks",
+   "expected": "SELECT TIMESTAMPDIFF(WEEK, '2009-01-01', '2009-12-31') AS numweeks",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT TIMESTAMPDIFF(WEEK, '2009-01-01', '2009-12-31') AS numweeks",
+   "expected": "SELECT TIMESTAMPDIFF(WEEK, '2009-01-01', '2009-12-31') AS numweeks",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT TS_OR_DS_DIFF('2009-12-31', '2009-01-01') AS numweeks",
+   "expected": "SELECT DATEDIFF('2009-12-31', '2009-01-01') AS numweeks",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT DATEDIFF('2009-12-31', '2009-01-01') AS numweeks",
+   "expected": "SELECT DATEDIFF('2009-12-31', '2009-01-01') AS numweeks",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_DATE()",
+   "expected": "SELECT CURRENT_DATE()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_DATE",
+   "expected": "SELECT CURRENT_DATE()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_DATE('UTC')",
+   "expected": "SELECT UTC_DATE()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT UTC_DATE",
+   "expected": "SELECT UTC_DATE()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT UTC_DATE()",
+   "expected": "SELECT CURRENT_DATE('UTC')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIME()",
+   "expected": "SELECT CURRENT_TIME()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIME",
+   "expected": "SELECT CURRENT_TIME()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIME(6)",
+   "expected": "SELECT CURRENT_TIME(6)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIME('UTC')",
+   "expected": "SELECT UTC_TIME()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT UTC_TIME",
+   "expected": "SELECT UTC_TIME()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT UTC_TIME()",
+   "expected": "SELECT CURRENT_TIME('UTC')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIMESTAMP()",
+   "expected": "SELECT CURRENT_TIMESTAMP()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIMESTAMP",
+   "expected": "SELECT CURRENT_TIMESTAMP()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIMESTAMP(6)",
+   "expected": "SELECT CURRENT_TIMESTAMP(6)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIMESTAMP('UTC')",
+   "expected": "SELECT UTC_TIMESTAMP()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT UTC_TIMESTAMP",
+   "expected": "SELECT UTC_TIMESTAMP()",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "",
+   "sql": "SELECT UTC_TIMESTAMP()",
+   "expected": "SELECT CURRENT_TIMESTAMP('UTC')",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_DATETIME()",
+   "expected": "SELECT CURRENT_TIMESTAMP(6) :> DATETIME(6)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT CURRENT_TIMESTAMP(6) :> DATETIME(6)",
+   "expected": "SELECT CURRENT_TIMESTAMP(6) :> DATETIME(6)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT UTC_TIMESTAMP(6)",
+   "expected": "SELECT UTC_TIMESTAMP(6)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT UTC_TIME(6)",
+   "expected": "SELECT UTC_TIME(6)",
+   "test": "TestSingleStore.test_time_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "TRUNCATE TABLE t1, t2",
+   "expected": "TRUNCATE t1; TRUNCATE t2",
+   "test": "TestSingleStore.test_truncate"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL(10, 20))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(10, 20))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a BIGDECIMAL(10, 20))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(10, 20))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a BOOLEAN)",
+   "expected": "CREATE TABLE testTypes (a BOOLEAN)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a BIT)",
+   "expected": "CREATE TABLE testTypes (a BOOLEAN)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DATE)",
+   "expected": "CREATE TABLE testTypes (a DATE)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DATE32)",
+   "expected": "CREATE TABLE testTypes (a DATE)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DATETIME)",
+   "expected": "CREATE TABLE testTypes (a DATETIME)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DATETIME64)",
+   "expected": "CREATE TABLE testTypes (a DATETIME)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL(9, 3))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(9, 3))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL32(3))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(9, 3))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL(18, 3))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(18, 3))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL64(3))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(18, 3))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL(38, 3))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(38, 3))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL128(3))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(38, 3))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL(65, 3))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(65, 3))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a DECIMAL256(3))",
+   "expected": "CREATE TABLE testTypes (a DECIMAL(65, 3))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a ENUM('a'))",
+   "expected": "CREATE TABLE testTypes (a ENUM('a'))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a ENUM8('a'))",
+   "expected": "CREATE TABLE testTypes (a ENUM('a'))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a ENUM('a'))",
+   "expected": "CREATE TABLE testTypes (a ENUM('a'))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a ENUM16('a'))",
+   "expected": "CREATE TABLE testTypes (a ENUM('a'))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a TEXT(2))",
+   "expected": "CREATE TABLE testTypes (a TEXT(2))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a FIXEDSTRING(2))",
+   "expected": "CREATE TABLE testTypes (a TEXT(2))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a GEOMETRY)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a GEOGRAPHYPOINT)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHYPOINT)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a POINT)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHYPOINT)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a RING)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a LINESTRING)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a POLYGON)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a MULTIPOLYGON)",
+   "expected": "CREATE TABLE testTypes (a GEOGRAPHY)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a BSON)",
+   "expected": "CREATE TABLE testTypes (a BSON)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a JSONB)",
+   "expected": "CREATE TABLE testTypes (a BSON)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a TIMESTAMP(6))",
+   "expected": "CREATE TABLE testTypes (a TIMESTAMP(6))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a TIMESTAMP)",
+   "expected": "CREATE TABLE testTypes (a TIMESTAMP)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a TIMESTAMP_S)",
+   "expected": "CREATE TABLE testTypes (a TIMESTAMP)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a TIMESTAMP(6))",
+   "expected": "CREATE TABLE testTypes (a TIMESTAMP(6))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a TIMESTAMP_MS)",
+   "expected": "CREATE TABLE testTypes (a TIMESTAMP(6))",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a BLOB)",
+   "expected": "CREATE TABLE testTypes (a BLOB)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "CREATE TABLE testTypes (a VARBINARY)",
+   "expected": "CREATE TABLE testTypes (a BLOB)",
+   "test": "TestSingleStore.test_types"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "singlestore",
+   "sql": "SELECT U&'d\\0061t\\0061'",
+   "expected": "SELECT 'data'",
+   "test": "TestSingleStore.test_unicodestring_sql"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT 'data'",
+   "expected": "SELECT 'data'",
+   "test": "TestSingleStore.test_unicodestring_sql"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT FROM_UNIXTIME(1234567890)",
+   "expected": "SELECT FROM_UNIXTIME(1234567890)",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT FROM_UNIXTIME(1234567890, '%M %D, %Y')",
+   "expected": "SELECT FROM_UNIXTIME(1234567890, '%M %D, %Y')",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT UNIX_TIMESTAMP()",
+   "expected": "SELECT UNIX_TIMESTAMP()",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "SELECT UNIX_TIMESTAMP('2009-02-13 23:31:30') AS funday",
+   "expected": "SELECT UNIX_TIMESTAMP('2009-02-13 23:31:30') AS funday",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "singlestore",
+   "sql": "SELECT EPOCH('2009-02-13 23:31:30')",
+   "expected": "SELECT UNIX_TIMESTAMP('2009-02-13 23:31:30')",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "singlestore",
+   "sql": "SELECT TIME_STR_TO_UNIX('2009-02-13 23:31:30')",
+   "expected": "SELECT UNIX_TIMESTAMP('2009-02-13 23:31:30')",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT TIME_STR_TO_UNIX('2009-02-13 23:31:30')",
+   "expected": "SELECT UNIX_TIMESTAMP('2009-02-13 23:31:30')",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT UNIX_SECONDS('2009-02-13 23:31:30')",
+   "expected": "SELECT UNIX_TIMESTAMP('2009-02-13 23:31:30')",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "singlestore",
+   "sql": "SELECT FROM_UNIXTIME(1234567890)",
+   "expected": "SELECT FROM_UNIXTIME(1234567890, '%Y-%m-%d %H:%i:%s')",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "singlestore",
+   "sql": "SELECT UNIX_TO_TIME_STR(1234567890)",
+   "expected": "SELECT FROM_UNIXTIME(1234567890) :> TEXT",
+   "test": "TestSingleStore.test_unix_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "singlestore",
+   "sql": "CREATE TABLE t (a VECTOR(INT, 10))",
+   "expected": "CREATE TABLE t (a VECTOR(10, I32))",
+   "test": "TestSingleStore.test_vector"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE t (a VECTOR(10, I32))",
+   "expected": "CREATE TABLE t (a VECTOR(10, I32))",
+   "test": "TestSingleStore.test_vector"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "snowflake",
+   "sql": "CREATE TABLE t (a VECTOR(10, I32))",
+   "expected": "CREATE TABLE t (a VECTOR(INT, 10))",
+   "test": "TestSingleStore.test_vector"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "singlestore",
+   "sql": "CREATE TABLE t (a VECTOR(10))",
+   "expected": "CREATE TABLE t (a VECTOR(10))",
+   "test": "TestSingleStore.test_vector"
+  },
+  {
+   "kind": "read",
+   "read": "singlestore",
+   "write": "singlestore",
+   "sql": "CREATE TABLE t (a VECTOR(10))",
+   "expected": "CREATE TABLE t (a VECTOR(10))",
+   "test": "TestSingleStore.test_vector"
+  },
+  {
+   "kind": "write",
+   "read": "singlestore",
+   "write": "snowflake",
+   "sql": "CREATE TABLE t (a VECTOR(10))",
+   "expected": "CREATE TABLE t (a VECTOR(10))",
+   "test": "TestSingleStore.test_vector"
+  }
+ ]
+}

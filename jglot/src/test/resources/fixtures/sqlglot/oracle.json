@@ -1,0 +1,4443 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_oracle.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'[it's]' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'{it's}' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'(it's)' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'<it's>' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'!it's!' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Q'#it's#' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q']it's]' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'}it's}' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q')it's)' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'>it's>' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q''it's'' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'ait'sa' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Q'Ait'sA' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'0it's0' FROM dual",
+   "expected": "SELECT 'it''s' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'[a''b]' FROM dual",
+   "expected": "SELECT 'a''''b' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'[a]b]' FROM dual",
+   "expected": "SELECT 'a]b' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT q'|\\n|' FROM dual",
+   "expected": "SELECT '\\n' FROM dual",
+   "test": "TestOracle.test_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE TABLE tbl",
+   "expected": "ANALYZE TABLE tbl",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE INDEX ndx",
+   "expected": "ANALYZE INDEX ndx",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE TABLE db.tbl PARTITION(foo = 'foo', bar = 'bar')",
+   "expected": "ANALYZE TABLE db.tbl PARTITION(foo = 'foo', bar = 'bar')",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE TABLE db.tbl SUBPARTITION(foo = 'foo', bar = 'bar')",
+   "expected": "ANALYZE TABLE db.tbl SUBPARTITION(foo = 'foo', bar = 'bar')",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE INDEX db.ndx PARTITION(foo = 'foo', bar = 'bar')",
+   "expected": "ANALYZE INDEX db.ndx PARTITION(foo = 'foo', bar = 'bar')",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE INDEX db.ndx PARTITION(part1)",
+   "expected": "ANALYZE INDEX db.ndx PARTITION(part1)",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE CLUSTER db.cluster",
+   "expected": "ANALYZE CLUSTER db.cluster",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE TABLE tbl VALIDATE REF UPDATE",
+   "expected": "ANALYZE TABLE tbl VALIDATE REF UPDATE",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE LIST CHAINED ROWS",
+   "expected": "ANALYZE LIST CHAINED ROWS",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE LIST CHAINED ROWS INTO tbl",
+   "expected": "ANALYZE LIST CHAINED ROWS INTO tbl",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE DELETE STATISTICS",
+   "expected": "ANALYZE DELETE STATISTICS",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE DELETE SYSTEM STATISTICS",
+   "expected": "ANALYZE DELETE SYSTEM STATISTICS",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE VALIDATE REF UPDATE",
+   "expected": "ANALYZE VALIDATE REF UPDATE",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE VALIDATE REF UPDATE SET DANGLING TO NULL",
+   "expected": "ANALYZE VALIDATE REF UPDATE SET DANGLING TO NULL",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE VALIDATE STRUCTURE",
+   "expected": "ANALYZE VALIDATE STRUCTURE",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE VALIDATE STRUCTURE CASCADE FAST",
+   "expected": "ANALYZE VALIDATE STRUCTURE CASCADE FAST",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE TABLE tbl VALIDATE STRUCTURE CASCADE COMPLETE ONLINE INTO db.tbl",
+   "expected": "ANALYZE TABLE tbl VALIDATE STRUCTURE CASCADE COMPLETE ONLINE INTO db.tbl",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ANALYZE TABLE tbl VALIDATE STRUCTURE CASCADE COMPLETE OFFLINE INTO db.tbl",
+   "expected": "ANALYZE TABLE tbl VALIDATE STRUCTURE CASCADE COMPLETE OFFLINE INTO db.tbl",
+   "test": "TestOracle.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT CHR(187 USING NCHAR_CS)",
+   "expected": "SELECT CHR(187 USING NCHAR_CS)",
+   "test": "TestOracle.test_chr"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT CHR(187)",
+   "expected": "SELECT CHR(187)",
+   "test": "TestOracle.test_chr"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "\n            SELECT last_name \"Employee\",\n            LEVEL, SYS_CONNECT_BY_PATH(last_name, '/') \"Path\"\n            FROM employees\n            WHERE level <= 3 AND department_id = 80\n        START WITH last_name = 'King'CONNECT BY PRIOR employee_id = manager_id AND LEVEL <= 4",
+   "expected": "SELECT\n  last_name AS \"Employee\",\n  LEVEL,\n  SYS_CONNECT_BY_PATH(last_name, '/') AS \"Path\"\nFROM employees\nWHERE\n  level <= 3 AND department_id = 80\nSTART WITH last_name = 'King'\nCONNECT BY PRIOR employee_id = manager_id AND LEVEL <= 4",
+   "pretty": true,
+   "test": "TestOracle.test_connect_by"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "\n            SELECT last_name \"Employee\",\n            LEVEL, SYS_CONNECT_BY_PATH(last_name, '/') \"Path\"\n            FROM employees\n            WHERE level <= 3 AND department_id = 80\n        CONNECT BY PRIOR employee_id = manager_id AND LEVEL <= 4START WITH last_name = 'King'",
+   "expected": "SELECT\n  last_name AS \"Employee\",\n  LEVEL,\n  SYS_CONNECT_BY_PATH(last_name, '/') AS \"Path\"\nFROM employees\nWHERE\n  level <= 3 AND department_id = 80\nSTART WITH last_name = 'King'\nCONNECT BY PRIOR employee_id = manager_id AND LEVEL <= 4",
+   "pretty": true,
+   "test": "TestOracle.test_connect_by"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) PCTFREE 10",
+   "expected": "CREATE TABLE t (id NUMBER) PCTFREE 10",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) PCTUSED 40",
+   "expected": "CREATE TABLE t (id NUMBER) PCTUSED 40",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) INITRANS 2",
+   "expected": "CREATE TABLE t (id NUMBER) INITRANS 2",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) MAXTRANS 255",
+   "expected": "CREATE TABLE t (id NUMBER) MAXTRANS 255",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) LOGGING",
+   "expected": "CREATE TABLE t (id NUMBER) LOGGING",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) NOLOGGING",
+   "expected": "CREATE TABLE t (id NUMBER) NOLOGGING",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) PCTFREE 10 PCTUSED 40 INITRANS 2 MAXTRANS 255 NOLOGGING",
+   "expected": "CREATE TABLE t (id NUMBER) PCTFREE 10 PCTUSED 40 INITRANS 2 MAXTRANS 255 NOLOGGING",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) LOGGING TABLESPACE users PCTFREE 10",
+   "expected": "CREATE TABLE t (id NUMBER) LOGGING TABLESPACE users PCTFREE 10",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "create table t (id number) pctfree 10 nologging",
+   "expected": "CREATE TABLE t (id NUMBER) PCTFREE 10 NOLOGGING",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE \"t\" (\"id\" NUMBER) PCTFREE 10 NOLOGGING",
+   "expected": "CREATE TABLE \"t\" (\"id\" NUMBER) PCTFREE 10 NOLOGGING",
+   "identify": true,
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t PCTFREE 10 NOLOGGING AS SELECT 1 AS id FROM dual",
+   "expected": "CREATE TABLE t PCTFREE 10 NOLOGGING AS SELECT 1 AS id FROM dual",
+   "test": "TestOracle.test_create_table_physical_properties"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) TABLESPACE ts PCTFREE 10 STORAGE (INITIAL 64K)",
+   "expected": "CREATE TABLE t (id NUMBER) TABLESPACE ts PCTFREE 10 STORAGE (INITIAL 64K)",
+   "test": "TestOracle.test_create_table_storage"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) STORAGE (INITIAL 65536 NEXT 1048576) TABLESPACE users LOGGING",
+   "expected": "CREATE TABLE t (id NUMBER) STORAGE (INITIAL 65536 NEXT 1048576) TABLESPACE users LOGGING",
+   "test": "TestOracle.test_create_table_storage"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) STORAGE (INITIAL 64K NEXT 1M MINEXTENTS 1 MAXEXTENTS UNLIMITED MAXSIZE 2M PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT) TABLESPACE users LOGGING",
+   "expected": "CREATE TABLE t (id NUMBER) STORAGE (INITIAL 64K NEXT 1M MINEXTENTS 1 MAXEXTENTS UNLIMITED MAXSIZE 2M PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT) TABLESPACE users LOGGING",
+   "test": "TestOracle.test_create_table_storage"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) STORAGE (MAXEXTENTS 100 MAXSIZE UNLIMITED BUFFER_POOL KEEP FLASH_CACHE NONE CELL_FLASH_CACHE KEEP) TABLESPACE users LOGGING",
+   "expected": "CREATE TABLE t (id NUMBER) STORAGE (MAXEXTENTS 100 MAXSIZE UNLIMITED BUFFER_POOL KEEP FLASH_CACHE NONE CELL_FLASH_CACHE KEEP) TABLESPACE users LOGGING",
+   "test": "TestOracle.test_create_table_storage"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) STORAGE (BUFFER_POOL RECYCLE FLASH_CACHE KEEP CELL_FLASH_CACHE NONE) TABLESPACE users LOGGING",
+   "expected": "CREATE TABLE t (id NUMBER) STORAGE (BUFFER_POOL RECYCLE FLASH_CACHE KEEP CELL_FLASH_CACHE NONE) TABLESPACE users LOGGING",
+   "test": "TestOracle.test_create_table_storage"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) storage (initial 64 k next 1 m) nologging",
+   "expected": "CREATE TABLE t (id NUMBER) STORAGE (INITIAL 64K NEXT 1M) NOLOGGING",
+   "test": "TestOracle.test_create_table_storage"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t STORAGE (INITIAL 64K) NOLOGGING AS SELECT 1 AS id FROM dual",
+   "expected": "CREATE TABLE t STORAGE (INITIAL 64K) NOLOGGING AS SELECT 1 AS id FROM dual",
+   "test": "TestOracle.test_create_table_storage"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (\n  id NUMBER\n)\nPCTFREE 10\nSTORAGE (INITIAL 64K NEXT 1M)\nLOGGING",
+   "expected": "CREATE TABLE t (\n  id NUMBER\n)\nPCTFREE 10\nSTORAGE (INITIAL 64K NEXT 1M)\nLOGGING",
+   "pretty": true,
+   "test": "TestOracle.test_create_table_storage"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) TABLESPACE ts",
+   "expected": "CREATE TABLE t (id NUMBER) TABLESPACE ts",
+   "test": "TestOracle.test_create_table_tablespace"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TABLE t (id NUMBER) TABLESPACE \"Mixed Ts\"",
+   "expected": "CREATE TABLE t (id NUMBER) TABLESPACE \"Mixed Ts\"",
+   "test": "TestOracle.test_create_table_tablespace"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TRIGGER check_salary BEFORE INSERT ON employees FOR EACH ROW BEGIN :NEW.status := 'PENDING' END",
+   "expected": "CREATE TRIGGER check_salary BEFORE INSERT ON employees FOR EACH ROW BEGIN :NEW.status := 'PENDING' END",
+   "command": true,
+   "test": "TestOracle.test_create_trigger"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TRIGGER audit_trigger AFTER UPDATE ON accounts FOR EACH ROW BEGIN INSERT INTO audit_log (user_id, old_balance, new_balance, changed_at) VALUES (:OLD.id, :OLD.balance, :NEW.balance, SYSDATE) END",
+   "expected": "CREATE TRIGGER audit_trigger AFTER UPDATE ON accounts FOR EACH ROW BEGIN INSERT INTO audit_log (user_id, old_balance, new_balance, changed_at) VALUES (:OLD.id, :OLD.balance, :NEW.balance, SYSDATE) END",
+   "command": true,
+   "test": "TestOracle.test_create_trigger"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE TRIGGER view_insert INSTEAD OF INSERT ON employee_view FOR EACH ROW BEGIN INSERT INTO employees (id, name, dept_id) VALUES (:NEW.id, :NEW.name, :NEW.dept_id) END",
+   "expected": "CREATE TRIGGER view_insert INSTEAD OF INSERT ON employee_view FOR EACH ROW BEGIN INSERT INTO employees (id, name, dept_id) VALUES (:NEW.id, :NEW.name, :NEW.dept_id) END",
+   "command": true,
+   "test": "TestOracle.test_create_trigger"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "clickhouse",
+   "sql": "TRUNC(SYSDATE, 'YEAR')",
+   "expected": "dateTrunc('YEAR', CURRENT_TIMESTAMP())",
+   "test": "TestOracle.test_datetrunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(SYSDATE, 'YEAR')",
+   "expected": "TRUNC(SYSDATE, 'YEAR')",
+   "test": "TestOracle.test_datetrunc"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(x, 'Q')",
+   "expected": "TRUNC(x, 'Q')",
+   "test": "TestOracle.test_datetrunc"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(x, 'W')",
+   "expected": "TRUNC(x, 'W')",
+   "test": "TestOracle.test_datetrunc"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN 123456",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN 123456",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN 123456 s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN 123456 s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN :scn",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN :scn",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN :scn s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN :scn s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN (123456 + 1)",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN (123456 + 1)",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN (123456 + 1) s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN (123456 + 1) s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN 123456 + 1",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN 123456 + 1",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN 123456 + 1 s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF SCN 123456 + 1 s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSTIMESTAMP",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSTIMESTAMP",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSTIMESTAMP s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSTIMESTAMP s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSDATE - 1 / 24",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSDATE - 1 / 24",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSDATE - 1 / 24 s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSDATE - 1 / 24 s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSTIMESTAMP - INTERVAL '1' HOUR",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSTIMESTAMP - INTERVAL '1' HOUR",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSTIMESTAMP - INTERVAL '1' HOUR s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP SYSTIMESTAMP - INTERVAL '1' HOUR s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS')",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS')",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS') s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS') s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales PARTITION(p1) AS OF SCN 123456 s",
+   "expected": "SELECT * FROM sales PARTITION(p1) AS OF SCN 123456 s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales SAMPLE (10) AS OF SCN 123456 s",
+   "expected": "SELECT * FROM sales SAMPLE (10) AS OF SCN 123456 s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales SUBPARTITION(sp1) SAMPLE (10) AS OF TIMESTAMP SYSDATE - 1 s WHERE s.id = 1",
+   "expected": "SELECT * FROM sales SUBPARTITION(sp1) SAMPLE (10) AS OF TIMESTAMP SYSDATE - 1 s WHERE s.id = 1",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales TIMESTAMP AS OF '2026-10-10 12:00:00' TABLESAMPLE (10 PERCENT) AS s",
+   "expected": "SELECT * FROM sales SAMPLE (10) AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS.FF6') s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT s.col1 FROM sales AS OF SCN 123456 s JOIN sales AS OF SCN 123457 t ON s.id = t.id",
+   "expected": "SELECT s.col1 FROM sales AS OF SCN 123456 s JOIN sales AS OF SCN 123457 t ON s.id = t.id",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales AS s",
+   "expected": "SELECT * FROM sales s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales AS s FOR SYSTEM_TIME AS OF '2026-10-10 12:00:00'",
+   "expected": "SELECT * FROM sales AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS.FF6') s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "bigquery",
+   "sql": "SELECT * FROM sales AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00', 'YYYY-MM-DD HH24:MI:SS.FF6') s",
+   "expected": "SELECT * FROM sales AS s FOR SYSTEM_TIME AS OF PARSE_TIMESTAMP('%F %H:%M:%E6S', '2026-10-10 12:00:00')",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales AS s FOR SYSTEM_TIME AS OF '2026-10-10 12:00:00.123456'",
+   "expected": "SELECT * FROM sales AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00.123456', 'YYYY-MM-DD HH24:MI:SS.FF6') s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales TIMESTAMP AS OF '2026-10-10 12:00:00.123456' AS s",
+   "expected": "SELECT * FROM sales AS OF TIMESTAMP TO_TIMESTAMP('2026-10-10 12:00:00.123456', 'YYYY-MM-DD HH24:MI:SS.FF6') s",
+   "test": "TestOracle.test_flashback"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT purchases_reader_role TO george, maria",
+   "expected": "GRANT purchases_reader_role TO george, maria",
+   "command": true,
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT USAGE ON TYPE price TO finance_role",
+   "expected": "GRANT USAGE ON TYPE price TO finance_role",
+   "command": true,
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT USAGE ON DERBY AGGREGATE types.maxPrice TO sales_role",
+   "expected": "GRANT USAGE ON DERBY AGGREGATE types.maxPrice TO sales_role",
+   "command": true,
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT SELECT ON TABLE t TO maria, harry",
+   "expected": "GRANT SELECT ON TABLE t TO maria, harry",
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT SELECT ON TABLE s.v TO PUBLIC",
+   "expected": "GRANT SELECT ON TABLE s.v TO PUBLIC",
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT SELECT ON TABLE t TO purchases_reader_role",
+   "expected": "GRANT SELECT ON TABLE t TO purchases_reader_role",
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT UPDATE, TRIGGER ON TABLE t TO anita, zhi",
+   "expected": "GRANT UPDATE, TRIGGER ON TABLE t TO anita, zhi",
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT EXECUTE ON PROCEDURE p TO george",
+   "expected": "GRANT EXECUTE ON PROCEDURE p TO george",
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "GRANT USAGE ON SEQUENCE order_id TO sales_role",
+   "expected": "GRANT USAGE ON SEQUENCE order_id TO sales_role",
+   "test": "TestOracle.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ USE_NL(A B) */ A.COL_TEST FROM TABLE_A A, TABLE_B B",
+   "expected": "SELECT /*+ USE_NL(A B) */ A.COL_TEST FROM TABLE_A A, TABLE_B B",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ INDEX(v.j jhist_employee_ix (employee_id start_date)) */ * FROM v",
+   "expected": "SELECT /*+ INDEX(v.j jhist_employee_ix (employee_id start_date)) */ * FROM v",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ USE_NL(A B C) */ A.COL_TEST FROM TABLE_A A, TABLE_B B, TABLE_C C",
+   "expected": "SELECT /*+ USE_NL(A B C) */ A.COL_TEST FROM TABLE_A A, TABLE_B B, TABLE_C C",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ NO_INDEX(employees emp_empid) */ employee_id FROM employees WHERE employee_id > 200",
+   "expected": "SELECT /*+ NO_INDEX(employees emp_empid) */ employee_id FROM employees WHERE employee_id > 200",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ NO_INDEX_FFS(items item_order_ix) */ order_id FROM order_items items",
+   "expected": "SELECT /*+ NO_INDEX_FFS(items item_order_ix) */ order_id FROM order_items items",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ LEADING(e j) */ * FROM employees e, departments d, job_history j WHERE e.department_id = d.department_id AND e.hire_date = j.start_date",
+   "expected": "SELECT /*+ LEADING(e j) */ * FROM employees e, departments d, job_history j WHERE e.department_id = d.department_id AND e.hire_date = j.start_date",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT /*+ APPEND */ INTO IAP_TBL (id, col1) VALUES (2, 'test2')",
+   "expected": "INSERT /*+ APPEND */ INTO IAP_TBL (id, col1) VALUES (2, 'test2')",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT /*+ APPEND_VALUES */ INTO dest_table VALUES (i, 'Value')",
+   "expected": "INSERT /*+ APPEND_VALUES */ INTO dest_table VALUES (i, 'Value')",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT /*+ APPEND(d) */ INTO dest d VALUES (i, 'Value')",
+   "expected": "INSERT /*+ APPEND(d) */ INTO dest d VALUES (i, 'Value')",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT /*+ APPEND(d) */ INTO dest d (i, value) SELECT 1, 'value' FROM dual",
+   "expected": "INSERT /*+ APPEND(d) */ INTO dest d (i, value) SELECT 1, 'value' FROM dual",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ LEADING(departments employees) USE_NL(employees) */ * FROM employees JOIN departments ON employees.department_id = departments.department_id",
+   "expected": "SELECT /*+ LEADING(departments employees)\n  USE_NL(employees) */\n  *\nFROM employees\nJOIN departments\n  ON employees.department_id = departments.department_id",
+   "pretty": true,
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ USE_NL(bbbbbbbbbbbbbbbbbbbbbbbb) LEADING(aaaaaaaaaaaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbbbbbbbb cccccccccccccccccccccccc dddddddddddddddddddddddd) INDEX(cccccccccccccccccccccccc) */ * FROM aaaaaaaaaaaaaaaaaaaaaaaa JOIN bbbbbbbbbbbbbbbbbbbbbbbb ON aaaaaaaaaaaaaaaaaaaaaaaa.id = bbbbbbbbbbbbbbbbbbbbbbbb.a_id JOIN cccccccccccccccccccccccc ON bbbbbbbbbbbbbbbbbbbbbbbb.id = cccccccccccccccccccccccc.b_id JOIN dddddddddddddddddddddddd ON cccccccccccccccccccccccc.id = dddddddddddddddddddddddd.c_id",
+   "expected": "SELECT /*+ USE_NL(bbbbbbbbbbbbbbbbbbbbbbbb) LEADING(aaaaaaaaaaaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbbbbbbbb cccccccccccccccccccccccc dddddddddddddddddddddddd) INDEX(cccccccccccccccccccccccc) */ * FROM aaaaaaaaaaaaaaaaaaaaaaaa JOIN bbbbbbbbbbbbbbbbbbbbbbbb ON aaaaaaaaaaaaaaaaaaaaaaaa.id = bbbbbbbbbbbbbbbbbbbbbbbb.a_id JOIN cccccccccccccccccccccccc ON bbbbbbbbbbbbbbbbbbbbbbbb.id = cccccccccccccccccccccccc.b_id JOIN dddddddddddddddddddddddd ON cccccccccccccccccccccccc.id = dddddddddddddddddddddddd.c_id",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ USE_NL(bbbbbbbbbbbbbbbbbbbbbbbb) LEADING(aaaaaaaaaaaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbbbbbbbb cccccccccccccccccccccccc dddddddddddddddddddddddd) INDEX(cccccccccccccccccccccccc) */ * FROM aaaaaaaaaaaaaaaaaaaaaaaa JOIN bbbbbbbbbbbbbbbbbbbbbbbb ON aaaaaaaaaaaaaaaaaaaaaaaa.id = bbbbbbbbbbbbbbbbbbbbbbbb.a_id JOIN cccccccccccccccccccccccc ON bbbbbbbbbbbbbbbbbbbbbbbb.id = cccccccccccccccccccccccc.b_id JOIN dddddddddddddddddddddddd ON cccccccccccccccccccccccc.id = dddddddddddddddddddddddd.c_id",
+   "expected": "SELECT /*+ USE_NL(bbbbbbbbbbbbbbbbbbbbbbbb)\n  LEADING(\n    aaaaaaaaaaaaaaaaaaaaaaaa\n    bbbbbbbbbbbbbbbbbbbbbbbb\n    cccccccccccccccccccccccc\n    dddddddddddddddddddddddd\n  )\n  INDEX(cccccccccccccccccccccccc) */\n  *\nFROM aaaaaaaaaaaaaaaaaaaaaaaa\nJOIN bbbbbbbbbbbbbbbbbbbbbbbb\n  ON aaaaaaaaaaaaaaaaaaaaaaaa.id = bbbbbbbbbbbbbbbbbbbbbbbb.a_id\nJOIN cccccccccccccccccccccccc\n  ON bbbbbbbbbbbbbbbbbbbbbbbb.id = cccccccccccccccccccccccc.b_id\nJOIN dddddddddddddddddddddddd\n  ON cccccccccccccccccccccccc.id = dddddddddddddddddddddddd.c_id",
+   "pretty": true,
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ LEADING(departments employees) USE_NL(employees) select where group by is order by */ * FROM employees JOIN departments ON employees.department_id = departments.department_id",
+   "expected": "SELECT /*+ LEADING(departments employees) USE_NL(employees) select where group by is order by */\n  *\nFROM employees\nJOIN departments\n  ON employees.department_id = departments.department_id",
+   "pretty": true,
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ LEADING(departments, employees) */ * FROM employees JOIN departments ON employees.department_id = departments.department_id",
+   "expected": "SELECT /*+ LEADING(departments, employees) */ * FROM employees JOIN departments ON employees.department_id = departments.department_id",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ LEADING(departments select) */ * FROM employees JOIN departments ON employees.department_id = departments.department_id",
+   "expected": "SELECT /*+ LEADING(departments select) */ * FROM employees JOIN departments ON employees.department_id = departments.department_id",
+   "test": "TestOracle.test_hints"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales PARTITION(p1) VALUES (1)",
+   "expected": "INSERT INTO sales PARTITION(p1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales PARTITION(p1) (col1) VALUES (1)",
+   "expected": "INSERT INTO sales PARTITION(p1) (col1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales PARTITION(p1) s VALUES (1)",
+   "expected": "INSERT INTO sales PARTITION(p1) s VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales PARTITION(p1) s (col1) VALUES (1)",
+   "expected": "INSERT INTO sales PARTITION(p1) s (col1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales SUBPARTITION(p1) VALUES (1)",
+   "expected": "INSERT INTO sales SUBPARTITION(p1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales SUBPARTITION(p1) (col1) VALUES (1)",
+   "expected": "INSERT INTO sales SUBPARTITION(p1) (col1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales SUBPARTITION(p1) s VALUES (1)",
+   "expected": "INSERT INTO sales SUBPARTITION(p1) s VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales SUBPARTITION(p1) s (col1) VALUES (1)",
+   "expected": "INSERT INTO sales SUBPARTITION(p1) s (col1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales PARTITION (p1) (col1) VALUES (1)",
+   "expected": "INSERT INTO sales PARTITION(p1) (col1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO \"SH\".\"SALES\" SUBPARTITION(\"P1\") s (col1) VALUES (1)",
+   "expected": "INSERT INTO \"SH\".\"SALES\" SUBPARTITION(\"P1\") s (col1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales s (col1) VALUES (1)",
+   "expected": "INSERT INTO sales s (col1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales \"PARTITION\" (col1) VALUES (1)",
+   "expected": "INSERT INTO sales \"PARTITION\" (col1) VALUES (1)",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT INTO sales PARTITION(p1) (col1) SELECT col1 FROM source",
+   "expected": "INSERT INTO sales PARTITION(p1) (col1) SELECT col1 FROM source",
+   "test": "TestOracle.test_insert_partition"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT e1.x, e2.x FROM e e1, e e2 WHERE e1.y (+) = e2.y",
+   "expected": "SELECT e1.x, e2.x FROM e e1, e e2 WHERE e1.y (+) = e2.y",
+   "test": "TestOracle.test_join_marker"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "",
+   "sql": "SELECT e1.x, e2.x FROM e e1, e e2 WHERE e1.y = e2.y (+)",
+   "expectedError": "unsupported",
+   "test": "TestOracle.test_join_marker"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "",
+   "sql": "SELECT e1.x, e2.x FROM e e1, e e2 WHERE e1.y = e2.y (+)",
+   "expected": "SELECT e1.x, e2.x FROM e AS e1, e AS e2 WHERE e1.y = e2.y",
+   "test": "TestOracle.test_join_marker"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT e1.x, e2.x FROM e e1, e e2 WHERE e1.y = e2.y (+)",
+   "expected": "SELECT e1.x, e2.x FROM e e1, e e2 WHERE e1.y = e2.y (+)",
+   "test": "TestOracle.test_join_marker"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle')",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle')",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\")",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\")",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' TRUE ON ERROR)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' TRUE ON ERROR)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" TRUE ON ERROR)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" TRUE ON ERROR)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' NULL ON EMPTY)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' NULL ON EMPTY)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" NULL ON EMPTY)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" NULL ON EMPTY)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' DEFAULT 1 ON ERROR TRUE ON EMPTY)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' DEFAULT 1 ON ERROR TRUE ON EMPTY)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" DEFAULT 1 ON ERROR TRUE ON EMPTY)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" DEFAULT 1 ON ERROR TRUE ON EMPTY)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle')",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle')",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\")",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\")",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' TRUE ON ERROR)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' TRUE ON ERROR)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" TRUE ON ERROR)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" TRUE ON ERROR)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' NULL ON EMPTY)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' NULL ON EMPTY)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" NULL ON EMPTY)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" NULL ON EMPTY)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' DEFAULT 1 ON ERROR TRUE ON EMPTY)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' DEFAULT 1 ON ERROR TRUE ON EMPTY)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" DEFAULT 1 ON ERROR TRUE ON EMPTY)",
+   "expected": "SELECT * FROM t WHERE JSON_EXISTS(name FORMAT JSON, '$[1].middle' PASSING 'name1' AS \"var1\", 'name2' AS \"var2\" DEFAULT 1 ON ERROR TRUE ON EMPTY)",
+   "test": "TestOracle.test_json_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM JSON_TABLE(foo FORMAT JSON, 'bla' ERROR ON ERROR NULL ON EMPTY COLUMNS(foo PATH 'bar'))",
+   "expected": "SELECT * FROM JSON_TABLE(foo FORMAT JSON, 'bla' ERROR ON ERROR NULL ON EMPTY COLUMNS(foo PATH 'bar'))",
+   "test": "TestOracle.test_json_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM JSON_TABLE(foo FORMAT JSON, 'bla' ERROR ON ERROR NULL ON EMPTY COLUMNS foo PATH 'bar')",
+   "expected": "SELECT * FROM JSON_TABLE(foo FORMAT JSON, 'bla' ERROR ON ERROR NULL ON EMPTY COLUMNS(foo PATH 'bar'))",
+   "test": "TestOracle.test_json_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT\n  CASE WHEN DBMS_LOB.GETLENGTH(info) < 32000 THEN DBMS_LOB.SUBSTR(info) END AS info_txt,\n  info AS info_clob\nFROM schemaname.tablename ar\nINNER JOIN JSON_TABLE(:emps, '$[*]' COLUMNS(empno NUMBER PATH '$')) jt\n  ON ar.empno = jt.empno",
+   "expected": "SELECT\n  CASE WHEN DBMS_LOB.GETLENGTH(info) < 32000 THEN DBMS_LOB.SUBSTR(info) END AS info_txt,\n  info AS info_clob\nFROM schemaname.tablename ar\nINNER JOIN JSON_TABLE(:emps, '$[*]' COLUMNS(empno NUMBER PATH '$')) jt\n  ON ar.empno = jt.empno",
+   "pretty": true,
+   "test": "TestOracle.test_json_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT\n  *\nFROM JSON_TABLE(res, '$.info[*]' COLUMNS(\n  tempid NUMBER PATH '$.tempid',\n  NESTED PATH '$.calid[*]' COLUMNS(last_dt PATH '$.last_dt ')\n)) src",
+   "expected": "SELECT\n  *\nFROM JSON_TABLE(res, '$.info[*]' COLUMNS(\n  tempid NUMBER PATH '$.tempid',\n  NESTED PATH '$.calid[*]' COLUMNS(last_dt PATH '$.last_dt ')\n)) src",
+   "pretty": true,
+   "test": "TestOracle.test_json_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM JSON_TABLE(my_doc, '$.data[*]' COLUMNS(NAME VARCHAR2(200) PATH '$.name', DATA CLOB FORMAT JSON PATH '$.data')) j",
+   "expected": "SELECT * FROM JSON_TABLE(my_doc, '$.data[*]' COLUMNS(NAME VARCHAR2(200) PATH '$.name', DATA CLOB FORMAT JSON PATH '$.data')) j",
+   "test": "TestOracle.test_json_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CONVERT('foo', 'dst')",
+   "expected": "CONVERT('foo', 'dst')",
+   "test": "TestOracle.test_json_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CONVERT('foo', 'dst', 'src')",
+   "expected": "CONVERT('foo', 'dst', 'src')",
+   "test": "TestOracle.test_json_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT LISTAGG(last_name, '; ' ON OVERFLOW TRUNCATE '...' WITH COUNT) WITHIN GROUP (ORDER BY hire_date) FROM employees",
+   "expected": "SELECT LISTAGG(last_name, '; ' ON OVERFLOW TRUNCATE '...' WITH COUNT) WITHIN GROUP (ORDER BY hire_date) FROM employees",
+   "test": "TestOracle.test_listagg"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT LISTAGG(last_name, '; ' ON OVERFLOW ERROR) WITHIN GROUP (ORDER BY hire_date) FROM employees",
+   "expected": "SELECT LISTAGG(last_name, '; ' ON OVERFLOW ERROR) WITHIN GROUP (ORDER BY hire_date) FROM employees",
+   "test": "TestOracle.test_listagg"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT\n  *\nFROM sales_history\nMATCH_RECOGNIZE (\n  PARTITION BY product\n  ORDER BY\n    tstamp\n  MEASURES\n    STRT.tstamp AS start_tstamp,\n    LAST(UP.tstamp) AS peak_tstamp,\n    LAST(DOWN.tstamp) AS end_tstamp,\n    MATCH_NUMBER() AS mno\n  ONE ROW PER MATCH\n  AFTER MATCH SKIP TO LAST DOWN\n  PATTERN (STRT UP+ FLAT* DOWN+)\n  DEFINE\n    UP AS UP.units_sold > PREV(UP.units_sold),\n    FLAT AS FLAT.units_sold = PREV(FLAT.units_sold),\n    DOWN AS DOWN.units_sold < PREV(DOWN.units_sold)\n) MR",
+   "expected": "SELECT\n  *\nFROM sales_history\nMATCH_RECOGNIZE (\n  PARTITION BY product\n  ORDER BY\n    tstamp\n  MEASURES\n    STRT.tstamp AS start_tstamp,\n    LAST(UP.tstamp) AS peak_tstamp,\n    LAST(DOWN.tstamp) AS end_tstamp,\n    MATCH_NUMBER() AS mno\n  ONE ROW PER MATCH\n  AFTER MATCH SKIP TO LAST DOWN\n  PATTERN (STRT UP+ FLAT* DOWN+)\n  DEFINE\n    UP AS UP.units_sold > PREV(UP.units_sold),\n    FLAT AS FLAT.units_sold = PREV(FLAT.units_sold),\n    DOWN AS DOWN.units_sold < PREV(DOWN.units_sold)\n) MR",
+   "pretty": true,
+   "test": "TestOracle.test_match_recognize"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "MERGE INTO target tgt USING (SELECT id, col1 FROM source_tbl) src ON tgt.id = src.id WHEN MATCHED THEN UPDATE SET tgt.col1 = src.col1 WHERE tgt.some_column IS NULL WHEN NOT MATCHED THEN INSERT (id, col1) VALUES (src.id, src.col1) WHERE NOT src.col1 IS NULL",
+   "expected": "MERGE INTO target tgt USING (SELECT id, col1 FROM source_tbl) src ON tgt.id = src.id WHEN MATCHED THEN UPDATE SET tgt.col1 = src.col1 WHERE tgt.some_column IS NULL WHEN NOT MATCHED THEN INSERT (id, col1) VALUES (src.id, src.col1) WHERE NOT src.col1 IS NULL",
+   "test": "TestOracle.test_merge"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "",
+   "sql": "MERGE INTO target tgt USING (SELECT id, col1 FROM source_tbl) src ON tgt.id = src.id WHEN MATCHED THEN UPDATE SET tgt.col1 = src.col1 WHERE tgt.some_column IS NULL WHEN NOT MATCHED THEN INSERT (id, col1) VALUES (src.id, src.col1) WHERE NOT src.col1 IS NULL",
+   "expected": "MERGE INTO target AS tgt USING (SELECT id, col1 FROM source_tbl) AS src ON tgt.id = src.id WHEN MATCHED THEN UPDATE SET tgt.col1 = src.col1 WHEN NOT MATCHED THEN INSERT (id, col1) VALUES (src.id, src.col1)",
+   "test": "TestOracle.test_merge"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT ALL INTO dest_tab1 (id, description) VALUES (id, description) INTO dest_tab2 (id, description) VALUES (id, description) INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "expected": "INSERT ALL INTO dest_tab1 (id, description) VALUES (id, description) INTO dest_tab2 (id, description) VALUES (id, description) INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT ALL INTO pivot_dest (id, day, val) VALUES (id, 'mon', mon_val) INTO pivot_dest (id, day, val) VALUES (id, 'tue', tue_val) INTO pivot_dest (id, day, val) VALUES (id, 'wed', wed_val) INTO pivot_dest (id, day, val) VALUES (id, 'thu', thu_val) INTO pivot_dest (id, day, val) VALUES (id, 'fri', fri_val) SELECT * FROM pivot_source",
+   "expected": "INSERT ALL INTO pivot_dest (id, day, val) VALUES (id, 'mon', mon_val) INTO pivot_dest (id, day, val) VALUES (id, 'tue', tue_val) INTO pivot_dest (id, day, val) VALUES (id, 'wed', wed_val) INTO pivot_dest (id, day, val) VALUES (id, 'thu', thu_val) INTO pivot_dest (id, day, val) VALUES (id, 'fri', fri_val) SELECT * FROM pivot_source",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT ALL WHEN id <= 3 THEN INTO dest_tab1 (id, description) VALUES (id, description) WHEN id BETWEEN 4 AND 7 THEN INTO dest_tab2 (id, description) VALUES (id, description) WHEN id >= 8 THEN INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "expected": "INSERT ALL WHEN id <= 3 THEN INTO dest_tab1 (id, description) VALUES (id, description) WHEN id BETWEEN 4 AND 7 THEN INTO dest_tab2 (id, description) VALUES (id, description) WHEN id >= 8 THEN INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT ALL WHEN id <= 3 THEN INTO dest_tab1 (id, description) VALUES (id, description) WHEN id BETWEEN 4 AND 7 THEN INTO dest_tab2 (id, description) VALUES (id, description) WHEN 1 = 1 THEN INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "expected": "INSERT ALL WHEN id <= 3 THEN INTO dest_tab1 (id, description) VALUES (id, description) WHEN id BETWEEN 4 AND 7 THEN INTO dest_tab2 (id, description) VALUES (id, description) WHEN 1 = 1 THEN INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT FIRST WHEN id <= 3 THEN INTO dest_tab1 (id, description) VALUES (id, description) WHEN id <= 5 THEN INTO dest_tab2 (id, description) VALUES (id, description) ELSE INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "expected": "INSERT FIRST WHEN id <= 3 THEN INTO dest_tab1 (id, description) VALUES (id, description) WHEN id <= 5 THEN INTO dest_tab2 (id, description) VALUES (id, description) ELSE INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT FIRST WHEN id <= 3 THEN INTO dest_tab1 (id, description) VALUES (id, description) ELSE INTO dest_tab2 (id, description) VALUES (id, description) INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "expected": "INSERT FIRST WHEN id <= 3 THEN INTO dest_tab1 (id, description) VALUES (id, description) ELSE INTO dest_tab2 (id, description) VALUES (id, description) INTO dest_tab3 (id, description) VALUES (id, description) SELECT id, description FROM source_tab",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "/* COMMENT */ INSERT FIRST WHEN salary > 4000 THEN INTO emp2 WHEN salary > 5000 THEN INTO emp3 WHEN salary > 6000 THEN INTO emp4 SELECT salary FROM employees",
+   "expected": "/* COMMENT */ INSERT FIRST WHEN salary > 4000 THEN INTO emp2 WHEN salary > 5000 THEN INTO emp3 WHEN salary > 6000 THEN INTO emp4 SELECT salary FROM employees",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "INSERT WHEN k > 1 THEN INTO t VALUES (k) ELSE INTO u VALUES (k) SELECT k FROM x",
+   "expected": "INSERT ALL WHEN k > 1 THEN INTO t VALUES (k) ELSE INTO u VALUES (k) SELECT k FROM x",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "INSERT WHEN k > 1 THEN INTO t VALUES (k) ELSE INTO u VALUES (k) SELECT k FROM x",
+   "expected": "INSERT ALL WHEN k > 1 THEN INTO t VALUES (k) ELSE INTO u VALUES (k) SELECT k FROM x",
+   "test": "TestOracle.test_multitable_inserts"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'[it's]' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'{it's}' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'(it's)' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'<it's>' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'!it's!' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq']it's]' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq''it's'' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'Ait'sA' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'0it's0' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'[a''b]' FROM dual",
+   "expected": "SELECT N'a''''b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'[a]b]' FROM dual",
+   "expected": "SELECT N'a]b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'|\\n|' FROM dual",
+   "expected": "SELECT N'\\n' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'[a\nb]' FROM dual",
+   "expected": "SELECT N'a\nb' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'[é漢]' FROM dual",
+   "expected": "SELECT N'é漢' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'[]' FROM dual",
+   "expected": "SELECT N'' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nq'[a;b]' FROM dual",
+   "expected": "SELECT N'a;b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'[it's]' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'{it's}' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'(it's)' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'<it's>' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'!it's!' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ']it's]' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ''it's'' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'Ait'sA' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'0it's0' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'[a''b]' FROM dual",
+   "expected": "SELECT N'a''''b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'[a]b]' FROM dual",
+   "expected": "SELECT N'a]b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'|\\n|' FROM dual",
+   "expected": "SELECT N'\\n' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'[a\nb]' FROM dual",
+   "expected": "SELECT N'a\nb' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'[é漢]' FROM dual",
+   "expected": "SELECT N'é漢' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'[]' FROM dual",
+   "expected": "SELECT N'' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT nQ'[a;b]' FROM dual",
+   "expected": "SELECT N'a;b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'[it's]' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'{it's}' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'(it's)' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'<it's>' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'!it's!' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq']it's]' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq''it's'' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'Ait'sA' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'0it's0' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'[a''b]' FROM dual",
+   "expected": "SELECT N'a''''b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'[a]b]' FROM dual",
+   "expected": "SELECT N'a]b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'|\\n|' FROM dual",
+   "expected": "SELECT N'\\n' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'[a\nb]' FROM dual",
+   "expected": "SELECT N'a\nb' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'[é漢]' FROM dual",
+   "expected": "SELECT N'é漢' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'[]' FROM dual",
+   "expected": "SELECT N'' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT Nq'[a;b]' FROM dual",
+   "expected": "SELECT N'a;b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'[it's]' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'{it's}' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'(it's)' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'<it's>' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'!it's!' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ']it's]' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ''it's'' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'Ait'sA' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'0it's0' FROM dual",
+   "expected": "SELECT N'it''s' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'[a''b]' FROM dual",
+   "expected": "SELECT N'a''''b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'[a]b]' FROM dual",
+   "expected": "SELECT N'a]b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'|\\n|' FROM dual",
+   "expected": "SELECT N'\\n' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'[a\nb]' FROM dual",
+   "expected": "SELECT N'a\nb' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'[é漢]' FROM dual",
+   "expected": "SELECT N'é漢' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'[]' FROM dual",
+   "expected": "SELECT N'' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NQ'[a;b]' FROM dual",
+   "expected": "SELECT N'a;b' FROM dual",
+   "test": "TestOracle.test_national_alternative_quoting"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "1 /* /* */",
+   "expected": "1 /* / * */",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "",
+   "sql": "SELECT CONNECT_BY_ROOT x y",
+   "expected": "SELECT CONNECT_BY_ROOT x AS y",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT CONNECT_BY_ROOT x y",
+   "expected": "SELECT CONNECT_BY_ROOT x AS y",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NTH_VALUE(x, 2) FROM FIRST OVER (ORDER BY y) AS c FROM t",
+   "expected": "SELECT NTH_VALUE(x, 2) FROM FIRST OVER (ORDER BY y) AS c FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NTH_VALUE(x, 2) FROM LAST IGNORE NULLS OVER (ORDER BY y) AS c FROM t",
+   "expected": "SELECT NTH_VALUE(x, 2) FROM LAST IGNORE NULLS OVER (ORDER BY y) AS c FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NTH_VALUE(x, 2) FROM FIRST RESPECT NULLS OVER (ORDER BY y) AS c FROM t",
+   "expected": "SELECT NTH_VALUE(x, 2) FROM FIRST RESPECT NULLS OVER (ORDER BY y) AS c FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "XMLELEMENT(EVALNAME foo + bar)",
+   "expected": "XMLELEMENT(EVALNAME foo + bar)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT BITMAP_BUCKET_NUMBER(32769)",
+   "expected": "SELECT BITMAP_BUCKET_NUMBER(32769)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT BITMAP_CONSTRUCT_AGG(value)",
+   "expected": "SELECT BITMAP_CONSTRUCT_AGG(value)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "DBMS_RANDOM.NORMAL",
+   "expected": "DBMS_RANDOM.NORMAL",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "DBMS_RANDOM.VALUE(low, high)",
+   "expected": "DBMS_RANDOM.VALUE(low, high)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "DBMS_RANDOM.VALUE()",
+   "expected": "DBMS_RANDOM.VALUE()",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CAST(value AS NUMBER DEFAULT 0 ON CONVERSION ERROR)",
+   "expected": "CAST(value AS NUMBER DEFAULT 0 ON CONVERSION ERROR)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SYSDATE",
+   "expected": "SYSDATE",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE GLOBAL TEMPORARY TABLE t AS SELECT * FROM orders",
+   "expected": "CREATE GLOBAL TEMPORARY TABLE t AS SELECT * FROM orders",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE PRIVATE TEMPORARY TABLE t AS SELECT * FROM orders",
+   "expected": "CREATE PRIVATE TEMPORARY TABLE t AS SELECT * FROM orders",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REGEXP_REPLACE('source', 'search')",
+   "expected": "REGEXP_REPLACE('source', 'search')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TIMESTAMP(3) WITH TIME ZONE",
+   "expected": "TIMESTAMP(3) WITH TIME ZONE",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SYSTIMESTAMP",
+   "expected": "SYSTIMESTAMP",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT SYSTIMESTAMP AT TIME ZONE 'UTC'",
+   "expected": "SELECT SYSTIMESTAMP AT TIME ZONE 'UTC'",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CURRENT_TIMESTAMP(precision)",
+   "expected": "CURRENT_TIMESTAMP(precision)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol",
+   "expected": "ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ALTER TABLE Payments ADD Stock NUMBER NOT NULL",
+   "expected": "ALTER TABLE Payments ADD Stock NUMBER NOT NULL",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT x FROM t WHERE cond FOR UPDATE",
+   "expected": "SELECT x FROM t WHERE cond FOR UPDATE",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT JSON_OBJECT(k1: v1 FORMAT JSON, k2: v2 FORMAT JSON)",
+   "expected": "SELECT JSON_OBJECT(k1: v1 FORMAT JSON, k2: v2 FORMAT JSON)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT JSON_OBJECT('name': first_name || ' ' || last_name) FROM t",
+   "expected": "SELECT JSON_OBJECT('name': first_name || ' ' || last_name) FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "COALESCE(c1, c2, c3)",
+   "expected": "COALESCE(c1, c2, c3)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM TABLE(foo)",
+   "expected": "SELECT * FROM TABLE(foo)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT a$x#b",
+   "expected": "SELECT a$x#b",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT :OBJECT",
+   "expected": "SELECT :OBJECT",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t FOR UPDATE",
+   "expected": "SELECT * FROM t FOR UPDATE",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t FOR UPDATE WAIT 5",
+   "expected": "SELECT * FROM t FOR UPDATE WAIT 5",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t FOR UPDATE NOWAIT",
+   "expected": "SELECT * FROM t FOR UPDATE NOWAIT",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t FOR UPDATE SKIP LOCKED",
+   "expected": "SELECT * FROM t FOR UPDATE SKIP LOCKED",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t FOR UPDATE OF s.t.c, s.t.v",
+   "expected": "SELECT * FROM t FOR UPDATE OF s.t.c, s.t.v",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t FOR UPDATE OF s.t.c, s.t.v NOWAIT",
+   "expected": "SELECT * FROM t FOR UPDATE OF s.t.c, s.t.v NOWAIT",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t FOR UPDATE OF s.t.c, s.t.v SKIP LOCKED",
+   "expected": "SELECT * FROM t FOR UPDATE OF s.t.c, s.t.v SKIP LOCKED",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT STANDARD_HASH('hello')",
+   "expected": "SELECT STANDARD_HASH('hello')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT STANDARD_HASH('hello', 'MD5')",
+   "expected": "SELECT STANDARD_HASH('hello', 'MD5')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM table_name@dblink_name.database_link_domain",
+   "expected": "SELECT * FROM table_name@dblink_name.database_link_domain",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM table_name SAMPLE (25) s",
+   "expected": "SELECT * FROM table_name SAMPLE (25) s",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT COUNT(*) * 10 FROM orders SAMPLE (10) SEED (1)",
+   "expected": "SELECT COUNT(*) * 10 FROM orders SAMPLE (10) SEED (1)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM V$SESSION",
+   "expected": "SELECT * FROM V$SESSION",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TO_DATE('January 15, 1989, 11:00 A.M.')",
+   "expected": "SELECT TO_DATE('January 15, 1989, 11:00 A.M.')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT INSTR(haystack, needle)",
+   "expected": "SELECT INSTR(haystack, needle)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT fred FROM barney WHERE dino ^= 'wilma'",
+   "expected": "SELECT fred FROM barney WHERE dino <> 'wilma'",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "SELECT fred FROM barney WHERE dino ^= 'wilma'",
+   "expected": "SELECT fred FROM barney WHERE dino <> 'wilma'",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT (TIMESTAMP '2025-12-30 20:00:00' - TIMESTAMP '2025-12-29 14:30:00') DAY TO SECOND",
+   "expected": "SELECT (TO_TIMESTAMP('2025-12-30 20:00:00', 'YYYY-MM-DD HH24:MI:SS.FF6') - TO_TIMESTAMP('2025-12-29 14:30:00', 'YYYY-MM-DD HH24:MI:SS.FF6')) DAY TO SECOND",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT (SYSTIMESTAMP - order_date) DAY(9) TO SECOND FROM orders",
+   "expected": "SELECT (SYSTIMESTAMP - order_date) DAY(9) TO SECOND FROM orders",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT (SYSTIMESTAMP - order_date) DAY(9) TO SECOND(3) FROM orders",
+   "expected": "SELECT (SYSTIMESTAMP - order_date) DAY(9) TO SECOND(3) FROM orders",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM consumer LEFT JOIN groceries ON consumer.groceries_id = consumer.id PIVOT(MAX(type_id) FOR consumer_type IN (1, 2, 3, 4))",
+   "expected": "SELECT * FROM consumer LEFT JOIN groceries ON consumer.groceries_id = consumer.id PIVOT(MAX(type_id) FOR consumer_type IN (1, 2, 3, 4))",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM test UNPIVOT INCLUDE NULLS (value FOR Description IN (col AS 'PREFIX ' || CHR(38) || ' SUFFIX'))",
+   "expected": "SELECT * FROM test UNPIVOT INCLUDE NULLS (value FOR Description IN (col AS 'PREFIX ' || CHR(38) || ' SUFFIX'))",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales UNPIVOT(q FOR p IN (q1 AS 'Prod1', q2 AS 'Prod2'))",
+   "expected": "SELECT * FROM sales UNPIVOT(q FOR p IN (q1 AS 'Prod1', q2 AS 'Prod2'))",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM sales UNPIVOT(q FOR p IN (q1 AS 1, q2 AS 2))",
+   "expected": "SELECT * FROM sales UNPIVOT(q FOR p IN (q1 AS 1, q2 AS 2))",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT last_name, employee_id, manager_id, LEVEL FROM employees START WITH employee_id = 100 CONNECT BY PRIOR employee_id = manager_id ORDER SIBLINGS BY last_name",
+   "expected": "SELECT last_name, employee_id, manager_id, LEVEL FROM employees START WITH employee_id = 100 CONNECT BY PRIOR employee_id = manager_id ORDER SIBLINGS BY last_name",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "ALTER TABLE Payments ADD (Stock NUMBER NOT NULL, dropid VARCHAR2(500) NOT NULL)",
+   "expected": "ALTER TABLE Payments ADD (Stock NUMBER NOT NULL, dropid VARCHAR2(500) NOT NULL)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT JSON_ARRAYAGG(JSON_OBJECT('RNK': RNK, 'RATING_CODE': RATING_CODE, 'DATE_VALUE': DATE_VALUE, 'AGENT_ID': AGENT_ID RETURNING CLOB) RETURNING CLOB) AS JSON_DATA FROM tablename",
+   "expected": "SELECT JSON_ARRAYAGG(JSON_OBJECT('RNK': RNK, 'RATING_CODE': RATING_CODE, 'DATE_VALUE': DATE_VALUE, 'AGENT_ID': AGENT_ID RETURNING CLOB) RETURNING CLOB) AS JSON_DATA FROM tablename",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT JSON_ARRAY(FOO() FORMAT JSON, BAR() NULL ON NULL RETURNING CLOB STRICT)",
+   "expected": "SELECT JSON_ARRAY(FOO() FORMAT JSON, BAR() NULL ON NULL RETURNING CLOB STRICT)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT JSON_ARRAYAGG(FOO() FORMAT JSON ORDER BY bar NULL ON NULL RETURNING CLOB STRICT)",
+   "expected": "SELECT JSON_ARRAYAGG(FOO() FORMAT JSON ORDER BY bar NULL ON NULL RETURNING CLOB STRICT)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT COUNT(1) INTO V_Temp FROM TABLE(CAST(somelist AS data_list)) WHERE col LIKE '%contact'",
+   "expected": "SELECT COUNT(1) INTO V_Temp FROM TABLE(CAST(somelist AS data_list)) WHERE col LIKE '%contact'",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t WHERE c LIKE (:v)",
+   "expected": "SELECT * FROM t WHERE c LIKE (:v)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT department_id INTO v_department_id FROM departments FETCH FIRST 1 ROWS ONLY",
+   "expected": "SELECT department_id INTO v_department_id FROM departments FETCH FIRST 1 ROWS ONLY",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT department_id BULK COLLECT INTO v_department_ids FROM departments",
+   "expected": "SELECT department_id BULK COLLECT INTO v_department_ids FROM departments",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT department_id, department_name BULK COLLECT INTO v_department_ids, v_department_names FROM departments",
+   "expected": "SELECT department_id, department_name BULK COLLECT INTO v_department_ids, v_department_names FROM departments",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT MIN(column_name) KEEP (DENSE_RANK FIRST ORDER BY column_name DESC) FROM table_name",
+   "expected": "SELECT MIN(column_name) KEEP (DENSE_RANK FIRST ORDER BY column_name DESC) FROM table_name",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "XMLELEMENT(\"ImageID\", image.id)",
+   "expected": "XMLELEMENT(NAME \"ImageID\", image.id)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT CAST('January 15, 1989, 11:00 A.M.' AS DATE DEFAULT NULL ON CONVERSION ERROR, 'Month dd, YYYY, HH:MI A.M.') FROM DUAL",
+   "expected": "SELECT TO_DATE('January 15, 1989, 11:00 A.M.', 'Month dd, YYYY, HH12:MI A.M.') FROM DUAL",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TRUNC(SYSDATE)",
+   "expected": "SELECT TRUNC(SYSDATE, 'DD')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT JSON_OBJECT(KEY 'key1' IS emp.column1, KEY 'key2' IS emp.column1) \"emp_key\" FROM emp",
+   "expected": "SELECT JSON_OBJECT('key1': emp.column1, 'key2': emp.column1) AS \"emp_key\" FROM emp",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT JSON_OBJECTAGG(KEY department_name VALUE department_id) FROM dep WHERE id <= 30",
+   "expected": "SELECT JSON_OBJECTAGG(department_name: department_id) FROM dep WHERE id <= 30",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT last_name, department_id, salary, MIN(salary) KEEP (DENSE_RANK FIRST ORDER BY commission_pct) OVER (PARTITION BY department_id) AS \"Worst\", MAX(salary) KEEP (DENSE_RANK LAST ORDER BY commission_pct) OVER (PARTITION BY department_id) AS \"Best\" FROM employees ORDER BY department_id, salary, last_name",
+   "expected": "SELECT last_name, department_id, salary, MIN(salary) KEEP (DENSE_RANK FIRST ORDER BY commission_pct) OVER (PARTITION BY department_id) AS \"Worst\", MAX(salary) KEEP (DENSE_RANK LAST ORDER BY commission_pct) OVER (PARTITION BY department_id) AS \"Best\" FROM employees ORDER BY department_id, salary, last_name",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT UNIQUE col1, col2 FROM table",
+   "expected": "SELECT DISTINCT col1, col2 FROM table",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM T ORDER BY I OFFSET NVL(:variable1, 10) ROWS FETCH NEXT NVL(:variable2, 10) ROWS ONLY",
+   "expected": "SELECT * FROM T ORDER BY I OFFSET NVL(:variable1, 10) ROWS FETCH NEXT NVL(:variable2, 10) ROWS ONLY",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t SAMPLE (.25)",
+   "expected": "SELECT * FROM t SAMPLE (0.25)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TO_CHAR(-100, 'L99', 'NL_CURRENCY = '' AusDollars '' ')",
+   "expected": "SELECT TO_CHAR(-100, 'L99', 'NL_CURRENCY = '' AusDollars '' ')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t START WITH col CONNECT BY NOCYCLE PRIOR col1 = col2",
+   "expected": "SELECT * FROM t START WITH col CONNECT BY NOCYCLE PRIOR col1 = col2",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT id FROM t START WITH (parent_id IS NULL) CONNECT BY PRIOR id = parent_id",
+   "expected": "SELECT id FROM t START WITH (parent_id IS NULL) CONNECT BY PRIOR id = parent_id",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT id FROM t START WITH (x) CONNECT BY PRIOR id = parent_id",
+   "expected": "SELECT id FROM t START WITH (x) CONNECT BY PRIOR id = parent_id",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT NTH_VALUE(x, 2) FROM LAST OVER (ORDER BY y) AS c FROM t",
+   "expected": "SELECT NTH_VALUE(x, 2) FROM LAST OVER (ORDER BY y) AS c FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "SELECT NTH_VALUE(x, 2) FROM LAST OVER (ORDER BY y) AS c FROM t",
+   "expected": "SELECT NTH_VALUE(x, 2) FROM LAST OVER (ORDER BY y) AS c FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "SELECT NTH_VALUE(x, 2) FROM LAST OVER (ORDER BY y) AS c FROM t",
+   "expected": "SELECT NTH_VALUE(x, 2) OVER (ORDER BY y) AS c FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "SELECT NTH_VALUE(x, 2) FROM LAST OVER (ORDER BY y) AS c FROM t",
+   "expectedError": "unsupported",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT DBMS_RANDOM.VALUE",
+   "expected": "SELECT DBMS_RANDOM.VALUE()",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "oracle",
+   "sql": "SELECT RANDOM()",
+   "expected": "SELECT DBMS_RANDOM.VALUE()",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT DBMS_RANDOM.VALUE()",
+   "expected": "SELECT DBMS_RANDOM.VALUE()",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "SELECT DBMS_RANDOM.VALUE()",
+   "expected": "SELECT RANDOM()",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "clickhouse",
+   "sql": "SELECT TRIM('|' FROM '||Hello ||| world||')",
+   "expected": "SELECT TRIM(BOTH '|' FROM '||Hello ||| world||')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TRIM('|' FROM '||Hello ||| world||')",
+   "expected": "SELECT TRIM('|' FROM '||Hello ||| world||')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT department_id, department_name INTO v_department_id, v_department_name FROM departments FETCH FIRST 1 ROWS ONLY",
+   "expected": "SELECT department_id, department_name INTO v_department_id, v_department_name FROM departments FETCH FIRST 1 ROWS ONLY",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "SELECT department_id, department_name INTO v_department_id, v_department_name FROM departments FETCH FIRST 1 ROWS ONLY",
+   "expectedError": "unsupported",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "SELECT department_id, department_name INTO v_department_id, v_department_name FROM departments FETCH FIRST 1 ROWS ONLY",
+   "expectedError": "unsupported",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "oracle",
+   "sql": "SELECT * FROM test WHERE col1 % 4 = 3",
+   "expected": "SELECT * FROM test WHERE MOD(col1, 4) = 3",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "SELECT * FROM test WHERE MOD(col1, 4) = 3",
+   "expected": "SELECT * FROM test WHERE col1 % 4 = 3",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM test WHERE MOD(col1, 4) = 3",
+   "expected": "SELECT * FROM test WHERE MOD(col1, 4) = 3",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "oracle",
+   "sql": "CURRENT_TIMESTAMP BETWEEN TO_DATE(f.C_SDATE, 'yyyy/mm/dd') AND TO_DATE(f.C_EDATE, 'yyyy/mm/dd')",
+   "expected": "CURRENT_TIMESTAMP BETWEEN TO_DATE(f.C_SDATE, 'YYYY/MM/DD') AND TO_DATE(f.C_EDATE, 'YYYY/MM/DD')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CURRENT_TIMESTAMP BETWEEN TO_DATE(f.C_SDATE, 'YYYY/MM/DD') AND TO_DATE(f.C_EDATE, 'YYYY/MM/DD')",
+   "expected": "CURRENT_TIMESTAMP BETWEEN TO_DATE(f.C_SDATE, 'YYYY/MM/DD') AND TO_DATE(f.C_EDATE, 'YYYY/MM/DD')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "CURRENT_TIMESTAMP BETWEEN TO_DATE(f.C_SDATE, 'YYYY/MM/DD') AND TO_DATE(f.C_EDATE, 'YYYY/MM/DD')",
+   "expected": "CURRENT_TIMESTAMP BETWEEN TO_DATE(f.C_SDATE, 'YYYY/MM/DD') AND TO_DATE(f.C_EDATE, 'YYYY/MM/DD')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "doris",
+   "sql": "TO_CHAR(x)",
+   "expected": "CAST(x AS STRING)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TO_CHAR(x)",
+   "expected": "TO_CHAR(x)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "oracle",
+   "sql": "TO_NUMBER(expr, fmt, nlsparam)",
+   "expected": "TO_NUMBER(expr, fmt, nlsparam)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TO_NUMBER(expr, fmt, nlsparam)",
+   "expected": "TO_NUMBER(expr, fmt, nlsparam)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "teradata",
+   "sql": "TO_NUMBER(expr, fmt, nlsparam)",
+   "expected": "TO_NUMBER(expr, fmt, nlsparam)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "bigquery",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS FLOAT64)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "doris",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "drill",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "hive",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "mysql",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x)",
+   "expected": "TO_NUMBER(x)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE PRECISION)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "presto",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "redshift",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE PRECISION)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TO_NUMBER(x)",
+   "expected": "TO_NUMBER(x)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark2",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "starrocks",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tableau",
+   "sql": "TO_NUMBER(x)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "teradata",
+   "sql": "TO_NUMBER(x)",
+   "expected": "TO_NUMBER(x)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "drill",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "databricks",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "drill",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "redshift",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "teradata",
+   "sql": "TO_NUMBER(x, fmt)",
+   "expected": "TO_NUMBER(x, fmt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TO_NUMBER('dino' DEFAULT 0 ON CONVERSION ERROR)",
+   "expected": "TO_NUMBER('dino' DEFAULT 0 ON CONVERSION ERROR)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TO_NUMBER('dino' DEFAULT 0 ON CONVERSION ERROR, '9999')",
+   "expected": "TO_NUMBER('dino' DEFAULT 0 ON CONVERSION ERROR, '9999')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TO_NUMBER('dino' DEFAULT 0 ON CONVERSION ERROR, '9999', 'NLS_NUMERIC_CHARACTERS = ''.,''')",
+   "expected": "TO_NUMBER('dino' DEFAULT 0 ON CONVERSION ERROR, '9999', 'NLS_NUMERIC_CHARACTERS = ''.,''')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT CAST(NULL AS VARCHAR2(2328 CHAR)) AS COL1",
+   "expected": "SELECT CAST(NULL AS VARCHAR2(2328 CHAR)) AS COL1",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "SELECT CAST(NULL AS VARCHAR2(2328 CHAR)) AS COL1",
+   "expected": "SELECT CAST(NULL AS VARCHAR(2328)) AS COL1",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT CAST(NULL AS VARCHAR2(2328 BYTE)) AS COL1",
+   "expected": "SELECT CAST(NULL AS VARCHAR2(2328 BYTE)) AS COL1",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "SELECT CAST(NULL AS VARCHAR2(2328 BYTE)) AS COL1",
+   "expected": "SELECT CAST(NULL AS VARCHAR(2328)) AS COL1",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "",
+   "sql": "DATE '2022-01-01'",
+   "expected": "DATE_STR_TO_DATE('2022-01-01')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "mysql",
+   "sql": "DATE '2022-01-01'",
+   "expected": "CAST('2022-01-01' AS DATE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "DATE '2022-01-01'",
+   "expected": "TO_DATE('2022-01-01', 'YYYY-MM-DD')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "DATE '2022-01-01'",
+   "expected": "CAST('2022-01-01' AS DATE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "x::binary_double",
+   "expected": "CAST(x AS DOUBLE PRECISION)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "",
+   "sql": "x::binary_double",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "x::binary_float",
+   "expected": "CAST(x AS FLOAT)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "",
+   "sql": "x::binary_float",
+   "expected": "CAST(x AS FLOAT)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "oracle",
+   "sql": "CAST(x AS sch.udt)",
+   "expected": "CAST(x AS sch.udt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CAST(x AS sch.udt)",
+   "expected": "CAST(x AS sch.udt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "CAST(x AS sch.udt)",
+   "expected": "CAST(x AS sch.udt)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TO_TIMESTAMP('2024-12-12 12:12:12.000000', 'YYYY-MM-DD HH24:MI:SS.FF6')",
+   "expected": "SELECT TO_TIMESTAMP('2024-12-12 12:12:12.000000', 'YYYY-MM-DD HH24:MI:SS.FF6')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "SELECT TO_TIMESTAMP('2024-12-12 12:12:12.000000', 'YYYY-MM-DD HH24:MI:SS.FF6')",
+   "expected": "SELECT STRPTIME('2024-12-12 12:12:12.000000', '%Y-%m-%d %H:%M:%S.%f')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TO_DATE('2024-12-12', 'YYYY-MM-DD')",
+   "expected": "SELECT TO_DATE('2024-12-12', 'YYYY-MM-DD')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "SELECT TO_DATE('2024-12-12', 'YYYY-MM-DD')",
+   "expected": "SELECT CAST(STRPTIME('2024-12-12', '%Y-%m-%d') AS DATE)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t ORDER BY a ASC NULLS LAST, b ASC NULLS FIRST, c DESC NULLS LAST, d DESC NULLS FIRST",
+   "expected": "SELECT * FROM t ORDER BY a ASC, b ASC NULLS FIRST, c DESC NULLS LAST, d DESC",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "NVL(NULL, 1)",
+   "expected": "NVL(NULL, 1)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "",
+   "sql": "NVL(NULL, 1)",
+   "expected": "COALESCE(NULL, 1)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "clickhouse",
+   "sql": "NVL(NULL, 1)",
+   "expected": "COALESCE(NULL, 1)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRIM(BOTH 'h' FROM 'Hello World')",
+   "expected": "TRIM(BOTH 'h' FROM 'Hello World')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "clickhouse",
+   "sql": "TRIM(BOTH 'h' FROM 'Hello World')",
+   "expected": "TRIM(BOTH 'h' FROM 'Hello World')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ ORDERED */* FROM tbl",
+   "expected": "SELECT /*+ ORDERED */ * FROM tbl",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /* test */ /*+ ORDERED */* FROM tbl",
+   "expected": "/* test */ SELECT /*+ ORDERED */ * FROM tbl",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT /*+ ORDERED */*/* test */ FROM tbl",
+   "expected": "SELECT /*+ ORDERED */ * /* test */ FROM tbl",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t FETCH FIRST 10 ROWS ONLY",
+   "expected": "SELECT * FROM t FETCH FIRST 10 ROWS ONLY",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "SELECT * FROM t FETCH FIRST 10 ROWS ONLY",
+   "expected": "SELECT * FROM t ORDER BY (SELECT NULL) OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE OR REPLACE FORCE VIEW foo1.foo2",
+   "expected": "CREATE OR REPLACE FORCE VIEW foo1.foo2",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TO_TIMESTAMP('foo')",
+   "expected": "TO_TIMESTAMP('foo')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TO_TIMESTAMP('05 Dec 2000 10:00 AM', 'DD Mon YYYY HH12:MI AM')",
+   "expected": "SELECT TO_TIMESTAMP('05 Dec 2000 10:00 AM', 'DD Mon YYYY HH12:MI AM')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TO_TIMESTAMP('05 Dec 2000 10:00 PM', 'DD Mon YYYY HH12:MI PM')",
+   "expected": "SELECT TO_TIMESTAMP('05 Dec 2000 10:00 PM', 'DD Mon YYYY HH12:MI PM')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TO_TIMESTAMP('05 Dec 2000 10:00 A.M.', 'DD Mon YYYY HH12:MI A.M.')",
+   "expected": "SELECT TO_TIMESTAMP('05 Dec 2000 10:00 A.M.', 'DD Mon YYYY HH12:MI A.M.')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT TO_TIMESTAMP('05 Dec 2000 10:00 P.M.', 'DD Mon YYYY HH12:MI P.M.')",
+   "expected": "SELECT TO_TIMESTAMP('05 Dec 2000 10:00 P.M.', 'DD Mon YYYY HH12:MI P.M.')",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT CUME_DIST(15, 0.05) WITHIN GROUP (ORDER BY col1, col2) FROM t",
+   "expected": "SELECT CUME_DIST(15, 0.05) WITHIN GROUP (ORDER BY col1, col2) FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT DENSE_RANK(15, 0.05) WITHIN GROUP (ORDER BY col1, col2) FROM t",
+   "expected": "SELECT DENSE_RANK(15, 0.05) WITHIN GROUP (ORDER BY col1, col2) FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT RANK(15, 0.05) WITHIN GROUP (ORDER BY col1, col2) FROM t",
+   "expected": "SELECT RANK(15, 0.05) WITHIN GROUP (ORDER BY col1, col2) FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT PERCENT_RANK(15, 0.05) WITHIN GROUP (ORDER BY col1, col2) FROM t",
+   "expected": "SELECT PERCENT_RANK(15, 0.05) WITHIN GROUP (ORDER BY col1, col2) FROM t",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "L2_DISTANCE(x, y)",
+   "expected": "L2_DISTANCE(x, y)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "BITMAP_OR_AGG(x)",
+   "expected": "BITMAP_OR_AGG(x)",
+   "test": "TestOracle.test_oracle"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" PARTITION(p1)",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" PARTITION(p1)",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" PARTITION(p1) s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" PARTITION(p1) s",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" PARTITION(\"P1\")",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" PARTITION(\"P1\")",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" PARTITION(\"P1\") s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" PARTITION(\"P1\") s",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" SUBPARTITION(p1)",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" SUBPARTITION(p1)",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" SUBPARTITION(p1) s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" SUBPARTITION(p1) s",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" SUBPARTITION(\"P1\")",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" SUBPARTITION(\"P1\")",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" SUBPARTITION(\"P1\") s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" SUBPARTITION(\"P1\") s",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM \"SH\".\"SALES\" PARTITION (\"P1\") s",
+   "expected": "SELECT * FROM \"SH\".\"SALES\" PARTITION(\"P1\") s",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT s.col1 FROM sales PARTITION(p1) s JOIN sales SUBPARTITION(sp1) t ON s.id = t.id",
+   "expected": "SELECT s.col1 FROM sales PARTITION(p1) s JOIN sales SUBPARTITION(sp1) t ON s.id = t.id",
+   "test": "TestOracle.test_partition_selection"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t UNPIVOT(revenue FOR month IN (t.jan, t.feb)) AS u",
+   "expected": "SELECT * FROM t UNPIVOT(revenue FOR month IN (jan, feb)) u",
+   "test": "TestOracle.test_pivot_syntax_restrictions"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM t PIVOT(SUM(t.val) FOR t.cat IN ('a' AS a)) AS p",
+   "expected": "SELECT * FROM t PIVOT(SUM(t.val) FOR cat IN ('a' AS a)) p",
+   "test": "TestOracle.test_pivot_syntax_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT id, PRIOR name AS parent_name, name FROM tree CONNECT BY NOCYCLE PRIOR id = parent_id",
+   "expected": "SELECT id, PRIOR name AS parent_name, name FROM tree CONNECT BY NOCYCLE PRIOR id = parent_id",
+   "test": "TestOracle.test_prior"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "WITH t AS (SELECT 1 AS COL) SELECT col, ROWID FROM t WHERE ROWNUM = 1",
+   "expected": "WITH t AS (SELECT 1 AS COL) SELECT col, ROWID FROM t WHERE ROWNUM = 1",
+   "test": "TestOracle.test_pseudocolumns"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM tbl WITH READ ONLY CONSTRAINT name",
+   "expected": "SELECT * FROM tbl WITH READ ONLY CONSTRAINT name",
+   "test": "TestOracle.test_query_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE VIEW view AS SELECT * FROM tbl WITH READ ONLY CONSTRAINT name",
+   "expected": "CREATE VIEW view AS SELECT * FROM tbl WITH READ ONLY CONSTRAINT name",
+   "test": "TestOracle.test_query_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM tbl WITH READ ONLY",
+   "expected": "SELECT * FROM tbl WITH READ ONLY",
+   "test": "TestOracle.test_query_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE VIEW view AS SELECT * FROM tbl WITH READ ONLY",
+   "expected": "CREATE VIEW view AS SELECT * FROM tbl WITH READ ONLY",
+   "test": "TestOracle.test_query_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM tbl WITH CHECK OPTION CONSTRAINT name",
+   "expected": "SELECT * FROM tbl WITH CHECK OPTION CONSTRAINT name",
+   "test": "TestOracle.test_query_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE VIEW view AS SELECT * FROM tbl WITH CHECK OPTION CONSTRAINT name",
+   "expected": "CREATE VIEW view AS SELECT * FROM tbl WITH CHECK OPTION CONSTRAINT name",
+   "test": "TestOracle.test_query_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT * FROM tbl WITH CHECK OPTION",
+   "expected": "SELECT * FROM tbl WITH CHECK OPTION",
+   "test": "TestOracle.test_query_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "CREATE VIEW view AS SELECT * FROM tbl WITH CHECK OPTION",
+   "expected": "CREATE VIEW view AS SELECT * FROM tbl WITH CHECK OPTION",
+   "test": "TestOracle.test_query_restrictions"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "WITH dup_hiredate(eid, emp_last, mgr_id, reportLevel, hire_date, job_id) AS (SELECT employee_id, last_name, manager_id, 0 AS reportLevel, hire_date, job_id FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.employee_id, e.last_name, e.manager_id, r.reportLevel + 1 AS reportLevel, e.hire_date, e.job_id FROM dup_hiredate r, employees e WHERE r.eid = e.manager_id) SEARCH DEPTH FIRST BY hire_date SET order1 SELECT LPAD(' ', 2 * reportLevel) || emp_last AS emp_name, eid, mgr_id, hire_date, job_id FROM dup_hiredate ORDER BY order1",
+   "expected": "WITH dup_hiredate(eid, emp_last, mgr_id, reportLevel, hire_date, job_id) AS (SELECT employee_id, last_name, manager_id, 0 AS reportLevel, hire_date, job_id FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.employee_id, e.last_name, e.manager_id, r.reportLevel + 1 AS reportLevel, e.hire_date, e.job_id FROM dup_hiredate r, employees e WHERE r.eid = e.manager_id) SEARCH DEPTH FIRST BY hire_date SET order1 SELECT LPAD(' ', 2 * reportLevel) || emp_last AS emp_name, eid, mgr_id, hire_date, job_id FROM dup_hiredate ORDER BY order1",
+   "test": "TestOracle.test_recursive_cte"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "WITH dup_hiredate(eid, emp_last, mgr_id, reportLevel, hire_date, job_id) AS (SELECT employee_id, last_name, manager_id, 0 AS reportLevel, hire_date, job_id FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.employee_id, e.last_name, e.manager_id, r.reportLevel + 1 AS reportLevel, e.hire_date, e.job_id FROM dup_hiredate r, employees e WHERE r.eid = e.manager_id) CYCLE hire_date SET is_cycle TO 'Y' DEFAULT 'N' SELECT LPAD(' ', 2 * reportLevel) || emp_last AS emp_name, eid, mgr_id, hire_date, job_id, is_cycle FROM dup_hiredate",
+   "expected": "WITH dup_hiredate(eid, emp_last, mgr_id, reportLevel, hire_date, job_id) AS (SELECT employee_id, last_name, manager_id, 0 AS reportLevel, hire_date, job_id FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.employee_id, e.last_name, e.manager_id, r.reportLevel + 1 AS reportLevel, e.hire_date, e.job_id FROM dup_hiredate r, employees e WHERE r.eid = e.manager_id) CYCLE hire_date SET is_cycle TO 'Y' DEFAULT 'N' SELECT LPAD(' ', 2 * reportLevel) || emp_last AS emp_name, eid, mgr_id, hire_date, job_id, is_cycle FROM dup_hiredate",
+   "test": "TestOracle.test_recursive_cte"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "WITH dup_hiredate(eid, emp_last, mgr_id, reportLevel, hire_date, job_id) AS (SELECT employee_id, last_name, manager_id, 0 AS reportLevel, hire_date, job_id FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.employee_id, e.last_name, e.manager_id, r.reportLevel + 1 AS reportLevel, e.hire_date, e.job_id FROM dup_hiredate r, employees e WHERE r.eid = e.manager_id) SEARCH DEPTH FIRST BY hire_date SET order1 CYCLE hire_date SET is_cycle TO 'Y' DEFAULT 'N' SELECT LPAD(' ', 2 * reportLevel) || emp_last AS emp_name, eid, mgr_id, hire_date, job_id, is_cycle FROM dup_hiredate ORDER BY order1",
+   "expected": "WITH dup_hiredate(eid, emp_last, mgr_id, reportLevel, hire_date, job_id) AS (SELECT employee_id, last_name, manager_id, 0 AS reportLevel, hire_date, job_id FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.employee_id, e.last_name, e.manager_id, r.reportLevel + 1 AS reportLevel, e.hire_date, e.job_id FROM dup_hiredate r, employees e WHERE r.eid = e.manager_id) SEARCH DEPTH FIRST BY hire_date SET order1 CYCLE hire_date SET is_cycle TO 'Y' DEFAULT 'N' SELECT LPAD(' ', 2 * reportLevel) || emp_last AS emp_name, eid, mgr_id, hire_date, job_id, is_cycle FROM dup_hiredate ORDER BY order1",
+   "test": "TestOracle.test_recursive_cte"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE purchases_reader_role FROM george, maria",
+   "expected": "REVOKE purchases_reader_role FROM george, maria",
+   "command": true,
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE USAGE ON TYPE price FROM finance_role",
+   "expected": "REVOKE USAGE ON TYPE price FROM finance_role",
+   "command": true,
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE USAGE ON DERBY AGGREGATE types.maxPrice FROM sales_role",
+   "expected": "REVOKE USAGE ON DERBY AGGREGATE types.maxPrice FROM sales_role",
+   "command": true,
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE SELECT ON TABLE t FROM maria, harry",
+   "expected": "REVOKE SELECT ON TABLE t FROM maria, harry",
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE SELECT ON TABLE s.v FROM PUBLIC",
+   "expected": "REVOKE SELECT ON TABLE s.v FROM PUBLIC",
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE SELECT ON TABLE t FROM purchases_reader_role",
+   "expected": "REVOKE SELECT ON TABLE t FROM purchases_reader_role",
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE UPDATE, TRIGGER ON TABLE t FROM anita, zhi",
+   "expected": "REVOKE UPDATE, TRIGGER ON TABLE t FROM anita, zhi",
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE EXECUTE ON PROCEDURE p FROM george",
+   "expected": "REVOKE EXECUTE ON PROCEDURE p FROM george",
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "REVOKE USAGE ON SEQUENCE order_id FROM sales_role",
+   "expected": "REVOKE USAGE ON SEQUENCE order_id FROM sales_role",
+   "test": "TestOracle.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(3.14159)",
+   "expected": "TRUNC(3.14159)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(3.14159)",
+   "expected": "TRUNC(3.14159)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(3.14159)",
+   "expected": "TRUNC(3.14159)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "mysql",
+   "sql": "TRUNC(3.14159)",
+   "expected": "TRUNCATE(3.14159, 0)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(3.14159)",
+   "expected": "ROUND(3.14159, 0, 1)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "oracle",
+   "sql": "TRUNCATE(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "oracle",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "oracle",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "mysql",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNCATE(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "ROUND(3.14159, 2, 1)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "bigquery",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "presto",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNCATE(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "clickhouse",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "trunc(3.14159, 2)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "CAST(3.14159 AS BIGINT)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "expected": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "expected": "DATE_TRUNC('DAY', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "expected": "DATE_TRUNC('DAY', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "bigquery",
+   "sql": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "expected": "DATE_TRUNC(CAST(x AS DATE), DAY)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "expected": "DATE_TRUNC('DAY', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "expected": "DATE_TRUNC('DAY', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "expected": "TRUNC(CAST(x AS DATE), 'DAY')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "expected": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "expected": "DATE_TRUNC('WEEK', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "expected": "DATE_TRUNC('WEEK', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "bigquery",
+   "sql": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "expected": "DATE_TRUNC(CAST(x AS DATE), WEEK)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "expected": "DATE_TRUNC('WEEK', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "expected": "DATE_TRUNC('WEEK', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "expected": "TRUNC(CAST(x AS DATE), 'WEEK')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "expected": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "expected": "DATE_TRUNC('MONTH', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "expected": "DATE_TRUNC('MONTH', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "bigquery",
+   "sql": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "expected": "DATE_TRUNC(CAST(x AS DATE), MONTH)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "expected": "DATE_TRUNC('MONTH', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "expected": "DATE_TRUNC('MONTH', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "expected": "TRUNC(CAST(x AS DATE), 'MONTH')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "expected": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "expected": "DATE_TRUNC('QUARTER', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "expected": "DATE_TRUNC('QUARTER', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "bigquery",
+   "sql": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "expected": "DATE_TRUNC(CAST(x AS DATE), QUARTER)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "expected": "DATE_TRUNC('QUARTER', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "expected": "DATE_TRUNC('QUARTER', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "expected": "TRUNC(CAST(x AS DATE), 'QUARTER')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "expected": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "expected": "DATE_TRUNC('YEAR', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "expected": "DATE_TRUNC('YEAR', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "bigquery",
+   "sql": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "expected": "DATE_TRUNC(CAST(x AS DATE), YEAR)",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "expected": "DATE_TRUNC('YEAR', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "expected": "DATE_TRUNC('YEAR', CAST(x AS DATE))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "expected": "TRUNC(CAST(x AS DATE), 'YEAR')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'HOUR')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'HOUR')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'HOUR')",
+   "expected": "DATE_TRUNC('HOUR', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'HOUR')",
+   "expected": "DATE_TRUNC('HOUR', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'HOUR')",
+   "expected": "DATE_TRUNC('HOUR', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'HOUR')",
+   "expected": "DATE_TRUNC('HOUR', CAST(x AS DATETIME2))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'HOUR')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'HOUR')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MINUTE')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'MINUTE')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MINUTE')",
+   "expected": "DATE_TRUNC('MINUTE', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MINUTE')",
+   "expected": "DATE_TRUNC('MINUTE', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MINUTE')",
+   "expected": "DATE_TRUNC('MINUTE', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MINUTE')",
+   "expected": "DATE_TRUNC('MINUTE', CAST(x AS DATETIME2))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MINUTE')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'MINUTE')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'SECOND')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'SECOND')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'SECOND')",
+   "expected": "DATE_TRUNC('SECOND', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'SECOND')",
+   "expected": "DATE_TRUNC('SECOND', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'SECOND')",
+   "expected": "DATE_TRUNC('SECOND', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'SECOND')",
+   "expected": "DATE_TRUNC('SECOND', CAST(x AS DATETIME2))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'SECOND')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'SECOND')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'DAY')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'DAY')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'DAY')",
+   "expected": "DATE_TRUNC('DAY', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'DAY')",
+   "expected": "DATE_TRUNC('DAY', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'DAY')",
+   "expected": "DATE_TRUNC('DAY', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'DAY')",
+   "expected": "DATE_TRUNC('DAY', CAST(x AS DATETIME2))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'DAY')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'DAY')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MONTH')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'MONTH')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MONTH')",
+   "expected": "DATE_TRUNC('MONTH', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MONTH')",
+   "expected": "DATE_TRUNC('MONTH', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MONTH')",
+   "expected": "DATE_TRUNC('MONTH', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MONTH')",
+   "expected": "DATE_TRUNC('MONTH', CAST(x AS DATETIME2))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MONTH')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'MONTH')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'YEAR')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'YEAR')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "snowflake",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'YEAR')",
+   "expected": "DATE_TRUNC('YEAR', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "postgres",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'YEAR')",
+   "expected": "DATE_TRUNC('YEAR', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "duckdb",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'YEAR')",
+   "expected": "DATE_TRUNC('YEAR', CAST(x AS TIMESTAMP))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "tsql",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'YEAR')",
+   "expected": "DATE_TRUNC('YEAR', CAST(x AS DATETIME2))",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "spark",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'YEAR')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'YEAR')",
+   "test": "TestOracle.test_trunc"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(3.14159, 2)",
+   "expected": "TRUNC(3.14159, 2)",
+   "test": "TestOracle.test_trunc_type_inference"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(price, 0)",
+   "expected": "TRUNC(price, 0)",
+   "test": "TestOracle.test_trunc_type_inference"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "TRUNC(foo, bar)",
+   "expected": "TRUNC(foo, bar)",
+   "test": "TestOracle.test_trunc_type_inference"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "UTC_TIME()",
+   "expected": "UTC_TIME()",
+   "test": "TestOracle.test_utc_time"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "UTC_TIME(6)",
+   "expected": "UTC_TIME(6)",
+   "test": "TestOracle.test_utc_time"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "UTC_TIMESTAMP()",
+   "expected": "UTC_TIMESTAMP()",
+   "test": "TestOracle.test_utc_time"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "UTC_TIMESTAMP(6)",
+   "expected": "UTC_TIMESTAMP(6)",
+   "test": "TestOracle.test_utc_time"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "XMLTABLE('x')",
+   "expected": "XMLTABLE('x')",
+   "test": "TestOracle.test_xml_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "XMLTABLE('x' RETURNING SEQUENCE BY REF)",
+   "expected": "XMLTABLE('x' RETURNING SEQUENCE BY REF)",
+   "test": "TestOracle.test_xml_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "XMLTABLE('x' PASSING y)",
+   "expected": "XMLTABLE('x' PASSING y)",
+   "test": "TestOracle.test_xml_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "XMLTABLE('x' PASSING y RETURNING SEQUENCE BY REF)",
+   "expected": "XMLTABLE('x' PASSING y RETURNING SEQUENCE BY REF)",
+   "test": "TestOracle.test_xml_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "XMLTABLE('x' RETURNING SEQUENCE BY REF COLUMNS a VARCHAR2, b FLOAT)",
+   "expected": "XMLTABLE('x' RETURNING SEQUENCE BY REF COLUMNS a VARCHAR2, b FLOAT)",
+   "test": "TestOracle.test_xml_table"
+  },
+  {
+   "kind": "identity",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT x.* FROM example t, XMLTABLE(XMLNAMESPACES(DEFAULT 'http://example.com/default', 'http://example.com/ns1' AS \"ns1\"), '/root/data' PASSING t.xml COLUMNS id NUMBER PATH '@id', value VARCHAR2(100) PATH 'ns1:value/text()') x",
+   "expected": "SELECT x.* FROM example t, XMLTABLE(XMLNAMESPACES(DEFAULT 'http://example.com/default', 'http://example.com/ns1' AS \"ns1\"), '/root/data' PASSING t.xml COLUMNS id NUMBER PATH '@id', value VARCHAR2(100) PATH 'ns1:value/text()') x",
+   "test": "TestOracle.test_xml_table"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT warehouse_name warehouse,\n   warehouse2.\"Water\", warehouse2.\"Rail\"\n   FROM warehouses,\n   XMLTABLE('/Warehouse'\n      PASSING warehouses.warehouse_spec\n      COLUMNS\n         \"Water\" varchar2(6) PATH 'WaterAccess',\n         \"Rail\" varchar2(6) PATH 'RailAccess')\n      warehouse2",
+   "expected": "SELECT\n  warehouse_name AS warehouse,\n  warehouse2.\"Water\",\n  warehouse2.\"Rail\"\nFROM warehouses, XMLTABLE(\n  '/Warehouse'\n  PASSING\n    warehouses.warehouse_spec\n  COLUMNS\n    \"Water\" VARCHAR2(6) PATH 'WaterAccess',\n    \"Rail\" VARCHAR2(6) PATH 'RailAccess'\n) warehouse2",
+   "pretty": true,
+   "test": "TestOracle.test_xml_table"
+  },
+  {
+   "kind": "write",
+   "read": "oracle",
+   "write": "oracle",
+   "sql": "SELECT table_name, column_name, data_default FROM xmltable('ROWSET/ROW'\n    passing dbms_xmlgen.getxmltype('SELECT table_name, column_name, data_default FROM user_tab_columns')\n    columns table_name      VARCHAR2(128)   PATH '*[1]'\n            , column_name   VARCHAR2(128)   PATH '*[2]'\n            , data_default  VARCHAR2(2000)  PATH '*[3]'\n            );",
+   "expected": "SELECT\n  table_name,\n  column_name,\n  data_default\nFROM XMLTABLE(\n  'ROWSET/ROW'\n  PASSING\n    dbms_xmlgen.getxmltype('SELECT table_name, column_name, data_default FROM user_tab_columns')\n  COLUMNS\n    table_name VARCHAR2(128) PATH '*[1]',\n    column_name VARCHAR2(128) PATH '*[2]',\n    data_default VARCHAR2(2000) PATH '*[3]'\n)",
+   "pretty": true,
+   "test": "TestOracle.test_xml_table"
+  }
+ ]
+}

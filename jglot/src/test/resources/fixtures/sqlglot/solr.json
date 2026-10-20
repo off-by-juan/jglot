@@ -1,0 +1,30 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_solr.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "solr",
+   "write": "solr",
+   "sql": "SELECT `default`.column FROM t",
+   "expected": "SELECT `default`.column FROM t",
+   "test": "TestSolr.test_solr"
+  },
+  {
+   "kind": "identity",
+   "read": "solr",
+   "write": "solr",
+   "sql": "SELECT column FROM t WHERE column = 'val'",
+   "expected": "SELECT column FROM t WHERE column = 'val'",
+   "test": "TestSolr.test_solr"
+  },
+  {
+   "kind": "identity",
+   "read": "solr",
+   "write": "solr",
+   "sql": "a || b",
+   "expected": "a OR b",
+   "test": "TestSolr.test_solr"
+  }
+ ]
+}

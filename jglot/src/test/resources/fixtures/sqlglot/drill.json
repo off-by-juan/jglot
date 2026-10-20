@@ -1,0 +1,142 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_drill.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "drill",
+   "write": "drill",
+   "sql": "ANALYZE TABLE tbl COMPUTE STATISTICS",
+   "expected": "ANALYZE TABLE tbl COMPUTE STATISTICS",
+   "test": "TestDrill.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "drill",
+   "write": "drill",
+   "sql": "ANALYZE TABLE tbl COMPUTE STATISTICS SAMPLE 5 PERCENT",
+   "expected": "ANALYZE TABLE tbl COMPUTE STATISTICS SAMPLE 5 PERCENT",
+   "test": "TestDrill.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "drill",
+   "write": "drill",
+   "sql": "SELECT * FROM table(dfs.`test_data.xlsx`(type => 'excel', sheetName => 'secondSheet'))",
+   "expected": "SELECT * FROM table(dfs.`test_data.xlsx`(type => 'excel', sheetName => 'secondSheet'))",
+   "test": "TestDrill.test_drill"
+  },
+  {
+   "kind": "identity",
+   "read": "drill",
+   "write": "drill",
+   "sql": "SELECT * FROM (SELECT * FROM t) PIVOT(avg(c1) AS ac1 FOR c2 IN ('V' AS v))",
+   "expected": "SELECT * FROM (SELECT * FROM t) PIVOT(avg(c1) AS ac1 FOR c2 IN ('V' AS v))",
+   "test": "TestDrill.test_drill"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "drill",
+   "sql": "SELECT '2021-01-01' + INTERVAL 1 MONTH",
+   "expected": "SELECT '2021-01-01' + INTERVAL '1' MONTH",
+   "test": "TestDrill.test_drill"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "mysql",
+   "sql": "SELECT '2021-01-01' + INTERVAL 1 MONTH",
+   "expected": "SELECT '2021-01-01' + INTERVAL '1' MONTH",
+   "test": "TestDrill.test_drill"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "drill",
+   "sql": "SELECT ILIKE(x, '%y')",
+   "expected": "SELECT ILIKE(x, '%y')",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "duckdb",
+   "sql": "SELECT ILIKE(x, '%y')",
+   "expected": "SELECT x ILIKE '%y'",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "postgres",
+   "sql": "SELECT ILIKE(x, '%y')",
+   "expected": "SELECT x ILIKE '%y'",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "drill",
+   "sql": "SELECT NOT ILIKE(x, '%y')",
+   "expected": "SELECT NOT ILIKE(x, '%y')",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "postgres",
+   "sql": "SELECT NOT ILIKE(x, '%y')",
+   "expected": "SELECT NOT x ILIKE '%y'",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "drill",
+   "sql": "SELECT ILIKE(x, '%y', '#')",
+   "expected": "SELECT ILIKE(x, '%y', '#')",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "write",
+   "read": "drill",
+   "write": "postgres",
+   "sql": "SELECT ILIKE(x, '%y', '#')",
+   "expected": "SELECT x ILIKE '%y' ESCAPE '#'",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "drill",
+   "sql": "x NOT ILIKE '%y' ESCAPE '#'",
+   "expected": "NOT ILIKE(x, '%y', '#')",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "drill",
+   "sql": "x ILIKE ANY ('a', 'b')",
+   "expected": "ILIKE(x, 'a') OR ILIKE(x, 'b')",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "drill",
+   "sql": "x ILIKE ANY ('a', 'b') ESCAPE '#'",
+   "expected": "ILIKE(x, 'a', '#') OR ILIKE(x, 'b', '#')",
+   "test": "TestDrill.test_ilike"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "drill",
+   "sql": "x LIKE ANY ('a', 'b')",
+   "expected": "x LIKE 'a' OR x LIKE 'b'",
+   "test": "TestDrill.test_ilike"
+  }
+ ]
+}

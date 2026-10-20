@@ -1,0 +1,5030 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_exasol.py",
+ "cases": [
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT department, EVERY(age >= 30) AS EVERY FROM employee_table GROUP BY department",
+   "expected": "SELECT department, EVERY(age >= 30) AS EVERY FROM employee_table GROUP BY department",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT department, EVERY(age >= 30) AS EVERY FROM employee_table GROUP BY department",
+   "expected": "SELECT department, EVERY(age >= 30) AS EVERY FROM employee_table GROUP BY department",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT department, EVERY(age >= 30) AS EVERY FROM employee_table GROUP BY department",
+   "expected": "SELECT department, ALL (age >= 30) AS EVERY FROM employee_table GROUP BY department",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT VAR_POP(current_salary)",
+   "expected": "SELECT VAR_POP(current_salary)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "exasol",
+   "sql": "SELECT VAR_POP(current_salary)",
+   "expected": "SELECT VAR_POP(current_salary)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT VAR_POP(current_salary)",
+   "expected": "SELECT VAR_POP(current_salary)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT VAR_POP(current_salary)",
+   "expected": "SELECT VAR_POP(current_salary)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT VAR_POP(current_salary)",
+   "expected": "SELECT VAR_POP(current_salary)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT VAR_POP(current_salary)",
+   "expected": "SELECT VAR_POP(current_salary)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT APPROX_COUNT_DISTINCT(y)",
+   "expected": "SELECT APPROXIMATE_COUNT_DISTINCT(y)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT APPROXIMATE_COUNT_DISTINCT(y)",
+   "expected": "SELECT APPROXIMATE_COUNT_DISTINCT(y)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT APPROXIMATE_COUNT_DISTINCT(y)",
+   "expected": "SELECT APPROXIMATE COUNT(DISTINCT y)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT APPROXIMATE_COUNT_DISTINCT(y)",
+   "expected": "SELECT APPROX_COUNT_DISTINCT(y)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT APPROXIMATE_COUNT_DISTINCT(y)",
+   "expected": "SELECT APPROXIMATE_COUNT_DISTINCT(y)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT a, b, RANK(b) OVER (ORDER BY b) FROM (VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1)) AS tab(a, b)",
+   "expected": "SELECT a, b, RANK() OVER (ORDER BY b) FROM (VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1)) AS tab(a, b)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT a, b, RANK(b) OVER (ORDER BY b) FROM (VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1)) AS tab(a, b)",
+   "expected": "SELECT a, b, RANK(b) OVER (ORDER BY b NULLS LAST) FROM VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1) AS tab(a, b)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT a, b, RANK(b) OVER (ORDER BY b) FROM (VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1)) AS tab(a, b)",
+   "expected": "SELECT a, b, RANK(b) OVER (ORDER BY b NULLS LAST) FROM VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1) AS tab(a, b)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT a, b, DENSE_RANK(b) OVER (ORDER BY b) FROM (VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1)) AS tab(a, b)",
+   "expected": "SELECT a, b, DENSE_RANK() OVER (ORDER BY b) FROM (VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1)) AS tab(a, b)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT a, b, DENSE_RANK(b) OVER (ORDER BY b) FROM (VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1)) AS tab(a, b)",
+   "expected": "SELECT a, b, DENSE_RANK(b) OVER (ORDER BY b NULLS LAST) FROM VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1) AS tab(a, b)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT a, b, DENSE_RANK(b) OVER (ORDER BY b) FROM (VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1)) AS tab(a, b)",
+   "expected": "SELECT a, b, DENSE_RANK(b) OVER (ORDER BY b NULLS LAST) FROM VALUES ('A1', 2), ('A1', 1), ('A2', 3), ('A1', 1) AS tab(a, b)",
+   "test": "TestExasol.test_aggregateFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_AND(x, 1)",
+   "expected": "SELECT BIT_AND(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "exasol",
+   "sql": "SELECT x & 1",
+   "expected": "SELECT BIT_AND(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT BITWISE_AND(x, 1)",
+   "expected": "SELECT BIT_AND(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT x & 1",
+   "expected": "SELECT BIT_AND(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_AND(x, 1)",
+   "expected": "SELECT BIT_AND(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT BIT_AND(x, 1)",
+   "expected": "SELECT x & 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "SELECT BIT_AND(x, 1)",
+   "expected": "SELECT x & 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT BIT_AND(x, 1)",
+   "expected": "SELECT BITWISE_AND(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT BIT_AND(x, 1)",
+   "expected": "SELECT x & 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_OR(x, 1)",
+   "expected": "SELECT BIT_OR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "exasol",
+   "sql": "SELECT x | 1",
+   "expected": "SELECT BIT_OR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT BITWISE_OR(x, 1)",
+   "expected": "SELECT BIT_OR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT x | 1",
+   "expected": "SELECT BIT_OR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_OR(x, 1)",
+   "expected": "SELECT BIT_OR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT BIT_OR(x, 1)",
+   "expected": "SELECT x | 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "SELECT BIT_OR(x, 1)",
+   "expected": "SELECT x | 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT BIT_OR(x, 1)",
+   "expected": "SELECT BITWISE_OR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT BIT_OR(x, 1)",
+   "expected": "SELECT x | 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "exasol",
+   "sql": "SELECT x ^ 1",
+   "expected": "SELECT BIT_XOR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_XOR(x, 1)",
+   "expected": "SELECT BIT_XOR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "SELECT x ^ 1",
+   "expected": "SELECT BIT_XOR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT BITWISE_XOR(x, 1)",
+   "expected": "SELECT BIT_XOR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "exasol",
+   "sql": "SELECT x # 1",
+   "expected": "SELECT BIT_XOR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "",
+   "sql": "SELECT BIT_XOR(x, 1)",
+   "expected": "SELECT x ^ 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_XOR(x, 1)",
+   "expected": "SELECT BIT_XOR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT BIT_XOR(x, 1)",
+   "expected": "SELECT x ^ 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT BIT_XOR(x, 1)",
+   "expected": "SELECT XOR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT BIT_XOR(x, 1)",
+   "expected": "SELECT BITWISE_XOR(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "postgres",
+   "sql": "SELECT BIT_XOR(x, 1)",
+   "expected": "SELECT x # 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_NOT(x)",
+   "expected": "SELECT BIT_NOT(x)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "exasol",
+   "sql": "SELECT ~x",
+   "expected": "SELECT BIT_NOT(x)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT BITWISE_NOT(x)",
+   "expected": "SELECT BIT_NOT(x)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT ~x",
+   "expected": "SELECT BIT_NOT(x)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_NOT(x)",
+   "expected": "SELECT BIT_NOT(x)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT BIT_NOT(x)",
+   "expected": "SELECT ~x",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "SELECT BIT_NOT(x)",
+   "expected": "SELECT ~x",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT BIT_NOT(x)",
+   "expected": "SELECT BITWISE_NOT(x)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT BIT_NOT(x)",
+   "expected": "SELECT ~x",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_LSHIFT(x, 1)",
+   "expected": "SELECT BIT_LSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT SHIFTLEFT(x, 1)",
+   "expected": "SELECT BIT_LSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "exasol",
+   "sql": "SELECT x << 1",
+   "expected": "SELECT BIT_LSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "exasol",
+   "sql": "SELECT x << 1",
+   "expected": "SELECT BIT_LSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_LSHIFT(x, 1)",
+   "expected": "SELECT BIT_LSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT BIT_LSHIFT(x, 1)",
+   "expected": "SELECT x << 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT BIT_LSHIFT(x, 1)",
+   "expected": "SELECT BITWISE_LEFT_SHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "SELECT BIT_LSHIFT(x, 1)",
+   "expected": "SELECT x << 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT BIT_LSHIFT(x, 1)",
+   "expected": "SELECT SHIFTLEFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_RSHIFT(x, 1)",
+   "expected": "SELECT BIT_RSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT SHIFTRIGHT(x, 1)",
+   "expected": "SELECT BIT_RSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "exasol",
+   "sql": "SELECT x >> 1",
+   "expected": "SELECT BIT_RSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "exasol",
+   "sql": "SELECT x >> 1",
+   "expected": "SELECT BIT_RSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT BIT_RSHIFT(x, 1)",
+   "expected": "SELECT BIT_RSHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT BIT_RSHIFT(x, 1)",
+   "expected": "SELECT x >> 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT BIT_RSHIFT(x, 1)",
+   "expected": "SELECT BITWISE_RIGHT_SHIFT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "SELECT BIT_RSHIFT(x, 1)",
+   "expected": "SELECT x >> 1",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT BIT_RSHIFT(x, 1)",
+   "expected": "SELECT SHIFTRIGHT(x, 1)",
+   "test": "TestExasol.test_bits"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_DATE('31-12-1999', 'dd-mm-yyyy') AS TO_DATE",
+   "expected": "SELECT TO_DATE('31-12-1999', 'DD-MM-YYYY') AS TO_DATE",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_DATE('31-12-1999', 'dd-mm-YY') AS TO_DATE",
+   "expected": "SELECT TO_DATE('31-12-1999', 'DD-MM-YY') AS TO_DATE",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_DATE('31-DECEMBER-1999', 'DD-MONTH-YYYY') AS TO_DATE",
+   "expected": "SELECT TO_DATE('31-DECEMBER-1999', 'DD-MONTH-YYYY') AS TO_DATE",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_DATE('31-DEC-1999', 'DD-MON-YYYY') AS TO_DATE",
+   "expected": "SELECT TO_DATE('31-DEC-1999', 'DD-MON-YYYY') AS TO_DATE",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT WEEKOFYEAR('2024-05-22')",
+   "expected": "SELECT WEEK('2024-05-22')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'HH12') AS hour_12",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'HH12') AS hour_12",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'HH24') AS hour_24",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'HH24') AS hour_24",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'ID') AS iso_weekday",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'ID') AS iso_weekday",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'IW') AS iso_week_number",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'IW') AS iso_week_number",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'uW') AS week_number_uW",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'uW') AS week_number_uW",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'VW') AS week_number_VW",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'VW') AS week_number_VW",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'IYYY') AS iso_year",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'IYYY') AS iso_year",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'MI') AS minutes",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'MI') AS minutes",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'SS') AS seconds",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'SS') AS seconds",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DAY') AS day_full",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DAY') AS day_full",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DY') AS day_abbr",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DY') AS day_abbr",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DY')",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DY')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DY')",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DY')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "postgres",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DY')",
+   "expected": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'TMDy')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT TO_CHAR(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'DY')",
+   "expected": "SELECT DATE_FORMAT(CAST('2024-07-08 13:45:00' AS TIMESTAMP), 'EEE')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TO_DATE(x, 'YYYY-MM-DD')",
+   "expected": "TO_DATE(x, 'YYYY-MM-DD')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "TO_DATE(x, 'YYYY-MM-DD')",
+   "expected": "CAST(x AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "TO_DATE(x, 'YYYY-MM-DD')",
+   "expected": "TO_DATE(x)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "TO_DATE(x, 'YYYY-MM-DD')",
+   "expected": "CAST(CAST(x AS TIMESTAMP) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "TO_DATE(x, 'YYYY-MM-DD')",
+   "expected": "TO_DATE(x)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "TO_DATE(x, 'YYYY-MM-DD')",
+   "expected": "TO_DATE(x, 'yyyy-mm-DD')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "TO_DATE(x, 'YYYY-MM-DD')",
+   "expected": "TO_DATE(x)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TO_DATE(x, 'YYYY')",
+   "expected": "TO_DATE(x, 'YYYY')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "TO_DATE(x, 'YYYY')",
+   "expected": "CAST(STRPTIME(x, '%Y') AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "TO_DATE(x, 'YYYY')",
+   "expected": "TO_DATE(x, 'yyyy')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "TO_DATE(x, 'YYYY')",
+   "expected": "CAST(DATE_PARSE(x, '%Y') AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "TO_DATE(x, 'YYYY')",
+   "expected": "TO_DATE(x, 'yyyy')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "TO_DATE(x, 'YYYY')",
+   "expected": "TO_DATE(x, 'yyyy')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "TO_DATE(x, 'YYYY')",
+   "expected": "TO_DATE(x, 'yyyy')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT CONVERT_TZ(CAST('2012-03-25 02:30:00' AS TIMESTAMP), 'Europe/Berlin', 'UTC', 'INVALID REJECT AMBIGUOUS REJECT') AS CONVERT_TZ",
+   "expected": "SELECT CONVERT_TZ(CAST('2012-03-25 02:30:00' AS TIMESTAMP), 'Europe/Berlin', 'UTC', 'INVALID REJECT AMBIGUOUS REJECT') AS CONVERT_TZ",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT CONVERT_TIMEZONE('Europe/Berlin', 'America/New_York', '2012-05-10 12:00:00')",
+   "expected": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "mysql",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CONVERT_TIMEZONE('Europe/Berlin', 'America/New_York', '2012-05-10 12:00:00')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CONVERT_TIMEZONE('Europe/Berlin', 'America/New_York', '2012-05-10 12:00:00')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CONVERT_TIMEZONE('Europe/Berlin', 'America/New_York', '2012-05-10 12:00:00')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CONVERT_TIMEZONE('Europe/Berlin', 'America/New_York', '2012-05-10 12:00:00')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT CONVERT_TZ('2012-05-10 12:00:00', 'Europe/Berlin', 'America/New_York')",
+   "expected": "SELECT CAST('2012-05-10 12:00:00' AS TIMESTAMP) AT TIME ZONE 'Europe/Berlin' AT TIME ZONE 'America/New_York'",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TIME_TO_STR(b, '%Y-%m-%d %H:%M:%S')",
+   "expected": "TO_CHAR(b, 'YYYY-MM-DD HH:MI:SS')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TIME_TO_STR(CAST(STR_TO_TIME(date, '%Y%m%d') AS DATE), '%a') AS day_of_week",
+   "expected": "SELECT TO_CHAR(CAST(TO_DATE(date, 'YYYYMMDD') AS DATE), 'DY') AS day_of_week",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT CAST(CAST(CURRENT_TIMESTAMP() AS TIMESTAMP) AT TIME ZONE 'CET' AS DATE) - 1",
+   "expected": "SELECT CAST(CONVERT_TZ(CAST(CURRENT_TIMESTAMP() AS TIMESTAMP), 'UTC', 'CET') AS DATE) - 1",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'MM') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('MM', DATE '2006-12-31') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'MM') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('MM', CAST('2006-12-31' AS DATE)) AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'MM') AS TRUNC",
+   "expected": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'MM') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('MM', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MM', TIMESTAMP '2006-12-31 23:59:59') AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('MM', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MM', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('MM', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MM', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('MM', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MM', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('MM', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MM', CURRENT_TIMESTAMP) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('MM', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MM', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'QUARTER') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('QUARTER', DATE '2006-12-31') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'QUARTER') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('QUARTER', CAST('2006-12-31' AS DATE)) AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'QUARTER') AS TRUNC",
+   "expected": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'QUARTER') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('QUARTER', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('QUARTER', TIMESTAMP '2006-12-31 23:59:59') AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('QUARTER', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('QUARTER', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('QUARTER', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('QUARTER', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('QUARTER', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('QUARTER', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('QUARTER', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('QUARTER', CURRENT_TIMESTAMP) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('QUARTER', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('QUARTER', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'WEEK') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('WEEK', DATE '2006-12-31') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'WEEK') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('WEEK', CAST('2006-12-31' AS DATE)) AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'WEEK') AS TRUNC",
+   "expected": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'WEEK') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('WEEK', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('WEEK', TIMESTAMP '2006-12-31 23:59:59') AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('WEEK', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('WEEK', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('WEEK', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('WEEK', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('WEEK', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('WEEK', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('WEEK', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('WEEK', CURRENT_TIMESTAMP) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('WEEK', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('WEEK', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'MINUTE') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('MINUTE', DATE '2006-12-31') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'MINUTE') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('MINUTE', CAST('2006-12-31' AS DATE)) AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'MINUTE') AS TRUNC",
+   "expected": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'MINUTE') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('MINUTE', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MINUTE', TIMESTAMP '2006-12-31 23:59:59') AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('MINUTE', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MINUTE', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('MINUTE', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MINUTE', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('MINUTE', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MINUTE', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('MINUTE', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MINUTE', CURRENT_TIMESTAMP) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('MINUTE', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('MINUTE', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'YEAR') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('YEAR', DATE '2006-12-31') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'YEAR') AS TRUNC",
+   "expected": "SELECT DATE_TRUNC('YEAR', CAST('2006-12-31' AS DATE)) AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'YEAR') AS TRUNC",
+   "expected": "SELECT TRUNC(CAST('2006-12-31' AS DATE), 'YEAR') AS TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('YEAR', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('YEAR', TIMESTAMP '2006-12-31 23:59:59') AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('YEAR', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('YEAR', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('YEAR', TIMESTAMP '2006-12-31T23:59:59') DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('YEAR', CAST('2006-12-31T23:59:59' AS TIMESTAMP)) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DATE_TRUNC('YEAR', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('YEAR', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DATE_TRUNC('YEAR', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('YEAR', CURRENT_TIMESTAMP) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT DATE_TRUNC('YEAR', CURRENT_TIMESTAMP) DATE_TRUNC",
+   "expected": "SELECT DATE_TRUNC('YEAR', CURRENT_TIMESTAMP()) AS DATE_TRUNC",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ADD_DAYS(DATE '2000-02-28', 1)",
+   "expected": "SELECT ADD_DAYS(CAST('2000-02-28' AS DATE), 1)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT ADD_DAYS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD(CAST('2000-02-28' AS DATE), INTERVAL 1 DAY)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT ADD_DAYS(DATE '2000-02-28', 1)",
+   "expected": "SELECT CAST('2000-02-28' AS DATE) + INTERVAL 1 DAY",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT ADD_DAYS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD('DAY', 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT ADD_DAYS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(DAY, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT ADD_DAYS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(DAY, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT ADD_DAYS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(DAY, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 DAY)",
+   "expected": "SELECT ADD_DAYS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 DAY)",
+   "expected": "SELECT ADD_DAYS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 DAY)",
+   "expected": "SELECT ADD_DAYS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 DAY)",
+   "expected": "SELECT ADD_DAYS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 DAY)",
+   "expected": "SELECT ADD_DAYS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 DAY)",
+   "expected": "SELECT ADD_DAYS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE), MONTH)",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY('2008-11-25')",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY_OF_MONTH(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DAYS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DAYS_BETWEEN(CAST('2000-02-28 00:00:00' AS TIMESTAMP), CURRENT_TIMESTAMP())",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT DAYS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF(CAST('2000-02-28 00:00:00' AS DATETIME), CURRENT_TIMESTAMP(), DAY)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT DAYS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('DAY', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT DAYS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('DAY', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT DAYS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(DAY, GETDATE(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT DAYS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(DAY, CURRENT_TIMESTAMP(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT DAYS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(DAY, GETDATE(), CAST('2000-02-28 00:00:00' AS DATETIME2))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ADD_YEARS(DATE '2000-02-28', 1)",
+   "expected": "SELECT ADD_YEARS(CAST('2000-02-28' AS DATE), 1)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT ADD_YEARS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD(CAST('2000-02-28' AS DATE), INTERVAL 1 YEAR)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT ADD_YEARS(DATE '2000-02-28', 1)",
+   "expected": "SELECT CAST('2000-02-28' AS DATE) + INTERVAL 1 YEAR",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT ADD_YEARS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD('YEAR', 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT ADD_YEARS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(YEAR, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT ADD_YEARS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(YEAR, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT ADD_YEARS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(YEAR, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 YEAR)",
+   "expected": "SELECT ADD_YEARS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 YEAR)",
+   "expected": "SELECT ADD_YEARS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 YEAR)",
+   "expected": "SELECT ADD_YEARS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 YEAR)",
+   "expected": "SELECT ADD_YEARS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 YEAR)",
+   "expected": "SELECT ADD_YEARS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 YEAR)",
+   "expected": "SELECT ADD_YEARS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE), MONTH)",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY('2008-11-25')",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY_OF_MONTH(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YEARS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT YEARS_BETWEEN(CAST('2000-02-28 00:00:00' AS TIMESTAMP), CURRENT_TIMESTAMP())",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT YEARS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF(CAST('2000-02-28 00:00:00' AS DATETIME), CURRENT_TIMESTAMP(), YEAR)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT YEARS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('YEAR', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT YEARS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('YEAR', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT YEARS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(YEAR, GETDATE(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT YEARS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(YEAR, CURRENT_TIMESTAMP(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT YEARS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(YEAR, GETDATE(), CAST('2000-02-28 00:00:00' AS DATETIME2))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ADD_MONTHS(DATE '2000-02-28', 1)",
+   "expected": "SELECT ADD_MONTHS(CAST('2000-02-28' AS DATE), 1)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT ADD_MONTHS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD(CAST('2000-02-28' AS DATE), INTERVAL 1 MONTH)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT ADD_MONTHS(DATE '2000-02-28', 1)",
+   "expected": "SELECT CAST('2000-02-28' AS DATE) + INTERVAL 1 MONTH",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT ADD_MONTHS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD('MONTH', 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT ADD_MONTHS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(MONTH, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT ADD_MONTHS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(MONTH, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT ADD_MONTHS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(MONTH, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MONTH)",
+   "expected": "SELECT ADD_MONTHS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MONTH)",
+   "expected": "SELECT ADD_MONTHS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MONTH)",
+   "expected": "SELECT ADD_MONTHS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MONTH)",
+   "expected": "SELECT ADD_MONTHS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MONTH)",
+   "expected": "SELECT ADD_MONTHS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MONTH)",
+   "expected": "SELECT ADD_MONTHS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE), MONTH)",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY('2008-11-25')",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY_OF_MONTH(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT MONTHS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT MONTHS_BETWEEN(CAST('2000-02-28 00:00:00' AS TIMESTAMP), CURRENT_TIMESTAMP())",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT MONTHS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF(CAST('2000-02-28 00:00:00' AS DATETIME), CURRENT_TIMESTAMP(), MONTH)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT MONTHS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('MONTH', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT MONTHS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('MONTH', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT MONTHS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(MONTH, GETDATE(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT MONTHS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(MONTH, CURRENT_TIMESTAMP(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT MONTHS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(MONTH, GETDATE(), CAST('2000-02-28 00:00:00' AS DATETIME2))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ADD_WEEKS(DATE '2000-02-28', 1)",
+   "expected": "SELECT ADD_WEEKS(CAST('2000-02-28' AS DATE), 1)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT ADD_WEEKS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD(CAST('2000-02-28' AS DATE), INTERVAL 1 WEEK)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT ADD_WEEKS(DATE '2000-02-28', 1)",
+   "expected": "SELECT CAST('2000-02-28' AS DATE) + INTERVAL 1 WEEK",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT ADD_WEEKS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD('WEEK', 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT ADD_WEEKS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(WEEK, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT ADD_WEEKS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(WEEK, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT ADD_WEEKS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(WEEK, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 WEEK)",
+   "expected": "SELECT ADD_WEEKS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 WEEK)",
+   "expected": "SELECT ADD_WEEKS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 WEEK)",
+   "expected": "SELECT ADD_WEEKS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 WEEK)",
+   "expected": "SELECT ADD_WEEKS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 WEEK)",
+   "expected": "SELECT ADD_WEEKS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 WEEK)",
+   "expected": "SELECT ADD_WEEKS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE), MONTH)",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY('2008-11-25')",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY_OF_MONTH(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT WEEKS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT WEEKS_BETWEEN(CAST('2000-02-28 00:00:00' AS TIMESTAMP), CURRENT_TIMESTAMP())",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT WEEKS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF(CAST('2000-02-28 00:00:00' AS DATETIME), CURRENT_TIMESTAMP(), WEEK)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT WEEKS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('WEEK', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT WEEKS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('WEEK', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT WEEKS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(WEEK, GETDATE(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT WEEKS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(WEEK, CURRENT_TIMESTAMP(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT WEEKS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(WEEK, GETDATE(), CAST('2000-02-28 00:00:00' AS DATETIME2))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ADD_MINUTES(DATE '2000-02-28', 1)",
+   "expected": "SELECT ADD_MINUTES(CAST('2000-02-28' AS DATE), 1)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT ADD_MINUTES(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD(CAST('2000-02-28' AS DATE), INTERVAL 1 MINUTE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT ADD_MINUTES(DATE '2000-02-28', 1)",
+   "expected": "SELECT CAST('2000-02-28' AS DATE) + INTERVAL 1 MINUTE",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT ADD_MINUTES(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD('MINUTE', 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT ADD_MINUTES(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(MINUTE, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT ADD_MINUTES(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(MINUTE, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT ADD_MINUTES(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(MINUTE, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MINUTE)",
+   "expected": "SELECT ADD_MINUTES('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MINUTE)",
+   "expected": "SELECT ADD_MINUTES('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MINUTE)",
+   "expected": "SELECT ADD_MINUTES('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MINUTE)",
+   "expected": "SELECT ADD_MINUTES('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MINUTE)",
+   "expected": "SELECT ADD_MINUTES('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 MINUTE)",
+   "expected": "SELECT ADD_MINUTES('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE), MONTH)",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY('2008-11-25')",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY_OF_MONTH(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT MINUTES_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT MINUTES_BETWEEN(CAST('2000-02-28 00:00:00' AS TIMESTAMP), CURRENT_TIMESTAMP())",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT MINUTES_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF(CAST('2000-02-28 00:00:00' AS DATETIME), CURRENT_TIMESTAMP(), MINUTE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT MINUTES_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('MINUTE', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT MINUTES_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('MINUTE', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT MINUTES_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(MINUTE, GETDATE(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT MINUTES_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(MINUTE, CURRENT_TIMESTAMP(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT MINUTES_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(MINUTE, GETDATE(), CAST('2000-02-28 00:00:00' AS DATETIME2))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ADD_SECONDS(DATE '2000-02-28', 1)",
+   "expected": "SELECT ADD_SECONDS(CAST('2000-02-28' AS DATE), 1)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT ADD_SECONDS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD(CAST('2000-02-28' AS DATE), INTERVAL 1 SECOND)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT ADD_SECONDS(DATE '2000-02-28', 1)",
+   "expected": "SELECT CAST('2000-02-28' AS DATE) + INTERVAL 1 SECOND",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT ADD_SECONDS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD('SECOND', 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT ADD_SECONDS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(SECOND, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT ADD_SECONDS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(SECOND, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT ADD_SECONDS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(SECOND, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 SECOND)",
+   "expected": "SELECT ADD_SECONDS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 SECOND)",
+   "expected": "SELECT ADD_SECONDS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 SECOND)",
+   "expected": "SELECT ADD_SECONDS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 SECOND)",
+   "expected": "SELECT ADD_SECONDS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 SECOND)",
+   "expected": "SELECT ADD_SECONDS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 SECOND)",
+   "expected": "SELECT ADD_SECONDS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE), MONTH)",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY('2008-11-25')",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY_OF_MONTH(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT SECONDS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT SECONDS_BETWEEN(CAST('2000-02-28 00:00:00' AS TIMESTAMP), CURRENT_TIMESTAMP())",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT SECONDS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF(CAST('2000-02-28 00:00:00' AS DATETIME), CURRENT_TIMESTAMP(), SECOND)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT SECONDS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('SECOND', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT SECONDS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('SECOND', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT SECONDS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(SECOND, GETDATE(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT SECONDS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(SECOND, CURRENT_TIMESTAMP(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT SECONDS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(SECOND, GETDATE(), CAST('2000-02-28 00:00:00' AS DATETIME2))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ADD_HOURS(DATE '2000-02-28', 1)",
+   "expected": "SELECT ADD_HOURS(CAST('2000-02-28' AS DATE), 1)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT ADD_HOURS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD(CAST('2000-02-28' AS DATE), INTERVAL 1 HOUR)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT ADD_HOURS(DATE '2000-02-28', 1)",
+   "expected": "SELECT CAST('2000-02-28' AS DATE) + INTERVAL 1 HOUR",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT ADD_HOURS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATE_ADD('HOUR', 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT ADD_HOURS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(HOUR, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT ADD_HOURS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(HOUR, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT ADD_HOURS(DATE '2000-02-28', 1)",
+   "expected": "SELECT DATEADD(HOUR, 1, CAST('2000-02-28' AS DATE))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "sqlite",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 HOUR)",
+   "expected": "SELECT ADD_HOURS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 HOUR)",
+   "expected": "SELECT ADD_HOURS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 HOUR)",
+   "expected": "SELECT ADD_HOURS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 HOUR)",
+   "expected": "SELECT ADD_HOURS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 HOUR)",
+   "expected": "SELECT ADD_HOURS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "SELECT DATE_SUB('2000-02-28', INTERVAL 1 HOUR)",
+   "expected": "SELECT ADD_HOURS('2000-02-28', -'1')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE), MONTH)",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY('2008-11-25')",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT LAST_DAY_OF_MONTH(CAST('2008-11-25' AS DATE))",
+   "expected": "SELECT CAST(ADD_DAYS(ADD_MONTHS(DATE_TRUNC('MONTH', DATE '2008-11-25'), 1), -1) AS DATE)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT HOURS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT HOURS_BETWEEN(CAST('2000-02-28 00:00:00' AS TIMESTAMP), CURRENT_TIMESTAMP())",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT HOURS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF(CAST('2000-02-28 00:00:00' AS DATETIME), CURRENT_TIMESTAMP(), HOUR)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT HOURS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('HOUR', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT HOURS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATE_DIFF('HOUR', CURRENT_TIMESTAMP, CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT HOURS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(HOUR, GETDATE(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT HOURS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(HOUR, CURRENT_TIMESTAMP(), CAST('2000-02-28 00:00:00' AS TIMESTAMP))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "SELECT HOURS_BETWEEN(TIMESTAMP '2000-02-28 00:00:00', CURRENT_TIMESTAMP)",
+   "expected": "SELECT DATEDIFF(HOUR, GETDATE(), CAST('2000-02-28 00:00:00' AS DATETIME2))",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT quarter('2016-08-31')",
+   "expected": "SELECT CEIL(MONTH(TO_DATE('2016-08-31'))/3)",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT quarter('2016-08-31')",
+   "expected": "SELECT QUARTER('2016-08-31')",
+   "test": "TestExasol.test_datetime_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT 1 AS [x]",
+   "expected": "SELECT 1 AS \"x\"",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SYSTIMESTAMP",
+   "expected": "SYSTIMESTAMP()",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT SYSTIMESTAMP()",
+   "expected": "SELECT SYSTIMESTAMP()",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT SYSTIMESTAMP(6)",
+   "expected": "SELECT SYSTIMESTAMP(6)",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT CURDATE()",
+   "expected": "SELECT CURRENT_DATE",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT USER",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT USER()",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT CURRENT_USER",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CURRENT_SCHEMA",
+   "expected": "CURRENT_SCHEMA",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT NOW()",
+   "expected": "SELECT CURRENT_TIMESTAMP()",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT FROM_POSIX_TIME(1234567890)",
+   "expected": "SELECT FROM_POSIX_TIME(1234567890)",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SELECT FROM_UNIXTIME(col)",
+   "expected": "SELECT FROM_POSIX_TIME(col)",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT FROM_POSIX_TIME(col)",
+   "expected": "SELECT FROM_POSIX_TIME(col)",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "mysql",
+   "sql": "SELECT FROM_POSIX_TIME(col)",
+   "expected": "SELECT FROM_UNIXTIME(col)",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "select foo, bar from table_1 minus select foo, bar from table_2",
+   "expected": "SELECT foo, bar FROM table_1 EXCEPT SELECT foo, bar FROM table_2",
+   "test": "TestExasol.test_exasol"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT 1 AS CS",
+   "expected": "SELECT 1 AS \"CS\"",
+   "test": "TestExasol.test_exasol_keywords"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT 1 AS ADD",
+   "expected": "SELECT 1 AS \"ADD\"",
+   "test": "TestExasol.test_exasol_keywords"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT 1 AS BOOLEAN",
+   "expected": "SELECT 1 AS \"BOOLEAN\"",
+   "test": "TestExasol.test_exasol_keywords"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT 1 AS CALL",
+   "expected": "SELECT 1 AS \"CALL\"",
+   "test": "TestExasol.test_exasol_keywords"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT 1 AS CONTROL",
+   "expected": "SELECT 1 AS \"CONTROL\"",
+   "test": "TestExasol.test_exasol_keywords"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SELECT city, COUNT(*) AS cnt FROM t GROUP BY cnt",
+   "expected": "SELECT city, COUNT(*) AS cnt FROM t GROUP BY LOCAL.cnt",
+   "test": "TestExasol.test_group_by_alias_local"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT city, COUNT(*) AS cnt FROM t GROUP BY LOCAL.cnt",
+   "expected": "SELECT city, COUNT(*) AS cnt FROM t GROUP BY LOCAL.cnt",
+   "test": "TestExasol.test_group_by_alias_local"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SELECT YEAR(a_date) AS a_year FROM t GROUP BY a_year",
+   "expected": "SELECT YEAR(TO_DATE(a_date)) AS a_year FROM t GROUP BY LOCAL.a_year",
+   "test": "TestExasol.test_group_by_alias_local"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YEAR(TO_DATE(a_date)) AS a_year FROM t GROUP BY LOCAL.a_year",
+   "expected": "SELECT YEAR(TO_DATE(a_date)) AS a_year FROM t GROUP BY LOCAL.a_year",
+   "test": "TestExasol.test_group_by_alias_local"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SELECT city, COUNT(*) FROM t GROUP BY city",
+   "expected": "SELECT city, COUNT(*) FROM t GROUP BY city",
+   "test": "TestExasol.test_group_by_alias_local"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT city, COUNT(*) FROM t GROUP BY city",
+   "expected": "SELECT city, COUNT(*) FROM t GROUP BY city",
+   "test": "TestExasol.test_group_by_alias_local"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SELECT COUNT(*) AS cnt FROM t HAVING cnt > 1",
+   "expected": "SELECT COUNT(*) AS cnt FROM t HAVING LOCAL.cnt > 1",
+   "test": "TestExasol.test_group_by_alias_local"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT COUNT(*) AS cnt FROM t HAVING LOCAL.cnt > 1",
+   "expected": "SELECT COUNT(*) AS cnt FROM t HAVING LOCAL.cnt > 1",
+   "test": "TestExasol.test_group_by_alias_local"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT id, city, COUNT(*) FROM dealer GROUP BY ALL",
+   "expected": "SELECT id, city, COUNT(*) FROM dealer GROUP BY 1, 2",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT id, city, COUNT(*) FROM dealer GROUP BY ALL",
+   "expected": "SELECT id, city, COUNT(*) FROM dealer GROUP BY ALL",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT car_model, COUNT(DISTINCT city) FROM dealer GROUP BY ALL",
+   "expected": "SELECT car_model, COUNT(DISTINCT city) FROM dealer GROUP BY 1",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT car_model, COUNT(DISTINCT city) FROM dealer GROUP BY ALL",
+   "expected": "SELECT car_model, COUNT(DISTINCT city) FROM dealer GROUP BY ALL",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT car_model, city FROM dealer GROUP BY ALL",
+   "expected": "SELECT car_model, city FROM dealer GROUP BY 1, 2",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT car_model, city FROM dealer GROUP BY ALL",
+   "expected": "SELECT car_model, city FROM dealer GROUP BY ALL",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT COUNT(*) FROM dealer GROUP BY ALL",
+   "expected": "SELECT COUNT(*) FROM dealer",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT COUNT(*) FROM dealer GROUP BY ALL",
+   "expected": "SELECT COUNT(*) FROM dealer GROUP BY ALL",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT UPPER(city), COUNT(*) FROM dealer GROUP BY ALL",
+   "expected": "SELECT UPPER(city), COUNT(*) FROM dealer GROUP BY 1",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT UPPER(city), COUNT(*) FROM dealer GROUP BY ALL",
+   "expected": "SELECT UPPER(city), COUNT(*) FROM dealer GROUP BY ALL",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT city AS c, COUNT(*) + 1 FROM dealer GROUP BY ALL",
+   "expected": "SELECT city AS c, COUNT(*) + 1 FROM dealer GROUP BY 1",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT city AS c, COUNT(*) + 1 FROM dealer GROUP BY ALL",
+   "expected": "SELECT city AS c, COUNT(*) + 1 FROM dealer GROUP BY ALL",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT city, COUNT(*) OVER () FROM dealer GROUP BY ALL",
+   "expected": "SELECT city, COUNT(*) OVER () FROM dealer GROUP BY 1",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT city, COUNT(*) OVER () FROM dealer GROUP BY ALL",
+   "expected": "SELECT city, COUNT(*) OVER () FROM dealer GROUP BY ALL",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT * FROM t GROUP BY ALL",
+   "expected": "SELECT DISTINCT * FROM t",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT * FROM t GROUP BY ALL",
+   "expected": "SELECT * FROM t GROUP BY ALL",
+   "test": "TestExasol.test_group_by_all"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT JSON_VALUE('{\"d\":\"a\"}', '$.d' NULL ON ERROR) AS x",
+   "expected": "SELECT JSON_VALUE('{\"d\":\"a\"}', '$.d' NULL ON ERROR) AS x",
+   "test": "TestExasol.test_json"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT JSON_VALUE('{\"d\":\"a\"}', '$.d' NULL ON ERROR) AS x",
+   "expected": "SELECT JSON_VALUE('{\"d\":\"a\"}', '$.d' NULL ON ERROR) AS x",
+   "test": "TestExasol.test_json"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "trino",
+   "sql": "SELECT JSON_VALUE('{\"d\":\"a\"}', '$.d' NULL ON ERROR) AS x",
+   "expected": "SELECT JSON_VALUE('{\"d\":\"a\"}', '$.d' NULL ON ERROR) AS x",
+   "test": "TestExasol.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT JSON_EXTRACT('{\"firstname\" : \"Ann\", \"surname\" : \"Smith\", \"age\" : 29}', '$.firstname', '$.surname', '$.age') EMITS (firstname VARCHAR(100), surname VARCHAR(100), age INT)",
+   "expected": "SELECT JSON_EXTRACT('{\"firstname\" : \"Ann\", \"surname\" : \"Smith\", \"age\" : 29}', '$.firstname', '$.surname', '$.age') EMITS (firstname VARCHAR(100), surname VARCHAR(100), age INT)",
+   "test": "TestExasol.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT JSON_EXTRACT(x, '$.a') s FROM t",
+   "expected": "SELECT JSON_EXTRACT(x, '$.a') AS s FROM t",
+   "test": "TestExasol.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ID FROM local WHERE \"LOCAL\".ID IS NULL",
+   "expected": "SELECT ID FROM \"LOCAL\" WHERE \"LOCAL\".ID IS NULL",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YEAR(a_date) AS \"a_year\" FROM MY_SUMMARY_TABLE GROUP BY LOCAL.\"a_year\"",
+   "expected": "SELECT YEAR(a_date) AS \"a_year\" FROM MY_SUMMARY_TABLE GROUP BY LOCAL.\"a_year\"",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT a_year AS a_year FROM \"LOCAL\" GROUP BY \"LOCAL\".a_year",
+   "expected": "SELECT a_year AS a_year FROM \"LOCAL\" GROUP BY \"LOCAL\".a_year",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YEAR(a_date) AS A_YEAR FROM my_table WHERE a_year > 2020",
+   "expected": "SELECT YEAR(a_date) AS A_YEAR FROM my_table WHERE LOCAL.A_YEAR > 2020",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT SUM(amount) AS Total FROM my_table HAVING TOTAL > 10000",
+   "expected": "SELECT SUM(amount) AS Total FROM my_table HAVING LOCAL.Total > 10000",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YEAR(a_date) AS a_year FROM my_table GROUP BY LOCAL.a_year",
+   "expected": "SELECT YEAR(a_date) AS a_year FROM my_table GROUP BY LOCAL.a_year",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT YEAR(a_date) AS a_year FROM my_table GROUP BY LOCAL.a_year",
+   "expected": "SELECT YEAR(a_date) AS a_year FROM my_table GROUP BY a_year",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT SUM(amount) AS total FROM my_table HAVING LOCAL.total > 10000",
+   "expected": "SELECT SUM(amount) AS total FROM my_table HAVING LOCAL.total > 10000",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT SUM(amount) AS total FROM my_table HAVING LOCAL.total > 10000",
+   "expected": "SELECT SUM(amount) AS total FROM my_table HAVING total > 10000",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YEAR(a_date) AS a_year FROM my_table WHERE LOCAL.a_year > 2020",
+   "expected": "SELECT YEAR(a_date) AS a_year FROM my_table WHERE LOCAL.a_year > 2020",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT YEAR(a_date) AS a_year FROM my_table WHERE LOCAL.a_year > 2020",
+   "expected": "SELECT YEAR(a_date) AS a_year FROM my_table WHERE a_year > 2020",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YEAR(a_date) AS a_year, MONTH(a_date) AS a_month FROM my_table WHERE LOCAL.a_year > 2020 AND LOCAL.a_month < 6",
+   "expected": "SELECT YEAR(a_date) AS a_year, MONTH(a_date) AS a_month FROM my_table WHERE LOCAL.a_year > 2020 AND LOCAL.a_month < 6",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT YEAR(a_date) AS a_year, MONTH(a_date) AS a_month FROM my_table WHERE LOCAL.a_year > 2020 AND LOCAL.a_month < 6",
+   "expected": "SELECT YEAR(a_date) AS a_year, MONTH(a_date) AS a_month FROM my_table WHERE a_year > 2020 AND a_month < 6",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YR AS THE_YEAR, ID AS YR, LOCAL.THE_YEAR + 1 AS NEXT_YEAR FROM my_table",
+   "expected": "SELECT YR AS THE_YEAR, ID AS YR, LOCAL.THE_YEAR + 1 AS NEXT_YEAR FROM my_table",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT YR AS THE_YEAR, ID AS YR, LOCAL.THE_YEAR + 1 AS NEXT_YEAR FROM my_table",
+   "expected": "SELECT YR AS THE_YEAR, ID AS YR, THE_YEAR + 1 AS NEXT_YEAR FROM my_table",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT YEAR(CURRENT_DATE) AS current_year, LOCAL.current_year + 1 AS next_year",
+   "expected": "SELECT YEAR(CURRENT_DATE) AS current_year, LOCAL.current_year + 1 AS next_year",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "SELECT YEAR(CURRENT_DATE) AS current_year, LOCAL.current_year + 1 AS next_year",
+   "expected": "SELECT YEAR(CURRENT_DATE) AS current_year, current_year + 1 AS next_year",
+   "test": "TestExasol.test_local_prefix_for_alias"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT MOD(x, 10)",
+   "expected": "SELECT MOD(x, 10)",
+   "test": "TestExasol.test_mod"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "teradata",
+   "sql": "SELECT MOD(x, 10)",
+   "expected": "SELECT x MOD 10",
+   "test": "TestExasol.test_mod"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "mysql",
+   "sql": "SELECT MOD(x, 10)",
+   "expected": "SELECT x % 10",
+   "test": "TestExasol.test_mod"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT MOD(x, 10)",
+   "expected": "SELECT MOD(x, 10)",
+   "test": "TestExasol.test_mod"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TRUNC(123.456, 2) AS TRUNC",
+   "expected": "SELECT TRUNC(123.456, 2) AS TRUNC",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT DIV(1234, 2) AS DIV",
+   "expected": "SELECT DIV(1234, 2) AS DIV",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(123.456, 2)",
+   "expected": "TRUNC(123.456, 2)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(3.14159)",
+   "expected": "TRUNC(3.14159)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS DATE))",
+   "expected": "TRUNC(CAST(x AS DATE))",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(price, 2)",
+   "expected": "TRUNC(price, 2)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(price, 2)",
+   "expected": "TRUNC(price, 2)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "postgres",
+   "sql": "TRUNC(price, 2)",
+   "expected": "TRUNC(price, 2)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "mysql",
+   "sql": "TRUNC(price, 2)",
+   "expected": "TRUNCATE(price, 2)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "TRUNC(price, 2)",
+   "expected": "ROUND(price, 2, 1)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'YYYY')",
+   "expected": "DATE_TRUNC('YYYY', x)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'YYYY')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'YYYY')",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MM')",
+   "expected": "DATE_TRUNC('MM', x)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MM')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'MM')",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'DD')",
+   "expected": "DATE_TRUNC('DD', x)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'DD')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'DD')",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'HH')",
+   "expected": "DATE_TRUNC('HH', x)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'HH')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'HH')",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MI')",
+   "expected": "DATE_TRUNC('MI', x)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'MI')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'MI')",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'SS')",
+   "expected": "DATE_TRUNC('SS', x)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'SS')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'SS')",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'WW')",
+   "expected": "DATE_TRUNC('WW', x)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'WW')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'WW')",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'Q')",
+   "expected": "DATE_TRUNC('QUARTER', x)",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "TRUNC(CAST(x AS TIMESTAMP), 'Q')",
+   "expected": "TRUNC(CAST(x AS TIMESTAMP), 'QUARTER')",
+   "test": "TestExasol.test_number_functions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT {d'2024-01-01'}",
+   "expected": "SELECT TO_DATE('2024-01-01')",
+   "test": "TestExasol.test_odbc_date_literals"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT {ts'2024-01-01 12:00:00'}",
+   "expected": "SELECT TO_TIMESTAMP('2024-01-01 12:00:00')",
+   "test": "TestExasol.test_odbc_date_literals"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "exasol",
+   "sql": "SELECT *, 1 FROM TEST",
+   "expected": "SELECT TEST.*, 1 FROM TEST",
+   "test": "TestExasol.test_qualify_unscoped_star"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT t.*, 1 FROM t",
+   "expected": "SELECT t.*, 1 FROM t",
+   "test": "TestExasol.test_qualify_unscoped_star"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT t.* FROM t",
+   "expected": "SELECT t.* FROM t",
+   "test": "TestExasol.test_qualify_unscoped_star"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT * FROM t",
+   "expected": "SELECT * FROM t",
+   "test": "TestExasol.test_qualify_unscoped_star"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "WITH t AS (SELECT 1 AS x) SELECT t.*, 3 FROM t",
+   "expected": "WITH t AS (SELECT 1 AS x) SELECT t.*, 3 FROM t",
+   "test": "TestExasol.test_qualify_unscoped_star"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "exasol",
+   "sql": "WITH t1 AS (SELECT 1 AS c1), t2 AS (SELECT 2 AS c2) SELECT *, 3 FROM t1, t2",
+   "expected": "WITH t1 AS (SELECT 1 AS c1), t2 AS (SELECT 2 AS c2) SELECT t1.*, t2.*, 3 FROM t1, t2",
+   "test": "TestExasol.test_qualify_unscoped_star"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "exasol",
+   "sql": "SELECT *, 3 FROM \"A\" JOIN \"B\" ON 1=1",
+   "expected": "SELECT \"A\".*, \"B\".*, 3 FROM \"A\" JOIN \"B\" ON 1 = 1",
+   "test": "TestExasol.test_qualify_unscoped_star"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "exasol",
+   "sql": "SELECT *, 7 FROM (SELECT 1 AS x) s CROSS JOIN (SELECT 2 AS y) q",
+   "expected": "SELECT s.*, q.*, 7 FROM (SELECT 1 AS x) AS s CROSS JOIN (SELECT 2 AS y) AS q",
+   "test": "TestExasol.test_qualify_unscoped_star"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT x REGEXP_LIKE '.*pattern.*'",
+   "expected": "SELECT x REGEXP_LIKE '.*pattern.*'",
+   "test": "TestExasol.test_regexp_like"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "exasol",
+   "sql": "SELECT a RLIKE 'x'",
+   "expected": "SELECT a REGEXP_LIKE '.*x.*'",
+   "test": "TestExasol.test_regexp_like"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SELECT REGEXP_LIKE(a, 'x')",
+   "expected": "SELECT a REGEXP_LIKE '.*x.*'",
+   "test": "TestExasol.test_regexp_like"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT a REGEXP_LIKE '.*x.*'",
+   "expected": "SELECT a REGEXP_LIKE '.*x.*'",
+   "test": "TestExasol.test_regexp_like"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "SELECT a REGEXP_LIKE '.*x.*'",
+   "expected": "SELECT a RLIKE '.*x.*'",
+   "test": "TestExasol.test_regexp_like"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT a REGEXP_LIKE '.*x.*'",
+   "expected": "SELECT REGEXP_LIKE(a, '.*x.*')",
+   "test": "TestExasol.test_regexp_like"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT USER",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "SELECT CURRENT_USER()",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "exasol",
+   "sql": "SELECT CURRENT_USER",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT CURRENT_USER()",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT CURRENT_USER",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT CURRENT_USER",
+   "expected": "SELECT CURRENT_USER()",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "trino",
+   "sql": "SELECT CURRENT_USER",
+   "expected": "SELECT CURRENT_USER",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT CURRENT_USER",
+   "expected": "SELECT CURRENT_USER()",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "CREATE OR REPLACE VIEW \"schema\".\"v\" (\"col\" COMMENT IS 'desc') AS SELECT \"src_col\" AS \"col\"",
+   "expected": "CREATE OR REPLACE VIEW `schema`.`v` (`col` COMMENT 'desc') AS SELECT `src_col` AS `col`",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CREATE OR REPLACE VIEW \"schema\".\"v\" (\"col\" COMMENT IS 'desc') AS SELECT \"src_col\" AS \"col\"",
+   "expected": "CREATE OR REPLACE VIEW \"schema\".\"v\" (\"col\" COMMENT IS 'desc') AS SELECT \"src_col\" AS \"col\"",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "exasol",
+   "sql": "SHA1(x)",
+   "expected": "HASH_SHA(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "HASH_SHA1(x)",
+   "expected": "HASH_SHA(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "exasol",
+   "sql": "SHA1(x)",
+   "expected": "HASH_SHA(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "exasol",
+   "sql": "SHA1(x)",
+   "expected": "HASH_SHA(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "HASH_SHA(x)",
+   "expected": "HASH_SHA(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "clickhouse",
+   "sql": "HASH_SHA(x)",
+   "expected": "SHA1(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "HASH_SHA(x)",
+   "expected": "SHA1(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "",
+   "sql": "HASH_SHA(x)",
+   "expected": "SHA(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "HASH_SHA(x)",
+   "expected": "SHA1(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "trino",
+   "sql": "HASH_SHA(x)",
+   "expected": "SHA1(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "HASH_MD5(x)",
+   "expected": "HASH_MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "",
+   "sql": "HASH_MD5(x)",
+   "expected": "MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "HASH_MD5(x)",
+   "expected": "TO_HEX(MD5(x))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "clickhouse",
+   "sql": "HASH_MD5(x)",
+   "expected": "LOWER(HEX(MD5(x)))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "HASH_MD5(x)",
+   "expected": "MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "HASH_MD5(x)",
+   "expected": "LOWER(TO_HEX(MD5(x)))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "HASH_MD5(x)",
+   "expected": "MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "trino",
+   "sql": "HASH_MD5(x)",
+   "expected": "LOWER(TO_HEX(MD5(x)))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "HASHTYPE_MD5(x)",
+   "expected": "HASHTYPE_MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "",
+   "sql": "HASHTYPE_MD5(x)",
+   "expected": "MD5_DIGEST(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "HASHTYPE_MD5(x)",
+   "expected": "MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "clickhouse",
+   "sql": "HASHTYPE_MD5(x)",
+   "expected": "MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "HASHTYPE_MD5(x)",
+   "expected": "UNHEX(MD5(x))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "HASHTYPE_MD5(x)",
+   "expected": "MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "HASHTYPE_MD5(x)",
+   "expected": "UNHEX(MD5(x))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "trino",
+   "sql": "HASHTYPE_MD5(x)",
+   "expected": "MD5(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "exasol",
+   "sql": "SHA256(x)",
+   "expected": "HASH_SHA256(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "exasol",
+   "sql": "SHA256(x)",
+   "expected": "HASH_SHA256(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "exasol",
+   "sql": "SHA256(x)",
+   "expected": "HASH_SHA256(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "HASH_SHA256(x)",
+   "expected": "HASH_SHA256(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "HASH_SHA256(x)",
+   "expected": "SHA256(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark2",
+   "sql": "HASH_SHA256(x)",
+   "expected": "SHA2(x, 256)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "clickhouse",
+   "sql": "HASH_SHA256(x)",
+   "expected": "SHA256(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "postgres",
+   "sql": "HASH_SHA256(x)",
+   "expected": "SHA256(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "HASH_SHA256(x)",
+   "expected": "LOWER(TO_HEX(SHA256(x)))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "HASH_SHA256(x)",
+   "expected": "SHA2(x, 256)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "trino",
+   "sql": "HASH_SHA256(x)",
+   "expected": "LOWER(TO_HEX(SHA256(x)))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "HASH_SHA256(x)",
+   "expected": "SHA256(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "HASH_SHA256(x)",
+   "expected": "SHA2(x, 256)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "exasol",
+   "sql": "SHA512(x)",
+   "expected": "HASH_SHA512(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "HASH_SHA512(x)",
+   "expected": "HASH_SHA512(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "clickhouse",
+   "sql": "HASH_SHA512(x)",
+   "expected": "SHA512(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "HASH_SHA512(x)",
+   "expected": "SHA512(x)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark2",
+   "sql": "HASH_SHA512(x)",
+   "expected": "SHA2(x, 512)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "HASH_SHA512(x)",
+   "expected": "LOWER(TO_HEX(SHA512(x)))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "trino",
+   "sql": "HASH_SHA512(x)",
+   "expected": "LOWER(TO_HEX(SHA512(x)))",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT NULLIFZERO(1) NIZ1",
+   "expected": "SELECT IF 1 = 0 THEN NULL ELSE 1 ENDIF AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT NULLIFZERO(1) NIZ1",
+   "expected": "SELECT IFF(1 = 0, NULL, 1) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "sqlite",
+   "sql": "SELECT NULLIFZERO(1) NIZ1",
+   "expected": "SELECT IIF(1 = 0, NULL, 1) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT NULLIFZERO(1) NIZ1",
+   "expected": "SELECT IF(1 = 0, NULL, 1) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT NULLIFZERO(1) NIZ1",
+   "expected": "SELECT IF(1 = 0, NULL, 1) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "SELECT NULLIFZERO(1) NIZ1",
+   "expected": "SELECT IF(1 = 0, NULL, 1) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT NULLIFZERO(1) NIZ1",
+   "expected": "SELECT CASE WHEN 1 = 0 THEN NULL ELSE 1 END AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT ZEROIFNULL(NULL) NIZ1",
+   "expected": "SELECT IF NULL IS NULL THEN 0 ELSE NULL ENDIF AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT ZEROIFNULL(NULL) NIZ1",
+   "expected": "SELECT IFF(NULL IS NULL, 0, NULL) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "sqlite",
+   "sql": "SELECT ZEROIFNULL(NULL) NIZ1",
+   "expected": "SELECT IIF(NULL IS NULL, 0, NULL) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT ZEROIFNULL(NULL) NIZ1",
+   "expected": "SELECT IF(NULL IS NULL, 0, NULL) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "SELECT ZEROIFNULL(NULL) NIZ1",
+   "expected": "SELECT IF(NULL IS NULL, 0, NULL) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "SELECT ZEROIFNULL(NULL) NIZ1",
+   "expected": "SELECT IF(NULL IS NULL, 0, NULL) AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "SELECT ZEROIFNULL(NULL) NIZ1",
+   "expected": "SELECT CASE WHEN NULL IS NULL THEN 0 ELSE NULL END AS NIZ1",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT name, age, IF age < 18 THEN 'underaged' ELSE 'adult' ENDIF AS LEGALITY FROM persons",
+   "expected": "SELECT name, age, IF age < 18 THEN 'underaged' ELSE 'adult' ENDIF AS LEGALITY FROM persons",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT HASHTYPE_MD5(a, b, c, d)",
+   "expected": "SELECT HASHTYPE_MD5(a, b, c, d)",
+   "test": "TestExasol.test_scalar"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SHOW DATABASES",
+   "expected": "SELECT SCHEMA_NAME FROM SYS.EXA_SCHEMAS",
+   "test": "TestExasol.test_show_databases"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT SCHEMA_NAME FROM SYS.EXA_SCHEMAS",
+   "expected": "SELECT SCHEMA_NAME FROM SYS.EXA_SCHEMAS",
+   "test": "TestExasol.test_show_databases"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SHOW SCHEMAS",
+   "expected": "SELECT SCHEMA_NAME FROM SYS.EXA_SCHEMAS",
+   "test": "TestExasol.test_show_databases"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT SCHEMA_NAME FROM SYS.EXA_SCHEMAS",
+   "expected": "SELECT SCHEMA_NAME FROM SYS.EXA_SCHEMAS",
+   "test": "TestExasol.test_show_databases"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SHOW TABLES FROM test",
+   "expected": "SELECT TABLE_NAME FROM SYS.EXA_ALL_TABLES WHERE TABLE_SCHEMA = 'TEST'",
+   "test": "TestExasol.test_show_tables"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TABLE_NAME FROM SYS.EXA_ALL_TABLES WHERE TABLE_SCHEMA = 'TEST'",
+   "expected": "SELECT TABLE_NAME FROM SYS.EXA_ALL_TABLES WHERE TABLE_SCHEMA = 'TEST'",
+   "test": "TestExasol.test_show_tables"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SHOW TABLES",
+   "expected": "SELECT TABLE_NAME FROM SYS.EXA_ALL_TABLES WHERE TABLE_SCHEMA = CURRENT_SCHEMA",
+   "test": "TestExasol.test_show_tables"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TABLE_NAME FROM SYS.EXA_ALL_TABLES WHERE TABLE_SCHEMA = CURRENT_SCHEMA",
+   "expected": "SELECT TABLE_NAME FROM SYS.EXA_ALL_TABLES WHERE TABLE_SCHEMA = CURRENT_SCHEMA",
+   "test": "TestExasol.test_show_tables"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "TO_CHAR(CAST(TO_DATE(date, 'YYYYMMDD') AS TIMESTAMP), 'DY') AS day_of_week",
+   "expected": "TO_CHAR(CAST(TO_DATE(date, 'YYYYMMDD') AS TIMESTAMP), 'DY') AS day_of_week",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(12345.67890, '9999999.999999999') AS TO_CHAR",
+   "expected": "SELECT TO_CHAR(12345.67890, '9999999.999999999') AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(DATE '1999-12-31') AS TO_CHAR",
+   "expected": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(TIMESTAMP '1999-12-31 23:59:00', 'HH24:MI:SS DD-MM-YYYY') AS TO_CHAR",
+   "expected": "SELECT TO_CHAR(CAST('1999-12-31 23:59:00' AS TIMESTAMP), 'HH24:MI:SS DD-MM-YYYY') AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(12345.6789) AS TO_CHAR",
+   "expected": "SELECT TO_CHAR(12345.6789) AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(-12345.67890, '000G000G000D000000MI') AS TO_CHAR",
+   "expected": "SELECT TO_CHAR(-12345.67890, '000G000G000D000000MI') AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "SELECT DATE_FORMAT('2009-10-04 22:23:00', '%W %M %Y')",
+   "expected": "SELECT TO_CHAR(CAST('2009-10-04 22:23:00' AS TIMESTAMP), 'DAY MONTH YYYY')",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT id, department, hire_date, GROUP_CONCAT(id ORDER BY hire_date SEPARATOR ',') OVER (PARTITION BY department rows between 1 preceding and 1 following) GROUP_CONCAT_RESULT from employee_table ORDER BY department, hire_date",
+   "expected": "SELECT id, department, hire_date, LISTAGG(id, ',') WITHIN GROUP (ORDER BY hire_date) OVER (PARTITION BY department rows BETWEEN 1 preceding AND 1 following) AS GROUP_CONCAT_RESULT FROM employee_table ORDER BY department, hire_date",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "GROUP_CONCAT(DISTINCT x ORDER BY y DESC)",
+   "expected": "LISTAGG(DISTINCT x, ',') WITHIN GROUP (ORDER BY y DESC)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "mysql",
+   "sql": "GROUP_CONCAT(DISTINCT x ORDER BY y DESC)",
+   "expected": "GROUP_CONCAT(DISTINCT x ORDER BY y DESC SEPARATOR ',')",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "tsql",
+   "sql": "GROUP_CONCAT(DISTINCT x ORDER BY y DESC)",
+   "expected": "STRING_AGG(x, ',') WITHIN GROUP (ORDER BY y DESC)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "GROUP_CONCAT(DISTINCT x ORDER BY y DESC)",
+   "expected": "LISTAGG(DISTINCT x, ',') WITHIN GROUP (ORDER BY y DESC)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "expected": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "expected": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "exasol",
+   "sql": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "expected": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "expected": "SELECT LISTAGG(x, ',') WITHIN GROUP (ORDER BY y) FROM t",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "LISTAGG(x, ',' ON OVERFLOW ERROR) WITHIN GROUP (ORDER BY y)",
+   "expected": "LISTAGG(x, ',' ON OVERFLOW ERROR) WITHIN GROUP (ORDER BY y)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "LISTAGG(x, ',' ON OVERFLOW TRUNCATE '...' WITH COUNT) WITHIN GROUP (ORDER BY y)",
+   "expected": "LISTAGG(x, ',' ON OVERFLOW TRUNCATE '...' WITH COUNT) WITHIN GROUP (ORDER BY y)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "LISTAGG(x, ',' ON OVERFLOW TRUNCATE '...' WITHOUT COUNT) WITHIN GROUP (ORDER BY y)",
+   "expected": "LISTAGG(x, ',' ON OVERFLOW TRUNCATE '...' WITHOUT COUNT) WITHIN GROUP (ORDER BY y)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "EDIT_DISTANCE(col1, col2)",
+   "expected": "EDIT_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "exasol",
+   "sql": "EDIT_DISTANCE(col1, col2)",
+   "expected": "EDIT_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "exasol",
+   "sql": "editDistance(col1, col2)",
+   "expected": "EDIT_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "drill",
+   "write": "exasol",
+   "sql": "LEVENSHTEIN_DISTANCE(col1, col2)",
+   "expected": "EDIT_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "exasol",
+   "sql": "LEVENSHTEIN(col1, col2)",
+   "expected": "EDIT_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "exasol",
+   "sql": "LEVENSHTEIN(col1, col2)",
+   "expected": "EDIT_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "EDIT_DISTANCE(col1, col2)",
+   "expected": "EDIT_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "EDIT_DISTANCE(col1, col2)",
+   "expected": "EDIT_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "clickhouse",
+   "sql": "EDIT_DISTANCE(col1, col2)",
+   "expected": "editDistance(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "drill",
+   "sql": "EDIT_DISTANCE(col1, col2)",
+   "expected": "LEVENSHTEIN_DISTANCE(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "EDIT_DISTANCE(col1, col2)",
+   "expected": "LEVENSHTEIN(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "EDIT_DISTANCE(col1, col2)",
+   "expected": "LEVENSHTEIN(col1, col2)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "exasol",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "exasol",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "duckdb",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "hive",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "spark",
+   "sql": "REGEXP_REPLACE(subject, pattern, replacement, position, occurrence)",
+   "expected": "REGEXP_REPLACE(subject, pattern, replacement, position)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(DATE '1999-12-31') AS TO_CHAR",
+   "expected": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "expected": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "expected": "SELECT DATE_FORMAT(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "expected": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "redshift",
+   "sql": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "expected": "SELECT CAST(CAST('1999-12-31' AS DATE) AS VARCHAR(MAX)) AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "postgres",
+   "sql": "SELECT TO_CHAR(CAST('1999-12-31' AS DATE)) AS TO_CHAR",
+   "expected": "SELECT CAST(CAST('1999-12-31' AS DATE) AS TEXT) AS TO_CHAR",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "STRPOS(haystack, needle)",
+   "expected": "INSTR(haystack, needle)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "STRPOS(haystack, needle)",
+   "expected": "INSTR(haystack, needle)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "databricks",
+   "sql": "STRPOS(haystack, needle)",
+   "expected": "LOCATE(needle, haystack)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "oracle",
+   "sql": "STRPOS(haystack, needle)",
+   "expected": "INSTR(haystack, needle)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "STRPOS(haystack, needle)",
+   "expected": "STRPOS(haystack, needle)",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT REGEXP_SUBSTR('My mail address is my_mail@yahoo.com', '(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') AS EMAIL",
+   "expected": "SELECT REGEXP_SUBSTR('My mail address is my_mail@yahoo.com', '(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') AS EMAIL",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "bigquery",
+   "sql": "SELECT REGEXP_SUBSTR('My mail address is my_mail@yahoo.com', '(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') AS EMAIL",
+   "expected": "SELECT REGEXP_EXTRACT('My mail address is my_mail@yahoo.com', '(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}') AS EMAIL",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "snowflake",
+   "sql": "SELECT REGEXP_SUBSTR('My mail address is my_mail@yahoo.com', '(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') AS EMAIL",
+   "expected": "SELECT REGEXP_SUBSTR('My mail address is my_mail@yahoo.com', '(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\\\\.[a-z]{2,4}') AS EMAIL",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "presto",
+   "sql": "SELECT REGEXP_SUBSTR('My mail address is my_mail@yahoo.com', '(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') AS EMAIL",
+   "expected": "SELECT REGEXP_EXTRACT('My mail address is my_mail@yahoo.com', '(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}') AS EMAIL",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT substring_index('www.apache.org', '.', 2)",
+   "expected": "SELECT SUBSTR('www.apache.org', 1, NVL(NULLIF(INSTR('www.apache.org', '.', 1, 2), 0) - 1, LENGTH('www.apache.org')))",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT substring_index('555A66A777' COLLATE UTF8_BINARY, 'a', 2)",
+   "expected": "SELECT SUBSTR('555A66A777', 1, NVL(NULLIF(INSTR('555A66A777', 'a', 1, 2), 0) - 1, LENGTH('555A66A777')))",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT substring_index('555A66A777' COLLATE UTF8_LCASE, 'a', 2)",
+   "expected": "SELECT SUBSTR('555A66A777', 1, NVL(NULLIF(INSTR(LOWER('555A66A777'), 'a', 1, 2), 0) - 1, LENGTH('555A66A777')))",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "exasol",
+   "sql": "SELECT substring_index('A|a|A' COLLATE UTF8_LCASE, 'A' COLLATE UTF8_LCASE, 2)",
+   "expected": "SELECT SUBSTR('A|a|A', 1, NVL(NULLIF(INSTR(LOWER('A|a|A'), LOWER('A'), 1, 2), 0) - 1, LENGTH('A|a|A')))",
+   "test": "TestExasol.test_stringFunctions"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS BLOB)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS LONGBLOB)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS LONGTEXT)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS MEDIUMBLOB)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS MEDIUMTEXT)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TINYBLOB)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TINYTEXT)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TEXT)",
+   "expected": "CAST(x AS LONG VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "SELECT CAST((CAST(202305 AS INT) - 100) AS LONG VARCHAR) AS CAL_YEAR_WEEK_ADJUSTED",
+   "expected": "SELECT CAST((CAST(202305 AS INT) - 100) AS LONG VARCHAR) AS CAL_YEAR_WEEK_ADJUSTED",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS VARBINARY)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS VARCHAR)",
+   "expected": "CAST(x AS VARCHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS CHAR)",
+   "expected": "CAST(x AS CHAR)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TINYINT)",
+   "expected": "CAST(x AS SMALLINT)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS SMALLINT)",
+   "expected": "CAST(x AS SMALLINT)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS INT)",
+   "expected": "CAST(x AS INT)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS MEDIUMINT)",
+   "expected": "CAST(x AS INT)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS BIGINT)",
+   "expected": "CAST(x AS BIGINT)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS FLOAT)",
+   "expected": "CAST(x AS FLOAT)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS DOUBLE)",
+   "expected": "CAST(x AS DOUBLE)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS DECIMAL32)",
+   "expected": "CAST(x AS DECIMAL)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS DECIMAL64)",
+   "expected": "CAST(x AS DECIMAL)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS DECIMAL128)",
+   "expected": "CAST(x AS DECIMAL)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS DECIMAL256)",
+   "expected": "CAST(x AS DECIMAL)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS DATE)",
+   "expected": "CAST(x AS DATE)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS DATETIME)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TIMESTAMP)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "CAST(x AS DATETIME2)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TIMESTAMP)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "exasol",
+   "sql": "CAST(x AS SMALLDATETIME)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TIMESTAMP)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS BOOLEAN)",
+   "expected": "CAST(x AS BOOLEAN)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TIMESTAMPLTZ)",
+   "expected": "CAST(x AS TIMESTAMP WITH LOCAL TIME ZONE)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "CAST(x AS TIMESTAMP(3) WITH LOCAL TIME ZONE)",
+   "expected": "CAST(x AS TIMESTAMP WITH LOCAL TIME ZONE)",
+   "test": "TestExasol.test_type_mappings"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "USE test",
+   "expected": "OPEN SCHEMA test",
+   "test": "TestExasol.test_use_to_open_schema"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "OPEN SCHEMA test",
+   "expected": "OPEN SCHEMA test",
+   "test": "TestExasol.test_use_to_open_schema"
+  },
+  {
+   "kind": "identity",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "OPEN SCHEMA test",
+   "expected": "OPEN SCHEMA test",
+   "test": "TestExasol.test_use_to_open_schema"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "exasol",
+   "sql": "USE `my_database`",
+   "expected": "OPEN SCHEMA \"my_database\"",
+   "test": "TestExasol.test_use_to_open_schema"
+  },
+  {
+   "kind": "write",
+   "read": "exasol",
+   "write": "exasol",
+   "sql": "OPEN SCHEMA \"my_database\"",
+   "expected": "OPEN SCHEMA \"my_database\"",
+   "test": "TestExasol.test_use_to_open_schema"
+  }
+ ]
+}

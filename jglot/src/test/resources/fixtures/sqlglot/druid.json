@@ -1,0 +1,366 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_druid.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT MOD(1000, 60)",
+   "expected": "SELECT MOD(1000, 60)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT CEIL(__time TO WEEK) FROM t",
+   "expected": "SELECT CEIL(__time TO WEEK) FROM t",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT CEIL(col) FROM t",
+   "expected": "SELECT CEIL(col) FROM t",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT CEIL(price, 2) AS rounded_price FROM t",
+   "expected": "SELECT CEIL(price, 2) AS rounded_price FROM t",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT FLOOR(__time TO WEEK) FROM t",
+   "expected": "SELECT FLOOR(__time TO WEEK) FROM t",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT FLOOR(col) FROM t",
+   "expected": "SELECT FLOOR(col) FROM t",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT FLOOR(price, 2) AS rounded_price FROM t",
+   "expected": "SELECT FLOOR(price, 2) AS rounded_price FROM t",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT CURRENT_TIMESTAMP",
+   "expected": "SELECT CURRENT_TIMESTAMP",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT ARRAY[1, 2, 3]",
+   "expected": "SELECT ARRAY[1, 2, 3]",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "athena",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "bigquery",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "clickhouse",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "databricks",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "dax",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "doris",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "dremio",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "drill",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "druid",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "duckdb",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "dune",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "fabric",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "hive",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "materialize",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "mysql",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "oracle",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "postgres",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "presto",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "prql",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "redshift",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "risingwave",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "snowflake",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "solr",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "spark",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "spark2",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "sqlite",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "starrocks",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "tableau",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "teradata",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "trino",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "tsql",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "write",
+   "read": "druid",
+   "write": "exasol",
+   "sql": "FLOOR(__time TO WEEK)",
+   "expected": "FLOOR(__time TO WEEK)",
+   "test": "TestDruid.test_druid"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', '$.item')",
+   "expected": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', '$.item')",
+   "test": "TestDruid.test_json_value"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', '$.price' RETURNING DOUBLE)",
+   "expected": "SELECT JSON_VALUE('{\"item\": \"shoes\", \"price\": \"49.95\"}', '$.price' RETURNING DOUBLE)",
+   "test": "TestDruid.test_json_value"
+  },
+  {
+   "kind": "identity",
+   "read": "druid",
+   "write": "druid",
+   "sql": "SELECT JSON_VALUE(x, '$.a' RETURNING BIGINT) FROM t",
+   "expected": "SELECT JSON_VALUE(x, '$.a' RETURNING BIGINT) FROM t",
+   "test": "TestDruid.test_json_value"
+  }
+ ]
+}

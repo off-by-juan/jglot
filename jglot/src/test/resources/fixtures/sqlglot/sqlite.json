@@ -1,0 +1,1458 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_sqlite.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "ANALYZE tbl",
+   "expected": "ANALYZE tbl",
+   "test": "TestSQLite.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "ANALYZE schma.tbl",
+   "expected": "ANALYZE schma.tbl",
+   "test": "TestSQLite.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TRIGGER log_insert AFTER INSERT ON users BEGIN INSERT INTO audit_log (user_id, action, created_at) VALUES (NEW.id, 'INSERT', datetime('now')) END",
+   "expected": "CREATE TRIGGER log_insert AFTER INSERT ON users BEGIN INSERT INTO audit_log (user_id, action, created_at) VALUES (NEW.id, 'INSERT', datetime('now')) END",
+   "command": true,
+   "test": "TestSQLite.test_create_trigger"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TRIGGER check_balance BEFORE UPDATE OF balance ON accounts WHEN NEW.balance < 0 BEGIN UPDATE accounts SET balance = 0 WHERE id = NEW.id END",
+   "expected": "CREATE TRIGGER check_balance BEFORE UPDATE OF balance ON accounts WHEN NEW.balance < 0 BEGIN UPDATE accounts SET balance = 0 WHERE id = NEW.id END",
+   "command": true,
+   "test": "TestSQLite.test_create_trigger"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TRIGGER view_insert INSTEAD OF INSERT ON employee_view BEGIN INSERT INTO employees (id, name, department) VALUES (NEW.id, NEW.name, NEW.department) END",
+   "expected": "CREATE TRIGGER view_insert INSTEAD OF INSERT ON employee_view BEGIN INSERT INTO employees (id, name, department) VALUES (NEW.id, NEW.name, NEW.department) END",
+   "command": true,
+   "test": "TestSQLite.test_create_trigger"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "DATEDIFF(a, b, 'day')",
+   "expected": "CAST((JULIANDAY(a) - JULIANDAY(b)) AS INTEGER)",
+   "test": "TestSQLite.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "DATEDIFF(a, b, 'hour')",
+   "expected": "CAST((JULIANDAY(a) - JULIANDAY(b)) * 24.0 AS INTEGER)",
+   "test": "TestSQLite.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "DATEDIFF(a, b, 'year')",
+   "expected": "CAST((JULIANDAY(a) - JULIANDAY(b)) / 365.0 AS INTEGER)",
+   "test": "TestSQLite.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "DATEDIFF(a, b, 'nanosecond')",
+   "expected": "CAST((JULIANDAY(a) - JULIANDAY(b)) * 86400000000000.0 AS INTEGER)",
+   "test": "TestSQLite.test_datediff"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "sqlite",
+   "sql": "DATEDIFF(NANOSECOND, b, a)",
+   "expected": "CAST((JULIANDAY(a) - JULIANDAY(b)) * 86400000000000.0 AS INTEGER)",
+   "test": "TestSQLite.test_datediff"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "sqlite",
+   "sql": "DATEDIFF_BIG(NANOSECOND, b, a)",
+   "expected": "CAST((JULIANDAY(a) - JULIANDAY(b)) * 86400000000000.0 AS INTEGER)",
+   "test": "TestSQLite.test_datediff"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "expected": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "expected": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "expected": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "expected": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "expected": "CREATE TABLE a (b, c, UNIQUE (b, c) ON CONFLICT IGNORE)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE over (x, y)",
+   "expected": "CREATE TABLE over (x, y)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT OR ABORT INTO foo (x, y) VALUES (1, 2)",
+   "expected": "INSERT OR ABORT INTO foo (x, y) VALUES (1, 2)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT OR FAIL INTO foo (x, y) VALUES (1, 2)",
+   "expected": "INSERT OR FAIL INTO foo (x, y) VALUES (1, 2)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT OR IGNORE INTO foo (x, y) VALUES (1, 2)",
+   "expected": "INSERT OR IGNORE INTO foo (x, y) VALUES (1, 2)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT OR REPLACE INTO foo (x, y) VALUES (1, 2)",
+   "expected": "INSERT OR REPLACE INTO foo (x, y) VALUES (1, 2)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT OR ROLLBACK INTO foo (x, y) VALUES (1, 2)",
+   "expected": "INSERT OR ROLLBACK INTO foo (x, y) VALUES (1, 2)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT INTO tbl (x, y) SELECT 1, 'a' WHERE TRUE ON CONFLICT(x, LOWER(y)) DO UPDATE SET y = excluded.y",
+   "expected": "INSERT INTO tbl (x, y) SELECT 1, 'a' WHERE TRUE ON CONFLICT(x, LOWER(y)) DO UPDATE SET y = excluded.y",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT INTO tbl (x, y) VALUES (1, 'a') ON CONFLICT(x, LOWER(y) COLLATE NOCASE ASC, y DESC) DO NOTHING",
+   "expected": "INSERT INTO tbl (x, y) VALUES (1, 'a') ON CONFLICT(x, LOWER(y) COLLATE NOCASE ASC, y DESC) DO NOTHING",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT INTO tbl (x, y) VALUES (1, 'a') ON CONFLICT(CASE WHEN x > 0 THEN x ELSE -x END) DO NOTHING",
+   "expected": "INSERT INTO tbl (x, y) VALUES (1, 'a') ON CONFLICT(CASE WHEN x > 0 THEN x ELSE -x END) DO NOTHING",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "INSERT INTO tbl (x, y) VALUES (1, 'a') ON CONFLICT(x) WHERE x > 0 DO UPDATE SET y = excluded.y",
+   "expected": "INSERT INTO tbl (x, y) VALUES (1, 'a') ON CONFLICT(x) WHERE x > 0 DO UPDATE SET y = excluded.y",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE foo (id INTEGER PRIMARY KEY ASC)",
+   "expected": "CREATE TABLE foo (id INTEGER PRIMARY KEY ASC)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TEMPORARY TABLE foo (id INTEGER)",
+   "expected": "CREATE TEMPORARY TABLE foo (id INTEGER)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE VIRTUAL TABLE docs USING fts5(title, content)",
+   "expected": "CREATE VIRTUAL TABLE docs USING fts5(title, content)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts5(title, content)",
+   "expected": "CREATE VIRTUAL TABLE IF NOT EXISTS docs USING fts5(title, content)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE VIRTUAL TABLE main.docs USING fts5(title, content)",
+   "expected": "CREATE VIRTUAL TABLE main.docs USING fts5(title, content)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE VIRTUAL TABLE demo_index USING rtree(id, minX, maxX, minY, maxY)",
+   "expected": "CREATE VIRTUAL TABLE demo_index USING rtree(id, minX, maxX, minY, maxY)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE VIRTUAL TABLE t USING module_name",
+   "expected": "CREATE VIRTUAL TABLE t USING module_name",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA table_info",
+   "expected": "PRAGMA table_info",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA schema",
+   "expected": "PRAGMA schema",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA full_column_names = on",
+   "expected": "PRAGMA full_column_names = on",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA full_column_names = off",
+   "expected": "PRAGMA full_column_names = off",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA cache_size = 2000",
+   "expected": "PRAGMA cache_size = 2000",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA foo = -2000",
+   "expected": "PRAGMA foo = -2000",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA foo(-2000)",
+   "expected": "PRAGMA foo = -2000",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA encoding = 'UTF-16'",
+   "expected": "PRAGMA encoding = 'UTF-16'",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA main.cache_size",
+   "expected": "PRAGMA main.cache_size",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA main.cache_size = 2000",
+   "expected": "PRAGMA main.cache_size = 2000",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA cache_size(2000)",
+   "expected": "PRAGMA cache_size = 2000",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "PRAGMA main.cache_size(2000)",
+   "expected": "PRAGMA main.cache_size = 2000",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "\n            CREATE TABLE \"Track\"\n            (\n                CONSTRAINT \"PK_Track\" FOREIGN KEY (\"TrackId\"),\n                FOREIGN KEY (\"AlbumId\") REFERENCES \"Album\" (\n                    \"AlbumId\"\n                ) ON DELETE NO ACTION ON UPDATE NO ACTION,\n                FOREIGN KEY (\"AlbumId\") ON DELETE CASCADE ON UPDATE RESTRICT,\n                FOREIGN KEY (\"AlbumId\") ON DELETE SET NULL ON UPDATE SET DEFAULT\n            )\n            ",
+   "expected": "CREATE TABLE \"Track\" (\n  CONSTRAINT \"PK_Track\" FOREIGN KEY (\"TrackId\"),\n  FOREIGN KEY (\"AlbumId\") REFERENCES \"Album\" (\n    \"AlbumId\"\n  ) ON DELETE NO ACTION ON UPDATE NO ACTION,\n  FOREIGN KEY (\"AlbumId\") ON DELETE CASCADE ON UPDATE RESTRICT,\n  FOREIGN KEY (\"AlbumId\") ON DELETE SET NULL ON UPDATE SET DEFAULT\n)",
+   "pretty": true,
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "sqlite",
+   "sql": "CREATE TABLE z (a INT UNIQUE PRIMARY KEY AUTO_INCREMENT)",
+   "expected": "CREATE TABLE z (a INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "sqlite",
+   "sql": "CREATE TABLE z (a INT GENERATED BY DEFAULT AS IDENTITY NOT NULL UNIQUE PRIMARY KEY)",
+   "expected": "CREATE TABLE z (a INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE z (a INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT)",
+   "expected": "CREATE TABLE z (a INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "mysql",
+   "sql": "CREATE TABLE z (a INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT)",
+   "expected": "CREATE TABLE z (a INT UNIQUE PRIMARY KEY AUTO_INCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "postgres",
+   "sql": "CREATE TABLE z (a INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT)",
+   "expected": "CREATE TABLE z (a INT GENERATED BY DEFAULT AS IDENTITY NOT NULL UNIQUE PRIMARY KEY)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "sqlite",
+   "sql": "CREATE TABLE z (a INT PRIMARY KEY AUTO_INCREMENT)",
+   "expected": "CREATE TABLE z (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE z (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "expected": "CREATE TABLE z (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "mysql",
+   "sql": "CREATE TABLE z (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "expected": "CREATE TABLE z (a INT PRIMARY KEY AUTO_INCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "sqlite",
+   "sql": "CREATE TABLE z (a INT AUTO_INCREMENT PRIMARY KEY)",
+   "expected": "CREATE TABLE z (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE z (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "expected": "CREATE TABLE z (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "mysql",
+   "sql": "CREATE TABLE z (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "expected": "CREATE TABLE z (a INT PRIMARY KEY AUTO_INCREMENT)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE \"x\" (\"Name\" NVARCHAR(200) NOT NULL)",
+   "expected": "CREATE TABLE \"x\" (\"Name\" TEXT(200) NOT NULL)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "mysql",
+   "sql": "CREATE TABLE \"x\" (\"Name\" NVARCHAR(200) NOT NULL)",
+   "expected": "CREATE TABLE `x` (`Name` VARCHAR(200) NOT NULL)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE store (store_id INTEGER PRIMARY KEY AUTOINCREMENT, mgr_id INTEGER NOT NULL UNIQUE REFERENCES staff ON UPDATE CASCADE)",
+   "expected": "CREATE TABLE store (store_id INTEGER PRIMARY KEY AUTOINCREMENT, mgr_id INTEGER NOT NULL UNIQUE REFERENCES staff ON UPDATE CASCADE)",
+   "test": "TestSQLite.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INTEGER, b INTEGER AS (a * 2) STORED)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER AS (a * 2) STORED)",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INTEGER, b INTEGER AS (a * 2))",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER AS (a * 2))",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INTEGER, b AS (a * 2) STORED)",
+   "expected": "CREATE TABLE t (a INTEGER, b AS (a * 2) STORED)",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INTEGER, b AS (a * 2))",
+   "expected": "CREATE TABLE t (a INTEGER, b AS (a * 2))",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INTEGER, b INTEGER GENERATED ALWAYS AS (a * 2) STORED)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER AS (a * 2) STORED)",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INTEGER, b INTEGER GENERATED ALWAYS AS (a * 2) VIRTUAL)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER AS (a * 2))",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INTEGER, b INTEGER GENERATED ALWAYS AS (a * 2))",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER AS (a * 2))",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY)",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT, b AS (a * 2) PERSISTED NOT NULL)",
+   "expected": "CREATE TABLE t (a INTEGER, b AS (a * 2) STORED NOT NULL)",
+   "test": "TestSQLite.test_generated_columns"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT 0XCC",
+   "expected": "SELECT x'CC'",
+   "test": "TestSQLite.test_hexadecimal_literal"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "mysql",
+   "sql": "SELECT 0XCC",
+   "expected": "SELECT x'CC'",
+   "test": "TestSQLite.test_hexadecimal_literal"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY)",
+   "expected": "CREATE TABLE t (a INTEGER)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY, PRIMARY KEY (a))",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY, b INT PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER PRIMARY KEY)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY, b INT, PRIMARY KEY (a, b))",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER, PRIMARY KEY (a, b))",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY (START WITH 10 INCREMENT BY 2))",
+   "expected": "CREATE TABLE t (a INTEGER)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY (START WITH 10 INCREMENT BY 2) PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY (START WITH 10 INCREMENT BY 2), PRIMARY KEY (a))",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY (START WITH 10 INCREMENT BY 2), b INT PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER PRIMARY KEY)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED ALWAYS AS IDENTITY (START WITH 10 INCREMENT BY 2), b INT, PRIMARY KEY (a, b))",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER, PRIMARY KEY (a, b))",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY)",
+   "expected": "CREATE TABLE t (a INTEGER)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY, PRIMARY KEY (a))",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY, b INT PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER PRIMARY KEY)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY, b INT, PRIMARY KEY (a, b))",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER, PRIMARY KEY (a, b))",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY (START WITH 10 INCREMENT BY 2))",
+   "expected": "CREATE TABLE t (a INTEGER)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY (START WITH 10 INCREMENT BY 2) PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY (START WITH 10 INCREMENT BY 2), PRIMARY KEY (a))",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY (START WITH 10 INCREMENT BY 2), b INT PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER PRIMARY KEY)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT AS IDENTITY (START WITH 10 INCREMENT BY 2), b INT, PRIMARY KEY (a, b))",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER, PRIMARY KEY (a, b))",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY)",
+   "expected": "CREATE TABLE t (a INTEGER)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY, PRIMARY KEY (a))",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY, b INT PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER PRIMARY KEY)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY, b INT, PRIMARY KEY (a, b))",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER, PRIMARY KEY (a, b))",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH 10 INCREMENT BY 2))",
+   "expected": "CREATE TABLE t (a INTEGER)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH 10 INCREMENT BY 2) PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH 10 INCREMENT BY 2), PRIMARY KEY (a))",
+   "expected": "CREATE TABLE t (a INTEGER PRIMARY KEY AUTOINCREMENT)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH 10 INCREMENT BY 2), b INT PRIMARY KEY)",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER PRIMARY KEY)",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "read",
+   "read": "",
+   "write": "sqlite",
+   "sql": "CREATE TABLE t (a INT GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH 10 INCREMENT BY 2), b INT, PRIMARY KEY (a, b))",
+   "expected": "CREATE TABLE t (a INTEGER, b INTEGER, PRIMARY KEY (a, b))",
+   "test": "TestSQLite.test_identity_columns"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a.data ->> b.key ->> a.final_key FROM t",
+   "expected": "SELECT a.data ->> b.key ->> a.final_key FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a -> b ->> c -> d FROM t",
+   "expected": "SELECT a -> b ->> c -> d FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a || b ->> c",
+   "expected": "SELECT (a || b) ->> c",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a ->> b || c FROM t",
+   "expected": "SELECT a ->> b || c FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT 2 * 3 || 4",
+   "expected": "SELECT 2 * (3 || 4)",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT 1 + 2 || 3",
+   "expected": "SELECT 1 + (2 || 3)",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a || b * c FROM t",
+   "expected": "SELECT (a || b) * c FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a - b ->> c FROM t",
+   "expected": "SELECT a - (b ->> c) FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a ->> b + c FROM t",
+   "expected": "SELECT (a ->> b) + c FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT -a || b FROM t",
+   "expected": "SELECT -a || b FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a || b COLLATE NOCASE FROM t ORDER BY 1",
+   "expected": "SELECT a || b COLLATE NOCASE FROM t ORDER BY 1",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a COLLATE NOCASE || b -> c FROM t",
+   "expected": "SELECT (a COLLATE NOCASE || b) -> c FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a COLLATE NOCASE || b * c FROM t",
+   "expected": "SELECT (a COLLATE NOCASE || b) * c FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a COLLATE NOCASE -> b + c FROM t",
+   "expected": "SELECT (a COLLATE NOCASE -> b) + c FROM t",
+   "test": "TestSQLite.test_json_arrow_precedence"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "CREATE TABLE foo (bar LONGVARCHAR)",
+   "expected": "CREATE TABLE foo (bar TEXT)",
+   "test": "TestSQLite.test_longvarchar_dtype"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT 1 IN (0) IN (1)",
+   "expected": "SELECT 1 IN (0) IN (1)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT 1 LIKE 2 LIKE 3",
+   "expected": "SELECT 1 LIKE 2 LIKE 3",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT 1 NOT IN (0) IN (0, 1)",
+   "expected": "SELECT (NOT 1 IN (0)) IN (0, 1)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT x NOT IN (1) IS TRUE",
+   "expected": "SELECT (NOT x IN (1)) IS TRUE",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT 0 NOT IN (1) NOT IN (2)",
+   "expected": "SELECT NOT (NOT 0 IN (1)) IN (2)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "WITH xyz(x) AS (SELECT 1) SELECT x FROM xyz",
+   "expected": "WITH xyz(x) AS (SELECT 1) SELECT x FROM xyz",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t AS t INDEXED BY s.i",
+   "expected": "SELECT * FROM t AS t INDEXED BY s.i",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t INDEXED BY s.i",
+   "expected": "SELECT * FROM t INDEXED BY s.i",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t INDEXED BY i",
+   "expected": "SELECT * FROM t INDEXED BY i",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t NOT INDEXED",
+   "expected": "SELECT * FROM t NOT INDEXED",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT match FROM t",
+   "expected": "SELECT match FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT rowid FROM t1 WHERE t1 MATCH 'lorem'",
+   "expected": "SELECT rowid FROM t1 WHERE t1 MATCH 'lorem'",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t WHERE a REGEXP 'x'",
+   "expected": "SELECT * FROM t WHERE a REGEXP 'x'",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT GROUP_CONCAT(x ORDER BY y)",
+   "expected": "SELECT GROUP_CONCAT(x ORDER BY y)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT GROUP_CONCAT(x, ',' ORDER BY y)",
+   "expected": "SELECT GROUP_CONCAT(x, ',' ORDER BY y)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT GROUP_CONCAT(DISTINCT x ORDER BY y DESC)",
+   "expected": "SELECT GROUP_CONCAT(DISTINCT x ORDER BY y DESC)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT GROUP_CONCAT(x, ',') OVER (PARTITION BY z ORDER BY y)",
+   "expected": "SELECT GROUP_CONCAT(x, ',') OVER (PARTITION BY z ORDER BY y)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "mysql",
+   "sql": "SELECT GROUP_CONCAT(x, ',' ORDER BY y)",
+   "expected": "SELECT GROUP_CONCAT(x ORDER BY y SEPARATOR ',')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "tsql",
+   "sql": "SELECT GROUP_CONCAT(x, ',' ORDER BY y)",
+   "expected": "SELECT STRING_AGG(x, ',') WITHIN GROUP (ORDER BY y)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT GROUP_CONCAT(x, ',' ORDER BY y) OVER (PARTITION BY z)",
+   "expectedError": "unsupported",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "sqlite",
+   "sql": "SELECT STRING_AGG(x, ',' ORDER BY y) FILTER (WHERE y > 0) OVER (PARTITION BY z)",
+   "expected": "SELECT GROUP_CONCAT(x, ',') FILTER(WHERE y > 0) OVER (PARTITION BY z)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT SUM(z) OVER (PARTITION BY GROUP_CONCAT(x ORDER BY y)) FROM t GROUP BY z",
+   "expected": "SELECT SUM(z) OVER (PARTITION BY GROUP_CONCAT(x ORDER BY y)) FROM t GROUP BY z",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT RANK() OVER (RANGE CURRENT ROW) FROM tbl",
+   "expected": "SELECT RANK() OVER (RANGE CURRENT ROW) FROM tbl",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT RANK() OVER (RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) FROM tbl",
+   "expected": "SELECT RANK() OVER (RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) FROM tbl",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT RANK() OVER (RANGE BETWEEN CURRENT ROW AND CURRENT ROW) FROM tbl",
+   "expected": "SELECT RANK() OVER (RANGE BETWEEN CURRENT ROW AND CURRENT ROW) FROM tbl",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT RANK() OVER (ORDER BY x RANGE BETWEEN CURRENT ROW AND 1 + 1 FOLLOWING) FROM tbl",
+   "expected": "SELECT RANK() OVER (ORDER BY x RANGE BETWEEN CURRENT ROW AND 1 + 1 FOLLOWING) FROM tbl",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "UNHEX(a, b)",
+   "expected": "UNHEX(a, b)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT DATE()",
+   "expected": "SELECT DATE()",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT DATE('now', 'start of month', '+1 month', '-1 day')",
+   "expected": "SELECT DATE('now', 'start of month', '+1 month', '-1 day')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "sqlite",
+   "sql": "SELECT DATE_ADD(d, INTERVAL 1 DAY) FROM t",
+   "expected": "SELECT DATE(d, '1 DAY') FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "sqlite",
+   "sql": "SELECT DATE_ADD(d, INTERVAL (-1) DAY) FROM t",
+   "expected": "SELECT DATE(d, '-1 DAY') FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "sqlite",
+   "sql": "SELECT DATE_ADD(d, INTERVAL (n) DAY) FROM t",
+   "expected": "SELECT DATE(d, (n) || ' DAY') FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "sqlite",
+   "sql": "SELECT DATE_ADD(d, INTERVAL (n + 1) DAY) FROM t",
+   "expected": "SELECT DATE(d, (n + 1) || ' DAY') FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "sqlite",
+   "sql": "SELECT DATE_ADD(d, INTERVAL (-n) MONTH) FROM t",
+   "expected": "SELECT DATE(d, (-n) || ' MONTH') FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "sqlite",
+   "sql": "SELECT DATE_ADD(d, INTERVAL (NULL) DAY) FROM t",
+   "expected": "SELECT DATE(d, (NULL) || ' DAY') FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT DATETIME(1092941466, 'unixepoch')",
+   "expected": "SELECT DATETIME(1092941466, 'unixepoch')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT DATETIME(1092941466, 'auto')",
+   "expected": "SELECT DATETIME(1092941466, 'auto')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT DATETIME(1092941466, 'unixepoch', 'localtime')",
+   "expected": "SELECT DATETIME(1092941466, 'unixepoch', 'localtime')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT UNIXEPOCH()",
+   "expected": "SELECT UNIXEPOCH()",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT JULIANDAY('now') - JULIANDAY('1776-07-04')",
+   "expected": "SELECT JULIANDAY('now') - JULIANDAY('1776-07-04')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT UNIXEPOCH() - UNIXEPOCH('2004-01-01 02:34:56')",
+   "expected": "SELECT UNIXEPOCH() - UNIXEPOCH('2004-01-01 02:34:56')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT DATE('now', 'start of year', '+9 months', 'weekday 2')",
+   "expected": "SELECT DATE('now', 'start of year', '+9 months', 'weekday 2')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT (JULIANDAY('now') - 2440587.5) * 86400.0",
+   "expected": "SELECT (JULIANDAY('now') - 2440587.5) * 86400.0",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT UNIXEPOCH('now', 'subsec')",
+   "expected": "SELECT UNIXEPOCH('now', 'subsec')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT TIMEDIFF('now', '1809-02-12')",
+   "expected": "SELECT TIMEDIFF('now', '1809-02-12')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT * FROM GENERATE_SERIES(1, 5)",
+   "expected": "SELECT * FROM GENERATE_SERIES(1, 5)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT INSTR(haystack, needle)",
+   "expected": "SELECT INSTR(haystack, needle)",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a, SUM(b) OVER (ORDER BY a ROWS BETWEEN -1 PRECEDING AND 1 FOLLOWING) FROM t1 ORDER BY 1",
+   "expected": "SELECT a, SUM(b) OVER (ORDER BY a ROWS BETWEEN -1 PRECEDING AND 1 FOLLOWING) FROM t1 ORDER BY 1",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT JSON_EXTRACT('[10, 20, [30, 40]]', '$[2]', '$[0]', '$[1]')",
+   "expected": "SELECT JSON_EXTRACT('[10, 20, [30, 40]]', '$[2]', '$[0]', '$[1]')",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT JSON_EXTRACT(a, '$.k') FROM t",
+   "expected": "SELECT JSON_EXTRACT(a, '$.k') FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a -> '$.k' FROM t",
+   "expected": "SELECT a -> '$.k' FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a ->> '$.k' FROM t",
+   "expected": "SELECT a ->> '$.k' FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a -> 'it''s' FROM t",
+   "expected": "SELECT a -> 'it''s' FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT a ->> 'it''s' FROM t",
+   "expected": "SELECT a ->> 'it''s' FROM t",
+   "test": "TestSQLite.test_sqlite"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT STRFTIME('%Y/%m/%d', 'now')",
+   "expected": "SELECT STRFTIME('%Y/%m/%d', 'now')",
+   "test": "TestSQLite.test_strftime"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT STRFTIME('%Y-%m-%d', '2016-10-16', 'start of month')",
+   "expected": "SELECT STRFTIME('%Y-%m-%d', '2016-10-16', 'start of month')",
+   "test": "TestSQLite.test_strftime"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT STRFTIME('%s')",
+   "expected": "SELECT STRFTIME('%s', CURRENT_TIMESTAMP)",
+   "test": "TestSQLite.test_strftime"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "duckdb",
+   "sql": "SELECT STRFTIME('%Y-%m-%d', '2020-01-01 12:05:03')",
+   "expected": "SELECT STRFTIME(CAST('2020-01-01 12:05:03' AS TIMESTAMP), '%Y-%m-%d')",
+   "test": "TestSQLite.test_strftime"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT STRFTIME('%Y-%m-%d', '2020-01-01 12:05:03')",
+   "expected": "SELECT STRFTIME('%Y-%m-%d', '2020-01-01 12:05:03')",
+   "test": "TestSQLite.test_strftime"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "duckdb",
+   "sql": "SELECT STRFTIME('%Y-%m-%d', CURRENT_TIMESTAMP)",
+   "expected": "SELECT STRFTIME(CAST(CURRENT_TIMESTAMP AS TIMESTAMP), '%Y-%m-%d')",
+   "test": "TestSQLite.test_strftime"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT STRFTIME('%Y-%m-%d', CURRENT_TIMESTAMP)",
+   "expected": "SELECT STRFTIME('%Y-%m-%d', CURRENT_TIMESTAMP)",
+   "test": "TestSQLite.test_strftime"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "TRUNC(3.14)",
+   "expected": "TRUNC(3.14)",
+   "test": "TestSQLite.test_trunc"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "TRUNC(3.14, 2)",
+   "expected": "TRUNC(3.14)",
+   "test": "TestSQLite.test_trunc"
+  },
+  {
+   "kind": "identity",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT * FROM t AS t(c1, c2)",
+   "expected": "SELECT * FROM t AS t",
+   "test": "TestSQLite.test_warnings"
+  },
+  {
+   "kind": "write",
+   "read": "sqlite",
+   "write": "sqlite",
+   "sql": "SELECT FIRST_VALUE(Name) OVER (PARTITION BY AlbumId ORDER BY Bytes DESC) AS LargestTrack FROM tracks",
+   "expected": "SELECT FIRST_VALUE(Name) OVER (PARTITION BY AlbumId ORDER BY Bytes DESC) AS LargestTrack FROM tracks",
+   "test": "TestSQLite.test_window_null_treatment"
+  }
+ ]
+}

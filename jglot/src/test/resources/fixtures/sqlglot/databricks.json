@@ -1,0 +1,1846 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_databricks.py",
+ "cases": [
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "tsql",
+   "sql": "SELECT DATEADD(year, 1, '2020-01-01')",
+   "expected": "SELECT DATEADD(YEAR, 1, '2020-01-01')",
+   "test": "TestDatabricks.test_add_date"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEADD(year, 1, '2020-01-01')",
+   "expected": "SELECT DATE_ADD(YEAR, 1, '2020-01-01')",
+   "test": "TestDatabricks.test_add_date"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF('end', 'start')",
+   "expected": "SELECT DATEDIFF(DAY, 'start', 'end')",
+   "test": "TestDatabricks.test_add_date"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "tsql",
+   "sql": "SELECT DATE_ADD('2020-01-01', 1)",
+   "expected": "SELECT DATEADD(DAY, 1, CAST(CAST('2020-01-01' AS DATETIME2) AS DATE))",
+   "test": "TestDatabricks.test_add_date"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATE_ADD('2020-01-01', 1)",
+   "expected": "SELECT DATE_ADD('2020-01-01', 1)",
+   "test": "TestDatabricks.test_add_date"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATE_ADD(MONTH, 1, '2020-01-01')",
+   "expected": "SELECT DATE_ADD(MONTH, 1, '2020-01-01')",
+   "test": "TestDatabricks.test_add_date"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEADD(e, 24) FROM t",
+   "expected": "SELECT DATE_ADD(e, 24) FROM t",
+   "test": "TestDatabricks.test_add_date"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ANALYZE TABLE tbl COMPUTE DELTA STATISTICS NOSCAN",
+   "expected": "ANALYZE TABLE tbl COMPUTE DELTA STATISTICS NOSCAN",
+   "test": "TestDatabricks.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ANALYZE TABLE tbl COMPUTE DELTA STATISTICS FOR ALL COLUMNS",
+   "expected": "ANALYZE TABLE tbl COMPUTE DELTA STATISTICS FOR ALL COLUMNS",
+   "test": "TestDatabricks.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ANALYZE TABLE tbl COMPUTE DELTA STATISTICS FOR COLUMNS foo, bar",
+   "expected": "ANALYZE TABLE tbl COMPUTE DELTA STATISTICS FOR COLUMNS foo, bar",
+   "test": "TestDatabricks.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ANALYZE TABLE ctlg.db.tbl COMPUTE DELTA STATISTICS NOSCAN",
+   "expected": "ANALYZE TABLE ctlg.db.tbl COMPUTE DELTA STATISTICS NOSCAN",
+   "test": "TestDatabricks.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ANALYZE TABLES COMPUTE STATISTICS NOSCAN",
+   "expected": "ANALYZE TABLES COMPUTE STATISTICS NOSCAN",
+   "test": "TestDatabricks.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ANALYZE TABLES FROM db COMPUTE STATISTICS",
+   "expected": "ANALYZE TABLES FROM db COMPUTE STATISTICS",
+   "test": "TestDatabricks.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ANALYZE TABLES IN db COMPUTE STATISTICS",
+   "expected": "ANALYZE TABLES IN db COMPUTE STATISTICS",
+   "test": "TestDatabricks.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ANALYZE TABLE ctlg.db.tbl PARTITION(foo = 'foo', bar = 'bar') COMPUTE STATISTICS NOSCAN",
+   "expected": "ANALYZE TABLE ctlg.db.tbl PARTITION(foo = 'foo', bar = 'bar') COMPUTE STATISTICS NOSCAN",
+   "test": "TestDatabricks.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE foo (my_arr ARRAY<STRING COLLATE UTF8_BINARY>)",
+   "expected": "CREATE TABLE foo (my_arr ARRAY<STRING COLLATE UTF8_BINARY>)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE foo (m MAP<STRING, STRING COLLATE UTF8_BINARY>)",
+   "expected": "CREATE TABLE foo (m MAP<STRING, STRING COLLATE UTF8_BINARY>)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CAST('a' AS STRING COLLATE UTF8_BINARY)",
+   "expected": "SELECT CAST('a' AS STRING COLLATE UTF8_BINARY)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT COSH(1.5)",
+   "expected": "SELECT COSH(1.5)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DESCRIBE EXTENDED staging.onetrade_startb AS JSON",
+   "expected": "DESCRIBE EXTENDED staging.onetrade_startb AS JSON",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT BITMAP_BIT_POSITION(10)",
+   "expected": "SELECT BITMAP_BIT_POSITION(10)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT BITMAP_BUCKET_NUMBER(32769)",
+   "expected": "SELECT BITMAP_BUCKET_NUMBER(32769)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT BITMAP_CONSTRUCT_AGG(value)",
+   "expected": "SELECT BITMAP_CONSTRUCT_AGG(value)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT EXP(1)",
+   "expected": "SELECT EXP(1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT MODE(category)",
+   "expected": "SELECT MODE(category)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT MODE(price, TRUE) AS deterministic_mode FROM products",
+   "expected": "SELECT MODE(price, TRUE) AS deterministic_mode FROM products",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "REGEXP_LIKE(x, y)",
+   "expected": "REGEXP_LIKE(x, y)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CAST(NULL AS VOID)",
+   "expected": "SELECT CAST(NULL AS VOID)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT void FROM t",
+   "expected": "SELECT void FROM t",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT * FROM stream",
+   "expected": "SELECT * FROM stream",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT * FROM STREAM t",
+   "expected": "SELECT * FROM STREAM t",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT t.current_time FROM t",
+   "expected": "SELECT t.current_time FROM t",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ALTER TABLE labels ADD COLUMN label_score FLOAT",
+   "expected": "ALTER TABLE labels ADD COLUMN label_score FLOAT",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DESCRIBE HISTORY a.b",
+   "expected": "DESCRIBE HISTORY a.b",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DESCRIBE history.tbl",
+   "expected": "DESCRIBE history.tbl",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t (a STRUCT<c: MAP<STRING, STRING>>)",
+   "expected": "CREATE TABLE t (a STRUCT<c: MAP<STRING, STRING>>)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t (c STRUCT<interval: DOUBLE COMMENT 'aaa'>)",
+   "expected": "CREATE TABLE t (c STRUCT<interval: DOUBLE COMMENT 'aaa'>)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t (c STRING COMMENT 'Hello World')",
+   "expected": "CREATE TABLE t (c STRING COMMENT 'Hello World')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE my_table TBLPROPERTIES (a.b=15)",
+   "expected": "CREATE TABLE my_table TBLPROPERTIES (a.b=15)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE my_table TBLPROPERTIES ('a.b'=15)",
+   "expected": "CREATE TABLE my_table TBLPROPERTIES ('a.b'=15)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE table1 CLUSTER BY AUTO",
+   "expected": "CREATE TABLE table1 CLUSTER BY AUTO",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t (customer_id INT NOT NULL, ts TIMESTAMP NOT NULL, CONSTRAINT customer_features_pk PRIMARY KEY (customer_id, ts TIMESERIES))",
+   "expected": "CREATE TABLE t (customer_id INT NOT NULL, ts TIMESTAMP NOT NULL, CONSTRAINT customer_features_pk PRIMARY KEY (customer_id, ts TIMESERIES))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t (a INT, b TIMESTAMP, PRIMARY KEY (a, b TIMESERIES))",
+   "expected": "CREATE TABLE t (a INT, b TIMESTAMP, PRIMARY KEY (a, b TIMESERIES))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "duckdb",
+   "sql": "CREATE TABLE t (a INT, b TIMESTAMP, PRIMARY KEY (a, b TIMESERIES))",
+   "expected": "CREATE TABLE t (a INT, b TIMESTAMPTZ, PRIMARY KEY (a, b))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "ALTER TABLE t CLUSTER BY NONE",
+   "expected": "ALTER TABLE t CLUSTER BY NONE",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t CLUSTER BY (col1)",
+   "expected": "CREATE TABLE t CLUSTER BY (col1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t CLUSTER BY (col1, col2)",
+   "expected": "CREATE TABLE t CLUSTER BY (col1, col2)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT col1 FROM t CLUSTER BY col1",
+   "expected": "SELECT col1 FROM t CLUSTER BY col1",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT col1, col2 FROM t CLUSTER BY col1, col2",
+   "expected": "SELECT col1, col2 FROM t CLUSTER BY col1, col2",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CAST('11 23:4:0' AS INTERVAL DAY TO HOUR)",
+   "expected": "SELECT CAST('11 23:4:0' AS INTERVAL DAY TO HOUR)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CAST('11 23:4:0' AS INTERVAL DAY TO MINUTE)",
+   "expected": "SELECT CAST('11 23:4:0' AS INTERVAL DAY TO MINUTE)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CAST('11 23:4:0' AS INTERVAL DAY TO SECOND)",
+   "expected": "SELECT CAST('11 23:4:0' AS INTERVAL DAY TO SECOND)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CAST('23:00:00' AS INTERVAL HOUR TO MINUTE)",
+   "expected": "SELECT CAST('23:00:00' AS INTERVAL HOUR TO MINUTE)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CAST('23:00:00' AS INTERVAL HOUR TO SECOND)",
+   "expected": "SELECT CAST('23:00:00' AS INTERVAL HOUR TO SECOND)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CAST('23:00:00' AS INTERVAL MINUTE TO SECOND)",
+   "expected": "SELECT CAST('23:00:00' AS INTERVAL MINUTE TO SECOND)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE target SHALLOW CLONE source",
+   "expected": "CREATE TABLE target SHALLOW CLONE source",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "INSERT INTO a REPLACE WHERE cond VALUES (1), (2)",
+   "expected": "INSERT INTO a REPLACE WHERE cond VALUES (1), (2)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION a.b(x INT) RETURNS INT RETURN x + 1",
+   "expected": "CREATE FUNCTION a.b(x INT) RETURNS INT RETURN x + 1",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION f(col STRING) RETURNS STRING DETERMINISTIC RETURN col",
+   "expected": "CREATE FUNCTION f(col STRING) RETURNS STRING DETERMINISTIC RETURN col",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION f(col STRING) RETURNS STRING NOT DETERMINISTIC RETURN col",
+   "expected": "CREATE FUNCTION f(col STRING) RETURNS STRING NOT DETERMINISTIC RETURN col",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION a AS b",
+   "expected": "CREATE FUNCTION a AS b",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT ${x} FROM ${y} WHERE ${z} > 1",
+   "expected": "SELECT ${x} FROM ${y} WHERE ${z} > 1",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE foo (x DATE GENERATED ALWAYS AS (CAST(y AS DATE)))",
+   "expected": "CREATE TABLE foo (x DATE GENERATED ALWAYS AS (CAST(y AS DATE)))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "TRUNCATE TABLE t1 PARTITION(age = 10, name = 'test', address)",
+   "expected": "TRUNCATE TABLE t1 PARTITION(age = 10, name = 'test', address)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT PARSE_JSON('{}')",
+   "expected": "SELECT PARSE_JSON('{}')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT RANDSTR(123)",
+   "expected": "SELECT RANDSTR(123)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT RANDSTR(123, 456)",
+   "expected": "SELECT RANDSTR(123, 456)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "PARSE_URL('https://example.com/path')",
+   "expected": "PARSE_URL('https://example.com/path')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "PARSE_URL('https://example.com/path', 'HOST')",
+   "expected": "PARSE_URL('https://example.com/path', 'HOST')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "PARSE_URL('https://example.com/path', 'QUERY', 'param')",
+   "expected": "PARSE_URL('https://example.com/path', 'QUERY', 'param')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE IF NOT EXISTS db.table (a TIMESTAMP, b BOOLEAN GENERATED ALWAYS AS (NOT a IS NULL)) USING DELTA",
+   "expected": "CREATE TABLE IF NOT EXISTS db.table (a TIMESTAMP, b BOOLEAN GENERATED ALWAYS AS (NOT a IS NULL)) USING DELTA",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT * FROM sales UNPIVOT INCLUDE NULLS (sales FOR quarter IN (q1 AS `Jan-Mar`))",
+   "expected": "SELECT * FROM sales UNPIVOT INCLUDE NULLS (sales FOR quarter IN (q1 AS `Jan-Mar`))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT * FROM sales UNPIVOT EXCLUDE NULLS (sales FOR quarter IN (q1 AS `Jan-Mar`))",
+   "expected": "SELECT * FROM sales UNPIVOT EXCLUDE NULLS (sales FOR quarter IN (q1 AS `Jan-Mar`))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION add_one(x INT) RETURNS INT LANGUAGE PYTHON AS $$def add_one(x):\n  return x+1$$",
+   "expected": "CREATE FUNCTION add_one(x INT) RETURNS INT LANGUAGE PYTHON AS $$def add_one(x):\n  return x+1$$",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION add_one(x INT) RETURNS INT LANGUAGE PYTHON AS $FOO$def add_one(x):\n  return x+1$FOO$",
+   "expected": "CREATE FUNCTION add_one(x INT) RETURNS INT LANGUAGE PYTHON AS $FOO$def add_one(x):\n  return x+1$FOO$",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "TRUNCATE TABLE t1 PARTITION(age = 10, name = 'test', city LIKE 'LA')",
+   "expected": "TRUNCATE TABLE t1 PARTITION(age = 10, name = 'test', city LIKE 'LA')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "COPY INTO target FROM `s3://link` FILEFORMAT = AVRO VALIDATE = ALL FILES = ('file1', 'file2') FORMAT_OPTIONS ('opt1'='true', 'opt2'='test') COPY_OPTIONS ('mergeSchema'='true')",
+   "expected": "COPY INTO target FROM `s3://link` FILEFORMAT = AVRO VALIDATE = ALL FILES = ('file1', 'file2') FORMAT_OPTIONS ('opt1'='true', 'opt2'='test') COPY_OPTIONS ('mergeSchema'='true')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT * FROM t1, t2",
+   "expected": "SELECT * FROM t1 CROSS JOIN t2",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT TIMESTAMP '2025-04-29 18.47.18'::DATE",
+   "expected": "SELECT CAST(CAST('2025-04-29 18.47.18' AS DATE) AS TIMESTAMP)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATE_FORMAT(CAST(FROM_UTC_TIMESTAMP(foo, 'America/Los_Angeles') AS TIMESTAMP), 'yyyy-MM-dd HH:mm:ss') AS foo FROM t",
+   "expected": "SELECT DATE_FORMAT(CAST(FROM_UTC_TIMESTAMP(CAST(foo AS TIMESTAMP), 'America/Los_Angeles') AS TIMESTAMP), 'yyyy-MM-dd HH:mm:ss') AS foo FROM t",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DATE_DIFF(day, created_at, current_date())",
+   "expected": "DATEDIFF(DAY, created_at, CURRENT_DATE)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT r\"\\\\foo.bar\\\"",
+   "expected": "SELECT '\\\\\\\\foo.bar\\\\'",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "FROM_UTC_TIMESTAMP(x::TIMESTAMP, tz)",
+   "expected": "FROM_UTC_TIMESTAMP(CAST(x AS TIMESTAMP), tz)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT SUBSTRING_INDEX(str, delim, count)",
+   "expected": "SELECT SUBSTRING_INDEX(str, delim, count)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "BITMAP_OR_AGG(x)",
+   "expected": "BITMAP_OR_AGG(x)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT SUBSTRING_INDEX('a.b.c.d', '.', 2)",
+   "expected": "SELECT SUBSTRING_INDEX('a.b.c.d', '.', 2)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT SUBSTRING_INDEX('a.b.c.d', '.', 2)",
+   "expected": "SELECT SUBSTRING_INDEX('a.b.c.d', '.', 2)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "mysql",
+   "sql": "SELECT SUBSTRING_INDEX('a.b.c.d', '.', 2)",
+   "expected": "SELECT SUBSTRING_INDEX('a.b.c.d', '.', 2)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT SUBSTR('Spark' FROM 5 FOR 1)",
+   "expected": "SELECT SUBSTRING('Spark', 5, 1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT SUBSTR('Spark SQL', 5)",
+   "expected": "SELECT SUBSTRING('Spark SQL', 5)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT SUBSTR(ENCODE('Spark SQL', 'utf-8'), 5)",
+   "expected": "SELECT SUBSTRING(ENCODE('Spark SQL', 'utf-8'), 5)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT TYPEOF(1)",
+   "expected": "SELECT TYPEOF(1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "databricks",
+   "sql": "SELECT TYPEOF(1)",
+   "expected": "SELECT TYPEOF(1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "databricks",
+   "sql": "SELECT TYPEOF(1)",
+   "expected": "SELECT TYPEOF(1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "databricks",
+   "sql": "SELECT toTypeName(1)",
+   "expected": "SELECT TYPEOF(1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "clickhouse",
+   "sql": "SELECT TYPEOF(1)",
+   "expected": "SELECT toTypeName(1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT c1:item[1].price",
+   "expected": "SELECT c1:item[1].price",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT c1:item[1].price",
+   "expected": "SELECT GET_JSON_OBJECT(c1, '$.item[1].price')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT GET_JSON_OBJECT(c1, '$.item[1].price')",
+   "expected": "SELECT GET_JSON_OBJECT(c1, '$.item[1].price')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT GET_JSON_OBJECT(c1, '$.item[1].price')",
+   "expected": "SELECT GET_JSON_OBJECT(c1, '$.item[1].price')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT GET_JSON_OBJECT(c1, '$.item[1].price')",
+   "expected": "SELECT GET_JSON_OBJECT(c1, '$.item[1].price')",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE foo (x INT GENERATED ALWAYS AS (YEAR(y)))",
+   "expected": "CREATE TABLE foo (x INT GENERATED ALWAYS AS (YEAR(y)))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "tsql",
+   "sql": "CREATE TABLE foo (x INT GENERATED ALWAYS AS (YEAR(y)))",
+   "expected": "CREATE TABLE foo (x AS YEAR(y))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "teradata",
+   "write": "databricks",
+   "sql": "CREATE TABLE t1 AS (SELECT c FROM t2) WITH DATA",
+   "expected": "CREATE TABLE t1 AS (SELECT c FROM t2)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "spark2",
+   "write": "databricks",
+   "sql": "SELECT X'1A2B'",
+   "expected": "SELECT X'1A2B'",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT X'1A2B'",
+   "expected": "SELECT X'1A2B'",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT x'1A2B'",
+   "expected": "SELECT X'1A2B'",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "spark2",
+   "sql": "SELECT X'1A2B'",
+   "expected": "SELECT X'1A2B'",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT X'1A2B'",
+   "expected": "SELECT X'1A2B'",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT X'1A2B'",
+   "expected": "SELECT X'1A2B'",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE OR REPLACE FUNCTION func(a BIGINT, b BIGINT) RETURNS TABLE (a INT) RETURN SELECT a",
+   "expected": "CREATE OR REPLACE FUNCTION func(a BIGINT, b BIGINT) RETURNS TABLE (a INT) RETURN SELECT a",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "duckdb",
+   "sql": "CREATE OR REPLACE FUNCTION func(a BIGINT, b BIGINT) RETURNS TABLE (a INT) RETURN SELECT a",
+   "expected": "CREATE OR REPLACE FUNCTION func(a BIGINT, b BIGINT) AS TABLE SELECT a",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE OR REPLACE FUNCTION func(a BIGINT, b BIGINT) RETURNS BIGINT RETURN a",
+   "expected": "CREATE OR REPLACE FUNCTION func(a BIGINT, b BIGINT) RETURNS BIGINT RETURN a",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "duckdb",
+   "sql": "CREATE OR REPLACE FUNCTION func(a BIGINT, b BIGINT) RETURNS BIGINT RETURN a",
+   "expected": "CREATE OR REPLACE FUNCTION func(a BIGINT, b BIGINT) AS a",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT ANY(col) FROM VALUES (TRUE), (FALSE) AS tab(col)",
+   "expected": "SELECT ANY(col) FROM VALUES (TRUE), (FALSE) AS tab(col)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "databricks",
+   "sql": "SELECT ANY(col) FROM VALUES (TRUE), (FALSE) AS tab(col)",
+   "expected": "SELECT ANY(col) FROM VALUES (TRUE), (FALSE) AS tab(col)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT ANY(col) FROM VALUES (TRUE), (FALSE) AS tab(col)",
+   "expected": "SELECT ANY(col) FROM VALUES (TRUE), (FALSE) AS tab(col)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t1 (foo BIGINT NOT NULL CONSTRAINT foo_c FOREIGN KEY REFERENCES t2)",
+   "expected": "CREATE TABLE t1 (foo BIGINT NOT NULL CONSTRAINT foo_c FOREIGN KEY REFERENCES t2)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t1 (foo BIGINT NOT NULL CONSTRAINT foo_c FOREIGN KEY REFERENCES t2 (foo))",
+   "expected": "CREATE TABLE t1 (foo BIGINT NOT NULL CONSTRAINT foo_c FOREIGN KEY REFERENCES t2 (foo))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t1 (foo BIGINT NOT NULL CONSTRAINT foo_c FOREIGN KEY REFERENCES t2 MATCH FULL)",
+   "expected": "CREATE TABLE t1 (foo BIGINT NOT NULL CONSTRAINT foo_c FOREIGN KEY REFERENCES t2 MATCH FULL)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE t1 (foo BIGINT NOT NULL CONSTRAINT foo_c FOREIGN KEY REFERENCES t2 NOT ENFORCED)",
+   "expected": "CREATE TABLE t1 (foo BIGINT NOT NULL CONSTRAINT foo_c FOREIGN KEY REFERENCES t2 NOT ENFORCED)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT test, LISTAGG(email, '') AS Email FROM organizations GROUP BY test",
+   "expected": "SELECT test, LISTAGG(email, '') AS Email FROM organizations GROUP BY test",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "WITH t AS (VALUES ('foo_val') AS t(foo1)) SELECT foo1 FROM t",
+   "expected": "WITH t AS (SELECT * FROM VALUES ('foo_val') AS t(foo1)) SELECT foo1 FROM t",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "NTILE() OVER (ORDER BY 1)",
+   "expected": "NTILE() OVER (ORDER BY 1)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CURRENT_VERSION()",
+   "expected": "CURRENT_VERSION()",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "snowflake",
+   "sql": "UNIFORM(1, 10, 5)",
+   "expected": "UNIFORM(1, 10, RANDOM(5))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "UNIFORM(1, 10, 5)",
+   "expected": "UNIFORM(1, 10, 5)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "duckdb",
+   "sql": "UNIFORM(1, 10, 5)",
+   "expected": "CAST(FLOOR(1 + (ABS(HASH(5)) % 1000000) / 1000000.0 * (10 - 1 + 1)) AS BIGINT)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "UNIFORM(1, 10)",
+   "expected": "UNIFORM(1, 10)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "snowflake",
+   "sql": "UNIFORM(1, 10)",
+   "expected": "UNIFORM(1, 10, RANDOM())",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "duckdb",
+   "sql": "UNIFORM(1, 10)",
+   "expected": "CAST(FLOOR(1 + RANDOM() * (10 - 1 + 1)) AS BIGINT)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT ELT(2, 'foo', 'bar', 'baz') AS Result",
+   "expected": "SELECT ELT(2, 'foo', 'bar', 'baz') AS Result",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "GETDATE()",
+   "expected": "CURRENT_TIMESTAMP()",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "NOW()",
+   "expected": "CURRENT_TIMESTAMP()",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CURRENT_TIMEZONE()",
+   "expected": "CURRENT_TIMEZONE()",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CURDATE()",
+   "expected": "CURRENT_DATE",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CURDATE",
+   "expected": "CURRENT_DATE",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT MAKE_INTERVAL(100, 11, 12, 13, 14, 14, 15)",
+   "expected": "SELECT MAKE_INTERVAL(100, 11, 12, 13, 14, 14, 15)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT name, GROUPING_ID() FROM customer GROUP BY ROLLUP (name)",
+   "expected": "SELECT name, GROUPING_ID() FROM customer GROUP BY ROLLUP (name)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "BIT_GET(11, 0)",
+   "expected": "GETBIT(11, 0)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT CURDATE()",
+   "expected": "SELECT CURRENT_DATE",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE tbl (id BIGINT NOT NULL GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1))",
+   "expected": "CREATE TABLE tbl (id BIGINT NOT NULL GENERATED BY DEFAULT AS IDENTITY (START WITH 1 INCREMENT BY 1))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE tbl (id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1))",
+   "expected": "CREATE TABLE tbl (id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1))",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT get_json_object(c, '$.x-y') FROM t",
+   "expected": "WITH t AS (SELECT '{\"x-y\": \"z\"}' AS c) SELECT GET_JSON_OBJECT(c, '$[\"x-y\"]') FROM t",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "INSERT INTO t REPLACE WHERE a = 1 SELECT * FROM src",
+   "expected": "INSERT INTO t REPLACE WHERE a = 1 SELECT * FROM src",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "INSERT INTO t REPLACE WHERE a = 2 (SELECT * FROM src)",
+   "expected": "INSERT INTO t REPLACE WHERE a = 2 (SELECT * FROM src)",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "WITH s AS (SELECT * FROM src) INSERT INTO t REPLACE WHERE a = 1 SELECT * FROM s",
+   "expected": "WITH s AS (SELECT * FROM src) INSERT INTO t REPLACE WHERE a = 1 SELECT * FROM s",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "WITH s AS (SELECT * FROM src) INSERT INTO t REPLACE USING (a) SELECT * FROM s",
+   "expected": "WITH s AS (SELECT * FROM src) INSERT INTO t REPLACE USING (a) SELECT * FROM s",
+   "test": "TestDatabricks.test_databricks"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "tsql",
+   "sql": "SELECT DATEDIFF(year, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(YEAR, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(year, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(YEAR, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(microsecond, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(MICROSECOND, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(microsecond, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(epoch FROM CAST('end' AS TIMESTAMP) - CAST('start' AS TIMESTAMP)) * 1000000 AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(millisecond, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(MILLISECOND, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(millisecond, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(epoch FROM CAST('end' AS TIMESTAMP) - CAST('start' AS TIMESTAMP)) * 1000 AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(second, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(SECOND, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(second, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(epoch FROM CAST('end' AS TIMESTAMP) - CAST('start' AS TIMESTAMP)) AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(minute, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(MINUTE, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(minute, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(epoch FROM CAST('end' AS TIMESTAMP) - CAST('start' AS TIMESTAMP)) / 60 AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(hour, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(HOUR, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(hour, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(epoch FROM CAST('end' AS TIMESTAMP) - CAST('start' AS TIMESTAMP)) / 3600 AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(day, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(DAY, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(day, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(epoch FROM CAST('end' AS TIMESTAMP) - CAST('start' AS TIMESTAMP)) / 86400 AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(week, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(WEEK, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(week, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(days FROM (CAST('end' AS TIMESTAMP) - CAST('start' AS TIMESTAMP))) / 7 AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(month, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(MONTH, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(month, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(year FROM AGE(CAST('end' AS TIMESTAMP), CAST('start' AS TIMESTAMP))) * 12 + EXTRACT(month FROM AGE(CAST('end' AS TIMESTAMP), CAST('start' AS TIMESTAMP))) AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(quarter, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(QUARTER, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(quarter, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(year FROM AGE(CAST('end' AS TIMESTAMP), CAST('start' AS TIMESTAMP))) * 4 + EXTRACT(month FROM AGE(CAST('end' AS TIMESTAMP), CAST('start' AS TIMESTAMP))) / 3 AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT DATEDIFF(year, 'start', 'end')",
+   "expected": "SELECT DATEDIFF(YEAR, 'start', 'end')",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT DATEDIFF(year, 'start', 'end')",
+   "expected": "SELECT CAST(EXTRACT(year FROM AGE(CAST('end' AS TIMESTAMP), CAST('start' AS TIMESTAMP))) AS BIGINT)",
+   "test": "TestDatabricks.test_datediff"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DECLARE VAR x INT",
+   "expected": "DECLARE x INT",
+   "test": "TestDatabricks.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DECLARE x INT",
+   "expected": "DECLARE x INT",
+   "test": "TestDatabricks.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DECLARE VARIABLE myvar INT DEFAULT 1",
+   "expected": "DECLARE myvar INT = 1",
+   "test": "TestDatabricks.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DECLARE x, y, z INT DEFAULT 1",
+   "expected": "DECLARE x, y, z INT = 1",
+   "test": "TestDatabricks.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DECLARE x INT = 1",
+   "expected": "DECLARE x INT = 1",
+   "test": "TestDatabricks.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "DECLARE OR REPLACE x INT = 1",
+   "expected": "DECLARE OR REPLACE x INT = 1",
+   "test": "TestDatabricks.test_declare"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "GRANT CREATE ON SCHEMA my_schema TO `alf@melmak.et`",
+   "expected": "GRANT CREATE ON SCHEMA my_schema TO `alf@melmak.et`",
+   "test": "TestDatabricks.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "GRANT SELECT ON TABLE sample_data TO `alf@melmak.et`",
+   "expected": "GRANT SELECT ON TABLE sample_data TO `alf@melmak.et`",
+   "test": "TestDatabricks.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "GRANT ALL PRIVILEGES ON TABLE forecasts TO finance",
+   "expected": "GRANT ALL PRIVILEGES ON TABLE forecasts TO finance",
+   "test": "TestDatabricks.test_grant"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "GRANT SELECT ON TABLE t TO `fab9e00e-ca35-11ec-9d64-0242ac120002`",
+   "expected": "GRANT SELECT ON TABLE t TO `fab9e00e-ca35-11ec-9d64-0242ac120002`",
+   "test": "TestDatabricks.test_grant"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT IFF(x > 0, 'positive', 'non-positive')",
+   "expected": "SELECT IF(x > 0, 'positive', 'non-positive')",
+   "test": "TestDatabricks.test_iff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT IF(x > 0, 'positive', 'non-positive')",
+   "expected": "SELECT IF(x > 0, 'positive', 'non-positive')",
+   "test": "TestDatabricks.test_iff"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "snowflake",
+   "sql": "SELECT IF(x > 0, 'positive', 'non-positive')",
+   "expected": "SELECT IFF(x > 0, 'positive', 'non-positive')",
+   "test": "TestDatabricks.test_iff"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "INSERT INTO target REPLACE USING (c1, c2) SELECT c1, c2 FROM source",
+   "expected": "INSERT INTO target REPLACE USING (c1, c2) SELECT c1, c2 FROM source",
+   "test": "TestDatabricks.test_insert_replace_using"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT c1:price, c1:price.foo, c1:price.bar[1]",
+   "expected": "SELECT c1:price, c1:price.foo, c1:price.bar[1]",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT TRY_CAST(c1:price AS ARRAY<VARIANT>)",
+   "expected": "SELECT TRY_CAST(c1:price AS ARRAY<VARIANT>)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT TRY_CAST(c1:[\"foo bar\"][\"baz qux\"] AS ARRAY<VARIANT>)",
+   "expected": "SELECT TRY_CAST(c1:[\"foo bar\"][\"baz qux\"] AS ARRAY<VARIANT>)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT c1:item[1].price FROM VALUES ('{ \"item\": [ { \"model\" : \"basic\", \"price\" : 6.12 }, { \"model\" : \"medium\", \"price\" : 9.24 } ] }') AS T(c1)",
+   "expected": "SELECT c1:item[1].price FROM VALUES ('{ \"item\": [ { \"model\" : \"basic\", \"price\" : 6.12 }, { \"model\" : \"medium\", \"price\" : 9.24 } ] }') AS T(c1)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT c1:item[*].price FROM VALUES ('{ \"item\": [ { \"model\" : \"basic\", \"price\" : 6.12 }, { \"model\" : \"medium\", \"price\" : 9.24 } ] }') AS T(c1)",
+   "expected": "SELECT c1:item[*].price FROM VALUES ('{ \"item\": [ { \"model\" : \"basic\", \"price\" : 6.12 }, { \"model\" : \"medium\", \"price\" : 9.24 } ] }') AS T(c1)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT FROM_JSON(c1:item[*].price, 'ARRAY<DOUBLE>')[0] FROM VALUES ('{ \"item\": [ { \"model\" : \"basic\", \"price\" : 6.12 }, { \"model\" : \"medium\", \"price\" : 9.24 } ] }') AS T(c1)",
+   "expected": "SELECT FROM_JSON(c1:item[*].price, 'ARRAY<DOUBLE>')[0] FROM VALUES ('{ \"item\": [ { \"model\" : \"basic\", \"price\" : 6.12 }, { \"model\" : \"medium\", \"price\" : 9.24 } ] }') AS T(c1)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT INLINE(FROM_JSON(c1:item[*], 'ARRAY<STRUCT<model STRING, price DOUBLE>>')) FROM VALUES ('{ \"item\": [ { \"model\" : \"basic\", \"price\" : 6.12 }, { \"model\" : \"medium\", \"price\" : 9.24 } ] }') AS T(c1)",
+   "expected": "SELECT INLINE(FROM_JSON(c1:item[*], 'ARRAY<STRUCT<model STRING, price DOUBLE>>')) FROM VALUES ('{ \"item\": [ { \"model\" : \"basic\", \"price\" : 6.12 }, { \"model\" : \"medium\", \"price\" : 9.24 } ] }') AS T(c1)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT c1:['price'] FROM VALUES ('{ \"price\": 5 }') AS T(c1)",
+   "expected": "SELECT c1:[\"price\"] FROM VALUES ('{ \"price\": 5 }') AS T(c1)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT GET_JSON_OBJECT(c1, '$.price') FROM VALUES ('{ \"price\": 5 }') AS T(c1)",
+   "expected": "SELECT GET_JSON_OBJECT(c1, '$.price') FROM VALUES ('{ \"price\": 5 }') AS T(c1)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT GET_JSON_OBJECT(col, path_col)",
+   "expected": "SELECT GET_JSON_OBJECT(col, path_col)",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT GET_JSON_OBJECT(col, CONCAT('$.', field_name))",
+   "expected": "SELECT GET_JSON_OBJECT(col, CONCAT('$.', field_name))",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT GET_JSON_OBJECT(GET_JSON_OBJECT(col, '$[0]'), '$.a')",
+   "expected": "SELECT GET_JSON_OBJECT(GET_JSON_OBJECT(col, '$[0]'), '$.a')",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT raw:`zip code`, raw:`fb:testid`, raw:store['bicycle'], raw:store[\"zip code\"]",
+   "expected": "SELECT raw:[\"zip code\"], raw:[\"fb:testid\"], raw:store[\"bicycle\"], raw:store[\"zip code\"]",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT col:`fr'uit`",
+   "expected": "SELECT col:[\"fr'uit\"]",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "postgres",
+   "sql": "SELECT col:`fr'uit`",
+   "expected": "SELECT JSON_EXTRACT_PATH(col, 'fr''uit')",
+   "test": "TestDatabricks.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT symbol, start_tstamp, end_tstamp, run_length FROM stock_ticker MATCH_RECOGNIZE (PARTITION BY symbol ORDER BY tstamp MEASURES FIRST(tstamp) AS start_tstamp, LAST(tstamp) AS end_tstamp, COUNT(*) AS run_length ONE ROW PER MATCH AFTER MATCH SKIP PAST LAST ROW PATTERN (strt up+) DEFINE up AS price > PREV(price)) AS T",
+   "expected": "SELECT symbol, start_tstamp, end_tstamp, run_length FROM stock_ticker MATCH_RECOGNIZE (PARTITION BY symbol ORDER BY tstamp MEASURES FIRST(tstamp) AS start_tstamp, LAST(tstamp) AS end_tstamp, COUNT(*) AS run_length ONE ROW PER MATCH AFTER MATCH SKIP PAST LAST ROW PATTERN (strt up+) DEFINE up AS price > PREV(price)) T",
+   "test": "TestDatabricks.test_match_recognize"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT * FROM stock_ticker MATCH_RECOGNIZE (PARTITION BY symbol ORDER BY tstamp MEASURES MATCH_NUMBER() AS match_no, CLASSIFIER() AS class, LAST(down.tstamp) AS bottom_tstamp PATTERN (strt down+ up+) DEFINE down AS price < PREV(price), up AS price > PREV(price))",
+   "expected": "SELECT * FROM stock_ticker MATCH_RECOGNIZE (PARTITION BY symbol ORDER BY tstamp MEASURES MATCH_NUMBER() AS match_no, CLASSIFIER() AS class, LAST(down.tstamp) AS bottom_tstamp PATTERN (strt down+ up+) DEFINE down AS price < PREV(price), up AS price > PREV(price))",
+   "test": "TestDatabricks.test_match_recognize"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT * FROM stock_ticker MATCH_RECOGNIZE (PARTITION BY symbol ORDER BY tstamp MEASURES MATCH_NUMBER() AS match_no, CLASSIFIER() AS class, LAST(down.tstamp) AS bottom_tstamp ALL ROWS PER MATCH PATTERN (strt down+ up+) DEFINE down AS price < PREV(price), up AS price > PREV(price))",
+   "expected": "SELECT * FROM stock_ticker MATCH_RECOGNIZE (PARTITION BY symbol ORDER BY tstamp MEASURES MATCH_NUMBER() AS match_no, CLASSIFIER() AS class, LAST(down.tstamp) AS bottom_tstamp ALL ROWS PER MATCH PATTERN (strt down+ up+) DEFINE down AS price < PREV(price), up AS price > PREV(price))",
+   "test": "TestDatabricks.test_match_recognize"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT * FROM stock_ticker MATCH_RECOGNIZE (PARTITION BY symbol ORDER BY tstamp MEASURES MATCH_NUMBER() AS match_no, CLASSIFIER() AS class, LAST(down.tstamp) AS bottom_tstamp ALL ROWS PER MATCH SHOW EMPTY MATCHES PATTERN (strt down+ up+) DEFINE down AS price < PREV(price), up AS price > PREV(price))",
+   "expected": "SELECT * FROM stock_ticker MATCH_RECOGNIZE (PARTITION BY symbol ORDER BY tstamp MEASURES MATCH_NUMBER() AS match_no, CLASSIFIER() AS class, LAST(down.tstamp) AS bottom_tstamp ALL ROWS PER MATCH SHOW EMPTY MATCHES PATTERN (strt down+ up+) DEFINE down AS price < PREV(price), up AS price > PREV(price))",
+   "test": "TestDatabricks.test_match_recognize"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT OVERLAY('Spark SQL', 'ANSI ', 7, 0)",
+   "expected": "SELECT OVERLAY('Spark SQL' PLACING 'ANSI ' FROM 7 FOR 0)",
+   "test": "TestDatabricks.test_overlay"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT OVERLAY('Spark SQL' PLACING 'CORE' FROM 7)",
+   "expected": "SELECT OVERLAY('Spark SQL' PLACING 'CORE' FROM 7)",
+   "test": "TestDatabricks.test_overlay"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT OVERLAY(ENCODE('Spark SQL', 'utf-8') PLACING ENCODE('_', 'utf-8') FROM 6)",
+   "expected": "SELECT OVERLAY(ENCODE('Spark SQL', 'utf-8') PLACING ENCODE('_', 'utf-8') FROM 6)",
+   "test": "TestDatabricks.test_overlay"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT OVERLAY('Spark SQL' PLACING 'ANSI ' FROM 7 FOR 0)",
+   "expected": "SELECT OVERLAY('Spark SQL' PLACING 'ANSI ' FROM 7 FOR 0)",
+   "test": "TestDatabricks.test_overlay"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT '20'?::INTEGER",
+   "expected": "SELECT TRY_CAST('20' AS INT)",
+   "test": "TestDatabricks.test_qdcolon"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "REVOKE CREATE ON SCHEMA my_schema FROM `alf@melmak.et`",
+   "expected": "REVOKE CREATE ON SCHEMA my_schema FROM `alf@melmak.et`",
+   "test": "TestDatabricks.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "REVOKE SELECT ON TABLE sample_data FROM `alf@melmak.et`",
+   "expected": "REVOKE SELECT ON TABLE sample_data FROM `alf@melmak.et`",
+   "test": "TestDatabricks.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "REVOKE ALL PRIVILEGES ON TABLE forecasts FROM finance",
+   "expected": "REVOKE ALL PRIVILEGES ON TABLE forecasts FROM finance",
+   "test": "TestDatabricks.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "REVOKE SELECT ON TABLE t FROM `fab9e00e-ca35-11ec-9d64-0242ac120002`",
+   "expected": "REVOKE SELECT ON TABLE t FROM `fab9e00e-ca35-11ec-9d64-0242ac120002`",
+   "test": "TestDatabricks.test_revoke"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SET VAR v = 5",
+   "expected": "SET VARIABLE v = 5",
+   "test": "TestDatabricks.test_set_variable"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SET VARIABLE v = 5",
+   "expected": "SET VARIABLE v = 5",
+   "test": "TestDatabricks.test_set_variable"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SET VARIABLE v1 = 1, v2 = '2'",
+   "expected": "SET VARIABLE v1 = 1, v2 = '2'",
+   "test": "TestDatabricks.test_set_variable"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SET VARIABLE (v1, v2) = (SELECT 1, 2)",
+   "expected": "SET VARIABLE (v1, v2) = (SELECT 1, 2)",
+   "test": "TestDatabricks.test_set_variable"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SET VARIABLE v = (SELECT MAX(c1) FROM VALUES (1), (2) AS T(c1))",
+   "expected": "SET VARIABLE v = (SELECT MAX(c1) FROM VALUES (1), (2) AS T(c1))",
+   "test": "TestDatabricks.test_set_variable"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SET VARIABLE v = DEFAULT",
+   "expected": "SET VARIABLE v = DEFAULT",
+   "test": "TestDatabricks.test_set_variable"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE STREAMING TABLE raw_data AS SELECT * FROM STREAM READ_FILES('abfss://container@storageAccount.dfs.core.windows.net/base/path')",
+   "expected": "CREATE STREAMING TABLE raw_data AS SELECT * FROM STREAM READ_FILES('abfss://container@storageAccount.dfs.core.windows.net/base/path')",
+   "test": "TestDatabricks.test_streaming_tables"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE OR REFRESH STREAMING TABLE csv_data (id INT, ts TIMESTAMP, event STRING) AS SELECT * FROM STREAM READ_FILES('s3://bucket/path', format => 'csv', schema => 'id int, ts timestamp, event string')",
+   "expected": "CREATE OR REFRESH STREAMING TABLE csv_data (id INT, ts TIMESTAMP, event STRING) AS SELECT * FROM STREAM READ_FILES('s3://bucket/path', format => 'csv', schema => 'id int, ts timestamp, event string')",
+   "test": "TestDatabricks.test_streaming_tables"
+  },
+  {
+   "kind": "read",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT TRY_DIVIDE(a, b)",
+   "test": "TestDatabricks.test_try_divide"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT TRY_DIVIDE(a, b)",
+   "test": "TestDatabricks.test_try_divide"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "snowflake",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT IFF(b <> 0, a / b, NULL)",
+   "test": "TestDatabricks.test_try_divide"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "duckdb",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT CASE WHEN b <> 0 THEN a / b ELSE NULL END",
+   "test": "TestDatabricks.test_try_divide"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "spark",
+   "sql": "SELECT TRY_DIVIDE(a, b)",
+   "expected": "SELECT TRY_DIVIDE(a, b)",
+   "test": "TestDatabricks.test_try_divide"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION a() ENVIRONMENT (dependencies = '[\"foo1==1\", \"foo2==2\"]', environment_version = 'None')",
+   "expected": "CREATE FUNCTION a() ENVIRONMENT (dependencies = '[\"foo1==1\", \"foo2==2\"]', environment_version = 'None')",
+   "test": "TestDatabricks.test_udf_environment_property"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION a() HANDLER 'handler_function'",
+   "expected": "CREATE FUNCTION a() HANDLER 'handler_function'",
+   "test": "TestDatabricks.test_udf_handler_property"
+  },
+  {
+   "kind": "identity",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE FUNCTION a() PARAMETER STYLE PANDAS",
+   "expected": "CREATE FUNCTION a() PARAMETER STYLE PANDAS",
+   "test": "TestDatabricks.test_udf_parameter_style_property"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "CREATE TABLE x (SELECT 1)",
+   "expected": "CREATE TABLE x AS (SELECT 1)",
+   "test": "TestDatabricks.test_without_as"
+  },
+  {
+   "kind": "write",
+   "read": "databricks",
+   "write": "databricks",
+   "sql": "WITH x (select 1) SELECT * FROM x",
+   "expected": "WITH x AS (SELECT 1) SELECT * FROM x",
+   "test": "TestDatabricks.test_without_as"
+  }
+ ]
+}

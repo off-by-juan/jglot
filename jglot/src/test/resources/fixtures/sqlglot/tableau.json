@@ -1,0 +1,198 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_tableau.py",
+ "cases": [
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "hive",
+   "sql": "[x]",
+   "expected": "`x`",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "tableau",
+   "sql": "[x]",
+   "expected": "[x]",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "hive",
+   "sql": "\"x\"",
+   "expected": "'x'",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "tableau",
+   "sql": "\"x\"",
+   "expected": "'x'",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "tableau",
+   "sql": "IF(x = 'a', y, NULL)",
+   "expected": "IF x = 'a' THEN y ELSE NULL END",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "presto",
+   "sql": "IF x = 'a' THEN y ELSE NULL END",
+   "expected": "IF(x = 'a', y, NULL)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "hive",
+   "sql": "IF x = 'a' THEN y ELSE NULL END",
+   "expected": "IF(x = 'a', y, NULL)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "tableau",
+   "sql": "IF x = 'a' THEN y ELSE NULL END",
+   "expected": "IF x = 'a' THEN y ELSE NULL END",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "tableau",
+   "sql": "COALESCE(a, 0)",
+   "expected": "IFNULL(a, 0)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "presto",
+   "sql": "IFNULL(a, 0)",
+   "expected": "COALESCE(a, 0)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "hive",
+   "sql": "IFNULL(a, 0)",
+   "expected": "COALESCE(a, 0)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "tableau",
+   "sql": "IFNULL(a, 0)",
+   "expected": "IFNULL(a, 0)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "tableau",
+   "sql": "COUNT(DISTINCT a)",
+   "expected": "COUNTD(a)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "presto",
+   "sql": "COUNTD(a)",
+   "expected": "COUNT(DISTINCT a)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "hive",
+   "sql": "COUNTD(a)",
+   "expected": "COUNT(DISTINCT a)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "tableau",
+   "sql": "COUNTD(a)",
+   "expected": "COUNTD(a)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "tableau",
+   "sql": "COUNT(DISTINCT(a))",
+   "expected": "COUNTD((a))",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "presto",
+   "sql": "COUNTD((a))",
+   "expected": "COUNT(DISTINCT (a))",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "hive",
+   "sql": "COUNTD((a))",
+   "expected": "COUNT(DISTINCT (a))",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "tableau",
+   "sql": "COUNTD((a))",
+   "expected": "COUNTD((a))",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "tableau",
+   "sql": "COUNT(a)",
+   "expected": "COUNT(a)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "presto",
+   "sql": "COUNT(a)",
+   "expected": "COUNT(a)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "hive",
+   "sql": "COUNT(a)",
+   "expected": "COUNT(a)",
+   "test": "TestTableau.test_tableau"
+  },
+  {
+   "kind": "write",
+   "read": "tableau",
+   "write": "tableau",
+   "sql": "COUNT(a)",
+   "expected": "COUNT(a)",
+   "test": "TestTableau.test_tableau"
+  }
+ ]
+}

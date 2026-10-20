@@ -1,0 +1,3067 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_presto.py",
+ "cases": [
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "ANALYZE tbl",
+   "expected": "ANALYZE tbl",
+   "test": "TestPresto.test_analyze"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "ANALYZE tbl WITH (prop1=val1, prop2=val2)",
+   "expected": "ANALYZE tbl WITH (prop1=val1, prop2=val2)",
+   "test": "TestPresto.test_analyze"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "presto",
+   "sql": "BITWISE_AND_AGG(x)",
+   "expected": "BITWISE_AND_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "presto",
+   "sql": "BITWISE_AND_AGG(x)",
+   "expected": "BITWISE_AND_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "presto",
+   "sql": "BITWISE_AND_AGG(x)",
+   "expected": "BITWISE_AND_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "presto",
+   "sql": "BITWISE_OR_AGG(x)",
+   "expected": "BITWISE_OR_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "presto",
+   "sql": "BITWISE_OR_AGG(x)",
+   "expected": "BITWISE_OR_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "presto",
+   "sql": "BITWISE_OR_AGG(x)",
+   "expected": "BITWISE_OR_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "presto",
+   "sql": "BITWISE_XOR_AGG(x)",
+   "expected": "BITWISE_XOR_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "read",
+   "read": "trino",
+   "write": "presto",
+   "sql": "BITWISE_XOR_AGG(x)",
+   "expected": "BITWISE_XOR_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "read",
+   "read": "oracle",
+   "write": "presto",
+   "sql": "BITWISE_XOR_AGG(x)",
+   "expected": "BITWISE_XOR_AGG(x)",
+   "test": "TestPresto.test_bit_aggs"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DEALLOCATE PREPARE my_query",
+   "expected": "DEALLOCATE PREPARE my_query",
+   "command": true,
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DESCRIBE INPUT x",
+   "expected": "DESCRIBE INPUT x",
+   "command": true,
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DESCRIBE OUTPUT x",
+   "expected": "DESCRIBE OUTPUT x",
+   "command": true,
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT * FROM x qualify",
+   "expected": "SELECT * FROM x AS qualify",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS IPADDRESS)",
+   "expected": "CAST(x AS IPADDRESS)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS IPPREFIX)",
+   "expected": "CAST(x AS IPPREFIX)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(TDIGEST_AGG(1) AS TDIGEST)",
+   "expected": "CAST(TDIGEST_AGG(1) AS TDIGEST)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS HYPERLOGLOG)",
+   "expected": "CAST(x AS HYPERLOGLOG)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "RESET SESSION hive.optimized_reader_enabled",
+   "expected": "RESET SESSION hive.optimized_reader_enabled",
+   "command": true,
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TIMESTAMP '2025-06-20 11:22:29 Europe/Prague'",
+   "expected": "CAST('2025-06-20 11:22:29 Europe/Prague' AS TIMESTAMP WITH TIME ZONE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "tsql",
+   "write": "presto",
+   "sql": "CAST(x AS BIT)",
+   "expected": "CAST(x AS BOOLEAN)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS BOOLEAN)",
+   "expected": "CAST(x AS BOOLEAN)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "tsql",
+   "sql": "CAST(x AS BOOLEAN)",
+   "expected": "CAST(x AS BIT)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05' AS TIMESTAMPTZ)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "expected": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "expected": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05' AS TIMESTAMPTZ)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05' AS TIMESTAMP)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "databricks",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05' AS TIMESTAMP)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT FROM_ISO8601_TIMESTAMP('2020-05-11T11:15:05')",
+   "expected": "SELECT CAST('2020-05-11T11:15:05' AS TIMESTAMP)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "expected": "SELECT CAST('2020-05-11' AS DATE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "expected": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "expected": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "expected": "SELECT CAST('2020-05-11' AS DATE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "expected": "SELECT CAST('2020-05-11' AS DATE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "databricks",
+   "sql": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "expected": "SELECT CAST('2020-05-11' AS DATE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT FROM_ISO8601_DATE('2020-05-11')",
+   "expected": "SELECT CAST('2020-05-11' AS DATE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "oracle",
+   "sql": "CAST(x AS INTERVAL YEAR TO MONTH)",
+   "expected": "CAST(x AS INTERVAL YEAR TO MONTH)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS INTERVAL YEAR TO MONTH)",
+   "expected": "CAST(x AS INTERVAL YEAR TO MONTH)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "oracle",
+   "sql": "CAST(x AS INTERVAL DAY TO SECOND)",
+   "expected": "CAST(x AS INTERVAL DAY TO SECOND)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS INTERVAL DAY TO SECOND)",
+   "expected": "CAST(x AS INTERVAL DAY TO SECOND)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "presto",
+   "sql": "SELECT CAST('10C' AS INTEGER)",
+   "expected": "SELECT CAST('10C' AS INTEGER)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT CAST('10C' AS INTEGER)",
+   "expected": "SELECT CAST('10C' AS INTEGER)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "SELECT CAST('10C' AS INTEGER)",
+   "expected": "SELECT CAST('10C' AS INTEGER)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "postgres",
+   "write": "presto",
+   "sql": "SELECT 'epoch'::TIMESTAMP",
+   "expected": "SELECT CAST('1970-01-01 00:00:00' AS TIMESTAMP)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "presto",
+   "sql": "UNBASE64(x)",
+   "expected": "FROM_BASE64(x)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "FROM_BASE64(x)",
+   "expected": "UNBASE64(x)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "FROM_BASE64(x)",
+   "expected": "FROM_BASE64(x)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "presto",
+   "sql": "BASE64(x)",
+   "expected": "TO_BASE64(x)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "TO_BASE64(x)",
+   "expected": "BASE64(x)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_BASE64(x)",
+   "expected": "TO_BASE64(x)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "CAST(a AS ARRAY(INT))",
+   "expected": "CAST(a AS ARRAY<INT64>)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CAST(a AS ARRAY(INT))",
+   "expected": "CAST(a AS INT[])",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(a AS ARRAY(INT))",
+   "expected": "CAST(a AS ARRAY(INTEGER))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CAST(a AS ARRAY(INT))",
+   "expected": "CAST(a AS ARRAY<INT>)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "CAST(a AS ARRAY(INT))",
+   "expected": "CAST(a AS ARRAY(INT))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "CAST(a AS VARCHAR)",
+   "expected": "CAST(a AS STRING)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CAST(a AS VARCHAR)",
+   "expected": "CAST(a AS TEXT)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(a AS VARCHAR)",
+   "expected": "CAST(a AS VARCHAR)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CAST(a AS VARCHAR)",
+   "expected": "CAST(a AS STRING)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "CAST(ARRAY[1, 2] AS ARRAY(BIGINT))",
+   "expected": "ARRAY<INT64>[1, 2]",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CAST(ARRAY[1, 2] AS ARRAY(BIGINT))",
+   "expected": "CAST([1, 2] AS BIGINT[])",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(ARRAY[1, 2] AS ARRAY(BIGINT))",
+   "expected": "CAST(ARRAY[1, 2] AS ARRAY(BIGINT))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CAST(ARRAY[1, 2] AS ARRAY(BIGINT))",
+   "expected": "CAST(ARRAY(1, 2) AS ARRAY<BIGINT>)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "CAST(ARRAY[1, 2] AS ARRAY(BIGINT))",
+   "expected": "CAST([1, 2] AS ARRAY(BIGINT))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CAST(MAP(ARRAY['key'], ARRAY[1]) AS MAP(VARCHAR, INT))",
+   "expected": "CAST(MAP(['key'], [1]) AS MAP(TEXT, INT))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(MAP(ARRAY['key'], ARRAY[1]) AS MAP(VARCHAR, INT))",
+   "expected": "CAST(MAP(ARRAY['key'], ARRAY[1]) AS MAP(VARCHAR, INTEGER))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CAST(MAP(ARRAY['key'], ARRAY[1]) AS MAP(VARCHAR, INT))",
+   "expected": "CAST(MAP('key', 1) AS MAP<STRING, INT>)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "CAST(MAP(ARRAY['key'], ARRAY[1]) AS MAP(VARCHAR, INT))",
+   "expected": "CAST(OBJECT_CONSTRUCT('key', 1) AS MAP(VARCHAR, INT))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CAST(MAP(ARRAY['key'], ARRAY[1]) AS MAP(VARCHAR, INT))",
+   "expected": "CAST(MAP_FROM_ARRAYS(ARRAY('key'), ARRAY(1)) AS MAP<STRING, INT>)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "CAST(MAP(ARRAY['a','b','c'], ARRAY[ARRAY[1], ARRAY[2], ARRAY[3]]) AS MAP(VARCHAR, ARRAY(INT)))",
+   "expected": "CAST(MAP(['a', 'b', 'c'], [[1], [2], [3]]) AS MAP<STRING, ARRAY<INT64>>)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CAST(MAP(ARRAY['a','b','c'], ARRAY[ARRAY[1], ARRAY[2], ARRAY[3]]) AS MAP(VARCHAR, ARRAY(INT)))",
+   "expected": "CAST(MAP(['a', 'b', 'c'], [[1], [2], [3]]) AS MAP(TEXT, INT[]))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(MAP(ARRAY['a','b','c'], ARRAY[ARRAY[1], ARRAY[2], ARRAY[3]]) AS MAP(VARCHAR, ARRAY(INT)))",
+   "expected": "CAST(MAP(ARRAY['a', 'b', 'c'], ARRAY[ARRAY[1], ARRAY[2], ARRAY[3]]) AS MAP(VARCHAR, ARRAY(INTEGER)))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CAST(MAP(ARRAY['a','b','c'], ARRAY[ARRAY[1], ARRAY[2], ARRAY[3]]) AS MAP(VARCHAR, ARRAY(INT)))",
+   "expected": "CAST(MAP('a', ARRAY(1), 'b', ARRAY(2), 'c', ARRAY(3)) AS MAP<STRING, ARRAY<INT>>)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CAST(MAP(ARRAY['a','b','c'], ARRAY[ARRAY[1], ARRAY[2], ARRAY[3]]) AS MAP(VARCHAR, ARRAY(INT)))",
+   "expected": "CAST(MAP_FROM_ARRAYS(ARRAY('a', 'b', 'c'), ARRAY(ARRAY(1), ARRAY(2), ARRAY(3))) AS MAP<STRING, ARRAY<INT>>)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "CAST(MAP(ARRAY['a','b','c'], ARRAY[ARRAY[1], ARRAY[2], ARRAY[3]]) AS MAP(VARCHAR, ARRAY(INT)))",
+   "expected": "CAST(OBJECT_CONSTRUCT('a', [1], 'b', [2], 'c', [3]) AS MAP(VARCHAR, ARRAY(INT)))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CAST(x AS TIME(5) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIMETZ)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "postgres",
+   "sql": "CAST(x AS TIME(5) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIMETZ(5))",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS TIME(5) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIME WITH TIME ZONE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "redshift",
+   "sql": "CAST(x AS TIME(5) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIME(5) WITH TIME ZONE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "CAST(x AS TIMESTAMP(9) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CAST(x AS TIMESTAMP(9) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIMESTAMPTZ)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS TIMESTAMP(9) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIMESTAMP WITH TIME ZONE)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CAST(x AS TIMESTAMP(9) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CAST(x AS TIMESTAMP(9) WITH TIME ZONE)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_cast"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CREATE TABLE test WITH (FORMAT = 'PARQUET') AS SELECT 1",
+   "expected": "CREATE TABLE test AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE TABLE test WITH (FORMAT = 'PARQUET') AS SELECT 1",
+   "expected": "CREATE TABLE test WITH (format='PARQUET') AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CREATE TABLE test WITH (FORMAT = 'PARQUET') AS SELECT 1",
+   "expected": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE TABLE test WITH (FORMAT = 'PARQUET') AS SELECT 1",
+   "expected": "CREATE TABLE test USING PARQUET AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CREATE TABLE test STORED AS 'PARQUET' AS SELECT 1",
+   "expected": "CREATE TABLE test AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE TABLE test STORED AS 'PARQUET' AS SELECT 1",
+   "expected": "CREATE TABLE test WITH (format='PARQUET') AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CREATE TABLE test STORED AS 'PARQUET' AS SELECT 1",
+   "expected": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE TABLE test STORED AS 'PARQUET' AS SELECT 1",
+   "expected": "CREATE TABLE test STORED AS PARQUET AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CREATE TABLE test WITH (FORMAT = 'PARQUET', X = '1', Z = '2') AS SELECT 1",
+   "expected": "CREATE TABLE test AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE TABLE test WITH (FORMAT = 'PARQUET', X = '1', Z = '2') AS SELECT 1",
+   "expected": "CREATE TABLE test WITH (format='PARQUET', X='1', Z='2') AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CREATE TABLE test WITH (FORMAT = 'PARQUET', X = '1', Z = '2') AS SELECT 1",
+   "expected": "CREATE TABLE test STORED AS PARQUET TBLPROPERTIES ('X'='1', 'Z'='2') AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE TABLE test WITH (FORMAT = 'PARQUET', X = '1', Z = '2') AS SELECT 1",
+   "expected": "CREATE TABLE test USING PARQUET TBLPROPERTIES ('X'='1', 'Z'='2') AS SELECT 1",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CREATE TABLE x (w VARCHAR, y INTEGER, z INTEGER) WITH (PARTITIONED_BY=ARRAY['y', 'z'])",
+   "expected": "CREATE TABLE x (w TEXT, y INT, z INT)",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE TABLE x (w VARCHAR, y INTEGER, z INTEGER) WITH (PARTITIONED_BY=ARRAY['y', 'z'])",
+   "expected": "CREATE TABLE x (w VARCHAR, y INTEGER, z INTEGER) WITH (PARTITIONED_BY=ARRAY['y', 'z'])",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CREATE TABLE x (w VARCHAR, y INTEGER, z INTEGER) WITH (PARTITIONED_BY=ARRAY['y', 'z'])",
+   "expected": "CREATE TABLE x (w STRING) PARTITIONED BY (y INT, z INT)",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE TABLE x (w VARCHAR, y INTEGER, z INTEGER) WITH (PARTITIONED_BY=ARRAY['y', 'z'])",
+   "expected": "CREATE TABLE x (w STRING, y INT, z INT) PARTITIONED BY (y, z)",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CREATE TABLE x WITH (bucket_by = ARRAY['y'], bucket_count = 64) AS SELECT 1 AS y",
+   "expected": "CREATE TABLE x AS SELECT 1 AS y",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE TABLE x WITH (bucket_by = ARRAY['y'], bucket_count = 64) AS SELECT 1 AS y",
+   "expected": "CREATE TABLE x WITH (bucket_by=ARRAY['y'], bucket_count=64) AS SELECT 1 AS y",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CREATE TABLE x WITH (bucket_by = ARRAY['y'], bucket_count = 64) AS SELECT 1 AS y",
+   "expected": "CREATE TABLE x TBLPROPERTIES ('bucket_by'=ARRAY('y'), 'bucket_count'=64) AS SELECT 1 AS y",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE TABLE x WITH (bucket_by = ARRAY['y'], bucket_count = 64) AS SELECT 1 AS y",
+   "expected": "CREATE TABLE x TBLPROPERTIES ('bucket_by'=ARRAY('y'), 'bucket_count'=64) AS SELECT 1 AS y",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b VARCHAR))",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT(struct_col_a INT, struct_col_b TEXT))",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b VARCHAR))",
+   "expected": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b VARCHAR))",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b VARCHAR))",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRING>)",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b VARCHAR))",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRING>)",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b ROW(nested_col_a VARCHAR, nested_col_b VARCHAR)))",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT(struct_col_a INT, struct_col_b STRUCT(nested_col_a TEXT, nested_col_b TEXT)))",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b ROW(nested_col_a VARCHAR, nested_col_b VARCHAR)))",
+   "expected": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b ROW(nested_col_a VARCHAR, nested_col_b VARCHAR)))",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b ROW(nested_col_a VARCHAR, nested_col_b VARCHAR)))",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRUCT<nested_col_a: STRING, nested_col_b: STRING>>)",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE TABLE db.example_table (col_a ROW(struct_col_a INTEGER, struct_col_b ROW(nested_col_a VARCHAR, nested_col_b VARCHAR)))",
+   "expected": "CREATE TABLE db.example_table (col_a STRUCT<struct_col_a: INT, struct_col_b: STRUCT<nested_col_a: STRING, nested_col_b: STRING>>)",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC, lname",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname",
+   "expected": "SELECT fname, lname, age FROM person ORDER BY age DESC NULLS FIRST, fname ASC NULLS LAST, lname NULLS LAST",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE OR REPLACE VIEW x (cola) SELECT 1 as cola",
+   "expected": "CREATE OR REPLACE VIEW x (cola) AS SELECT 1 AS cola",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE OR REPLACE VIEW x (cola) SELECT 1 as cola",
+   "expected": "CREATE OR REPLACE VIEW x AS SELECT 1 AS cola",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CREATE TABLE IF NOT EXISTS x (\"cola\" INTEGER, \"ds\" TEXT) COMMENT 'comment' WITH (PARTITIONED BY=(\"ds\"))",
+   "expected": "CREATE TABLE IF NOT EXISTS x (`cola` INT, `ds` STRING) COMMENT 'comment' PARTITIONED BY (`ds`)",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE TABLE IF NOT EXISTS x (\"cola\" INTEGER, \"ds\" TEXT) COMMENT 'comment' WITH (PARTITIONED BY=(\"ds\"))",
+   "expected": "CREATE TABLE IF NOT EXISTS x (\"cola\" INTEGER, \"ds\" VARCHAR) COMMENT 'comment' WITH (PARTITIONED_BY=ARRAY['ds'])",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE OR REPLACE VIEW v SECURITY DEFINER AS SELECT id FROM t",
+   "expected": "CREATE OR REPLACE VIEW v SECURITY DEFINER AS SELECT id FROM t",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CREATE OR REPLACE VIEW v SECURITY INVOKER AS SELECT id FROM t",
+   "expected": "CREATE OR REPLACE VIEW v SECURITY INVOKER AS SELECT id FROM t",
+   "test": "TestPresto.test_ddl"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "FROM_UTF8(x, y)",
+   "expected": "FROM_UTF8(x, y)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "presto",
+   "sql": "ENCODE(x)",
+   "expected": "TO_UTF8(x)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "ENCODE(x, 'utf-8')",
+   "expected": "TO_UTF8(x)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "TO_UTF8(x)",
+   "expected": "ENCODE(x)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_UTF8(x)",
+   "expected": "TO_UTF8(x)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "TO_UTF8(x)",
+   "expected": "ENCODE(x, 'utf-8')",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "presto",
+   "sql": "DECODE(x)",
+   "expected": "FROM_UTF8(x)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "DECODE(x, 'utf-8')",
+   "expected": "FROM_UTF8(x)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "FROM_UTF8(x)",
+   "expected": "DECODE(x)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "FROM_UTF8(x)",
+   "expected": "FROM_UTF8(x)",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "FROM_UTF8(x)",
+   "expected": "DECODE(x, 'utf-8')",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "ENCODE(x, 'invalid')",
+   "expectedError": "unsupported",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "ENCODE(x, 'invalid')",
+   "expectedError": "unsupported",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DECODE(x, 'invalid')",
+   "expectedError": "unsupported",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DECODE(x, 'invalid')",
+   "expectedError": "unsupported",
+   "test": "TestPresto.test_encode_decode"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "TO_HEX(x)",
+   "expected": "HEX(x)",
+   "test": "TestPresto.test_hex_unhex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "FROM_HEX(x)",
+   "expected": "UNHEX(x)",
+   "test": "TestPresto.test_hex_unhex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "HEX(x)",
+   "expected": "TO_HEX(x)",
+   "test": "TestPresto.test_hex_unhex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "UNHEX(x)",
+   "expected": "FROM_HEX(x)",
+   "test": "TestPresto.test_hex_unhex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "INITCAP(col)",
+   "expected": "REGEXP_REPLACE(col, '(\\w)(\\w*)', x -> UPPER(x[1]) || LOWER(x[2]))",
+   "test": "TestPresto.test_initcap"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT INTERVAL '1' SeCoNds",
+   "expected": "SELECT INTERVAL '1' SECOND",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT INTERVAL '1' SeCoNds",
+   "expected": "SELECT INTERVAL '1' SECOND",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT INTERVAL '1' SeCoNds",
+   "expected": "SELECT INTERVAL '1' SECOND",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "mysql",
+   "sql": "SELECT INTERVAL '1' SeCoNds",
+   "expected": "SELECT INTERVAL '1' SECOND",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "doris",
+   "sql": "SELECT INTERVAL '1' SeCoNds",
+   "expected": "SELECT INTERVAL '1' SECOND",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT INTERVAL '1' minutes",
+   "expected": "SELECT INTERVAL '1' MINUTE",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT INTERVAL '1' minutes",
+   "expected": "SELECT INTERVAL '1' MINUTE",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT INTERVAL '1' minutes",
+   "expected": "SELECT INTERVAL '1' MINUTE",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "mysql",
+   "sql": "SELECT INTERVAL '1' minutes",
+   "expected": "SELECT INTERVAL '1' MINUTE",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "doris",
+   "sql": "SELECT INTERVAL '1' minutes",
+   "expected": "SELECT INTERVAL '1' MINUTE",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT INTERVAL '1' hours",
+   "expected": "SELECT INTERVAL '1' HOUR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT INTERVAL '1' hours",
+   "expected": "SELECT INTERVAL '1' HOUR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT INTERVAL '1' hours",
+   "expected": "SELECT INTERVAL '1' HOUR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "mysql",
+   "sql": "SELECT INTERVAL '1' hours",
+   "expected": "SELECT INTERVAL '1' HOUR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "doris",
+   "sql": "SELECT INTERVAL '1' hours",
+   "expected": "SELECT INTERVAL '1' HOUR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT INTERVAL '1' days",
+   "expected": "SELECT INTERVAL '1' DAY",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT INTERVAL '1' days",
+   "expected": "SELECT INTERVAL '1' DAY",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT INTERVAL '1' days",
+   "expected": "SELECT INTERVAL '1' DAY",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "mysql",
+   "sql": "SELECT INTERVAL '1' days",
+   "expected": "SELECT INTERVAL '1' DAY",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "doris",
+   "sql": "SELECT INTERVAL '1' days",
+   "expected": "SELECT INTERVAL '1' DAY",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT INTERVAL '1' months",
+   "expected": "SELECT INTERVAL '1' MONTH",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT INTERVAL '1' months",
+   "expected": "SELECT INTERVAL '1' MONTH",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT INTERVAL '1' months",
+   "expected": "SELECT INTERVAL '1' MONTH",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "mysql",
+   "sql": "SELECT INTERVAL '1' months",
+   "expected": "SELECT INTERVAL '1' MONTH",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "doris",
+   "sql": "SELECT INTERVAL '1' months",
+   "expected": "SELECT INTERVAL '1' MONTH",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT INTERVAL '1' years",
+   "expected": "SELECT INTERVAL '1' YEAR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT INTERVAL '1' years",
+   "expected": "SELECT INTERVAL '1' YEAR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT INTERVAL '1' years",
+   "expected": "SELECT INTERVAL '1' YEAR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "mysql",
+   "sql": "SELECT INTERVAL '1' years",
+   "expected": "SELECT INTERVAL '1' YEAR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "doris",
+   "sql": "SELECT INTERVAL '1' years",
+   "expected": "SELECT INTERVAL '1' YEAR",
+   "test": "TestPresto.test_interval_plural_to_singular"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT JSON_EXTRACT(x, '$[1,0]')",
+   "expected": "SELECT JSON_EXTRACT(x, '$[1,0]')",
+   "test": "TestPresto.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT JSON_EXTRACT_SCALAR(x, '$[1,0]')",
+   "expected": "SELECT JSON_EXTRACT_SCALAR(x, '$[1,0]')",
+   "test": "TestPresto.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT JSON_EXTRACT(x, '$[\"a\",\"\"]')",
+   "expected": "SELECT JSON_EXTRACT(x, '$[\"a\",\"\"]')",
+   "test": "TestPresto.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT JSON_EXTRACT(x, '$[\"\"]')",
+   "expected": "SELECT JSON_EXTRACT(x, '$[\"\"]')",
+   "test": "TestPresto.test_json"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT JSON_EXTRACT_SCALAR(TRY(FILTER(CAST(JSON_EXTRACT('{\"k1\": [{\"k2\": \"{\\\"k3\\\": 1}\", \"k4\": \"v\"}]}', '$.k1') AS ARRAY(MAP(VARCHAR, VARCHAR))), x -> x['k4'] = 'v')[1]['k2']), '$.k3')",
+   "expected": "SELECT JSON_EXTRACT_SCALAR(TRY(FILTER(CAST(JSON_EXTRACT('{\"k1\": [{\"k2\": \"{\\\"k3\\\": 1}\", \"k4\": \"v\"}]}', '$.k1') AS ARRAY(MAP(VARCHAR, VARCHAR))), x -> x['k4'] = 'v')[1]['k2']), '$.k3')",
+   "test": "TestPresto.test_json"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT JSON_EXTRACT_SCALAR(TRY(FILTER(CAST(JSON_EXTRACT('{\"k1\": [{\"k2\": \"{\\\"k3\\\": 1}\", \"k4\": \"v\"}]}', '$.k1') AS ARRAY(MAP(VARCHAR, VARCHAR))), x -> x['k4'] = 'v')[1]['k2']), '$.k3')",
+   "expected": "SELECT GET_JSON_OBJECT(FILTER(FROM_JSON(GET_JSON_OBJECT('{\"k1\": [{\"k2\": \"{\\\\\"k3\\\\\": 1}\", \"k4\": \"v\"}]}', '$.k1'), 'ARRAY<MAP<STRING, STRING>>'), x -> x['k4'] = 'v')[0]['k2'], '$.k3')",
+   "test": "TestPresto.test_json"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT\n  *\nFROM orders\nMATCH_RECOGNIZE (\n  PARTITION BY custkey\n  ORDER BY\n    orderdate\n  MEASURES\n    A.totalprice AS starting_price,\n    LAST(B.totalprice) AS bottom_price,\n    LAST(C.totalprice) AS top_price\n  ONE ROW PER MATCH\n  AFTER MATCH SKIP PAST LAST ROW\n  PATTERN (A B+ C+ D+)\n  DEFINE\n    B AS totalprice < PREV(totalprice),\n    C AS totalprice > PREV(totalprice) AND totalprice <= A.totalprice,\n    D AS totalprice > PREV(totalprice),\n    E AS MAX(foo) >= NEXT(bar)\n)",
+   "expected": "SELECT\n  *\nFROM orders\nMATCH_RECOGNIZE (\n  PARTITION BY custkey\n  ORDER BY\n    orderdate\n  MEASURES\n    A.totalprice AS starting_price,\n    LAST(B.totalprice) AS bottom_price,\n    LAST(C.totalprice) AS top_price\n  ONE ROW PER MATCH\n  AFTER MATCH SKIP PAST LAST ROW\n  PATTERN (A B+ C+ D+)\n  DEFINE\n    B AS totalprice < PREV(totalprice),\n    C AS totalprice > PREV(totalprice) AND totalprice <= A.totalprice,\n    D AS totalprice > PREV(totalprice),\n    E AS MAX(foo) >= NEXT(bar)\n)",
+   "pretty": true,
+   "test": "TestPresto.test_match_recognize"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT SHA256(x)",
+   "expected": "SELECT SHA256(x)",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT SHA256(x)",
+   "expected": "SELECT SHA256(x)",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "SELECT SHA256(x)",
+   "expected": "SELECT UNHEX(SHA256(x))",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT SHA256(x)",
+   "expected": "SELECT SHA256(x)",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT SHA512(x)",
+   "expected": "SELECT SHA512(x)",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT SHA512(x)",
+   "expected": "SELECT SHA512(x)",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT SHA512(x)",
+   "expected": "SELECT SHA512(x)",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT SHA2(x, 256)",
+   "expected": "SELECT LOWER(TO_HEX(SHA256(x)))",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "presto",
+   "sql": "SELECT SHA2(x, 256)",
+   "expected": "SELECT LOWER(TO_HEX(SHA256(x)))",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT SHA2(x, 512)",
+   "expected": "SELECT LOWER(TO_HEX(SHA512(x)))",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "read",
+   "read": "snowflake",
+   "write": "presto",
+   "sql": "SELECT SHA2(x, 512)",
+   "expected": "SELECT LOWER(TO_HEX(SHA512(x)))",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "postgres",
+   "sql": "SELECT COALESCE(ELEMENT_AT(MAP_FROM_ENTRIES(ARRAY[(51, '1')]), id), quantity) FROM my_table",
+   "expectedError": "unsupported",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT COALESCE(ELEMENT_AT(MAP_FROM_ENTRIES(ARRAY[(51, '1')]), id), quantity) FROM my_table",
+   "expected": "SELECT COALESCE(ELEMENT_AT(MAP_FROM_ENTRIES(ARRAY[(51, '1')]), id), quantity) FROM my_table",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "",
+   "sql": "SELECT ELEMENT_AT(ARRAY[1, 2, 3], 4)",
+   "expected": "SELECT ARRAY(1, 2, 3)[3]",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "SELECT ELEMENT_AT(ARRAY[1, 2, 3], 4)",
+   "expected": "SELECT [1, 2, 3][SAFE_ORDINAL(4)]",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "postgres",
+   "sql": "SELECT ELEMENT_AT(ARRAY[1, 2, 3], 4)",
+   "expected": "SELECT (ARRAY[1, 2, 3])[4]",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT ELEMENT_AT(ARRAY[1, 2, 3], 4)",
+   "expected": "SELECT ELEMENT_AT(ARRAY[1, 2, 3], 4)",
+   "test": "TestPresto.test_presto"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "''''",
+   "expected": "''''",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "''''",
+   "expected": "''''",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "''''",
+   "expected": "'\\''",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "''''",
+   "expected": "'\\''",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "'x'",
+   "expected": "'x'",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "'x'",
+   "expected": "'x'",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "'x'",
+   "expected": "'x'",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "'x'",
+   "expected": "'x'",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "'''x'''",
+   "expected": "'''x'''",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "'''x'''",
+   "expected": "'''x'''",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "'''x'''",
+   "expected": "'\\'x\\''",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "'''x'''",
+   "expected": "'\\'x\\''",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "'''x'",
+   "expected": "'''x'",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "'''x'",
+   "expected": "'''x'",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "'''x'",
+   "expected": "'\\'x'",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "'''x'",
+   "expected": "'\\'x'",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "x IN ('a', 'a''b')",
+   "expected": "x IN ('a', 'a''b')",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "x IN ('a', 'a''b')",
+   "expected": "x IN ('a', 'a''b')",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "x IN ('a', 'a''b')",
+   "expected": "x IN ('a', 'a\\'b')",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "x IN ('a', 'a''b')",
+   "expected": "x IN ('a', 'a\\'b')",
+   "test": "TestPresto.test_quotes"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "REGEXP_REPLACE('abcd', '[ab]')",
+   "expected": "REGEXP_REPLACE('abcd', '[ab]', '')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "REGEXP_REPLACE('abcd', '[ab]')",
+   "expected": "REGEXP_REPLACE('abcd', '[ab]', '')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "REGEXP_LIKE(a, 'x')",
+   "expected": "REGEXP_MATCHES(a, 'x')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "REGEXP_LIKE(a, 'x')",
+   "expected": "REGEXP_LIKE(a, 'x')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "REGEXP_LIKE(a, 'x')",
+   "expected": "a RLIKE 'x'",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "REGEXP_LIKE(a, 'x')",
+   "expected": "a RLIKE 'x'",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "SPLIT(x, 'a.')",
+   "expected": "STR_SPLIT(x, 'a.')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SPLIT(x, 'a.')",
+   "expected": "SPLIT(x, 'a.')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "SPLIT(x, 'a.')",
+   "expected": "SPLIT(x, CONCAT('\\\\Q', 'a.', '\\\\E'))",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SPLIT(x, 'a.')",
+   "expected": "SPLIT(x, CONCAT('\\\\Q', 'a.', '\\\\E'))",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "REGEXP_SPLIT(x, 'a.')",
+   "expected": "STR_SPLIT_REGEX(x, 'a.')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "REGEXP_SPLIT(x, 'a.')",
+   "expected": "REGEXP_SPLIT(x, 'a.')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "REGEXP_SPLIT(x, 'a.')",
+   "expected": "SPLIT(x, 'a.')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "REGEXP_SPLIT(x, 'a.')",
+   "expected": "SPLIT(x, 'a.')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "CARDINALITY(x)",
+   "expected": "ARRAY_LENGTH(x)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CARDINALITY(x)",
+   "expected": "CARDINALITY(x)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "CARDINALITY(x)",
+   "expected": "SIZE(x)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "CARDINALITY(x)",
+   "expected": "SIZE(x)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "ARRAY_JOIN(x, '-', 'a')",
+   "expected": "CONCAT_WS('-', x)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "ARRAY_JOIN(x, '-', 'a')",
+   "expected": "ARRAY_JOIN(x, '-', 'a')",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "STRPOS(haystack, needle, occurrence)",
+   "expected": "INSTR(haystack, needle, 1, occurrence)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "oracle",
+   "sql": "STRPOS(haystack, needle, occurrence)",
+   "expected": "INSTR(haystack, needle, 1, occurrence)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "STRPOS(haystack, needle, occurrence)",
+   "expected": "STRPOS(haystack, needle, occurrence)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "tableau",
+   "sql": "STRPOS(haystack, needle, occurrence)",
+   "expected": "FINDNTH(haystack, needle, occurrence)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "STRPOS(haystack, needle, occurrence)",
+   "expected": "STRPOS(haystack, needle, occurrence)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "teradata",
+   "sql": "STRPOS(haystack, needle, occurrence)",
+   "expected": "INSTR(haystack, needle, 1, occurrence)",
+   "test": "TestPresto.test_regex"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "REPLACE(subject, pattern)",
+   "expected": "REPLACE(subject, pattern, '')",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "REPLACE(subject, pattern)",
+   "expected": "REPLACE(subject, pattern, '')",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "REPLACE(subject, pattern)",
+   "expected": "REPLACE(subject, pattern, '')",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "REPLACE(subject, pattern)",
+   "expected": "REPLACE(subject, pattern, '')",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "REPLACE(subject, pattern)",
+   "expected": "REPLACE(subject, pattern, '')",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "REPLACE(subject, pattern)",
+   "expected": "REPLACE(subject, pattern, '')",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "read",
+   "read": "bigquery",
+   "write": "presto",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "presto",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "read",
+   "read": "hive",
+   "write": "presto",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "presto",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "REPLACE(subject, pattern, replacement)",
+   "expected": "REPLACE(subject, pattern, replacement)",
+   "test": "TestPresto.test_replace"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SIGN(x)",
+   "expected": "SIGN(x)",
+   "test": "TestPresto.test_signum"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SIGNUM(x)",
+   "expected": "SIGN(x)",
+   "test": "TestPresto.test_signum"
+  },
+  {
+   "kind": "read",
+   "read": "starrocks",
+   "write": "presto",
+   "sql": "SIGN(x)",
+   "expected": "SIGN(x)",
+   "test": "TestPresto.test_signum"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SIGN(x)",
+   "expected": "SIGN(x)",
+   "test": "TestPresto.test_signum"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SIGN(x)",
+   "expected": "SIGN(x)",
+   "test": "TestPresto.test_signum"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "starrocks",
+   "sql": "SIGN(x)",
+   "expected": "SIGN(x)",
+   "test": "TestPresto.test_signum"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "FROM_UNIXTIME(a, b)",
+   "expected": "FROM_UNIXTIME(a, b)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "FROM_UNIXTIME(a, b, c)",
+   "expected": "FROM_UNIXTIME(a, b, c)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TRIM(a, b)",
+   "expected": "TRIM(a, b)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "VAR_POP(a)",
+   "expected": "VAR_POP(a)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT FROM_UNIXTIME(col) FROM tbl",
+   "expected": "SELECT FROM_UNIXTIME(col) FROM tbl",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT FROM_UNIXTIME(col) FROM tbl",
+   "expected": "SELECT CAST(FROM_UNIXTIME(col) AS TIMESTAMP) FROM tbl",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT FROM_UNIXTIME(col) FROM tbl",
+   "expected": "SELECT FROM_UNIXTIME(col) FROM tbl",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "DATE_FORMAT(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "FORMAT_DATE('%F %T', x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DATE_FORMAT(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "STRFTIME(x, '%Y-%m-%d %H:%M:%S')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_FORMAT(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "DATE_FORMAT(x, '%Y-%m-%d %T')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_FORMAT(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "DATE_FORMAT(x, 'yyyy-MM-dd HH:mm:ss')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DATE_FORMAT(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "DATE_FORMAT(x, 'yyyy-MM-dd HH:mm:ss')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DATE_PARSE(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "STRPTIME(x, '%Y-%m-%d %H:%M:%S')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_PARSE(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "DATE_PARSE(x, '%Y-%m-%d %T')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_PARSE(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DATE_PARSE(x, '%Y-%m-%d %H:%i:%S')",
+   "expected": "TO_TIMESTAMP(x, 'yyyy-M-d H:m:s')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DATE_PARSE(x, '%Y-%m-%d')",
+   "expected": "STRPTIME(x, '%Y-%m-%d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_PARSE(x, '%Y-%m-%d')",
+   "expected": "DATE_PARSE(x, '%Y-%m-%d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_PARSE(x, '%Y-%m-%d')",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DATE_PARSE(x, '%Y-%m-%d')",
+   "expected": "TO_TIMESTAMP(x, 'yyyy-M-d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_FORMAT(x, '%T')",
+   "expected": "DATE_FORMAT(x, 'HH:mm:ss')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DATE_PARSE(SUBSTR(x, 1, 10), '%Y-%m-%d')",
+   "expected": "STRPTIME(SUBSTRING(x, 1, 10), '%Y-%m-%d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_PARSE(SUBSTR(x, 1, 10), '%Y-%m-%d')",
+   "expected": "DATE_PARSE(SUBSTR(x, 1, 10), '%Y-%m-%d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_PARSE(SUBSTR(x, 1, 10), '%Y-%m-%d')",
+   "expected": "CAST(SUBSTRING(x, 1, 10) AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DATE_PARSE(SUBSTR(x, 1, 10), '%Y-%m-%d')",
+   "expected": "TO_TIMESTAMP(SUBSTRING(x, 1, 10), 'yyyy-M-d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DATE_PARSE(SUBSTRING(x, 1, 10), '%Y-%m-%d')",
+   "expected": "STRPTIME(SUBSTRING(x, 1, 10), '%Y-%m-%d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_PARSE(SUBSTRING(x, 1, 10), '%Y-%m-%d')",
+   "expected": "DATE_PARSE(SUBSTR(x, 1, 10), '%Y-%m-%d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_PARSE(SUBSTRING(x, 1, 10), '%Y-%m-%d')",
+   "expected": "CAST(SUBSTRING(x, 1, 10) AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DATE_PARSE(SUBSTRING(x, 1, 10), '%Y-%m-%d')",
+   "expected": "TO_TIMESTAMP(SUBSTRING(x, 1, 10), 'yyyy-M-d')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "FROM_UNIXTIME(x)",
+   "expected": "TO_TIMESTAMP(x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "FROM_UNIXTIME(x)",
+   "expected": "FROM_UNIXTIME(x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "FROM_UNIXTIME(x)",
+   "expected": "FROM_UNIXTIME(x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "FROM_UNIXTIME(x)",
+   "expected": "CAST(FROM_UNIXTIME(x) AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "TO_UNIXTIME(x)",
+   "expected": "EPOCH(x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_UNIXTIME(x)",
+   "expected": "TO_UNIXTIME(x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "TO_UNIXTIME(x)",
+   "expected": "UNIX_TIMESTAMP(x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "TO_UNIXTIME(x)",
+   "expected": "UNIX_TIMESTAMP(x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DATE_ADD('DAY', 1, x)",
+   "expected": "x + INTERVAL 1 DAY",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_ADD('DAY', 1, x)",
+   "expected": "DATE_ADD('DAY', 1, x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "DATE_ADD('DAY', 1, x)",
+   "expected": "DATE_ADD(x, 1)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DATE_ADD('DAY', 1, x)",
+   "expected": "DATE_ADD(x, 1)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_ADD('DAY', 1 * -1, x)",
+   "expected": "DATE_ADD('DAY', 1 * -1, x)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "NOW()",
+   "expected": "CURRENT_TIMESTAMP",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "NOW()",
+   "expected": "CURRENT_TIMESTAMP()",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "redshift",
+   "write": "presto",
+   "sql": "SELECT DATEADD(DAY, 1, CURRENT_DATE)",
+   "expected": "SELECT DATE_ADD('DAY', 1, CAST(CURRENT_DATE AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "DAYOFWEEK(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "expected": "((DAY_OF_WEEK(CAST(CAST(TRY_CAST('2012-08-08 01:00:00' AS TIMESTAMP WITH TIME ZONE) AS TIMESTAMP) AS DATE)) % 7) + 1)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "duckdb",
+   "write": "presto",
+   "sql": "ISODOW(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "expected": "DAY_OF_WEEK(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DAY_OF_WEEK(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "expected": "((DAYOFWEEK(CAST('2012-08-08 01:00:00' AS TIMESTAMP)) % 7) + 1)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DAY_OF_WEEK(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "expected": "DAY_OF_WEEK(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DAY_OF_WEEK(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "expected": "ISODOW(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DAY_OF_MONTH(timestamp '2012-08-08 01:00:00')",
+   "expected": "DAYOFMONTH(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DAY_OF_MONTH(timestamp '2012-08-08 01:00:00')",
+   "expected": "DAY_OF_MONTH(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DAY_OF_MONTH(timestamp '2012-08-08 01:00:00')",
+   "expected": "DAYOFMONTH(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "DAY_OF_YEAR(timestamp '2012-08-08 01:00:00')",
+   "expected": "DAYOFYEAR(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DAY_OF_YEAR(timestamp '2012-08-08 01:00:00')",
+   "expected": "DAY_OF_YEAR(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "DAY_OF_YEAR(timestamp '2012-08-08 01:00:00')",
+   "expected": "DAYOFYEAR(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "WEEK_OF_YEAR(timestamp '2012-08-08 01:00:00')",
+   "expected": "WEEKOFYEAR(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "WEEK_OF_YEAR(timestamp '2012-08-08 01:00:00')",
+   "expected": "WEEK_OF_YEAR(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "WEEK_OF_YEAR(timestamp '2012-08-08 01:00:00')",
+   "expected": "WEEKOFYEAR(CAST('2012-08-08 01:00:00' AS TIMESTAMP))",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT CAST('2012-10-31 00:00' AS TIMESTAMP) AT TIME ZONE 'America/Sao_Paulo'",
+   "expected": "SELECT FROM_UTC_TIMESTAMP(CAST('2012-10-31 00:00' AS TIMESTAMP), 'America/Sao_Paulo')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT CAST('2012-10-31 00:00' AS TIMESTAMP) AT TIME ZONE 'America/Sao_Paulo'",
+   "expected": "SELECT AT_TIMEZONE(CAST('2012-10-31 00:00' AS TIMESTAMP), 'America/Sao_Paulo')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "SELECT FROM_UTC_TIMESTAMP(TIMESTAMP '2012-10-31 00:00', 'America/Sao_Paulo')",
+   "expected": "SELECT AT_TIMEZONE(CAST('2012-10-31 00:00' AS TIMESTAMP WITH TIME ZONE), 'America/Sao_Paulo')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "presto",
+   "sql": "CAST(x AS DATETIME)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "clickhouse",
+   "write": "presto",
+   "sql": "CAST(x AS DATETIME64)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "CAST(x AS TIMESTAMP)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "mysql",
+   "write": "presto",
+   "sql": "TIMESTAMP(x)",
+   "expected": "CAST(x AS TIMESTAMP)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "duckdb",
+   "sql": "TIMESTAMP(x, '12:00:00')",
+   "expected": "TIMESTAMP(x, '12:00:00')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TIMESTAMP(x, '12:00:00')",
+   "expected": "TIMESTAMP(x, '12:00:00')",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_ADD('DAY', x, y)",
+   "expected": "DATE_ADD('DAY', CAST(x AS BIGINT), y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_ADD('DAY', CAST(x AS BIGINT), y)",
+   "expected": "DATE_ADD('DAY', CAST(x AS BIGINT), y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_ADD('DAY', 1, y)",
+   "expected": "DATE_ADD('DAY', 1, y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT DATE_ADD('MINUTE', 30, col)",
+   "expected": "SELECT DATE_ADD('MINUTE', 30, col)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT DATE_ADD('MINUTE', 30, col)",
+   "expected": "SELECT DATE_ADD('MINUTE', 30, col)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "DATE_ADD('DAY', FLOOR(5), y)",
+   "expected": "DATE_ADD('DAY', FLOOR(5), y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "identity",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT DATE_ADD('DAY', MOD(5, 2.5), y), DATE_ADD('DAY', CEIL(5.5), y)",
+   "expected": "SELECT DATE_ADD('DAY', CAST(5 % 2.5 AS BIGINT), y), DATE_ADD('DAY', CAST(CEIL(5.5) AS BIGINT), y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "spark",
+   "write": "presto",
+   "sql": "TIMESTAMPADD(MINUTE, FLOOR(EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)/30)*30, col)",
+   "expected": "DATE_ADD('MINUTE', CAST(FLOOR(CAST(EXTRACT(MINUTE FROM CURRENT_TIMESTAMP) AS DOUBLE) / NULLIF(30, 0)) * 30 AS BIGINT), col)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "read",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT WEEK(y)",
+   "expected": "SELECT WEEK_OF_YEAR(y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT WEEK_OF_YEAR(y)",
+   "expected": "SELECT WEEKOFYEAR(y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT WEEK_OF_YEAR(y)",
+   "expected": "SELECT WEEK_OF_YEAR(y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "trino",
+   "sql": "SELECT WEEK_OF_YEAR(y)",
+   "expected": "SELECT WEEK_OF_YEAR(y)",
+   "test": "TestPresto.test_time"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "TO_CHAR(ts, 'dd')",
+   "expected": "FORMAT_DATE('%d', ts)",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_CHAR(ts, 'dd')",
+   "expected": "DATE_FORMAT(ts, '%d')",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "TO_CHAR(ts, 'hh')",
+   "expected": "FORMAT_DATE('%H', ts)",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_CHAR(ts, 'hh')",
+   "expected": "DATE_FORMAT(ts, '%H')",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "TO_CHAR(ts, 'hh24')",
+   "expected": "FORMAT_DATE('%H', ts)",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_CHAR(ts, 'hh24')",
+   "expected": "DATE_FORMAT(ts, '%H')",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "TO_CHAR(ts, 'mi')",
+   "expected": "FORMAT_DATE('%M', ts)",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_CHAR(ts, 'mi')",
+   "expected": "DATE_FORMAT(ts, '%i')",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "TO_CHAR(ts, 'mm')",
+   "expected": "FORMAT_DATE('%m', ts)",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_CHAR(ts, 'mm')",
+   "expected": "DATE_FORMAT(ts, '%m')",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "TO_CHAR(ts, 'ss')",
+   "expected": "FORMAT_DATE('%S', ts)",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_CHAR(ts, 'ss')",
+   "expected": "DATE_FORMAT(ts, '%s')",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "TO_CHAR(ts, 'yyyy')",
+   "expected": "FORMAT_DATE('%Y', ts)",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_CHAR(ts, 'yyyy')",
+   "expected": "DATE_FORMAT(ts, '%Y')",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "bigquery",
+   "sql": "TO_CHAR(ts, 'yy')",
+   "expected": "FORMAT_DATE('%y', ts)",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "TO_CHAR(ts, 'yy')",
+   "expected": "DATE_FORMAT(ts, '%y')",
+   "test": "TestPresto.test_to_char"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "oracle",
+   "sql": "u&'Hello winter \\2603 !'",
+   "expected": "U'Hello winter \\2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "u&'Hello winter \\2603 !'",
+   "expected": "U&'Hello winter \\2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "u&'Hello winter \\2603 !'",
+   "expected": "'Hello winter \\u2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "u&'Hello winter \\2603 !'",
+   "expected": "'Hello winter \\u2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "oracle",
+   "sql": "u&'Hello winter #2603 !' UESCAPE '#'",
+   "expected": "U'Hello winter \\2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "u&'Hello winter #2603 !' UESCAPE '#'",
+   "expected": "U&'Hello winter #2603 !' UESCAPE '#'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "u&'Hello winter #2603 !' UESCAPE '#'",
+   "expected": "'Hello winter \\u2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "u&'Hello winter #2603 !' UESCAPE '#'",
+   "expected": "'Hello winter \\u2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "oracle",
+   "sql": "U&'Hello winter \\2603 !'",
+   "expected": "U'Hello winter \\2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "U&'Hello winter \\2603 !'",
+   "expected": "U&'Hello winter \\2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "U&'Hello winter \\2603 !'",
+   "expected": "'Hello winter \\u2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "U&'Hello winter \\2603 !'",
+   "expected": "'Hello winter \\u2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "oracle",
+   "sql": "U&'Hello winter #2603 !' UESCAPE '#'",
+   "expected": "U'Hello winter \\2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "U&'Hello winter #2603 !' UESCAPE '#'",
+   "expected": "U&'Hello winter #2603 !' UESCAPE '#'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "snowflake",
+   "sql": "U&'Hello winter #2603 !' UESCAPE '#'",
+   "expected": "'Hello winter \\u2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "U&'Hello winter #2603 !' UESCAPE '#'",
+   "expected": "'Hello winter \\u2603 !'",
+   "test": "TestPresto.test_unicode_string"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT a FROM x CROSS JOIN UNNEST(ARRAY(y)) AS t (a)",
+   "expected": "SELECT a FROM x CROSS JOIN UNNEST(ARRAY[y]) AS t(a)",
+   "test": "TestPresto.test_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "SELECT a FROM x CROSS JOIN UNNEST(ARRAY(y)) AS t (a)",
+   "expected": "SELECT a FROM x LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "test": "TestPresto.test_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "spark",
+   "sql": "SELECT a FROM x CROSS JOIN UNNEST(ARRAY(y)) AS t (a)",
+   "expected": "SELECT a FROM x LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "test": "TestPresto.test_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "presto",
+   "sql": "SELECT a FROM x CROSS JOIN UNNEST(ARRAY(y)) AS t (a) CROSS JOIN b",
+   "expected": "SELECT a FROM x CROSS JOIN UNNEST(ARRAY[y]) AS t(a) CROSS JOIN b",
+   "test": "TestPresto.test_unnest"
+  },
+  {
+   "kind": "write",
+   "read": "presto",
+   "write": "hive",
+   "sql": "SELECT a FROM x CROSS JOIN UNNEST(ARRAY(y)) AS t (a) CROSS JOIN b",
+   "expected": "SELECT a FROM x CROSS JOIN b LATERAL VIEW EXPLODE(ARRAY(y)) t AS a",
+   "test": "TestPresto.test_unnest"
+  }
+ ]
+}

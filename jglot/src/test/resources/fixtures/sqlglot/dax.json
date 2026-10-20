@@ -1,0 +1,102 @@
+{
+ "sqlglotVersion": "30.23.0",
+ "source": "tests/dialects/test_dax.py",
+ "cases": [
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE Sales",
+   "expected": "SELECT * FROM Sales",
+   "test": "TestDAX.test_evaluate"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE 'Sales Data'",
+   "expected": "SELECT * FROM \"Sales Data\"",
+   "test": "TestDAX.test_evaluate"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE FILTER(Sales, Sales[Amount] > 100)",
+   "expected": "SELECT * FROM Sales WHERE Sales.\"Amount\" > 100",
+   "test": "TestDAX.test_filter"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE FILTER('Sales Data', 'Sales Data'[Amount] > 100)",
+   "expected": "SELECT * FROM \"Sales Data\" WHERE \"Sales Data\".\"Amount\" > 100",
+   "test": "TestDAX.test_filter"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE FILTER(FILTER(Sales, Sales[Amount] > 100), Sales[Region] = \"West\")",
+   "expected": "SELECT * FROM Sales WHERE Sales.\"Amount\" > 100 AND Sales.\"Region\" = 'West'",
+   "test": "TestDAX.test_filter"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE FILTER(Sales, Sales[Amount] > 100 && Sales[Qty] < 5)",
+   "expected": "SELECT * FROM Sales WHERE Sales.\"Amount\" > 100 AND Sales.\"Qty\" < 5",
+   "test": "TestDAX.test_filter"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE FILTER(Sales, Sales[Amount] > 100 || Sales[Qty] < 5)",
+   "expected": "SELECT * FROM Sales WHERE Sales.\"Amount\" > 100 OR Sales.\"Qty\" < 5",
+   "test": "TestDAX.test_filter"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE FILTER(Sales, [Total Amount] > 100)",
+   "expected": "SELECT * FROM Sales WHERE \"Total Amount\" > 100",
+   "test": "TestDAX.test_filter"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE FILTER(Sales, Sales[Note] = \"He said \"\"hi\"\"\")",
+   "expected": "SELECT * FROM Sales WHERE Sales.\"Note\" = 'He said \"hi\"'",
+   "test": "TestDAX.test_filter"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "duckdb",
+   "sql": "EVALUATE FILTER(Sales, Sales[Amount] > 100)",
+   "expected": "SELECT * FROM Sales WHERE Sales.\"Amount\" > 100",
+   "test": "TestDAX.test_filter"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "",
+   "sql": "EVALUATE Sales ORDER BY Sales[Amount] DESC, Sales[Qty]",
+   "expected": "SELECT * FROM Sales ORDER BY Sales.\"Amount\" DESC, Sales.\"Qty\"",
+   "test": "TestDAX.test_order_by"
+  },
+  {
+   "kind": "transpile",
+   "read": "dax",
+   "write": "duckdb",
+   "sql": "EVALUATE FILTER(Sales, Sales[Amount] > 100) ORDER BY Sales[Amount]",
+   "expected": "SELECT * FROM Sales WHERE Sales.\"Amount\" > 100 ORDER BY Sales.\"Amount\" NULLS FIRST",
+   "test": "TestDAX.test_order_by"
+  }
+ ]
+}
