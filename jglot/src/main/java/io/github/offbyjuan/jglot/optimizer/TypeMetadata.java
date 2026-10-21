@@ -100,14 +100,16 @@ final class TypeMetadata {
         self.setType(e, isNumericOrUnknown(thisExpr) ? thisExpr.dataType() : DType.INT);
     };
 
+    private static final Set<DType> NUMERIC_OR_UNKNOWN;
+
+    static {
+        EnumSet<DType> s = EnumSet.copyOf(DataTypes.NUMERIC_TYPES);
+        s.add(DType.UNKNOWN);
+        NUMERIC_OR_UNKNOWN = Collections.unmodifiableSet(s);
+    }
+
     private static boolean isNumericOrUnknown(Expression e) {
-        Object[] types = new Object[DataTypes.NUMERIC_TYPES.size() + 1];
-        types[0] = DType.UNKNOWN;
-        int i = 1;
-        for (DType d : DataTypes.NUMERIC_TYPES) {
-            types[i++] = d;
-        }
-        return TypeAnnotator.isType(e, types);
+        return TypeAnnotator.isType(e, NUMERIC_OR_UNKNOWN);
     }
 
     private static final Set<DType> INTEGER_OR_TEXT;

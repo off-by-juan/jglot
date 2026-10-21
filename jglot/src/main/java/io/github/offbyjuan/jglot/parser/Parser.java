@@ -3741,7 +3741,7 @@ public class Parser extends ParserMethods {
                     // a TableAlias and attach to the Unnest, so it matches the parser's output
                     if (Expression.isInstance(table.get(Args.ALIAS), ExprType.TABLE_ALIAS)) {
                         tableAsColumn.replace(tableAsColumn.getThis());
-                        Exp.tableAlias(unnest, null, List.of(table.expr(Args.ALIAS).getThis()));
+                        Exp.tableAlias(unnest, null, List.of(table.expr(Args.ALIAS).getThis()), false);
                     }
 
                     table.replace(unnest);

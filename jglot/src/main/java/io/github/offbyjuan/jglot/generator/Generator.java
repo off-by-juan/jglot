@@ -4309,7 +4309,7 @@ public class Generator extends GeneratorMethods {
         Expression parent = expression.parent();
         boolean isQualified = parent != null && parent.is(ExprType.DOT) && expression == parent.getExpression();
 
-        return funcWith(sql(expression, Args.THIS), "(", ")", !isQualified, expression.getExpressions().toArray());
+        return funcWith(sql(expression, Args.THIS), "(", ")", !isQualified, expression.list(Args.EXPRESSIONS).toArray());
     }
 
     @Override

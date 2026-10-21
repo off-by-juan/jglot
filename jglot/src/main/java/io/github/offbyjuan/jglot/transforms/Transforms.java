@@ -1411,21 +1411,23 @@ public final class Transforms {
 
     /** {@code Scope(expression)}. */
     private static Scope newScope(Expression expression) {
-        throw new UnsupportedOperationException("not yet ported from sqlglot: optimizer.scope.Scope(expression)");
+        return new Scope(expression);
     }
 
     /** {@code [name for name, _ in scope.references]}. */
     private static List<String> scopeReferenceNames(Scope scope) {
-        throw new UnsupportedOperationException("not yet ported from sqlglot: optimizer.scope.Scope.references");
+        List<String> out = new ArrayList<>();
+        for (Map.Entry<String, Expression> ref : scope.references()) {
+            out.add(ref.getKey());
+        }
+        return out;
     }
 
-    /** {@code scope.expression}. */
     private static Expression scopeExpression(Scope scope) {
-        throw new UnsupportedOperationException("not yet ported from sqlglot: optimizer.scope.Scope.expression");
+        return scope.expression();
     }
 
-    /** {@code scope.is_correlated_subquery}. */
     private static boolean scopeIsCorrelatedSubquery(Scope scope) {
-        throw new UnsupportedOperationException("not yet ported from sqlglot: optimizer.scope.Scope.is_correlated_subquery");
+        return scope.isCorrelatedSubquery();
     }
 }

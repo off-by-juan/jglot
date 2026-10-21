@@ -1670,8 +1670,20 @@ public final class Expression {
      * nodes). See {@link DataTypes#isType}.
      */
     public boolean isType(Object... dtypes) {
-        Expression dt = type.isDataTypeType() ? this : dataType();
+        // sqlglot: DataType.is_type compares the node itself; Expression.is_type only consults the
+        // explicitly annotated type (never a cast's `to`).
+        if (type.isCastType()) {
+            // Cast.is_type checks the target type
+            Expression to = expr(Args.TO);
+            return to != null && DataTypes.isType(to, false, dtypes);
+        }
+        Expression dt = type.isDataTypeType() ? this : dataType;
         return dt != null && DataTypes.isType(dt, false, dtypes);
+    }
+
+    /** The explicitly annotated type (sqlglot's {@code _type}), without the cast {@code to} fallback. */
+    public Expression rawDataType() {
+        return dataType;
     }
 
     /** {@code expression.assert_is(type)}. */

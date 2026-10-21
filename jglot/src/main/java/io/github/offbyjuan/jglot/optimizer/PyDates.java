@@ -376,9 +376,6 @@ final class PyDates {
                     }
                     pos += hasSep ? 1 : 0;
                     dayno = digits(dtstr, pos, pos + 1);
-                    if (pos + 1 != len) {
-                        throw new PyDateError("Invalid isoformat string");
-                    }
                 }
                 return isoweekToGregorian(year, weekno, dayno);
             }
@@ -389,9 +386,6 @@ final class PyDates {
             }
             pos += hasSep ? 1 : 0;
             int day = digits(dtstr, pos, pos + 2);
-            if (pos + 2 != len) {
-                throw new PyDateError("Invalid isoformat string");
-            }
             if (year < 1) {
                 throw new PyDateError("year 0 is out of range");
             }
@@ -515,6 +509,10 @@ final class PyDates {
             LocalDate date = parseIsoformatDate(dstr);
 
             if (tstr.isEmpty()) {
+                if (sep < text.length()) {
+                    // a separator with nothing after it
+                    return null;
+                }
                 return PyDateTime.datetime(date.atStartOfDay(), null);
             }
             if (!isAscii(tstr) || tstr.length() < 2) {
