@@ -204,8 +204,14 @@ public final class Exp {
         return alias(e, alias, null);
     }
 
-    /** sqlglot's {@code alias_} (column alias form). */
+    /** sqlglot's {@code alias_} (column alias form); like sqlglot, {@code e} is copied. */
     public static Expression alias(Expression e, Object alias, Boolean quoted) {
+        return alias(e, alias, quoted, true);
+    }
+
+    /** sqlglot's {@code alias_(expression, alias, quoted=..., copy=...)} (column alias form). */
+    public static Expression alias(Expression e, Object alias, Boolean quoted, boolean copy) {
+        e = maybeCopy(e, copy);
         Expression id = toIdentifier(alias, quoted, true);
         if (e.accepts(Args.ALIAS) && e.type() != WINDOW) {
             e.set(Args.ALIAS, id);
@@ -214,8 +220,14 @@ public final class Exp {
         return Expression.of(ALIAS, Args.THIS, e, Args.ALIAS, id);
     }
 
-    /** sqlglot's {@code alias_(..., table=True|columns)}. */
+    /** sqlglot's {@code alias_(..., table=True|columns)}; like sqlglot, {@code e} is copied. */
     public static Expression tableAlias(Expression e, Object alias, List<?> columns) {
+        return tableAlias(e, alias, columns, true);
+    }
+
+    /** sqlglot's {@code alias_(..., table=True|columns, copy=...)}. */
+    public static Expression tableAlias(Expression e, Object alias, List<?> columns, boolean copy) {
+        e = maybeCopy(e, copy);
         Expression ta = Expression.of(TABLE_ALIAS, Args.THIS, toIdentifier(alias));
         e.set(Args.ALIAS, ta);
         if (columns != null) {
@@ -827,25 +839,9 @@ public final class Exp {
         return found;
     }
 
-    /**
-     * Calls the dialect parser's hand-written FUNCTIONS builder. The parser only exposes it as a
-     * protected method ({@code ParserCore.callFunctionBuilder}), so it is invoked reflectively.
-     */
+    /** Calls the dialect parser's hand-written FUNCTIONS builder. */
     private static Expression callFunctionBuilder(Dialect dialect, String upperName, List<Expression> args) {
-        io.github.offbyjuan.jglot.parser.Parser parser = dialect.newParser(ParserOptions.DEFAULT);
-        try {
-            java.lang.reflect.Method m = io.github.offbyjuan.jglot.parser.ParserCore.class
-                    .getDeclaredMethod("callFunctionBuilder", String.class, List.class);
-            m.setAccessible(true);
-            return (Expression) m.invoke(parser, upperName, args);
-        } catch (java.lang.reflect.InvocationTargetException e) {
-            if (e.getCause() instanceof RuntimeException re) {
-                throw re;
-            }
-            throw new IllegalStateException(e.getCause());
-        } catch (ReflectiveOperationException e) {
-            throw new IllegalStateException("cannot call FUNCTIONS builder for " + upperName, e);
-        }
+        return dialect.newParser(ParserOptions.DEFAULT).callFunctionBuilder(upperName, args);
     }
 
     /** {@code exp.case(expression)}: an empty CASE; add branches with {@link Expression#when}. */

@@ -244,4 +244,24 @@ public final class Py {
         }
         return value;
     }
+
+    /**
+     * Python's {@code str(value)} as used in f-strings: {@code None} for null, {@code True}/{@code
+     * False} for booleans, and expressions rendered as SQL in sqlglot's base dialect.
+     */
+    public static String str(Object value) {
+        if (value == null) {
+            return "None";
+        }
+        if (value instanceof String s) {
+            return s;
+        }
+        if (value instanceof Boolean b) {
+            return b ? "True" : "False";
+        }
+        if (value instanceof Expression e) {
+            return e.sql(io.github.offbyjuan.jglot.dialects.Dialects.base());
+        }
+        return value.toString();
+    }
 }

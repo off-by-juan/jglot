@@ -178,7 +178,9 @@ public final class Expression {
         if (v instanceof Expression e) {
             return List.of(e);
         }
-        List<?> l = (List<?>) v;
+        if (!(v instanceof List<?> l)) {
+            return Collections.emptyList();
+        }
         boolean allExprs = true;
         for (Object o : l) {
             if (!(o instanceof Expression)) {
@@ -391,6 +393,13 @@ public final class Expression {
         return argKey;
     }
 
+    /** Assigns this node's parent link directly (sqlglot allows setting {@code .parent}/{@code .arg_key}/{@code .index}). */
+    public void setParent(Expression parent, Arg argKey, int index) {
+        this.parent = parent;
+        this.argKey = argKey;
+        this.index = index;
+    }
+
     /** Index within the parent's list arg, or -1 if not in a list. */
     public int index() {
         return index;
@@ -503,6 +512,33 @@ public final class Expression {
 
     public boolean hasMeta() {
         return meta != null && !meta.isEmpty();
+    }
+
+    private static final String[] POSITION_META_KEYS = {"line", "col", "start", "end"};
+
+    /** sqlglot's {@code update_positions(token)}: copies the token's line/col/start/end into meta. */
+    public Expression updatePositions(io.github.offbyjuan.jglot.tokens.Token token) {
+        if (token != null) {
+            Map<String, Object> m = meta();
+            m.put("line", token.line());
+            m.put("col", token.col());
+            m.put("start", token.start());
+            m.put("end", token.end());
+        }
+        return this;
+    }
+
+    /** sqlglot's {@code update_positions(other)}: copies the position meta keys of another node. */
+    public Expression updatePositions(Expression other) {
+        if (other != null && other.meta != null && !other.meta.isEmpty()) {
+            Map<String, Object> m = meta();
+            for (String k : POSITION_META_KEYS) {
+                if (other.meta.containsKey(k)) {
+                    m.put(k, other.meta.get(k));
+                }
+            }
+        }
+        return this;
     }
 
     /** The data type annotation (a DATA_TYPE expression), as set by the parser or type inference. */
@@ -1014,9 +1050,18 @@ public final class Expression {
         return out;
     }
 
-    /** Strips any number of enclosing {@code PAREN} nodes. */
+    /**
+     * sqlglot's {@code unnest}: strips enclosing {@code PAREN} nodes; for a {@code SUBQUERY} it returns
+     * the first non-subquery node (sqlglot's {@code Subquery.unnest}).
+     */
     public Expression unnest() {
         Expression e = this;
+        if (type == SUBQUERY) {
+            while (e != null && e.type == SUBQUERY) {
+                e = e.getThis();
+            }
+            return e;
+        }
         while (e.type == PAREN && e.getThis() != null) {
             e = e.getThis();
         }
@@ -1293,122 +1338,330 @@ public final class Expression {
     }
 
     // ------------------------------------------------------------------------------------------
-    // Builder methods (sqlglot's Expression/Query/Select builder API). Stubs marked TODO(port) are
-    // filled in by the expression-helpers port; their signatures are the contract other code uses.
+    // Builder methods (sqlglot's Expression/Query/Select builder API). Their signatures are the
+    // contract other code uses.
     // Unless noted, these follow sqlglot's copy=True default and return a modified copy.
 
-    private static RuntimeException notPorted(String what) {
-        return new UnsupportedOperationException("not yet ported from sqlglot: " + what);
+    private static List<Object> argList(Object[] expressions) {
+        List<Object> out = new ArrayList<>();
+        if (expressions != null) {
+            Collections.addAll(out, expressions);
+        }
+        return out;
+    }
+
+    private static List<Object> withSelf(Expression self, Object[] expressions) {
+        List<Object> out = new ArrayList<>();
+        out.add(self);
+        if (expressions != null) {
+            Collections.addAll(out, expressions);
+        }
+        return out;
+    }
+
+    private UnsupportedOperationException noBuilder(String what) {
+        return new UnsupportedOperationException("'" + type.className() + "' object has no builder '" + what + "'");
     }
 
     /** {@code query.select(*expressions, append=..., copy=...)}. */
     public Expression select(boolean append, boolean copy, Object... expressions) {
-        throw notPorted("Select.select"); // TODO(port)
+        if (type == SELECT) {
+            return Exp.applyListBuilder(argList(expressions), this, Args.EXPRESSIONS, append, copy, null, EXPRESSION,
+                    null);
+        }
+        if (is(SET_OPERATION)) {
+            Expression thisExpr = Exp.maybeCopy(this, copy);
+            thisExpr.getThis().unnest().select(append, false, expressions);
+            thisExpr.getExpression().unnest().select(append, false, expressions);
+            return thisExpr;
+        }
+        if (type == SUBQUERY) {
+            Expression thisExpr = Exp.maybeCopy(this, copy);
+            Expression inner = thisExpr.unnest();
+            if (inner != null && inner.is(QUERY)) {
+                inner.select(append, false, expressions);
+            }
+            return thisExpr;
+        }
+        if (is(QUERY)) {
+            throw new UnsupportedOperationException("Query objects must implement `select`");
+        }
+        throw noBuilder("select");
     }
 
     /** {@code select.from_(expression, copy=...)}. */
     public Expression from(Object expression, boolean copy) {
-        throw notPorted("Select.from_"); // TODO(port)
+        if (type == UPDATE) {
+            if (!truthy(expression)) {
+                return Exp.maybeCopy(this, copy);
+            }
+        } else if (type != SELECT) {
+            throw noBuilder("from_");
+        }
+        return Exp.applyBuilder(expression, this, Args.FROM_, copy, "FROM", FROM, null, Args.THIS);
     }
 
     /** {@code query.where(*expressions, append=..., copy=...)}: AND-combines with any existing WHERE. */
     public Expression where(boolean append, boolean copy, Object... expressions) {
-        throw notPorted("Select.where"); // TODO(port)
+        List<Object> exprs;
+        if (is(QUERY)) {
+            exprs = new ArrayList<>();
+            for (Object e : argList(expressions)) {
+                exprs.add(e instanceof Expression w && w.is(WHERE) ? w.getThis() : e);
+            }
+        } else if (type == DELETE || type == UPDATE) {
+            exprs = argList(expressions);
+        } else {
+            throw noBuilder("where");
+        }
+        return Exp.applyConjunctionBuilder(exprs, this, Args.WHERE, WHERE, append, copy, null);
     }
 
     /** {@code select.join(expression, on=..., using=..., join_type=..., join_alias=..., copy=...)}. */
     public Expression join(Object expression, Object on, List<Object> using, String joinType, String joinAlias, boolean copy) {
-        throw notPorted("Select.join"); // TODO(port)
+        if (type != SELECT) {
+            throw noBuilder("join");
+        }
+        boolean append = true;
+
+        Expression parsed;
+        try {
+            parsed = Exp.maybeParse(expression, JOIN, null, "JOIN", false);
+        } catch (io.github.offbyjuan.jglot.errors.ParseError e) {
+            parsed = Exp.maybeParseAny(expression, new ExprType[] {JOIN, EXPRESSION}, null, null, false);
+        }
+
+        Expression join = parsed.is(JOIN) ? parsed : Expression.of(JOIN, Args.THIS, parsed);
+        Expression joinThis = join.getThis();
+        if (joinThis != null && joinThis.is(SELECT)) {
+            joinThis.replace(joinThis.subquery(null, true));
+        }
+
+        if (joinType != null && !joinType.isEmpty()) {
+            Expression newJoin = Exp.maybeParse("FROM _ " + joinType + " JOIN _", null, null, null, false).find(JOIN);
+            String method = newJoin.text(Args.METHOD).toUpperCase(Locale.ROOT);
+            String side = newJoin.text(Args.SIDE).toUpperCase(Locale.ROOT);
+            String kind = newJoin.text(Args.KIND).toUpperCase(Locale.ROOT);
+
+            if (!method.isEmpty()) {
+                join.set(Args.METHOD, method);
+            }
+            if (!side.isEmpty()) {
+                join.set(Args.SIDE, side);
+            }
+            if (!kind.isEmpty()) {
+                join.set(Args.KIND, kind);
+            }
+        }
+
+        if (truthy(on)) {
+            List<Object> onExprs = io.github.offbyjuan.jglot.util.Py.ensureList(on);
+            Expression onNode = Exp.combineConditions(onExprs, AND, null, copy, true);
+            join.set(Args.ON, onNode);
+        }
+
+        if (truthy(using)) {
+            List<Object> usingExprs = io.github.offbyjuan.jglot.util.Py.ensureList(using);
+            join = Exp.applyListBuilder(usingExprs, join, Args.USING, append, copy, null, IDENTIFIER, null);
+        }
+
+        if (joinAlias != null && !joinAlias.isEmpty()) {
+            join.set(Args.THIS, Exp.tableAlias(join.getThis(), joinAlias, null, true));
+        }
+
+        List<Object> joins = new ArrayList<>();
+        joins.add(join);
+        return Exp.applyListBuilder(joins, this, Args.JOINS, append, copy, null, null, null);
     }
 
     /** {@code select.group_by(*expressions, append=..., copy=...)}. */
     public Expression groupBy(boolean append, boolean copy, Object... expressions) {
-        throw notPorted("Select.group_by"); // TODO(port)
+        if (type != SELECT) {
+            throw noBuilder("group_by");
+        }
+        if (expressions == null || expressions.length == 0) {
+            return copy ? copy() : this;
+        }
+        return Exp.applyChildListBuilder(argList(expressions), this, Args.GROUP, append, copy, "GROUP BY", GROUP, null,
+                null);
     }
 
     /** {@code query.order_by(*expressions, append=..., copy=...)}. */
     public Expression orderBy(boolean append, boolean copy, Object... expressions) {
-        throw notPorted("Query.order_by"); // TODO(port)
+        if (!is(QUERY)) {
+            throw noBuilder("order_by");
+        }
+        return Exp.applyChildListBuilder(argList(expressions), this, Args.ORDER, append, copy, "ORDER BY", ORDER, null,
+                null);
     }
 
     /** {@code query.limit(expression, copy=...)}. */
     public Expression limit(Object expression, boolean copy) {
-        throw notPorted("Query.limit"); // TODO(port)
+        if (!is(QUERY)) {
+            throw noBuilder("limit");
+        }
+        return Exp.applyBuilder(expression, this, Args.LIMIT, copy, "LIMIT", LIMIT, null, Args.EXPRESSION);
     }
 
     /** {@code query.offset(expression, copy=...)}. */
     public Expression offset(Object expression, boolean copy) {
-        throw notPorted("Query.offset"); // TODO(port)
+        if (!is(QUERY)) {
+            throw noBuilder("offset");
+        }
+        return Exp.applyBuilder(expression, this, Args.OFFSET, copy, "OFFSET", OFFSET, null, Args.EXPRESSION);
     }
 
     /** {@code select.distinct(*ons, distinct=..., copy=...)}. */
     public Expression distinct(boolean distinct, boolean copy, Object... ons) {
-        throw notPorted("Select.distinct"); // TODO(port)
+        if (type != SELECT) {
+            throw noBuilder("distinct");
+        }
+        Expression instance = Exp.maybeCopy(this, copy);
+        Expression on = null;
+        if (ons != null && ons.length > 0) {
+            List<Expression> items = new ArrayList<>();
+            for (Object o : ons) {
+                if (truthy(o)) {
+                    items.add(Exp.maybeParse(o, null, null, null, copy));
+                }
+            }
+            on = Expression.of(TUPLE, Args.EXPRESSIONS, items);
+        }
+        instance.set(Args.DISTINCT, distinct ? Expression.of(DISTINCT, Args.ON, on) : null);
+        return instance;
     }
 
     /** {@code query.with_(alias, as_, recursive=..., append=..., copy=...)}. */
     public Expression with(Object alias, Object as, boolean recursive, boolean append, boolean copy) {
-        throw notPorted("Query.with_"); // TODO(port)
+        if (!is(QUERY) && type != INSERT && type != UPDATE) {
+            throw noBuilder("with_");
+        }
+        // sqlglot's _apply_cte_builder (materialized=None, scalar=None)
+        Expression aliasExpression = Exp.maybeParse(alias, TABLE_ALIAS, null, null, false);
+        Expression asExpression = Exp.maybeParse(as, null, null, null, copy);
+        Expression cte = Expression.of(CTE, Args.THIS, asExpression, Args.ALIAS, aliasExpression);
+        Map<Arg, Object> properties = new java.util.LinkedHashMap<>();
+        if (recursive) {
+            properties.put(Args.RECURSIVE, Boolean.TRUE);
+        }
+        List<Object> ctes = new ArrayList<>();
+        ctes.add(cte);
+        return Exp.applyChildListBuilder(ctes, this, Args.WITH_, append, copy, null, WITH, null, properties);
     }
 
     /** {@code query.subquery(alias=..., copy=...)}: wraps the query in a SUBQUERY node. */
     public Expression subquery(Object alias, boolean copy) {
-        throw notPorted("Query.subquery"); // TODO(port)
+        Expression instance = Exp.maybeCopy(this, copy);
+        Object aliasNode = alias;
+        if (!(alias instanceof Expression)) {
+            aliasNode = truthy(alias) ? Expression.of(TABLE_ALIAS, Args.THIS, Exp.toIdentifier(alias)) : null;
+        }
+        return Expression.of(SUBQUERY, Args.THIS, instance, Args.ALIAS, aliasNode);
     }
 
     /** {@code expression.as_(alias, quoted=..., copy=..., table=...)}. */
     public Expression as(Object alias, Boolean quoted, boolean copy) {
-        throw notPorted("Expression.as_"); // TODO(port)
+        return Exp.alias(this, alias, quoted, copy);
+    }
+
+    private Expression setOperation(ExprType kind, String name, boolean distinct, boolean copy, Object[] expressions) {
+        List<Object> all = withSelf(this, expressions);
+        if (all.size() < 2) {
+            throw new AssertionError("At least two expressions are required by `" + name + "`.");
+        }
+        return Exp.applySetOperation(all, kind, distinct, null, copy);
     }
 
     /** {@code query.union(*expressions, distinct=..., copy=...)}. */
     public Expression union(boolean distinct, boolean copy, Object... expressions) {
-        throw notPorted("Query.union"); // TODO(port)
+        return setOperation(UNION, "union", distinct, copy, expressions);
     }
 
     /** {@code query.intersect(*expressions, distinct=..., copy=...)}. */
     public Expression intersect(boolean distinct, boolean copy, Object... expressions) {
-        throw notPorted("Query.intersect"); // TODO(port)
+        return setOperation(INTERSECT, "intersect", distinct, copy, expressions);
     }
 
     /** {@code query.except_(*expressions, distinct=..., copy=...)}. */
     public Expression except(boolean distinct, boolean copy, Object... expressions) {
-        throw notPorted("Query.except_"); // TODO(port)
+        return setOperation(EXCEPT, "except_", distinct, copy, expressions);
     }
 
     /** {@code expression.and_(*expressions, copy=...)}. */
     public Expression and(boolean copy, Object... expressions) {
-        throw notPorted("Expression.and_"); // TODO(port)
+        return Exp.combineConditions(withSelf(this, expressions), AND, null, copy, true);
     }
 
     /** {@code expression.or_(*expressions, copy=...)}. */
     public Expression or(boolean copy, Object... expressions) {
-        throw notPorted("Expression.or_"); // TODO(port)
+        return Exp.combineConditions(withSelf(this, expressions), OR, null, copy, true);
     }
 
     /** {@code expression.not_(copy=...)}. */
     public Expression not(boolean copy) {
-        throw notPorted("Expression.not_"); // TODO(port)
+        Expression thisExpr = Exp.condition(this, null, copy);
+        return Expression.of(NOT, Args.THIS, Exp.wrap(thisExpr, CONNECTOR));
+    }
+
+    /** sqlglot's {@code Expr._binop(klass, other)}: {@code klass(this=copy of self, expression=convert(other))}. */
+    public Expression binop(ExprType klass, Object other) {
+        return Exp.binop(klass, this, other, false);
+    }
+
+    /** sqlglot's {@code Expr._binop(klass, other, reverse=True)} (the {@code __radd__} family). */
+    public Expression binop(ExprType klass, Object other, boolean reverse) {
+        return Exp.binop(klass, this, other, reverse);
     }
 
     /** {@code expression.eq(other)}: a copy of this = other. */
     public Expression eq(Object other) {
-        throw notPorted("Expression.eq"); // TODO(port)
+        return Exp.binop(EQ, this, other, false);
     }
 
     /** {@code expression.neq(other)}. */
     public Expression neq(Object other) {
-        throw notPorted("Expression.neq"); // TODO(port)
+        return Exp.binop(NEQ, this, other, false);
+    }
+
+    /** {@code expression.is_(other)}: a copy of this IS other. */
+    public Expression is_(Object other) {
+        return Exp.binop(IS, this, other, false);
     }
 
     /** {@code expression.isin(*expressions, query=..., unnest=..., copy=...)}. */
     public Expression isin(Object query, Object unnest, boolean copy, Object... expressions) {
-        throw notPorted("Expression.isin"); // TODO(port)
+        Expression subquery = null;
+        if (truthy(query)) {
+            subquery = Exp.maybeParse(query, null, null, null, copy);
+            if (subquery.is(QUERY)) {
+                subquery = subquery.subquery(null, false);
+            }
+        }
+        List<Object> unnestList = io.github.offbyjuan.jglot.util.Py.ensureList(unnest);
+
+        Expression thisExpr = Exp.maybeCopy(this, copy);
+        List<Expression> converted = new ArrayList<>();
+        for (Object e : argList(expressions)) {
+            converted.add(Exp.convert(e, copy));
+        }
+        Expression unnestNode = null;
+        if (truthy(unnest)) {
+            List<Expression> parsed = new ArrayList<>();
+            for (Object e : unnestList) {
+                parsed.add(Exp.maybeParse(e, null, null, null, copy));
+            }
+            unnestNode = Expression.of(UNNEST, Args.EXPRESSIONS, parsed);
+        }
+        return Expression.of(IN, Args.THIS, thisExpr, Args.EXPRESSIONS, converted, Args.QUERY, subquery, Args.UNNEST,
+                unnestNode);
     }
 
     /** {@code expression.between(low, high, copy=...)}. */
     public Expression between(Object low, Object high, boolean copy) {
-        throw notPorted("Expression.between"); // TODO(port)
+        return Expression.of(BETWEEN,
+                Args.THIS, Exp.maybeCopy(this, copy),
+                Args.LOW, Exp.convert(low, copy),
+                Args.HIGH, Exp.convert(high, copy));
     }
 
     /**
@@ -1431,17 +1684,49 @@ public final class Expression {
 
     /** {@code column.to_dot(include_dots=...)}: converts a column into a Dot chain. */
     public Expression toDot(boolean includeDots) {
-        throw notPorted("Column.to_dot"); // TODO(port)
+        if (!is(COLUMN)) {
+            throw noBuilder("to_dot");
+        }
+        List<Expression> parts = new ArrayList<>(parts());
+        Expression p = parent;
+
+        if (includeDots) {
+            while (p != null && p.is(DOT)) {
+                parts.add(p.getExpression());
+                p = p.parent;
+            }
+        }
+
+        if (parts.size() > 1) {
+            List<Expression> copies = new ArrayList<>(parts.size());
+            for (Expression part : parts) {
+                copies.add(part == null ? null : part.copy());
+            }
+            return Exp.dot(copies);
+        }
+        return parts.get(0);
     }
 
     /** {@code case.when(condition, then, copy=...)}. */
     public Expression when(Object condition, Object then, boolean copy) {
-        throw notPorted("Case.when"); // TODO(port)
+        if (type != CASE) {
+            throw noBuilder("when");
+        }
+        Expression instance = Exp.maybeCopy(this, copy);
+        instance.append(Args.IFS, Expression.of(IF,
+                Args.THIS, Exp.maybeParse(condition, null, null, null, copy),
+                Args.TRUE, Exp.maybeParse(then, null, null, null, copy)));
+        return instance;
     }
 
     /** {@code case.else_(condition, copy=...)}. */
     public Expression elseCase(Object condition, boolean copy) {
-        throw notPorted("Case.else_"); // TODO(port)
+        if (type != CASE) {
+            throw noBuilder("else_");
+        }
+        Expression instance = Exp.maybeCopy(this, copy);
+        instance.set(Args.DEFAULT, Exp.maybeParse(condition, null, null, null, copy));
+        return instance;
     }
 
     /** {@code expression.sql(dialect)}: renders this node in {@code dialect}. */

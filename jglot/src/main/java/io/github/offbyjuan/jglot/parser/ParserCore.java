@@ -661,7 +661,7 @@ public abstract class ParserCore {
     // FUNCTIONS table
 
     /** Whether the dialect's FUNCTIONS table has an entry for {@code upperName}. */
-    protected boolean hasFunction(String upperName) {
+    public boolean hasFunction(String upperName) {
         return d.FUNCTIONS_FROM_ARG_LIST.containsKey(upperName) || d.FUNCTIONS_CUSTOM.contains(upperName);
     }
 
@@ -669,7 +669,7 @@ public abstract class ParserCore {
      * Calls the dialect's FUNCTIONS builder for {@code upperName}: either the generic
      * {@code Func.from_arg_list} of a known type, or a hand-written {@link #buildFunction}.
      */
-    protected Expression callFunctionBuilder(String upperName, List<Expression> args) {
+    public Expression callFunctionBuilder(String upperName, List<Expression> args) {
         ExprType t = d.FUNCTIONS_FROM_ARG_LIST.get(upperName);
         if (t != null) {
             return Exp.fromArgList(t, args);
