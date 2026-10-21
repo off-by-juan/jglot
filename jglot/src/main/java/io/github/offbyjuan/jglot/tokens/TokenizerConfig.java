@@ -145,6 +145,10 @@ public final class TokenizerConfig {
         return numericEscapes;
     }
 
+    public boolean dropUnknownEscapes() {
+        return dropUnknownEscapes;
+    }
+
     public Map<String, String> unescapedSequences() {
         return unescapedSequences;
     }

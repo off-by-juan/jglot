@@ -52,13 +52,45 @@ public final class DataTypes {
      * {@code udt}) or an existing DATA_TYPE node.
      */
     public static Expression build(Object dtype, io.github.offbyjuan.jglot.dialects.Dialect dialect, boolean udt, boolean copy) {
+        if (dtype instanceof String s) {
+            return fromStr(s, dialect, udt);
+        }
         if (dtype instanceof DType t) {
             return of(t);
         }
-        if (dtype instanceof Expression e && e.type() == ExprType.DATA_TYPE) {
+        if (dtype instanceof Expression e && e.is(ExprType.IDENTIFIER, ExprType.DOT) && udt) {
+            return Expression.of(ExprType.DATA_TYPE, Args.THIS, DType.USERDEFINED, Args.KIND, e);
+        }
+        if (dtype instanceof Expression e && e.is(ExprType.DATA_TYPE)) {
             return copy ? e.copy() : e;
         }
-        throw new UnsupportedOperationException("not yet ported from sqlglot: DataType.build"); // TODO(port)
+        throw new IllegalArgumentException("Invalid data type: " + typeName(dtype) + ". Expected str or DType");
+    }
+
+    private static String typeName(Object o) {
+        if (o == null) {
+            return "<class 'NoneType'>";
+        }
+        if (o instanceof Expression e) {
+            return "<class 'sqlglot.expressions." + e.type().className() + "'>";
+        }
+        return "<class '" + o.getClass().getSimpleName() + "'>";
+    }
+
+    /** {@code DataType.from_str(dtype, dialect, udt)}: parses a type string into a DATA_TYPE node. */
+    public static Expression fromStr(String dtype, io.github.offbyjuan.jglot.dialects.Dialect dialect, boolean udt) {
+        if (dtype.toUpperCase(java.util.Locale.ROOT).equals("UNKNOWN")) {
+            return of(DType.UNKNOWN);
+        }
+        try {
+            return Exp.parseOne(dtype, dialect, io.github.offbyjuan.jglot.parser.ParserOptions.DEFAULT
+                    .withErrorLevel(io.github.offbyjuan.jglot.errors.ErrorLevel.IGNORE), ExprType.DATA_TYPE);
+        } catch (io.github.offbyjuan.jglot.errors.ParseError e) {
+            if (udt) {
+                return Expression.of(ExprType.DATA_TYPE, Args.THIS, DType.USERDEFINED, Args.KIND, dtype);
+            }
+            throw e;
+        }
     }
 
     public static Expression build(Object dtype) {

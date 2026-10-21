@@ -211,7 +211,7 @@ public final class GeneratorData {
     }
 
     private static void base0(GeneratorData d) {
-        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("cluster", "distribute", "qualify", "sort", "windows");
+        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("cluster", "distribute", "sort", "windows", "qualify");
         d.ALTER_SET_TYPE = "SET DATA TYPE";
         d.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD = true;
         d.ARRAY_CONCAT_IS_VAR_LEN = true;
@@ -315,7 +315,7 @@ public final class GeneratorData {
     }
 
     private static void postgres0(GeneratorData d) {
-        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("qualify", "windows");
+        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("windows", "qualify");
         d.ALTER_SET_TYPE = BASE.ALTER_SET_TYPE;
         d.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD = BASE.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD;
         d.ARRAY_SIZE_DIM_REQUIRED = Boolean.TRUE;
@@ -414,7 +414,7 @@ public final class GeneratorData {
     }
 
     private static void presto0(GeneratorData d) {
-        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("qualify", "windows");
+        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("windows", "qualify");
         d.ALTER_SET_TYPE = BASE.ALTER_SET_TYPE;
         d.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD = BASE.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD;
         d.ARRAY_CONCAT_IS_VAR_LEN = BASE.ARRAY_CONCAT_IS_VAR_LEN;
@@ -508,7 +508,7 @@ public final class GeneratorData {
     }
 
     private static void trino0(GeneratorData d) {
-        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("qualify", "windows");
+        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("windows", "qualify");
         d.ALTER_SET_TYPE = BASE.ALTER_SET_TYPE;
         d.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD = BASE.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD;
         d.ARRAY_CONCAT_IS_VAR_LEN = BASE.ARRAY_CONCAT_IS_VAR_LEN;
@@ -699,7 +699,7 @@ public final class GeneratorData {
     }
 
     private static void clickhouse0(GeneratorData d) {
-        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("qualify", "windows");
+        d.AFTER_HAVING_MODIFIER_TRANSFORMS = strings("windows", "qualify");
         d.ALTER_SET_TYPE = "TYPE";
         d.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD = BASE.ALTER_TABLE_INCLUDE_COLUMN_KEYWORD;
         d.ARRAY_CONCAT_IS_VAR_LEN = BASE.ARRAY_CONCAT_IS_VAR_LEN;
@@ -915,7 +915,7 @@ public final class GeneratorData {
     }
 
     static Set<String> strings(String... items) {
-        return java.util.Collections.unmodifiableSet(new java.util.HashSet<>(java.util.Arrays.asList(items)));
+        return java.util.Collections.unmodifiableSet(new java.util.LinkedHashSet<>(java.util.Arrays.asList(items)));
     }
 
     @SuppressWarnings("unchecked")

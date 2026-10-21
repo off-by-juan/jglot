@@ -594,7 +594,7 @@ public final class DialectData {
     }
 
     static Set<String> strings(String... items) {
-        return java.util.Collections.unmodifiableSet(new java.util.HashSet<>(java.util.Arrays.asList(items)));
+        return java.util.Collections.unmodifiableSet(new java.util.LinkedHashSet<>(java.util.Arrays.asList(items)));
     }
 
     @SuppressWarnings("unchecked")

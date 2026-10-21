@@ -385,6 +385,17 @@ def emit_value(ctx, t: str, v) -> str:
         return jstr(v.pattern)
     if t == "Template":
         return jstr(v.sql())
+    if t.startswith("Keys<"):
+        keys = list(v.keys())
+        if t == "Keys<TokenType>":
+            return "tokens(" + ", ".join(tt(x) for x in sorted(keys, key=lambda x: x.name)) + ")"
+        if t == "Keys<String>":
+            # dict order matters for some tables (e.g. AFTER_HAVING_MODIFIER_TRANSFORMS)
+            return "strings(" + ", ".join(jstr(x) for x in keys) + ")"
+        if t == "Keys<ExprType>":
+            return "types(" + ", ".join(ctx.exptype(x) for x in sorted(keys, key=lambda x: ctx.const_names[x])) + ")"
+        if t == "Keys<DType>":
+            return "dtypes(" + ", ".join(dt(x) for x in sorted(keys, key=lambda x: x.name)) + ")"
     ft = field_type(t)
     if ft == "Set<TokenType>":
         items = sorted(v, key=lambda x: x.name)
@@ -432,16 +443,6 @@ def emit_value(ctx, t: str, v) -> str:
                 seqs.append("List.of(" + ", ".join(jstr(w) for w in words) + ")")
             parts.append(f"{jstr(k)}, List.of({', '.join(seqs)})")
         return "options(" + ", ".join(parts) + ")"
-    if t.startswith("Keys<"):
-        keys = list(v.keys())
-        if t == "Keys<TokenType>":
-            return "tokens(" + ", ".join(tt(x) for x in sorted(keys, key=lambda x: x.name)) + ")"
-        if t == "Keys<String>":
-            return "strings(" + ", ".join(jstr(x) for x in sorted(keys)) + ")"
-        if t == "Keys<ExprType>":
-            return "types(" + ", ".join(ctx.exptype(x) for x in sorted(keys, key=lambda x: ctx.const_names[x])) + ")"
-        if t == "Keys<DType>":
-            return "dtypes(" + ", ".join(dt(x) for x in sorted(keys, key=lambda x: x.name)) + ")"
     raise ValueError(f"cannot emit {t}: {v!r}")
 
 
@@ -517,7 +518,7 @@ HELPERS = """
     }
 
     static Set<String> strings(String... items) {
-        return java.util.Collections.unmodifiableSet(new java.util.HashSet<>(java.util.Arrays.asList(items)));
+        return java.util.Collections.unmodifiableSet(new java.util.LinkedHashSet<>(java.util.Arrays.asList(items)));
     }
 
     @SuppressWarnings("unchecked")
