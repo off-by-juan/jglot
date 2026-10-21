@@ -914,7 +914,7 @@ public final class Exp {
         }
 
         if (DataTypes.INTEGER_TYPES.contains(expression.dataType().thisValue())) {
-            LOGGER.info("Applying array index offset (" + offset + ")");
+            LOGGER.fine("Applying array index offset (" + offset + ")");
             expression = io.github.offbyjuan.jglot.optimizer.Simplify.simplify(binop(ADD, expression, offset, false),
                     Dialects.base());
             List<Expression> out = new ArrayList<>();

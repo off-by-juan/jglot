@@ -20,7 +20,8 @@ public record GeneratorOptions(
         int maxUnsupported,
         boolean leadingComma,
         int maxTextWidth,
-        boolean comments) {
+        boolean comments,
+        boolean strictFunctions) {
 
     public static final GeneratorOptions DEFAULT = builder().build();
 
@@ -41,6 +42,7 @@ public record GeneratorOptions(
         b.leadingComma = leadingComma;
         b.maxTextWidth = maxTextWidth;
         b.comments = comments;
+        b.strictFunctions = strictFunctions;
         return b;
     }
 
@@ -56,6 +58,7 @@ public record GeneratorOptions(
         private boolean leadingComma;
         private int maxTextWidth = 80;
         private boolean comments = true;
+        private boolean strictFunctions = true;
 
         /** Format the output over multiple lines (intended for debugging). */
         public Builder pretty(boolean v) {
@@ -115,9 +118,20 @@ public record GeneratorOptions(
             return this;
         }
 
+        /**
+         * Treat a known function as unsupported when the target dialect has no specific rendering
+         * for it and doesn't itself recognise its canonical name (default true). sqlglot has no
+         * such check: it prints the canonical name, which may not exist in the target engine.
+         * Turn this off for exact sqlglot parity.
+         */
+        public Builder strictFunctions(boolean v) {
+            strictFunctions = v;
+            return this;
+        }
+
         public GeneratorOptions build() {
             return new GeneratorOptions(pretty, identify, normalize, pad, indent, normalizeFunctions,
-                    unsupportedLevel, maxUnsupported, leadingComma, maxTextWidth, comments);
+                    unsupportedLevel, maxUnsupported, leadingComma, maxTextWidth, comments, strictFunctions);
         }
     }
 }

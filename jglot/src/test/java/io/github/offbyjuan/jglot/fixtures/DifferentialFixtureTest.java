@@ -44,7 +44,7 @@ class DifferentialFixtureTest {
     private static final GeneratorOptions PLAIN = GeneratorOptions.builder().unsupportedLevel(ErrorLevel.IGNORE).build();
     private static final GeneratorOptions PRETTY =
             GeneratorOptions.builder().unsupportedLevel(ErrorLevel.IGNORE).pretty(true).build();
-    private static final GeneratorOptions STRICT = GeneratorOptions.builder().unsupportedLevel(ErrorLevel.RAISE).build();
+    private static final GeneratorOptions STRICT = GeneratorOptions.builder().unsupportedLevel(ErrorLevel.RAISE).strictFunctions(false).build();
 
     private static String id(String... parts) {
         try {

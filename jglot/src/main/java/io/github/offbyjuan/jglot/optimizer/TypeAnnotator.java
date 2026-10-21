@@ -34,7 +34,7 @@ import java.util.logging.Logger;
  * <p>An instance holds per-run caches and is not thread-safe; {@link #annotateTypes} creates one per call.
  */
 public final class TypeAnnotator {
-    private static final Logger LOGGER = Logger.getLogger("sqlglot");
+    private static final Logger LOGGER = Logger.getLogger("jglot");
 
     /** EXTRACT/DATE_PART specifiers that return BIGINT instead of INT. */
     static final Set<String> BIGINT_EXTRACT_DATE_PARTS = Set.of(

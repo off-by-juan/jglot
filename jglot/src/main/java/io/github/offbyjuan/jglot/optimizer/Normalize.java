@@ -50,7 +50,7 @@ public final class Normalize {
                 long distance = normalizationDistance(node, dnf, maxDistance);
 
                 if (distance > maxDistance) {
-                    LOGGER.info("Skipping normalization because distance " + distance + " exceeds max " + maxDistance);
+                    LOGGER.fine("Skipping normalization because distance " + distance + " exceeds max " + maxDistance);
                     return expression;
                 }
 
@@ -58,7 +58,7 @@ public final class Normalize {
                     final Expression current = node;
                     node = node.replace(whileChanging(current, e -> distributiveLaw(e, dnf, maxDistance)));
                 } catch (OptimizeError e) {
-                    LOGGER.info(e.getMessage());
+                    LOGGER.fine(e.getMessage());
                     node.replace(original);
                     if (root) {
                         return original;

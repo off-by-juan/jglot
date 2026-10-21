@@ -26,8 +26,19 @@ The MVP covers translation (tokenize → parse → AST → generate) between:
 Alibaba Cloud MaxCompute is next. sqlglot's optimizer (qualification, simplification as a public
 API, lineage, execution) is out of scope.
 
-Conformance is measured against sqlglot's own test suite; see
-[`jglot/src/test/resources/fixtures/baseline/REPORT.md`](jglot/src/test/resources/fixtures/baseline/REPORT.md).
+Conformance is measured against sqlglot itself, at three levels:
+
+| Suite | Result |
+|---|---|
+| sqlglot's dialect tests (every `validate_identity` / `validate_all` case between the dialects above) | **4,151 / 4,151** |
+| Differential corpus: sqlglot's `identity.sql`, `pretty.sql` and optimizer fixtures (TPC-H and TPC-DS included), translated into every dialect, comparing plain output, pretty output and whether strict mode raises | **92,367 / 92,367** checks |
+| Tokenizer: tokens identical to sqlglot's for every fixture input | **3,719 / 3,719** |
+
+See [`jglot/src/test/resources/fixtures/baseline/REPORT.md`](jglot/src/test/resources/fixtures/baseline/REPORT.md).
+
+Performance (JMH, single thread, no tuning yet): about 6 µs for a short query and 40–60 µs for
+TPC-H Q1 or a CTE/window query, end to end. That is roughly 30–45x faster than pure-Python
+sqlglot on the same machine.
 
 ## Functions
 
@@ -36,6 +47,12 @@ Conformance is measured against sqlglot's own test suite; see
 * If the target dialect can't express a known function or construct, generation **fails loudly**
   with `UnsupportedError`. This is the default (`GeneratorOptions.unsupportedLevel = RAISE`); sqlglot
   only warns by default.
+* `GeneratorOptions.strictFunctions` (on by default) also raises when a known function has no
+  specific rendering for the target and the target doesn't recognise its canonical name. sqlglot
+  silently prints the canonical name in that case. **This check is only partial:** sqlglot's
+  function tables are shared across dialects, so a canonical name the target engine doesn't
+  actually have (e.g. `FARM_FINGERPRINT` to Postgres) still passes through. Closing this gap needs
+  per-engine function catalogs.
 * A function the source dialect doesn't know (a UDF, or a table function) is passed through
   unchanged.
 

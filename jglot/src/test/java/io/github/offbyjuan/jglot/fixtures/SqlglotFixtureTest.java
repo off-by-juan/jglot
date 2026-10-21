@@ -101,7 +101,7 @@ class SqlglotFixtureTest {
         try {
             Expression parsed = singleStatement(read, c.sql());
             if (c.expectError()) {
-                GeneratorOptions opts = GeneratorOptions.builder().unsupportedLevel(ErrorLevel.RAISE).build();
+                GeneratorOptions opts = GeneratorOptions.builder().unsupportedLevel(ErrorLevel.RAISE).strictFunctions(false).build();
                 try {
                     write.generate(parsed, opts);
                     return "expected UnsupportedError";

@@ -44,6 +44,7 @@ public abstract class GeneratorCore {
     protected final boolean leadingComma;
     protected final int maxTextWidth;
     protected final boolean preserveComments;
+    protected final boolean strictFunctions;
 
     protected List<String> unsupportedMessages = new ArrayList<>();
     protected final String escapedQuoteEnd;
@@ -69,6 +70,7 @@ public abstract class GeneratorCore {
         this.leadingComma = options.leadingComma();
         this.maxTextWidth = options.maxTextWidth();
         this.preserveComments = options.comments();
+        this.strictFunctions = options.strictFunctions();
         this.normalizeFunctions = options.normalizeFunctions() == null ? dd.NORMALIZE_FUNCTIONS : options.normalizeFunctions();
 
         String firstStringEscape = dialect.tokenizerConfig().stringEscapesOrdered().get(0);
@@ -371,12 +373,33 @@ public abstract class GeneratorCore {
             return out;
         }
         if (e.is(ExprType.FUNC)) {
+            if (strictFunctions && !isTargetFunction(e)) {
+                unsupported("Function " + functionName(e) + " (" + t.className() + ") has no known translation in "
+                        + (dialect.name().isEmpty() ? "the base dialect" : dialect.name()));
+            }
             return functionFallbackSql(e);
         }
         if (e.is(ExprType.PROPERTY)) {
             return propertySql(e);
         }
         throw new IllegalArgumentException("Unsupported expression type " + t.className());
+    }
+
+    /**
+     * Whether rendering {@code e} under its canonical name is a translation the target dialect
+     * knows: the target's own parser maps that name to a function (sqlglot round-trip
+     * consistency). Used when the generator has no specific rendering for a known function.
+     */
+    protected boolean isTargetFunction(Expression e) {
+        String name = functionName(e).toUpperCase(Locale.ROOT);
+        io.github.offbyjuan.jglot.dialects.data.ParserData pd = dialect.parserData();
+        ExprType mapped = pd.FUNCTIONS_FROM_ARG_LIST.get(name);
+        if (mapped != null) {
+            return mapped == e.type();
+        }
+        return pd.FUNCTIONS_CUSTOM.contains(name)
+                || pd.FUNCTION_PARSERS.contains(name)
+                || pd.NO_PAREN_FUNCTION_PARSERS.contains(name);
     }
 
     /** Custom (non-rename) entries of the dialect's TRANSFORMS table. */
