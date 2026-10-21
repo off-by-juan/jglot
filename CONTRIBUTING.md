@@ -138,6 +138,10 @@ scripts under `tools/fixtures`, then regenerate (steps 3 and 4 above). Implement
 sqlglot counterpart extends, and register it in `Dialects`. Add the dialect to the tables in
 `README.md`, then run `mvn verify` and record the newly passing cases in the baseline.
 
+## Releasing
+
+Maintainers publish releases to Maven Central; see [`RELEASING.md`](RELEASING.md).
+
 ## Reporting bugs
 
 Open an issue with the input SQL, the read and write dialects, jglot's output, and sqlglot's

@@ -8,9 +8,37 @@ idiomatic Java 21 with no runtime dependencies.
 String trino = JGlot.transpileOne("SELECT a::INT, NOW() FROM t", "postgres", "trino");
 ```
 
+## Installation
+
+jglot is on Maven Central and needs Java 21 or later.
+
+Maven:
+
+```xml
+<dependency>
+  <groupId>io.github.off-by-juan</groupId>
+  <artifactId>jglot</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+Gradle:
+
+```kotlin
+implementation("io.github.off-by-juan:jglot:0.1.0")
+```
+
+jglot is a named module (`io.github.offbyjuan.jglot`). Its public API is the packages the module
+exports: `io.github.offbyjuan.jglot` (the `JGlot` entry point), `dialects`, `expressions`,
+`errors`, `parser`, `generator` and `tokens`. Everything else is internal: the dialect
+implementations, the generated data tables, transforms, optimizer helpers and utilities.
+
+**Stability:** jglot is pre-1.0. Minor releases (0.2, 0.3, ...) may change the public API; patch
+releases won't. Changes are listed in [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Status
 
-The MVP covers translation (tokenize → parse → AST → generate) between:
+Version 0.1.0 covers translation (tokenize → parse → AST → generate) between:
 
 | Dialect | Name |
 |---|---|
