@@ -16,7 +16,11 @@
   <description>JMH benchmarks for jglot. Not published.</description>
 
   <properties>
+    <!-- Not published: skip the release profile's deploy, sources, javadoc and signing. -->
     <maven.deploy.skip>true</maven.deploy.skip>
+    <maven.source.skip>true</maven.source.skip>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <gpg.skip>true</gpg.skip>
   </properties>
 
   <dependencies>

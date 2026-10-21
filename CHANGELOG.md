@@ -16,3 +16,4 @@ First release. Ports sqlglot 30.23.0's translation path (tokenize, parse, genera
   for the target.
 * Thread-safe: immutable, shared dialects; per-call parsers and generators.
 * No runtime dependencies.
+* A named module, `io.github.offbyjuan.jglot`, that exports only the public API packages.
