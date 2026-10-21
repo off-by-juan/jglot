@@ -337,9 +337,11 @@ public final class Transforms {
                 Expression thisExpr = unnestZipExprs(unnest, exprs, hasMultiExpr, unnestUsingArraysZip).get(0);
 
                 List<Expression> columns = alias != null ? new ArrayList<>(alias.exprs(Args.COLUMNS)) : new ArrayList<>();
-                Expression offset = unnest.expr(Args.OFFSET);
-                if (offset != null) {
-                    columns.add(0, offset.is(ExprType.IDENTIFIER) ? offset : Exp.toIdentifier("pos"));
+                // offset is an Identifier or True (WITH ORDINALITY)
+                Object offset = unnest.get(Args.OFFSET);
+                if (Expression.truthy(offset)) {
+                    columns.add(0, Expression.isInstance(offset, ExprType.IDENTIFIER)
+                            ? (Expression) offset : Exp.toIdentifier("pos"));
                 }
 
                 unnest.replace(Expression.of(ExprType.TABLE,
@@ -383,9 +385,11 @@ public final class Transforms {
                                 "CROSS JOIN UNNEST to LATERAL VIEW EXPLODE transformation requires explicit column aliases");
                     }
 
-                    Expression offset = unnest.expr(Args.OFFSET);
-                    if (offset != null) {
-                        aliasCols.add(0, offset.is(ExprType.IDENTIFIER) ? offset : Exp.toIdentifier("pos"));
+                    // offset is an Identifier or True (WITH ORDINALITY)
+                    Object offset = unnest.get(Args.OFFSET);
+                    if (Expression.truthy(offset)) {
+                        aliasCols.add(0, Expression.isInstance(offset, ExprType.IDENTIFIER)
+                                ? (Expression) offset : Exp.toIdentifier("pos"));
                     }
                     // Python mutates alias.columns in place.
                     alias.set(Args.COLUMNS, aliasCols);

@@ -1534,7 +1534,9 @@ public final class DialectHelpers {
             }
         }
 
-        if (!modifiers.isEmpty()) {
+        // sqlglot sets "expressions" even on a WithinGroup, which doesn't declare it (so the
+        // generator ignores it there); only set it where the node accepts it.
+        if (!modifiers.isEmpty() && listagg.accepts(Args.EXPRESSIONS)) {
             listagg.set(Args.EXPRESSIONS, List.of(args + modifiers));
         }
 
