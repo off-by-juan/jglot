@@ -1,0 +1,4 @@
+# Python packages for the scripts in tools/. sqlglot itself is not listed: install it editable from
+# a source checkout at the tag in jglot/src/test/resources/fixtures/sqlglot/VERSION, because the
+# fixture scripts import its test suite (see CONTRIBUTING.md).
+pytz==2026.5

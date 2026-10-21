@@ -89,4 +89,12 @@ mvn -q package -DskipTests && java -jar jglot-benchmarks/target/benchmarks.jar
   generator.
 * `docs/PORTING.md`: the Python → Java conventions.
 
-sqlglot is MIT-licensed by Toby Mao. jglot is an independent port and is also MIT-licensed.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to contribute, including how to move to a new
+sqlglot release.
+
+## Licence
+
+jglot is MIT-licensed; see [`LICENSE`](LICENSE). It is an independent port of sqlglot, which is
+MIT-licensed by Toby Mao. Large parts of jglot are derived from sqlglot, so sqlglot's copyright
+and licence notice is reproduced in [`THIRD-PARTY-NOTICES`](THIRD-PARTY-NOTICES) and ships
+inside the jar's `META-INF/`.

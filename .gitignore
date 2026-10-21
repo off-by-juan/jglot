@@ -5,3 +5,4 @@ target/
 .vscode/
 __pycache__/
 .venv/
+dependency-reduced-pom.xml
