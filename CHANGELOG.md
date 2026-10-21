@@ -3,7 +3,7 @@
 All notable changes to jglot are listed here. jglot follows [semantic versioning](https://semver.org/);
 while it is below 1.0, minor versions may change the public API.
 
-## 0.1.0 (unreleased)
+## 0.1.0 (2026-10-21)
 
 First release. Ports sqlglot 30.23.0's translation path (tokenize, parse, generate) to Java 21.
 
