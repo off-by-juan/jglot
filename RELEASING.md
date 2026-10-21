@@ -12,14 +12,19 @@ Releases go to Maven Central as `io.github.off-by-juan:jglot` (plus its parent P
    half is on a public keyserver:
 
    ```
-   gpg --full-generate-key                       # RSA 4096 or ed25519; set a passphrase
+   gpg --full-generate-key                       # ECC/Curve 25519; set a passphrase
    gpg --list-secret-keys --keyid-format long    # note the key id
-   gpg --keyserver keys.openpgp.org --send-keys <KEYID>
    gpg --keyserver keyserver.ubuntu.com --send-keys <KEYID>
    ```
 
-   keys.openpgp.org emails you a link to confirm the address on the key. Click it, so the key is
-   published with its user id.
+   Use the GitHub noreply address
+   (`38688162+off-by-juan@users.noreply.github.com`) as the key's email, since it is public.
+   Publish to keyserver.ubuntu.com, which publishes the user id as is. keys.openpgp.org only
+   publishes it after emailing a confirmation link, and a noreply address can't receive that.
+
+   The current release key is `EFD6F7D87A63B1CF4CA53709FC4962B5810E1020` and expires on
+   2028-10-20. Extend it before then with `gpg --edit-key <KEYID>` → `expire`, and re-send it.
+   Back up the revocation certificate in `~/.gnupg/openpgp-revocs.d/`.
 3. **Repository secrets**, for the release workflow. Add these under *Settings → Environments →
    release → Environment secrets*. Scoping them to the `release` environment means only the
    release workflow can read them.
